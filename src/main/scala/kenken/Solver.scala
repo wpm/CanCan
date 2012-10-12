@@ -1,0 +1,4 @@
+package kenken
+
+object Solver {
+}
