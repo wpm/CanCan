@@ -5,10 +5,22 @@ import math.abs
 
 abstract class Constraint(cs: List[(Int, Int)],
                           constraint: List[Set[Int]] => Option[List[Set[Int]]],
-                          name: String) extends Iterable[(Int, Int)]{
+                          name: String) extends Iterable[(Int, Int)] {
   val cells = cs.sorted
 
   def iterator = cells.iterator
+
+  def apply(xs: List[Set[Int]]) = constraint(xs)
+
+  /**
+   * Apply the constraint to a grid
+   * @param grid grid of possible values
+   * @return list of cells and their corresponding new possible values or _None_ if the constraint is unsatisfiable
+   */
+  def constrain(grid: Grid): Option[List[((Int, Int), Set[Int])]] = constraint(cells.map(cell => grid(cell))) match {
+    case None => None
+    case cellValues => Option(cells.zip(cellValues.get))
+  }
 
   override def toString() = name + ": " + cells.mkString(" ")
 }
@@ -130,5 +142,14 @@ object Constraint {
     println(r1p)
     val r1m = MinusConstraint(List((1, 1), (1, 2)), 1)
     println(r1m)
+
+    val s =
+      """123 123 123
+        |123 123 123
+        |123 123 123""".stripMargin
+    val g3 = Grid(s)
+    val gc = r1p.constrain(g3)
+    println(g3)
+    println(gc)
   }
 }

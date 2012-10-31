@@ -1,54 +1,52 @@
 package kenken
 
-import scala.math.Ordering.Implicits._
 import collection.immutable.TreeSet
+import scala.math.Ordering.Implicits._
+import collection.GenTraversableOnce
 
-/**
- * NxN grid of possible values
- * @param n dimension of the grid
- * @param g grid of possible values
- */
-class Grid private(n: Int, g: Map[(Int, Int), TreeSet[Int]]) extends Iterable[((Int, Int), TreeSet[Int])] {
-  val grid = g
 
-  def ++(changed: ((Int, Int), TreeSet[Int])*) = new Grid(n, g ++ changed)
+class Grid private(n: Int, grid: Map[(Int, Int), TreeSet[Int]]) {
 
-  def apply(cell: (Int, Int)) = g(cell)
+  def isSolved = grid.values.forall(_.size == 1)
 
-  def solved = g.values.forall(_.size == 1)
+  def unsolvedCells = iterator.filter(x => x._2.size != 1)
 
-  def iterator = cells.map(cell => (cell, g(cell))).iterator
+  def apply(key: (Int, Int)) = grid(key)
+
+  def +(kv: ((Int, Int), TreeSet[Int])) = new Grid(n, grid + kv)
+
+  def ++(xs: GenTraversableOnce[((Int, Int), TreeSet[Int])]) = new Grid(n, grid ++ xs)
+
+  def iterator: Iterator[((Int, Int), TreeSet[Int])] = cells.map(cell => (cell, grid(cell))).iterator
+
+  /**
+   * Apply the constraint to a grid
+   * @return list of cells and their corresponding new possible values or _None_ if the constraint is unsatisfiable
+   */
+  def constrain(constraint: Constraint): Option[List[((Int, Int), Set[Int])]] = constraint(cells.map(cell => grid(cell))) match {
+    case None => None
+    case cellValues => Option(cells.zip(cellValues.get))
+  }
 
   /**
    * List of cells in the grid sorted by the number of possible values and then by location.
    * @return cells in the grid
    */
-  def cells = g.keys.toList.sortWith {
+  private def cells = grid.keys.toList.sortWith {
     (a, b) =>
-      g(a).size.compare(g(b).size) match {
+      grid(a).size.compare(grid(b).size) match {
         case 0 => a < b
         case c => c < 0
       }
   }
 
-  def unsolvedCells = filter(x => x._2.size != 1)
-
-  override def equals(other: Any) = other match {
-    case that: Grid => canEqual(that) && g == that.grid
-    case _ => false
-  }
-
-  // TODO Implement canEqual
-
-  override def hashCode() = g.hashCode()
-
-  override def toString() = {
+  override def toString = {
     def centered(s: String, width: Int) = {
       val pad = " " * ((width - s.length) / 2)
       pad + s + pad
     }
-    def widest = g.values.map(_.mkString("").length).max
-    (1 to n).map(r => (1 to n).map(c => centered(g((c, r)).mkString(""), widest)).mkString(" ")).mkString("\n")
+    def widest = grid.values.map(_.mkString("").length).max
+    (1 to n).map(r => (1 to n).map(c => centered(grid((r, c)).mkString(""), widest)).mkString(" ")).mkString("\n")
   }
 }
 
@@ -58,14 +56,39 @@ object Grid {
     new Grid(n, Map(init: _*))
   }
 
+  /**
+   * Convert an string array of numbers to a grid
+   * @param s array of numbers
+   * @return corresponding grid
+   */
+  def apply(s: String) = {
+    def stringToCell(r: Int, cells: Array[String]) = cells.zipWithIndex.map {
+      case (cell, i) => (r, i + 1) -> TreeSet[Int](cell.toList.map(_.toString.toInt): _*)
+    }
+    val cells = s.split("\n").map("\\s+".r.split(_))
+    // All lines must contain the same number of cells.
+    val n = cells.head.length
+    println("n=" + n)
+    require(cells.forall(_.length == n))
+    val init = cells.zipWithIndex.flatMap {
+      case (line, r) => stringToCell(r + 1, line)
+    }
+    new Grid(n, Map(init: _*))
+  }
 
   def main(args: Array[String]) {
     val g = Grid(3)
+    println(g)
+    println(g(1, 1))
+    println(g((1, 1)))
+    println(g.iterator.toList)
 
-    val x = g ++ ((1, 1) -> TreeSet(1))
-    val y = g ++ ((1, 1) -> TreeSet(1))
-    val z = g ++ ((1, 1) -> TreeSet(2))
+    val g2 = Grid(2) ++ List((1, 1) -> TreeSet(1), (1, 2) -> TreeSet(2), (2, 1) -> TreeSet(3), (2, 2) -> TreeSet(4))
+    println(g2)
 
-    println(Set[Grid](x, y, z))
+    val s =
+      """12 12
+        |12 2""".stripMargin
+    println(Grid(s))
   }
 }

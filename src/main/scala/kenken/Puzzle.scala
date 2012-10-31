@@ -5,6 +5,11 @@ import collection.mutable
 
 
 // TODO How to implement all this with immutable variables?
+
+/**
+ * A set of constraints on a square grid of numbers
+ * @param n the dimension of the grid
+ */
 class Puzzle(n: Int) {
   val size = n
   val constraints = constraintMap(latinSquareConstraints(size))

@@ -22,6 +22,7 @@ object KenKen {
   }
 
   def applyConstraint(constraint: Constraint, grid: Grid): (Grid, List[Constraint]) = {
+    constraint.map(cell => grid(cell))
     (grid, Nil)
   }
 
@@ -30,10 +31,10 @@ object KenKen {
      * This returns a list of grids with guesses in all the unsolved cells.
      */
     def search(grid: Grid) = {
-      grid.unsolvedCells.flatMap(u => u._2.map(value => (u._1 -> TreeSet(value)))).map(grid ++ _).toList
+      grid.unsolvedCells.flatMap(u => u._2.map(value => (u._1 -> TreeSet(value)))).map(grid + _).toList
     }
 
-    (grid.solved match {
+    (grid.isSolved match {
       case true => if (visited.contains(grid)) Nil
       else {
         visited += grid
