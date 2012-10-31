@@ -3,32 +3,32 @@ package kenken
 import collection.immutable.TreeSet
 import math.abs
 
-abstract class Constraint(cs: Set[(Int, Int)],
+abstract class Constraint(cs: List[(Int, Int)],
                           constraint: List[Set[Int]] => Option[List[Set[Int]]],
                           name: String) extends Iterable[(Int, Int)]{
-  val cells = cs
+  val cells = cs.sorted
 
   def iterator = cells.iterator
 
   override def toString() = name + ": " + cells.mkString(" ")
 }
 
-class CageConstraint(cs: Set[(Int, Int)],
+class CageConstraint(cs: List[(Int, Int)],
                      m: Int, constraint: Int => List[Set[Int]] => Option[List[Set[Int]]],
                      operator: String)
   extends Constraint(cs, constraint(m), m + "" + operator)
 
-case class UniquenessConstraint(cs: Set[(Int, Int)]) extends Constraint(cs, Constraint.unique, "Unique")
+case class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs, Constraint.unique, "Unique")
 
-case class DefinitenessConstraint(cs: Set[(Int, Int)]) extends Constraint(cs, Constraint.definite, "Definite")
+case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs, Constraint.definite, "Definite")
 
-case class PlusConstraint(cs: Set[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.plus, "+")
+case class PlusConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.plus, "+")
 
-case class MinusConstraint(cs: Set[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.minus, "-")
+case class MinusConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.minus, "-")
 
-case class TimesConstraint(cs: Set[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.times, "x")
+case class TimesConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.times, "x")
 
-case class DivideConstraint(cs: Set[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.divide, "/")
+case class DivideConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.divide, "/")
 
 object Constraint {
   /**
@@ -122,13 +122,13 @@ object Constraint {
     println("2- " + minus(2)(List(TreeSet(1, 2, 3, 4), TreeSet(1, 2, 3, 4))))
     println("20- " + minus(20)(List(TreeSet(1, 2, 3, 4), TreeSet(1, 2, 3, 4))))
 
-    val r1d = DefinitenessConstraint(Set((1, 1), (1, 2)))
+    val r1d = DefinitenessConstraint(List((1, 1), (1, 2)))
     println(r1d)
-    val r1u = UniquenessConstraint(Set((1, 1), (1, 2)))
+    val r1u = UniquenessConstraint(List((1, 1), (1, 2)))
     println(r1u)
-    val r1p = PlusConstraint(Set((1, 1), (1, 2)), 5)
+    val r1p = PlusConstraint(List((1, 1), (1, 2)), 5)
     println(r1p)
-    val r1m = MinusConstraint(Set((1, 1), (1, 2)), 1)
+    val r1m = MinusConstraint(List((1, 1), (1, 2)), 1)
     println(r1m)
   }
 }

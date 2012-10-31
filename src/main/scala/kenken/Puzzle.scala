@@ -12,8 +12,8 @@ class Puzzle(n: Int) {
   override def toString = constraints.toString()
 
   private def latinSquareConstraints(n: Int) = {
-    def row(r: Int) = Set((1 to n).map((r, _)): _*)
-    def col(c: Int) = Set((1 to n).map((_, c)): _*)
+    def row(r: Int) = List((1 to n).map((r, _)): _*)
+    def col(c: Int) = List((1 to n).map((_, c)): _*)
 
     var constraints: List[Constraint] = Nil
     for (i <- (1 to n)) {
