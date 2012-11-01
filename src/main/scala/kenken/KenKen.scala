@@ -1,7 +1,6 @@
 package kenken
 
 import collection.SeqView
-import collection.immutable.TreeSet
 import collection.mutable
 
 object KenKen {
@@ -31,7 +30,7 @@ object KenKen {
      * This returns a list of grids with guesses in all the unsolved cells.
      */
     def search(grid: Grid) = {
-      grid.unsolvedCells.flatMap(u => u._2.map(value => (u._1 -> TreeSet(value)))).map(grid + _).toList
+      grid.unsolvedCells.flatMap(u => u._2.map(value => (u._1 -> Set(value)))).map(grid + _).toList
     }
 
     (grid.isSolved match {

@@ -1,6 +1,5 @@
 package kenken
 
-import collection.immutable.TreeSet
 import math.abs
 
 abstract class Constraint(cs: List[(Int, Int)],
@@ -12,16 +11,6 @@ abstract class Constraint(cs: List[(Int, Int)],
 
   def apply(xs: List[Set[Int]]) = constraint(xs)
 
-  /**
-   * Apply the constraint to a grid
-   * @param grid grid of possible values
-   * @return list of cells and their corresponding new possible values or _None_ if the constraint is unsatisfiable
-   */
-  def constrain(grid: Grid): Option[List[((Int, Int), Set[Int])]] = constraint(cells.map(cell => grid(cell))) match {
-    case None => None
-    case cellValues => Option(cells.zip(cellValues.get))
-  }
-
   override def toString() = name + ": " + cells.mkString(" ")
 }
 
@@ -30,19 +19,34 @@ class CageConstraint(cs: List[(Int, Int)],
                      operator: String)
   extends Constraint(cs, constraint(m), m + "" + operator)
 
+case class SpecifiedConstraint(cell: (Int, Int), m: Int)
+  extends Constraint(cell :: Nil, Constraint.specified(m), m.toString)
+
 case class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs, Constraint.unique, "Unique")
 
 case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs, Constraint.definite, "Definite")
 
 case class PlusConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.plus, "+")
 
-case class MinusConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.minus, "-")
+case class MinusConstraint(c1: (Int, Int), c2: (Int, Int), m: Int)
+  extends CageConstraint(c1 :: c2 :: Nil, m, Constraint.minus, "-")
 
 case class TimesConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.times, "x")
 
-case class DivideConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.divide, "/")
+case class DivideConstraint(c1: (Int, Int), c2: (Int, Int), m: Int)
+  extends CageConstraint(c1 :: c2 :: Nil, m, Constraint.divide, "/")
+
+// TODO Specified value constraint
 
 object Constraint {
+  /**
+   * The value of a single cell is specified.
+   */
+  def specified(m: Int)(xs: List[Set[Int]]) = {
+    if (xs.head.contains(m)) Some(List(Set(m)))
+    else None
+  }
+
   /**
    * All solved cells are distinct.
    */
@@ -55,7 +59,7 @@ object Constraint {
       None
     else {
       //
-      val s = TreeSet(d: _*)
+      val s = Set(d: _*)
       Some(xs.map {
         x =>
           x.size match {
@@ -94,7 +98,7 @@ object Constraint {
                       (n: Int, xs: Traversable[Traversable[Int]]) =
     f(n, xs).transpose match {
       case Nil => None
-      case ys => Some(ys.map(TreeSet(_: _*)).toList)
+      case ys => Some(ys.map(Set(_: _*)).toList)
     }
 
   def plusFilter(n: Int, xs: Traversable[Traversable[Int]]) = associative(n, xs)(_ + _)
@@ -121,18 +125,18 @@ object Constraint {
     nonAssociative(xs.head, xs.tail.head)(p => p._1 % p._2 == 0 && p._1 / p._2 == n)
 
   def main(args: Array[String]) {
-    var r = List(TreeSet(1), TreeSet(2, 3), TreeSet(1, 2, 3))
+    var r = List(Set(1), Set(2, 3), Set(1, 2, 3))
     println(definite(r))
-    r = List(TreeSet(1), TreeSet(1), TreeSet(1, 2, 3))
+    r = List(Set(1), Set(1), Set(1, 2, 3))
     println(definite(r))
-    r = List(TreeSet(1), TreeSet(2, 3, 4), TreeSet(2, 3), TreeSet(2, 3))
+    r = List(Set(1), Set(2, 3, 4), Set(2, 3), Set(2, 3))
     println(unique(r))
 
-    println("5+ " + plus(5)(List(TreeSet(1, 2, 3, 4), TreeSet(1, 2, 3))))
-    println("50+ " + plus(50)(List(TreeSet(1, 2, 3, 4), TreeSet(1, 2, 3, 4))))
+    println("5+ " + plus(5)(List(Set(1, 2, 3, 4), Set(1, 2, 3))))
+    println("50+ " + plus(50)(List(Set(1, 2, 3, 4), Set(1, 2, 3, 4))))
 
-    println("2- " + minus(2)(List(TreeSet(1, 2, 3, 4), TreeSet(1, 2, 3, 4))))
-    println("20- " + minus(20)(List(TreeSet(1, 2, 3, 4), TreeSet(1, 2, 3, 4))))
+    println("2- " + minus(2)(List(Set(1, 2, 3, 4), Set(1, 2, 3, 4))))
+    println("20- " + minus(20)(List(Set(1, 2, 3, 4), Set(1, 2, 3, 4))))
 
     val r1d = DefinitenessConstraint(List((1, 1), (1, 2)))
     println(r1d)
@@ -140,16 +144,7 @@ object Constraint {
     println(r1u)
     val r1p = PlusConstraint(List((1, 1), (1, 2)), 5)
     println(r1p)
-    val r1m = MinusConstraint(List((1, 1), (1, 2)), 1)
+    val r1m = MinusConstraint((1, 1), (1, 2), 1)
     println(r1m)
-
-    val s =
-      """123 123 123
-        |123 123 123
-        |123 123 123""".stripMargin
-    val g3 = Grid(s)
-    val gc = r1p.constrain(g3)
-    println(g3)
-    println(gc)
   }
 }
