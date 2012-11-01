@@ -12,6 +12,17 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
   val constraints = constraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
+  def applyConstraint(grid:Grid, constraint:Constraint) = {
+    grid.constrain(constraint)
+  }
+
+  // TODO Debugging only: remove.
+  def allC = constraints.values.flatten.toList.distinct
+
+  def printC() {
+    for ((x, i) <- allC.zipWithIndex) println(i + ": " + x)
+  }
+
   override def toString = constraints.toString()
 
   // TODO How to implement all this with immutable variables?
@@ -60,10 +71,10 @@ object Puzzle {
     }
 
     def constraintMapFromLines(lines: List[String]) = {
-      val constraint = """(\d+)([+-x*])?\s+(\w+)""".r
+      val constraint = """(\w+)\s+(\d+)([+-x/])?""".r
       lines.foldLeft(Map[String, (Int, String)]()) {
         (constraintMap, line) =>
-          val constraint(m, operation, label) = line
+          val constraint(label, m, operation) = line
           constraintMap + (label ->(m.toInt, operation))
       }
     }
@@ -95,18 +106,55 @@ object Puzzle {
     Puzzle(n, cageConstraints)
   }
 
-  def main(args: Array[String]) {
-    val p = Puzzle(2)
-    println(p)
+  val p = Puzzle(
+    """a a a b
+      |c a d b
+      |c e d d
+      |c e f f
+      |a 12+
+      |b 3+
+      |c 7+
+      |d 9+
+      |e 5+
+      |f 4+""".stripMargin)
 
-    val s =
-      """a a b
-        |a b b
-        |c c d
-        |5+ a
-        |3x b
-        |2- c
-        |1  d""".stripMargin
-    println(apply(s))
+  def main(args: Array[String]) {
+    val p1 = Puzzle(2)
+    println(p1)
+
+    //    4 3 1 2
+    //    3 1 2 4
+    //    2 4 3 1
+    //    1 2 4 3
+    val p2 = """a b b b
+               |a c d d
+               |e c d f
+               |e e f f
+               |a 1-
+               |b 6+
+               |c 5+
+               |d 9+
+               |e 5+
+               |f 8+""".stripMargin
+    println(apply(p2))
+
+
+    //    2 1 4 3
+    //    4 3 2 1
+    //    1 4 3 2
+    //    3 2 1 4
+    val p3 = """a a b b
+               |c d d e
+               |c f f g
+               |c h h g
+               |a 2/
+               |b 1-
+               |c 12x
+               |d 1-
+               |e 1
+               |f 12x
+               |g 2/
+               |h 3+""".stripMargin
+    println(apply(p3))
   }
 }

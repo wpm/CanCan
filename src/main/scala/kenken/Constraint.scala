@@ -2,6 +2,23 @@ package kenken
 
 import math.abs
 
+
+//scala> val x = List(('a,1), ('b,2))
+//x: List[(Symbol, Int)] = List(('a,1), ('b,2))
+//
+//scala> val y = List(('a,1), ('b,3))
+//y: List[(Symbol, Int)] = List(('a,1), ('b,3))
+//
+//scala> x.zip(y)
+//res2: List[((Symbol, Int), (Symbol, Int))] = List((('a,1),('a,1)), (('b,2),('b,3)))
+//
+//scala> x.zip(y).filter(p=>p._1._2 != p._2._2)
+//res3: List[((Symbol, Int), (Symbol, Int))] = List((('b,2),('b,3)))
+//
+//scala> x.zip(y).filter(p=>p._1._2 != p._2._2).map(_._2)
+//res5: List[(Symbol, Int)] = List(('b,3))
+
+
 abstract class Constraint(cs: List[(Int, Int)],
                           constraint: List[Set[Int]] => Option[List[Set[Int]]],
                           name: String) extends Iterable[(Int, Int)] {
@@ -10,6 +27,18 @@ abstract class Constraint(cs: List[(Int, Int)],
   def iterator = cells.iterator
 
   def apply(xs: List[Set[Int]]) = constraint(xs)
+
+
+  //  def apply(grid: Grid): Option[(Grid, List[(Int, Int)])] = {
+  //    val before = cells.map(cell => (cell, grid(cell)))
+  //    cells.zip(constraint(before.map(_._2))) match {
+  //      case Nil => None
+  //      case after => {
+  //        val changed = before.zip(after).filter(p => p._1._2 != p._2._2).map(_._2)
+  //        Option(grid ++ changed, changed.map(_._1))
+  //      }
+  //    }
+  //  }
 
   override def toString() = name + ": " + cells.mkString(" ")
 }
@@ -123,6 +152,29 @@ object Constraint {
 
   def divideFilter(n: Int, xs: Traversable[Traversable[Int]]) =
     nonAssociative(xs.head, xs.tail.head)(p => p._1 % p._2 == 0 && p._1 / p._2 == n)
+
+  // TODO Remove this utility function?
+
+  def appc(grid: Grid, c: Constraint): Option[(Grid, List[(Int, Int)])] = {
+    val before = c.cells.map(cell => (cell, grid(cell)))
+    val values = before.map(_._2)
+    c(values) match {
+      case None => None
+      case after => {
+        val changed = tupleDiff(before, c.cells.zip(after.get))
+        Option((grid ++ changed, changed.map(_._1)))
+      }
+    }
+  }
+
+  /**
+   * scala> val xs = List(('a, 1), ('b, 2), ('c, 3)); val ys = List(('a, 1), ('b, 3), ('c, 4))
+   * scala> Constraint.tupleDiff(xs, ys)
+   * res2: List[(Symbol, Int)] = List(('b,3), ('c,4))
+   */
+  def tupleDiff[A, B](xs: List[(A, B)], ys: List[(A, B)]): List[(A, B)] = {
+    xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
+  }
 
   def main(args: Array[String]) {
     var r = List(Set(1), Set(2, 3), Set(1, 2, 3))

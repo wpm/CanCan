@@ -26,7 +26,7 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) {
   def constrain(constraint: Constraint): Option[List[((Int, Int), Set[Int])]] =
     constraint(constraint.map(grid(_)).toList) match {
       case None => None
-      case cellValues => Option(cells.zip(cellValues.get))
+      case cellValues => Option(constraint.toList.zip(cellValues.get))
     }
 
   def constrainGrid(constraint: Constraint): Option[Grid] =
