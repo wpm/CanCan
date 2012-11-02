@@ -62,8 +62,6 @@ case class TimesConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(
 case class DivideConstraint(c1: (Int, Int), c2: (Int, Int), m: Int)
   extends CageConstraint(c1 :: c2 :: Nil, m, Constraint.divide, "/")
 
-// TODO Specified value constraint
-
 object Constraint {
   /**
    * The value of a single cell is specified.
@@ -96,19 +94,16 @@ object Constraint {
     }
   }
 
-
   /**
    * If a value only appears in one cell, that cell is solved.
    */
   def unique(xs: List[Set[Int]]) = {
-    def union(xs: List[Set[Int]]) = xs.foldLeft(Set[Int]())((memo, x) => memo ++ x)
-
-    val uniqueElements = union(xs.map(x => x -- union(xs.filter(_ != x))))
-    val nonUniqueElements = union(xs) -- uniqueElements
     Some(xs.map {
-      x =>
-        val d = x -- nonUniqueElements
-        if (d.isEmpty) x else d
+      x => val u = x -- (xs.filter(y => !(y eq x)).reduceLeft(_ | _))
+      u.size match {
+        case 1 => u
+        case _ => x
+      }
     })
   }
 

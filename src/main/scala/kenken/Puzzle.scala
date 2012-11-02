@@ -12,8 +12,22 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
   val constraints = constraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
-  def applyConstraint(grid:Grid, constraint:Constraint) = {
-    grid.constrain(constraint)
+  def propagateConstraints(grid: Grid) = {
+    var unverified = Set(constraints.values.flatten.toList: _*)
+    var constrainedGrid = grid
+    while (!unverified.isEmpty) {
+      val constraint = unverified.head
+      println(constraint + "\n" + constraint(constrainedGrid) + "\n\n")
+      constraint(constrainedGrid) match {
+        case None => unverified = Set.empty[Constraint]
+        case Some((g, cells)) => {
+          constrainedGrid = g
+          unverified ++= cells.flatMap(constraints(_))
+          unverified -= constraint
+        }
+      }
+    }
+    constrainedGrid
   }
 
   // TODO Debugging only: remove.
