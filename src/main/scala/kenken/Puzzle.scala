@@ -170,5 +170,7 @@ object Puzzle {
                |g 2/
                |h 3+""".stripMargin
     println(apply(p3))
+
+    println(p.propagateConstraints(Grid(4)))
   }
 }

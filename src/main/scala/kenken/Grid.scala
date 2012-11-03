@@ -49,8 +49,8 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) {
 
   override def toString = {
     def centered(s: String, width: Int) = {
-      val pad = " " * ((width - s.length) / 2)
-      pad + s + pad
+      val pad = (width - s.length) / 2
+      ("%" + width + "s").format(" " * pad + s)
     }
     def widest = grid.values.map(_.mkString("").length).max
     (1 to n).map(r => (1 to n).map {
