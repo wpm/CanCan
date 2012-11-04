@@ -2,7 +2,6 @@ package kenken
 
 import scala._
 import annotation.tailrec
-import collection.mutable
 
 
 /**
@@ -11,7 +10,7 @@ import collection.mutable
  */
 class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
-  val constraints = constraintMap(latinSquareConstraints(size) ::: cageConstraints)
+  val constraints = createConstraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
   def solve: List[Grid] = {
     def solveRec(grid: Grid, unapplied: List[Constraint]): List[Grid] = {
@@ -35,36 +34,34 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
       grid.constrain(constraint) match {
         case None => None
         case Some((g, cells)) =>
-          propagateConstraints(g,
-            unapplied ++ cells.flatMap(constraints(_)) - constraint)
+          propagateConstraints(
+            g,
+            unapplied ++ cells.flatMap(constraints(_)) - constraint
+          )
       }
     }
   }
 
   override def toString = constraints.toString()
 
-  // TODO How to implement all this with immutable variables?
-
   private def latinSquareConstraints(n: Int) = {
     def row(r: Int) = List((1 to n).map((r, _)): _*)
     def col(c: Int) = List((1 to n).map((_, c)): _*)
 
-    var constraints: List[Constraint] = Nil
-    for (i <- (1 to n)) {
-      constraints = DefinitenessConstraint(row(i)) :: constraints
-      constraints = UniquenessConstraint(row(i)) :: constraints
-      constraints = DefinitenessConstraint(col(i)) :: constraints
-      constraints = UniquenessConstraint(col(i)) :: constraints
-    }
-    constraints
+    (for (i <- (1 to n)) yield
+      DefinitenessConstraint(row(i)) ::
+        UniquenessConstraint(row(i)) ::
+        DefinitenessConstraint(col(i)) ::
+        UniquenessConstraint(col(i)) ::
+        Nil).flatten.toList
   }
 
-  private def constraintMap(constraints: List[Constraint]) = {
-    val m = mutable.Map[(Int, Int), List[Constraint]]()
-    for (constraint <- constraints; cell <- constraint.cells) {
-      m(cell) = constraint :: m.getOrElse(cell, List.empty)
-    }
-    Map[(Int, Int), List[Constraint]]() ++ m
+  /**
+   * Create a map of cells to the constraints that contain them.
+   */
+  private def createConstraintMap(constraints: List[Constraint]) = {
+    val cs = for (constraint <- constraints; cell <- constraint.cells) yield (cell -> constraint)
+    (Map[(Int, Int), List[Constraint]]() /: cs)((m, p) => m + (p._1 -> (p._2 :: m.getOrElse(p._1, Nil))))
   }
 }
 
