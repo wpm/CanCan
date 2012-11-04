@@ -2,6 +2,7 @@ package kenken
 
 import scala._
 import annotation.tailrec
+import collection.mutable
 import collection.SeqView
 
 
@@ -14,10 +15,16 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val constraintMap = createConstraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
   def solve: SeqView[Grid, Seq[_]] = {
+    val solutions = mutable.Set[Grid]()
+
     def solveRec(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
       propagateConstraints(grid, Set(constraints: _*)) match {
         case None => Nil.view
-        case Some(g) if (g.isSolved) => List(g).view
+        case Some(g) if (solutions.contains(g)) => Nil.view
+        case Some(g) if (g.isSolved) => {
+          solutions += g
+          List(g).view
+        }
         case Some(g: Grid) => unsolvedCells(g).flatMap {
           case (cell, values) =>
             values.flatMap(value => solveRec(g + (cell -> Set(value)), constraintMap(cell)))

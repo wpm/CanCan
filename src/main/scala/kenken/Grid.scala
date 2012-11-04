@@ -3,17 +3,25 @@ package kenken
 import collection.GenTraversableOnce
 
 
-class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
+class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
+  val grid = g
 
-  def iterator = grid.iterator
+  def iterator = g.iterator
 
-  def isSolved = grid.values.forall(_.size == 1)
+  def isSolved = g.values.forall(_.size == 1)
 
-  def apply(key: (Int, Int)) = grid(key)
+  def apply(key: (Int, Int)) = g(key)
 
-  def +(kv: ((Int, Int), Set[Int])) = new Grid(n, grid + kv)
+  def +(kv: ((Int, Int), Set[Int])) = new Grid(n, g + kv)
 
-  def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = new Grid(n, grid ++ xs)
+  def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = new Grid(n, g ++ xs)
+
+  override def equals(other: Any): Boolean = other match {
+    case that: Grid => g == that.grid
+    case _ => false
+  }
+
+  override def hashCode() = g.hashCode()
 
   /**
    * Apply a constraint to the grid
@@ -29,7 +37,7 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) extends Iterable[((I
     def tupleDiff[A, B](xs: List[(A, B)], ys: List[(A, B)]): List[(A, B)] =
       xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
 
-    val before = constraint.cells.map(cell => (cell, grid(cell)))
+    val before = constraint.cells.map(cell => (cell, g(cell)))
     val values = before.map(_._2)
     constraint(values) match {
       case None => None
@@ -45,9 +53,9 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) extends Iterable[((I
       val pad = (width - s.length) / 2
       ("%" + width + "s").format(" " * pad + s)
     }
-    def widest = grid.values.map(_.mkString("").length).max
+    def widest = g.values.map(_.mkString("").length).max
     (1 to n).map(r => (1 to n).map {
-      c => centered(grid((r, c)).toList.sorted.mkString(""), widest)
+      c => centered(g((r, c)).toList.sorted.mkString(""), widest)
     }.mkString(" ")).mkString("\n")
   }
 }

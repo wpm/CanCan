@@ -1,7 +1,7 @@
 package kenken
 
 object Test {
-  val p1 = Puzzle(2, List(SpecifiedConstraint(1, (1, 1))))
+  val p1 = Puzzle(3, List(SpecifiedConstraint(1, (1, 1))))
 
   //    4 3 1 2
   //    3 1 2 4
@@ -50,12 +50,10 @@ object Test {
 
 
   def main(args: Array[String]) {
-    println(p1.solve.toList)
+    println(p1 + "\n" + p1.solve.toList.mkString("\n\n"))
 
-    println(p2)
-    println(p2.solve.toList)
+    println(p2 + "\n" + p2.solve.toList.mkString("\n\n"))
 
-    println(p3)
-    println(p3.solve.toList)
+    println(p3 + "\n" + p3.solve.toList.mkString("\n\n"))
   }
 }
