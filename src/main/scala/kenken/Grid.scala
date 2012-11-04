@@ -1,16 +1,13 @@
 package kenken
 
-import scala.math.Ordering.Implicits._
 import collection.GenTraversableOnce
 
 
-class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) {
+class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
 
-  val size = n
+  def iterator = grid.iterator
 
   def isSolved = grid.values.forall(_.size == 1)
-
-  def unsolvedCells = cells.map(cell => (cell, grid(cell))).filter(x => x._2.size != 1)
 
   def apply(key: (Int, Int)) = grid(key)
 
@@ -43,20 +40,7 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) {
     }
   }
 
-  // TODO Move ordering criteria into Puzzle.
-  /**
-   * List of cells in the grid sorted by the number of possible values and then by location.
-   * @return cells in the grid
-   */
-  def cells = grid.keys.toList.sortWith {
-    (a, b) =>
-      grid(a).size.compare(grid(b).size) match {
-        case 0 => a < b
-        case c => c < 0
-      }
-  }
-
-  override def toString = {
+  override def toString() = {
     def centered(s: String, width: Int) = {
       val pad = (width - s.length) / 2
       ("%" + width + "s").format(" " * pad + s)

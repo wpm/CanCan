@@ -18,9 +18,9 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
       propagateConstraints(grid, Set(unapplied: _*)) match {
         case None => Nil.view
         case Some(g) if (g.isSolved) => List(g).view
-        case Some(g: Grid) => g.cells.view.flatMap {
-          cell =>
-            g(cell).flatMap(value => solveRec(g + (cell -> Set(value)), constraints(cell)))
+        case Some(g: Grid) => unsolvedCells(g).flatMap {
+          case (cell, values) =>
+            values.flatMap(value => solveRec(g + (cell -> Set(value)), constraints(cell)))
         }
       }
     }
@@ -41,6 +41,17 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
           )
       }
     }
+  }
+
+  /**
+   * @return unsolved cells in the grid, in order of the number of values
+   */
+  private def unsolvedCells(grid: Grid) = {
+    grid.filter {
+      case (cell, values) => values.size > 1
+    }.toList.sortWith {
+      (a, b) => a._2.size.compare(b._2.size) < 0
+    }.view
   }
 
   override def toString = constraints.toString()
@@ -173,7 +184,7 @@ object Puzzle {
     //    println(p1.solve.toList)
 
     println(p2)
-    //    println(p2.solve.take(1).toList)
+    println(p2.solve.take(1).toList)
     //    println(p2.propagateConstraints(Grid(4)).get)
 
 
