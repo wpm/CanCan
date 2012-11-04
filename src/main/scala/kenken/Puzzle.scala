@@ -153,8 +153,8 @@ object Puzzle {
 
 
   def main(args: Array[String]) {
-    val p1 = Puzzle(2)
-    println(p1)
+    val p1 = Puzzle(2, List(SpecifiedConstraint(1, (1, 1))))
+    println(p1.solve)
 
     //    4 3 1 2
     //    3 1 2 4
@@ -171,12 +171,10 @@ object Puzzle {
                        |e 5+
                        |f 8+""".stripMargin)
     println(p2)
-    //    println(p2.propagateConstraints(Grid(4)))
+    //    println(p2.solve)
 
 
     println(p3)
-    //    println(p3.propagateConstraints(Grid(4)))
     println(p3.solve)
-
   }
 }
