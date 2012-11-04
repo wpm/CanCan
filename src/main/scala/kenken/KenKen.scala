@@ -22,15 +22,4 @@ object KenKen {
       case false => search(grid).flatMap(solve(_, visited))
     }).view
   }
-
-  def main(args: Array[String]) {
-    val n = 2
-    val p = Puzzle(n)
-    val g = Grid(n)
-//    val a = propagateConstraints(p, g)
-//    println(a)
-    //    val s = solve(g)
-    //    println(s.mkString("\n\n"))
-    //    println(s.length)
-  }
 }

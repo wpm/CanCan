@@ -15,9 +15,9 @@ object Misc {
 
     val n = 3
     val p = Puzzle(n, List(SpecifiedConstraint(1, (1, 1))))
-    println(p.propagateConstraints(Grid(n)))
+//    println(p.propagateConstraints(Grid(n)))
 
     val invalid = Puzzle(n, List(SpecifiedConstraint(1, (1, 1)), SpecifiedConstraint(1, (1, 2))))
-    println(invalid.propagateConstraints(Grid(n)))
+//    println(invalid.propagateConstraints(Grid(n)))
   }
 }

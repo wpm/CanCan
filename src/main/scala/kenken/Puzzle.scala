@@ -13,15 +13,30 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
   val constraints = constraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
+  def solve: List[Grid] = {
+    def solveRec(grid: Grid, unapplied: List[Constraint]): List[Grid] = {
+      propagateConstraints(grid, Set(unapplied: _*)) match {
+        case None => Nil
+        case Some(g) if (g.isSolved) => List(g)
+        case Some(g: Grid) => g.cells.flatMap {
+          cell =>
+            g(cell).flatMap(value => solveRec(g + (cell -> Set(value)), constraints(cell)))
+        }
+      }
+    }
+    solveRec(Grid(n), cageConstraints)
+  }
+
+
   @tailrec
-  final def propagateConstraints(grid: Grid, unverified: Set[Constraint] = Set(cageConstraints: _*)): Option[Grid] = {
-    if (unverified.isEmpty) Option(grid)
+  private def propagateConstraints(grid: Grid, unapplied: Set[Constraint]): Option[Grid] = {
+    if (unapplied.isEmpty) Option(grid)
     else {
-      val constraint = unverified.head
+      val constraint = unapplied.head
       grid.constrain(constraint) match {
         case None => None
         case Some((g, cells)) => propagateConstraints(g,
-          unverified ++ cells.flatMap(constraints(_)) - constraint)
+          unapplied ++ cells.flatMap(constraints(_)) - constraint)
       }
     }
   }
@@ -166,12 +181,12 @@ object Puzzle {
                        |e 5+
                        |f 8+""".stripMargin)
     println(p2)
-    println(p2.propagateConstraints(Grid(4)))
+    //    println(p2.propagateConstraints(Grid(4)))
 
 
     println(p3)
-    println(p3.propagateConstraints(Grid(4)))
+    //    println(p3.propagateConstraints(Grid(4)))
+    println(p3.solve)
 
-    //    println(p.propagateConstraints(Grid(4)))
   }
 }
