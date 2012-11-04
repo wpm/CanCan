@@ -1,0 +1,72 @@
+package kenken
+
+import org.scalatest.FlatSpec
+
+class PuzzleSpec extends FlatSpec {
+  "A 2x2 Latin square" should "have two solutions" in {
+    val s1 = Grid(
+      """1 2
+        |2 1""".stripMargin)
+    val s2 = Grid(
+      """2 1
+        |1 2""".stripMargin)
+    expect(Set(s1, s2)) {
+      Set(Puzzle(2).allSolutions.toList: _*)
+    }
+  }
+
+  "Some example 4x4 KenKen puzzles" should "have solutions" in {
+    expect(Option(Grid(
+      """4 3 1 2
+        |3 1 2 4
+        |2 4 3 1
+        |1 2 4 3""".stripMargin))) {
+      Puzzle( """a b b b
+                |a c d d
+                |e c d f
+                |e e f f
+                |a 1-
+                |b 6+
+                |c 5+
+                |d 9+
+                |e 5+
+                |f 8+""".stripMargin).solution
+    }
+
+    expect(Option(Grid(
+      """2 1 4 3
+        |4 3 2 1
+        |1 4 3 2
+        |3 2 1 4""".stripMargin))) {
+      Puzzle( """a a b b
+                |c d d e
+                |c f f g
+                |c h h g
+                |a 2/
+                |b 1-
+                |c 12x
+                |d 1-
+                |e 1
+                |f 12x
+                |g 2/
+                |h 3+""".stripMargin).solution
+    }
+
+    expect(Option(Grid(
+      """3 1 4 2
+        |2 4 3 1
+        |1 3 2 4
+        |4 2 1 3""".stripMargin))) {
+      Puzzle( """a a a b
+                |c a d b
+                |c e d d
+                |c e f f
+                |a 12+
+                |b 3+
+                |c 7+
+                |d 9+
+                |e 5+
+                |f 4+""".stripMargin).solution
+    }
+  }
+}
