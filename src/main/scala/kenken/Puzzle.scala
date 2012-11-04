@@ -11,16 +11,16 @@ import collection.SeqView
  */
 class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
-  val constraints = createConstraintMap(latinSquareConstraints(size) ::: cageConstraints)
+  val constraintMap = createConstraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
   def solve: SeqView[Grid, Seq[_]] = {
-    def solveRec(grid: Grid, unapplied: List[Constraint]): SeqView[Grid, Seq[_]] = {
-      propagateConstraints(grid, Set(unapplied: _*)) match {
+    def solveRec(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
+      propagateConstraints(grid, Set(constraints: _*)) match {
         case None => Nil.view
         case Some(g) if (g.isSolved) => List(g).view
         case Some(g: Grid) => unsolvedCells(g).flatMap {
           case (cell, values) =>
-            values.flatMap(value => solveRec(g + (cell -> Set(value)), constraints(cell)))
+            values.flatMap(value => solveRec(g + (cell -> Set(value)), constraintMap(cell)))
         }
       }
     }
@@ -28,16 +28,16 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   }
 
   @tailrec
-  private def propagateConstraints(grid: Grid, unapplied: Set[Constraint]): Option[Grid] = {
-    if (unapplied.isEmpty) Option(grid)
+  private def propagateConstraints(grid: Grid, constraints: Set[Constraint]): Option[Grid] = {
+    if (constraints.isEmpty) Option(grid)
     else {
-      val constraint = unapplied.head
+      val constraint = constraints.head
       grid.constrain(constraint) match {
         case None => None
         case Some((g, cells)) =>
           propagateConstraints(
             g,
-            unapplied ++ cells.flatMap(constraints(_)) - constraint
+            constraints ++ cells.flatMap(constraintMap(_)) - constraint
           )
       }
     }
@@ -54,7 +54,7 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
     }.view
   }
 
-  override def toString = constraints.toString()
+  override def toString = constraintMap.toString()
 
   private def latinSquareConstraints(n: Int) = {
     def row(r: Int) = List((1 to n).map((r, _)): _*)
