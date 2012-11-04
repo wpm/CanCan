@@ -96,7 +96,7 @@ object Puzzle {
     }
 
     val lines = s.split("\n").toList
-    val n = "\\s+".r.split(lines.head).length
+    val n = """\s+""".r.split(lines.head).length
     val constraintGrid = constraintGridFromLines(lines.take(n))
     val constraintMap = constraintMapFromLines(lines.drop(n))
     val cageConstraints = constraintGrid.map {
@@ -173,11 +173,11 @@ object Puzzle {
     //    println(p1.solve.toList)
 
     println(p2)
-    println(p2.solve.take(1).toList)
+    //    println(p2.solve.take(1).toList)
     //    println(p2.propagateConstraints(Grid(4)).get)
 
 
-    //    println(p3)
-    //    println(p3.solve.toList)
+    println(p3)
+    println(p3.solve.toList)
   }
 }
