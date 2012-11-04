@@ -34,12 +34,13 @@ case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends Constraint(cell
 
 /**
  * All solved cells contain distinct values.
+ *
+ * The constraint is violated if the solved values are not all distinct.
  */
 case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
-    // the non-solved values from the solved. The constraint is violated if
-    // the solved values are not all distinct.
+    // the non-solved values from the solved.
     val d = xs.filter(_.size == 1).foldLeft(List[Int]())((memo, x) => x.head :: memo)
     if (d.distinct != d)
       None
@@ -135,6 +136,9 @@ case class DivideConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonA
   override def toString = m + "/: " + super.toString
 }
 
+/**
+ * A set of cells whose values combine with an associative operator
+ */
 abstract class AssociativeConstraint(m: Int, cs: List[(Int, Int)]) extends ArithmeticConstraint(m, cs) {
   def fills(xs: List[Set[Int]]) = {
     def cartesianProduct[A](zs: Traversable[Traversable[A]]): Seq[Seq[A]] =

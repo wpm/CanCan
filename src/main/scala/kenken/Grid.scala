@@ -43,6 +43,7 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) {
     }
   }
 
+  // TODO Move ordering criteria into Puzzle.
   /**
    * List of cells in the grid sorted by the number of possible values and then by location.
    * @return cells in the grid
@@ -68,6 +69,11 @@ class Grid private(n: Int, grid: Map[(Int, Int), Set[Int]]) {
 }
 
 object Grid {
+  /**
+   * Create an empty grid
+   * @param n grid dimension
+   * @return empty grid
+   */
   def apply(n: Int) = {
     val init = for (r <- (1 to n); c <- (1 to n)) yield (r, c) -> Set((1 to n): _*)
     new Grid(n, Map(init: _*))
@@ -82,7 +88,7 @@ object Grid {
     def stringToCell(r: Int, cells: Array[String]) = cells.zipWithIndex.map {
       case (cell, i) => (r, i + 1) -> Set[Int](cell.toList.map(_.toString.toInt): _*)
     }
-    val cells = s.split("\n").map("\\s+".r.split(_))
+    val cells = s.split("\n").map( """\s+""".r.split(_))
     val n = cells.head.length
     // All lines must contain the same number of cells.
     require(cells.forall(_.length == n))
@@ -92,20 +98,5 @@ object Grid {
     // All values must be between 1 and n.
     require(init.flatMap(_._2).forall(x => x > 0 && x <= n))
     new Grid(n, Map(init: _*))
-  }
-
-  def main(args: Array[String]) {
-    val g = Grid(3)
-    println(g)
-    println(g(1, 1))
-    println(g((1, 1)))
-
-    val g2 = Grid(2) ++ List((1, 1) -> Set(1), (1, 2) -> Set(2), (2, 1) -> Set(3), (2, 2) -> Set(4))
-    println(g2)
-
-    val s =
-      """12 12
-        |12 2""".stripMargin
-    println(Grid(s))
   }
 }

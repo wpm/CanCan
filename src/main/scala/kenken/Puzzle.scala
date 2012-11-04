@@ -27,7 +27,6 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
     solveRec(Grid(n), cageConstraints)
   }
 
-
   @tailrec
   private def propagateConstraints(grid: Grid, unapplied: Set[Constraint]): Option[Grid] = {
     if (unapplied.isEmpty) Option(grid)
@@ -35,17 +34,11 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
       val constraint = unapplied.head
       grid.constrain(constraint) match {
         case None => None
-        case Some((g, cells)) => propagateConstraints(g,
-          unapplied ++ cells.flatMap(constraints(_)) - constraint)
+        case Some((g, cells)) =>
+          propagateConstraints(g,
+            unapplied ++ cells.flatMap(constraints(_)) - constraint)
       }
     }
-  }
-
-  // TODO Debugging only: remove.
-  def allC = constraints.values.flatten.toList.distinct
-
-  def printC() {
-    for ((x, i) <- allC.zipWithIndex) println(i + ": " + x)
   }
 
   override def toString = constraints.toString()
