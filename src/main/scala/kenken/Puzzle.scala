@@ -1,6 +1,7 @@
 package kenken
 
 import scala._
+import annotation.tailrec
 import collection.mutable
 
 
@@ -12,22 +13,17 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
   val constraints = constraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
-  def propagateConstraints(grid: Grid) = {
-    var unverified = Set(constraints.values.flatten.toList: _*)
-    var constrainedGrid = grid
-    while (!unverified.isEmpty) {
+  @tailrec
+  final def propagateConstraints(grid: Grid, unverified: Set[Constraint] = Set(cageConstraints: _*)): Option[Grid] = {
+    if (unverified.isEmpty) Option(grid)
+    else {
       val constraint = unverified.head
-      println(constraint + "\n" + constraint(constrainedGrid) + "\n\n")
-      constraint(constrainedGrid) match {
-        case None => unverified = Set.empty[Constraint]
-        case Some((g, cells)) => {
-          constrainedGrid = g
-          unverified ++= cells.flatMap(constraints(_))
-          unverified -= constraint
-        }
+      grid.constrain(constraint) match {
+        case None => None
+        case Some((g, cells)) => propagateConstraints(g,
+          unverified ++ cells.flatMap(constraints(_)) - constraint)
       }
     }
-    constrainedGrid
   }
 
   // TODO Debugging only: remove.
@@ -57,7 +53,7 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
 
   private def constraintMap(constraints: List[Constraint]) = {
     val m = mutable.Map[(Int, Int), List[Constraint]]()
-    for (constraint <- constraints; cell <- constraint) {
+    for (constraint <- constraints; cell <- constraint.cells) {
       m(cell) = constraint :: m.getOrElse(cell, List.empty)
     }
     Map[(Int, Int), List[Constraint]]() ++ m
@@ -101,19 +97,19 @@ object Puzzle {
       case (label, cells) =>
         val (m, operation) = constraintMap(label)
         operation match {
-          case "+" => PlusConstraint(cells, m)
+          case "+" => PlusConstraint(m, cells)
           case "-" => {
             require(cells.length == 2)
-            MinusConstraint(cells.head, cells.tail.head, m)
+            MinusConstraint(m, cells.head, cells.tail.head)
           }
-          case "x" => TimesConstraint(cells, m)
+          case "x" => TimesConstraint(m, cells)
           case "/" => {
             require(cells.length == 2)
-            DivideConstraint(cells.head, cells.tail.head, m)
+            DivideConstraint(m, cells.head, cells.tail.head)
           }
           case _ => {
             require(cells.length == 1)
-            SpecifiedConstraint(cells.head, m)
+            SpecifiedConstraint(m, cells.head)
           }
         }
     }.toList
@@ -132,6 +128,25 @@ object Puzzle {
       |e 5+
       |f 4+""".stripMargin)
 
+
+  //    2 1 4 3
+  //    4 3 2 1
+  //    1 4 3 2
+  //    3 2 1 4
+  val p3 = Puzzle( """a a b b
+                     |c d d e
+                     |c f f g
+                     |c h h g
+                     |a 2/
+                     |b 1-
+                     |c 12x
+                     |d 1-
+                     |e 1
+                     |f 12x
+                     |g 2/
+                     |h 3+""".stripMargin)
+
+
   def main(args: Array[String]) {
     val p1 = Puzzle(2)
     println(p1)
@@ -140,37 +155,23 @@ object Puzzle {
     //    3 1 2 4
     //    2 4 3 1
     //    1 2 4 3
-    val p2 = """a b b b
-               |a c d d
-               |e c d f
-               |e e f f
-               |a 1-
-               |b 6+
-               |c 5+
-               |d 9+
-               |e 5+
-               |f 8+""".stripMargin
-    println(apply(p2))
+    val p2 = Puzzle( """a b b b
+                       |a c d d
+                       |e c d f
+                       |e e f f
+                       |a 1-
+                       |b 6+
+                       |c 5+
+                       |d 9+
+                       |e 5+
+                       |f 8+""".stripMargin)
+    println(p2)
+    println(p2.propagateConstraints(Grid(4)))
 
 
-    //    2 1 4 3
-    //    4 3 2 1
-    //    1 4 3 2
-    //    3 2 1 4
-    val p3 = """a a b b
-               |c d d e
-               |c f f g
-               |c h h g
-               |a 2/
-               |b 1-
-               |c 12x
-               |d 1-
-               |e 1
-               |f 12x
-               |g 2/
-               |h 3+""".stripMargin
-    println(apply(p3))
+    println(p3)
+    println(p3.propagateConstraints(Grid(4)))
 
-    println(p.propagateConstraints(Grid(4)))
+    //    println(p.propagateConstraints(Grid(4)))
   }
 }

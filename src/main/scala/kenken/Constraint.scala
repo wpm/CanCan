@@ -1,80 +1,42 @@
 package kenken
 
-import math.abs
-
-
-abstract class Constraint(cs: List[(Int, Int)],
-                          constraint: List[Set[Int]] => Option[List[Set[Int]]],
-                          name: String) extends Iterable[(Int, Int)] {
+/**
+ * A constraint on the possible values of a set of cells in a grid.
+ * @param cs the cells to which the constraint applies
+ */
+abstract class Constraint(cs: List[(Int, Int)]) {
+  /**
+   * The cells to which this constraint applies
+   */
   val cells = cs.sorted
 
-  def iterator = cells.iterator
-
-  def apply(xs: List[Set[Int]]) = constraint(xs)
-
   /**
-   * Apply the constraint to a grid
-   * @param grid grid to apply constraint
-   * @return tuple of the new grid and a list of changed cells or _None_ if the constraint is inconsistent
+   * Apply the constraint to the values in a set of cells
+   * @param xs sets of values in the cells
+   * @return sets of values in the cells with the constraint applied or
+   *         _None_ if the constraint cannot be satisfied
    */
-  def apply(grid: Grid): Option[(Grid, List[(Int, Int)])] = {
-    /**
-     * scala> val xs = List(('a, 1), ('b, 2), ('c, 3)); val ys = List(('a, 1), ('b, 3), ('c, 4))
-     * scala> Constraint.tupleDiff(xs, ys)
-     * res2: List[(Symbol, Int)] = List(('b,3), ('c,4))
-     */
-    def tupleDiff[A, B](xs: List[(A, B)], ys: List[(A, B)]): List[(A, B)] =
-      xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
+  def apply(xs: List[Set[Int]]): Option[List[Set[Int]]]
 
-    val before = cells.map(cell => (cell, grid(cell)))
-    val values = before.map(_._2)
-    constraint(values) match {
-      case None => None
-      case after => {
-        val changed = tupleDiff(before, cells.zip(after.get))
-        Option((grid ++ changed, changed.map(_._1)))
-      }
-    }
-  }
-
-  override def toString() = name + ": " + cells.mkString(" ")
+  override def toString = cells.mkString(" ")
 }
 
-class CageConstraint(cs: List[(Int, Int)],
-                     m: Int, constraint: Int => List[Set[Int]] => Option[List[Set[Int]]],
-                     operator: String)
-  extends Constraint(cs, constraint(m), m + "" + operator)
+/**
+ * The value of a single cell is specified.
+ * @param m the value
+ * @param cell the cell to which the constraint applies
+ */
+case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends Constraint(cell :: Nil) {
+  def apply(xs: List[Set[Int]]) = if (xs.head.contains(m)) Some(List(Set(m))) else None
 
-case class SpecifiedConstraint(cell: (Int, Int), m: Int)
-  extends Constraint(cell :: Nil, Constraint.specified(m), m.toString)
+  override def toString = m + ": " + super.toString
+}
 
-case class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs, Constraint.unique, "Unique")
-
-case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs, Constraint.definite, "Definite")
-
-case class PlusConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.plus, "+")
-
-case class MinusConstraint(c1: (Int, Int), c2: (Int, Int), m: Int)
-  extends CageConstraint(c1 :: c2 :: Nil, m, Constraint.minus, "-")
-
-case class TimesConstraint(cs: List[(Int, Int)], m: Int) extends CageConstraint(cs, m, Constraint.times, "x")
-
-case class DivideConstraint(c1: (Int, Int), c2: (Int, Int), m: Int)
-  extends CageConstraint(c1 :: c2 :: Nil, m, Constraint.divide, "/")
-
-object Constraint {
-  /**
-   * The value of a single cell is specified.
-   */
-  def specified(m: Int)(xs: List[Set[Int]]) = {
-    if (xs.head.contains(m)) Some(List(Set(m)))
-    else None
-  }
-
-  /**
-   * All solved cells are distinct.
-   */
-  def definite(xs: List[Set[Int]]) = {
+/**
+ * All solved cells contain distinct values.
+ */
+case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+  def apply(xs: List[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved. The constraint is violated if
     // the solved values are not all distinct.
@@ -94,80 +56,111 @@ object Constraint {
     }
   }
 
-  /**
-   * If a value only appears in one cell, that cell is solved.
-   */
-  def unique(xs: List[Set[Int]]) = {
+  override def toString = "Definite: " + super.toString
+}
+
+/**
+ * If a value only appears in one cell, that cell is solved.
+ */
+case class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+  def apply(xs: List[Set[Int]]) = {
     Some(xs.map {
-      x => val u = x -- (xs.filter(y => !(y eq x)).reduceLeft(_ | _))
-      u.size match {
-        case 1 => u
-        case _ => x
-      }
+      x =>
+        val u = x -- (xs.filter(y => !(y eq x)).reduceLeft(_ | _))
+        u.size match {
+          case 1 => u
+          case _ => x
+        }
     })
   }
 
-  def plus(n: Int)(xs: Traversable[Traversable[Int]]) = arithmeticFilter(plusFilter)(n, xs)
+  override def toString = "Unique: " + super.toString
+}
 
-  def times(n: Int)(xs: Traversable[Traversable[Int]]) = arithmeticFilter(timesFilter)(n, xs)
-
-  def minus(n: Int)(xs: Traversable[Traversable[Int]]) = arithmeticFilter(minusFilter)(n, xs)
-
-  def divide(n: Int)(xs: Traversable[Traversable[Int]]) = arithmeticFilter(divideFilter)(n, xs)
-
-  def arithmeticFilter(f: (Int, Traversable[Traversable[Int]]) => Seq[Seq[Int]])
-                      (n: Int, xs: Traversable[Traversable[Int]]) =
-    f(n, xs).transpose match {
-      case Nil => None
-      case ys => Some(ys.map(Set(_: _*)).toList)
-    }
-
-  def plusFilter(n: Int, xs: Traversable[Traversable[Int]]) = associative(n, xs)(_ + _)
-
-  def timesFilter(n: Int, xs: Traversable[Traversable[Int]]) = associative(n, xs)(_ * _)
-
-  def associative[A](n: A, xs: Traversable[Traversable[A]])(f: (A, A) => A) =
-    cartesianProduct(xs).filter(_.reduceLeft(f) == n)
-
-  def cartesianProduct[A](xs: Traversable[Traversable[A]]): Seq[Seq[A]] =
-    xs.foldLeft(Seq(Seq.empty[A])) {
-      (x, y) => for (a <- x.view; b <- y) yield a :+ b
-    }
-
-  def nonAssociative[A](xs: Traversable[A], ys: Traversable[A])(f: ((A, A)) => Boolean) =
-    xs.flatMap(x => ys.flatMap(y => List(List(x, y), List(y, x)))).toList.distinct.filter {
-      p => f(p.head, p.tail.head) || f(p.tail.head, p.head)
-    }
-
-  def minusFilter(n: Int, xs: Traversable[Traversable[Int]]) =
-    nonAssociative(xs.head, xs.tail.head)(p => abs(p._1 - p._2) == n)
-
-  def divideFilter(n: Int, xs: Traversable[Traversable[Int]]) =
-    nonAssociative(xs.head, xs.tail.head)(p => p._1 % p._2 == 0 && p._1 / p._2 == n)
-
-  def main(args: Array[String]) {
-    var r = List(Set(1), Set(2, 3), Set(1, 2, 3))
-    println(definite(r))
-    r = List(Set(1), Set(1), Set(1, 2, 3))
-    println(definite(r))
-    r = List(Set(1), Set(2, 3, 4), Set(2, 3), Set(2, 3))
-    println(unique(r))
-
-    println("5+ " + plus(5)(List(Set(1, 2, 3, 4), Set(1, 2, 3))))
-    println("50+ " + plus(50)(List(Set(1, 2, 3, 4), Set(1, 2, 3, 4))))
-
-    println("2- " + minus(2)(List(Set(1, 2, 3, 4), Set(1, 2, 3, 4))))
-    println("20- " + minus(20)(List(Set(1, 2, 3, 4), Set(1, 2, 3, 4))))
-
-    val r1d = DefinitenessConstraint(List((1, 1), (1, 2)))
-    println(r1d)
-    val r1u = UniquenessConstraint(List((1, 1), (1, 2)))
-    println(r1u)
-    val r1p = PlusConstraint(List((1, 1), (1, 2)), 3)
-    println(r1p)
-    val r1m = MinusConstraint((1, 1), (1, 2), 1)
-    println(r1m)
-
-    println(r1p(Grid(4)))
+/**
+ * A set of cells whose values must combine arithmetically to a specified value.
+ */
+abstract class ArithmeticConstraint(m: Int, cs: List[(Int, Int)]) extends Constraint(cs) {
+  def apply(xs: List[Set[Int]]) = {
+    val f = fills(xs)
+    if (f.isEmpty) None else Some(f.transpose.map(Set(_: _*)))
   }
+
+  /**
+   * Values that can fill the cells.
+   *
+   * For example, a 2-cell +5 constraint might return List(List(2, 3), List(3, 2), List(4, 1)).
+   *
+   * @param xs cell possible values
+   * @return set of lists of possible values to fill the cells
+   */
+  def fills(xs: List[Set[Int]]): List[List[Int]]
+}
+
+/**
+ * A pair of cells whose values combine with a non-associative operator.
+ *
+ * The constraint is satisfied if either ordering of the cells produces the specified value.
+ */
+abstract class NonAssociativeConstraint(m: Int, c1: (Int, Int), c2: (Int, Int))
+  extends ArithmeticConstraint(m, List(c1, c2)) {
+
+  def fills(xs: List[Set[Int]]) =
+    (for (a <- xs.head; b <- xs.tail.head; if satisfied(a, b) || satisfied(b, a)) yield List(a, b)).toList
+
+  /**
+   * Does this pair of numbers satisfy the constraint?
+   * @param x a number in a cell
+   * @param y a number in a cell
+   * @return _true_ if the combination satisfies the constraint
+   */
+  def satisfied(x: Int, y: Int): Boolean
+}
+
+/**
+ * The difference of a pair of cells must be a specified value.
+ */
+case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
+  def satisfied(x: Int, y: Int) = x - y == m
+
+  override def toString = m + "-: " + super.toString
+}
+
+/**
+ * The quotient of a pair of cells must be a specified value.
+ */
+case class DivideConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
+  def satisfied(x: Int, y: Int) = x % y == 0 && x / y == m
+
+  override def toString = m + "/: " + super.toString
+}
+
+abstract class AssociativeConstraint(m: Int, cs: List[(Int, Int)]) extends ArithmeticConstraint(m, cs) {
+  def fills(xs: List[Set[Int]]) = {
+    def cartesianProduct[A](zs: Traversable[Traversable[A]]): Seq[Seq[A]] =
+      zs.foldLeft(Seq(Seq.empty[A])) {
+        (x, y) => for (a <- x.view; b <- y) yield a :+ b
+      }
+    cartesianProduct(xs).filter(_.reduceLeft(combine) == m).map(_.toList).toList
+  }
+
+  def combine(x: Int, y: Int): Int
+}
+
+/**
+ * The sum of the values in a set of cells must equal a specified value.
+ */
+case class PlusConstraint(m: Int, cs: List[(Int, Int)]) extends AssociativeConstraint(m, cs) {
+  def combine(x: Int, y: Int) = x + y
+
+  override def toString = m + "+: " + super.toString
+}
+
+/**
+ * The sum of the values in a set of cells must equal a specified value.
+ */
+case class TimesConstraint(m: Int, cs: List[(Int, Int)]) extends AssociativeConstraint(m, cs) {
+  def combine(x: Int, y: Int) = x * y
+
+  override def toString = m + "x: " + super.toString
 }
