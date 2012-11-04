@@ -50,10 +50,11 @@ object Test {
 
 
   def main(args: Array[String]) {
-    println(p1 + "\n" + p1.solve.toList.mkString("\n\n"))
+    println(p1 + "\n" + p1.allSolutions.toList.mkString("\n\n"))
 
-    println(p2 + "\n" + p2.solve.toList.mkString("\n\n"))
+    println(p2 + "\n" + p2.allSolutions.toList.mkString("\n\n"))
+    println(p2.solution)
 
-    println(p3 + "\n" + p3.solve.toList.mkString("\n\n"))
+    println(p3 + "\n" + p3.allSolutions.toList.mkString("\n\n"))
   }
 }

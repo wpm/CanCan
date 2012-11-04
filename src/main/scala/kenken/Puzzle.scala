@@ -11,10 +11,27 @@ import collection.SeqView
  * @param n the dimension of the grid
  */
 class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
-  val size = n
-  val constraintMap = createConstraintMap(latinSquareConstraints(size) ::: cageConstraints)
+  /**
+   * Map of cells in the puzzle grid to the constraints that contain them
+   */
+  private val constraintMap = createConstraintMap(latinSquareConstraints(n) ::: cageConstraints)
 
-  def solve: SeqView[Grid, Seq[_]] = {
+  /**
+   * A solution to the puzzle.
+   * @return puzzle solution or _None_ if it cannot be solved
+   */
+  def solution: Option[Grid] = allSolutions.take(1).toList match {
+    case Nil => None
+    case ss => Option(ss.head)
+  }
+
+  /**
+   * All solutions to the puzzle.
+   * @return a view of all the grids that solve this puzzle
+   */
+  def allSolutions: SeqView[Grid, Seq[_]] = {
+    // The search may turn up multiple copies of the same solution, so ensure
+    // that this function returns a unique list.
     val solutions = mutable.Set[Grid]()
 
     def solveRec(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
@@ -34,6 +51,9 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
     solveRec(Grid(n), cageConstraints)
   }
 
+  /**
+   * Propagate constraints to the grid
+   */
   @tailrec
   private def propagateConstraints(grid: Grid, constraints: Set[Constraint]): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
@@ -51,7 +71,7 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   }
 
   /**
-   * @return unsolved cells in the grid, in order of the number of values
+   * Unsolved cells and their values in order of the number of possible values
    */
   private def unsolvedCells(grid: Grid) = {
     grid.filter {
@@ -75,9 +95,6 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
         Nil).flatten.toList
   }
 
-  /**
-   * Create a map of cells to the constraints that contain them.
-   */
   private def createConstraintMap(constraints: List[Constraint]) = {
     val cs = for (constraint <- constraints; cell <- constraint.cells) yield (cell -> constraint)
     (Map[(Int, Int), List[Constraint]]() /: cs)((m, p) => m + (p._1 -> (p._2 :: m.getOrElse(p._1, Nil))))

@@ -1,4 +1,4 @@
-Ken Ken Solver
-==============
+KenKen Solver
+=============
 
-This solves Ken Ken puzzles.
+This solves [KenKen](http://www.kenken.com) puzzles.
