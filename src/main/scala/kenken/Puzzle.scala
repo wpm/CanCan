@@ -2,6 +2,7 @@ package kenken
 
 import scala._
 import annotation.tailrec
+import collection.SeqView
 
 
 /**
@@ -12,12 +13,12 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   val size = n
   val constraints = createConstraintMap(latinSquareConstraints(size) ::: cageConstraints)
 
-  def solve: List[Grid] = {
-    def solveRec(grid: Grid, unapplied: List[Constraint]): List[Grid] = {
+  def solve: SeqView[Grid, Seq[_]] = {
+    def solveRec(grid: Grid, unapplied: List[Constraint]): SeqView[Grid, Seq[_]] = {
       propagateConstraints(grid, Set(unapplied: _*)) match {
-        case None => Nil
-        case Some(g) if (g.isSolved) => List(g)
-        case Some(g: Grid) => g.cells.flatMap {
+        case None => Nil.view
+        case Some(g) if (g.isSolved) => List(g).view
+        case Some(g: Grid) => g.cells.view.flatMap {
           cell =>
             g(cell).flatMap(value => solveRec(g + (cell -> Set(value)), constraints(cell)))
         }
@@ -27,7 +28,7 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   }
 
   @tailrec
-  private def propagateConstraints(grid: Grid, unapplied: Set[Constraint]): Option[Grid] = {
+  final def propagateConstraints(grid: Grid, unapplied: Set[Constraint] = Set(cageConstraints: _*)): Option[Grid] = {
     if (unapplied.isEmpty) Option(grid)
     else {
       val constraint = unapplied.head
@@ -134,6 +135,21 @@ object Puzzle {
       |f 4+""".stripMargin)
 
 
+  //    4 3 1 2
+  //    3 1 2 4
+  //    2 4 3 1
+  //    1 2 4 3
+  val p2 = Puzzle( """a b b b
+                     |a c d d
+                     |e c d f
+                     |e e f f
+                     |a 1-
+                     |b 6+
+                     |c 5+
+                     |d 9+
+                     |e 5+
+                     |f 8+""".stripMargin)
+
   //    2 1 4 3
   //    4 3 2 1
   //    1 4 3 2
@@ -153,28 +169,15 @@ object Puzzle {
 
 
   def main(args: Array[String]) {
-    val p1 = Puzzle(2, List(SpecifiedConstraint(1, (1, 1))))
-    println(p1.solve)
+    //    val p1 = Puzzle(2, List(SpecifiedConstraint(1, (1, 1))))
+    //    println(p1.solve.toList)
 
-    //    4 3 1 2
-    //    3 1 2 4
-    //    2 4 3 1
-    //    1 2 4 3
-    val p2 = Puzzle( """a b b b
-                       |a c d d
-                       |e c d f
-                       |e e f f
-                       |a 1-
-                       |b 6+
-                       |c 5+
-                       |d 9+
-                       |e 5+
-                       |f 8+""".stripMargin)
     println(p2)
-    //    println(p2.solve)
+    println(p2.solve.take(1).toList)
+    //    println(p2.propagateConstraints(Grid(4)).get)
 
 
-    println(p3)
-    println(p3.solve)
+    //    println(p3)
+    //    println(p3.solve.toList)
   }
 }
