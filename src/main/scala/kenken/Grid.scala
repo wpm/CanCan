@@ -2,6 +2,9 @@ package kenken
 
 import collection.GenTraversableOnce
 
+import util.parsing.combinator.RegexParsers
+
+
 /**
  * A nxn grid of possible values
  *
@@ -64,6 +67,7 @@ class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int,
   }
 }
 
+
 object Grid {
   /**
    * Create an empty grid
@@ -75,24 +79,37 @@ object Grid {
     new Grid(n, Map(init: _*))
   }
 
+  def apply(m: Array[Array[Set[Int]]]) = {
+    val n = m.length
+    // The array must be square.
+    require(m.forall(_.length == n))
+    val init = for ((row, r) <- m.zipWithIndex; (item, c) <- row.zipWithIndex) yield ((r + 1, c + 1), item)
+    new Grid(n, Map(init: _*))
+  }
+
   /**
    * Convert an string array of numbers to a grid
    * @param s array of numbers
    * @return corresponding grid
    */
-  def apply(s: String) = {
-    def stringToCell(r: Int, cells: Array[String]) = cells.zipWithIndex.map {
-      case (cell, i) => (r, i + 1) -> Set[Int](cell.toList.map(_.toString.toInt): _*)
+  def apply(s: String): Grid = {
+    // TODO Can GridParser be an object?
+    val eol = sys.props("line.separator")
+
+    class GridParser extends RegexParsers {
+      override val whiteSpace = """[ \t]+""".r
+      val cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set[Int](s.toList.map(_.toString.toInt): _*))
+
+      def row: Parser[List[Set[Int]]] = rep(cell)
+
+      def table: Parser[List[List[Set[Int]]]] = rep(row ~ eol ^^ (_._1))
     }
-    val cells = s.split("\n").map( """\s+""".r.split(_))
-    val n = cells.head.length
-    // All lines must contain the same number of cells.
-    require(cells.forall(_.length == n))
-    val init = cells.zipWithIndex.flatMap {
-      case (line, r) => stringToCell(r + 1, line)
+
+
+    val p = new GridParser()
+    p.parseAll(p.table, if (s.endsWith(eol)) s else s + eol) match {
+      case p.Success(a, _) => Grid(a.map(_.toArray).toArray)
+      case e: p.Failure => throw new IllegalArgumentException(e.toString())
     }
-    // All values must be between 1 and n.
-    require(init.flatMap(_._2).forall(x => x > 0 && x <= n))
-    new Grid(n, Map(init: _*))
   }
 }
