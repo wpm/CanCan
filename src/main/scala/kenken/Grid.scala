@@ -79,6 +79,11 @@ object Grid {
     new Grid(n, Map(init: _*))
   }
 
+  /**
+   * Create a grid from a square array of integer sets
+   * @param m array of integer sets
+   * @return new grid
+   */
   def apply(m: Array[Array[Set[Int]]]) = {
     val n = m.length
     // The array must be square.
@@ -93,23 +98,20 @@ object Grid {
    * @return corresponding grid
    */
   def apply(s: String): Grid = {
-    // TODO Can GridParser be an object?
     val eol = sys.props("line.separator")
 
-    class GridParser extends RegexParsers {
+    object GridParser extends RegexParsers {
       override val whiteSpace = """[ \t]+""".r
-      val cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set[Int](s.toList.map(_.toString.toInt): _*))
+
+      def cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set[Int](s.toList.map(_.toString.toInt): _*))
 
       def row: Parser[List[Set[Int]]] = rep(cell)
 
       def table: Parser[List[List[Set[Int]]]] = rep(row ~ eol ^^ (_._1))
     }
-
-
-    val p = new GridParser()
-    p.parseAll(p.table, if (s.endsWith(eol)) s else s + eol) match {
-      case p.Success(a, _) => Grid(a.map(_.toArray).toArray)
-      case e: p.Failure => throw new IllegalArgumentException(e.toString())
+    GridParser.parseAll(GridParser.table, if (s.endsWith(eol)) s else s + eol) match {
+      case GridParser.Success(a, _) => Grid(a.map(_.toArray).toArray)
+      case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
     }
   }
 }
