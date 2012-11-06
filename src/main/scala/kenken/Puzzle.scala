@@ -100,7 +100,9 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
 
   private def createConstraintMap(constraints: List[Constraint]) = {
     val cs = for (constraint <- constraints; cell <- constraint.cells) yield (cell -> constraint)
-    (Map[(Int, Int), List[Constraint]]() /: cs)((m, p) => m + (p._1 -> (p._2 :: m.getOrElse(p._1, Nil))))
+    (Map[(Int, Int), List[Constraint]]() /: cs) {
+      case (m, (cell, constraint)) => m + (cell -> (constraint :: m.getOrElse(cell, Nil)))
+    }
   }
 }
 
