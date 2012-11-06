@@ -9,7 +9,7 @@ import collection.GenTraversableOnce
  * @param n the dimension of the grid
  * @param g map of grid positions to possible values
  */
-class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
+case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
   val grid = g
 
   def iterator = g.iterator
@@ -21,13 +21,6 @@ class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int,
   def +(kv: ((Int, Int), Set[Int])) = new Grid(n, g + kv)
 
   def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = new Grid(n, g ++ xs)
-
-  override def equals(other: Any): Boolean = other match {
-    case that: Grid => g == that.grid
-    case _ => false
-  }
-
-  override def hashCode() = g.hashCode()
 
   /**
    * Apply a constraint to the grid
