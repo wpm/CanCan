@@ -4,11 +4,14 @@ import scala._
 import annotation.tailrec
 import collection.mutable
 import collection.SeqView
+import scala.Predef._
+import scala.Some
 
 
 /**
  * A set of constraints on a square grid of numbers
  * @param n the dimension of the grid
+ * @param cageConstraints cage constraints in the puzzle
  */
 class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   /**
@@ -104,56 +107,5 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
 object Puzzle {
   def apply(n: Int, cageConstraints: List[Constraint] = Nil): Puzzle = new Puzzle(n, cageConstraints)
 
-  def apply(s: String): Puzzle = {
-    def constraintGridFromLines(lines: List[String]) = {
-      def stringToCell(r: Int, cells: Array[String]) = cells.zipWithIndex.map {
-        case (cell, i) => cell ->(r, i + 1)
-      }
-
-      val cells = lines.map( """\s+""".r.split(_))
-      val init = cells.zipWithIndex.flatMap {
-        case (line, r) => stringToCell(r + 1, line)
-      }
-      init.foldLeft(Map[String, List[(Int, Int)]]()) {
-        (m, p) =>
-          val cs: List[(Int, Int)] = p._2 :: m.getOrElse(p._1, List[(Int, Int)]())
-          m + (p._1 -> cs)
-      }
-    }
-
-    def constraintMapFromLines(lines: List[String]) = {
-      val constraint = """(\w+)\s+(\d+)([+-x/])?""".r
-      lines.foldLeft(Map[String, (Int, String)]()) {
-        (constraintMap, line) =>
-          val constraint(label, m, operation) = line
-          constraintMap + (label ->(m.toInt, operation))
-      }
-    }
-
-    val lines = s.split("\n").toList
-    val n = """\s+""".r.split(lines.head).length
-    val constraintGrid = constraintGridFromLines(lines.take(n))
-    val constraintMap = constraintMapFromLines(lines.drop(n))
-    val cageConstraints = constraintGrid.map {
-      case (label, cells) =>
-        val (m, operation) = constraintMap(label)
-        operation match {
-          case "+" => PlusConstraint(m, cells)
-          case "-" => {
-            require(cells.length == 2)
-            MinusConstraint(m, cells.head, cells.tail.head)
-          }
-          case "x" => TimesConstraint(m, cells)
-          case "/" => {
-            require(cells.length == 2)
-            DivideConstraint(m, cells.head, cells.tail.head)
-          }
-          case _ => {
-            require(cells.length == 1)
-            SpecifiedConstraint(m, cells.head)
-          }
-        }
-    }.toList
-    Puzzle(n, cageConstraints)
-  }
+  def apply(s: String): Puzzle = Parsers.parsePuzzle(s)
 }

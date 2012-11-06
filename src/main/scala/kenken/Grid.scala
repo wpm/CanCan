@@ -2,8 +2,6 @@ package kenken
 
 import collection.GenTraversableOnce
 
-import util.parsing.combinator.RegexParsers
-
 
 /**
  * A nxn grid of possible values
@@ -95,23 +93,7 @@ object Grid {
   /**
    * Convert an string array of numbers to a grid
    * @param s array of numbers
-   * @return corresponding grid
+   * @return new grid
    */
-  def apply(s: String): Grid = {
-    val eol = sys.props("line.separator")
-
-    object GridParser extends RegexParsers {
-      override val whiteSpace = """[ \t]+""".r
-
-      def cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set[Int](s.toList.map(_.toString.toInt): _*))
-
-      def row: Parser[List[Set[Int]]] = rep(cell)
-
-      def table: Parser[List[List[Set[Int]]]] = rep(row ~ eol ^^ (_._1))
-    }
-    GridParser.parseAll(GridParser.table, if (s.endsWith(eol)) s else s + eol) match {
-      case GridParser.Success(a, _) => Grid(a.map(_.toArray).toArray)
-      case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
-    }
-  }
+  def apply(s: String): Grid = Parsers.parseGrid(s: String)
 }
