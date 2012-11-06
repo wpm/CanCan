@@ -37,7 +37,7 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
     // that this function returns a unique list.
     val solutions = mutable.Set[Grid]()
 
-    def solveRec(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
+    def search(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
       propagateConstraints(grid, Set(constraints: _*)) match {
         case None => Nil.view
         case Some(g) if (solutions.contains(g)) => Nil.view
@@ -47,11 +47,11 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
         }
         case Some(g: Grid) => unsolvedCells(g).flatMap {
           case (cell, values) =>
-            values.flatMap(value => solveRec(g + (cell -> Set(value)), constraintMap(cell)))
+            values.flatMap(value => search(g + (cell -> Set(value)), constraintMap(cell)))
         }
       }
     }
-    solveRec(Grid(n), cageConstraints)
+    search(Grid(n), cageConstraints)
   }
 
   /**
