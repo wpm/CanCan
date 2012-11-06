@@ -89,7 +89,7 @@ The `KenKen` object represents a single puzzle.
 It associates a set of constraints with a grid of a particular size.
 The search algorithm is implemented in the private recursive `search` function, which in turn calls a private recursive `propagateConstraints` function.
 
-The `KenKen.allSolutions` method returns all solutions as a lazily-evaluated sequence.
+The `KenKen.solutions` method returns all solutions as a lazily-evaluated sequence.
 Because the search algorithm may find the same solution via multiple paths, this method maintains a private set of all solved grids it has encountered so far.
 If you just want to find a single solution, you may call the `KenKen.solution` method instead.
 

@@ -24,7 +24,7 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
    * A solution to the puzzle.
    * @return puzzle solution or _None_ if it cannot be solved
    */
-  def solution: Option[Grid] = allSolutions.take(1).toList match {
+  def solution: Option[Grid] = solutions.take(1).toList match {
     case Nil => None
     case ss => Option(ss.head)
   }
@@ -33,17 +33,17 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
    * All solutions to the puzzle.
    * @return a view of all the grids that solve this puzzle
    */
-  def allSolutions: SeqView[Grid, Seq[_]] = {
+  def solutions: SeqView[Grid, Seq[_]] = {
     // The search may turn up multiple copies of the same solution, so ensure
     // that this function returns a unique list.
-    val solutions = mutable.Set[Grid]()
+    val visited = mutable.Set[Grid]()
 
     def search(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
       propagateConstraints(grid, Set(constraints: _*)) match {
         case None => Nil.view
-        case Some(g) if (solutions.contains(g)) => Nil.view
+        case Some(g) if (visited.contains(g)) => Nil.view
         case Some(g) if (g.isSolved) => {
-          solutions += g
+          visited += g
           List(g).view
         }
         case Some(g: Grid) => unsolvedCells(g).flatMap {
