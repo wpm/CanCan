@@ -10,8 +10,6 @@ import collection.GenTraversableOnce
  * @param g map of grid positions to possible values
  */
 case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
-  val grid = g
-
   def iterator = g.iterator
 
   def isSolved = g.values.forall(_.size == 1)
