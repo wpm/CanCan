@@ -15,10 +15,10 @@ object Parsers {
     //  1  23  123
     // 23  123 123
     //
-    def grid: Parser[Grid] = rep(row) ^^ (rows => Grid(rows.map(_.toArray).toArray))
+    def grid: Parser[Grid] = repsep(row, eol) ^^ (rows => Grid(rows.map(_.toArray).toArray))
 
     // 123 123 12
-    def row: Parser[List[Set[Int]]] = rep(cell) <~ eol
+    def row: Parser[List[Set[Int]]] = rep(cell)
 
     // 123
     def cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set[Int](s.toList.map(_.toString.toInt): _*))
@@ -72,7 +72,7 @@ object Parsers {
     // a b b
     // c c d
     //
-    def table: Parser[Map[String, List[(Int, Int)]]] = rep(tableRow) ^^ {
+    def table: Parser[Map[String, List[(Int, Int)]]] = repsep(tableRow, eol) ^^ {
       labels: List[List[String]] =>
         val n = labels.length
         // The table must be square.
@@ -86,17 +86,15 @@ object Parsers {
     }
 
     // a a b
-    def tableRow: Parser[List[String]] = rep(ident) <~ eol
+    def tableRow: Parser[List[String]] = rep(ident)
   }
 
-  private def addEol(s: String) = if (s.endsWith(eol)) s else s + eol
-
-  def parseGrid(s: String): Grid = GridParser.parseAll(GridParser.grid, Parsers.addEol(s)) match {
+  def parseGrid(s: String): Grid = GridParser.parseAll(GridParser.grid, s) match {
     case GridParser.Success(a, _) => a
     case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
   }
 
-  def parsePuzzle(s: String): Puzzle = PuzzleParser.parseAll(PuzzleParser.puzzle, Parsers.addEol(s)) match {
+  def parsePuzzle(s: String): Puzzle = PuzzleParser.parseAll(PuzzleParser.puzzle, s) match {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
   }
