@@ -6,6 +6,7 @@ import collection.mutable
 import collection.SeqView
 import scala.Predef._
 import scala.Some
+import java.io.FileReader
 
 
 /**
@@ -13,7 +14,7 @@ import scala.Some
  * @param n the dimension of the grid
  * @param cageConstraints cage constraints in the puzzle
  */
-class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
+class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
@@ -106,8 +107,17 @@ class Puzzle(n: Int, cageConstraints: List[Constraint] = Nil) {
   }
 }
 
-object Puzzle {
-  def apply(n: Int, cageConstraints: List[Constraint] = Nil): Puzzle = new Puzzle(n, cageConstraints)
+object KenKen {
+  def apply(n: Int, cageConstraints: List[Constraint] = Nil): KenKen = new KenKen(n, cageConstraints)
 
-  def apply(s: String): Puzzle = Parsers.parsePuzzle(s)
+  def apply(s: String): KenKen = Parsers.parsePuzzle(s)
+
+  def main(args: Array[String]) {
+    val in: FileReader = new FileReader(args(0))
+    val puzzle = Parsers.parsePuzzle(in)
+    puzzle.solution match {
+      case Some(solution) => println(solution)
+      case None => println("The puzzle cannot be solved.")
+    }
+  }
 }

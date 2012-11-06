@@ -76,7 +76,7 @@ object Grid {
   def apply(m: Array[Array[Set[Int]]]) = {
     val n = m.length
     // The array must be square.
-    require(m.forall(_.length == n))
+    require(m.forall(_.length == n), "The grid is not square:\n" + m)
     val init = for ((row, r) <- m.zipWithIndex; (item, c) <- row.zipWithIndex) yield ((r + 1, c + 1), item)
     new Grid(n, Map(init: _*))
   }

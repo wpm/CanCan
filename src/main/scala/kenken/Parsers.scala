@@ -1,6 +1,7 @@
 package kenken
 
 import util.parsing.combinator.{RegexParsers, JavaTokenParsers}
+import java.io.FileReader
 
 /**
  * Parsers for string representations of grid and puzzle objects.
@@ -34,13 +35,13 @@ object Parsers {
     // a b b
     // c c d
     //
-    def puzzle: Parser[Puzzle] = cages ~ table ^^ {
+    def puzzle: Parser[KenKen] = cages ~ table ^^ {
       case (c ~ t) =>
         // The dimension of the grid is equal to the largest cell coordinate.
         val n = t.values.flatten.flatMap(cell => List(cell._1, cell._2)).max
         val cageConstraints = c.map {
           case (label, (value, op)) =>
-            require(t.contains(label))
+            require(t.contains(label), "Table missing cage for " + label + " " + value + "" + op)
             (op, t(label)) match {
               case ("+", cells) => PlusConstraint(value, cells)
               case ("-", cell1 :: cell2 :: Nil) => MinusConstraint(value, cell1, cell2)
@@ -50,7 +51,7 @@ object Parsers {
               case _ => throw new IllegalArgumentException("Invalid cage " + label)
             }
         }.toList
-        Puzzle(n, cageConstraints)
+        KenKen(n, cageConstraints)
     }
 
     // a=5 b=7+ c=3x d=2-
@@ -75,8 +76,7 @@ object Parsers {
     def table: Parser[Map[String, List[(Int, Int)]]] = repsep(tableRow, eol) ^^ {
       labels: List[List[String]] =>
         val n = labels.length
-        // The table must be square.
-        require(labels.forall(_.length == n))
+        require(labels.forall(_.length == n), "The table is not square:\n" + labels)
         val labeledCells = for ((row, r) <- labels.zipWithIndex;
                                 (label, c) <- row.zipWithIndex)
         yield (label, (r + 1, c + 1))
@@ -87,6 +87,10 @@ object Parsers {
 
     // a a b
     def tableRow: Parser[List[String]] = rep(ident)
+
+    implicit def parsePuzzleString(s: String) = parseAll(puzzle, s)
+
+    implicit def parsePuzzleFile(r: FileReader) = parseAll(puzzle, r)
   }
 
   def parseGrid(s: String): Grid = GridParser.parseAll(GridParser.grid, s) match {
@@ -94,7 +98,7 @@ object Parsers {
     case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
   }
 
-  def parsePuzzle(s: String): Puzzle = PuzzleParser.parseAll(PuzzleParser.puzzle, s) match {
+  def parsePuzzle[T](implicit r: PuzzleParser.ParseResult[T]) = r match {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
   }
