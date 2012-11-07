@@ -101,6 +101,7 @@ abstract class ArithmeticConstraint(m: Int, cs: List[(Int, Int)]) extends Constr
 /**
  * A pair of cells whose values combine with a non-associative operator.
  *
+ * A non-associative constraint must apply to exactly two cells.
  * The constraint is satisfied if either ordering of the cells produces the specified value.
  */
 abstract class NonAssociativeConstraint(m: Int, c1: (Int, Int), c2: (Int, Int))
