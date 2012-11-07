@@ -10,7 +10,9 @@ import java.io.FileReader
 
 
 /**
- * A set of constraints on a square grid of numbers
+ * A [[http://www.kenken.com KenKen]] puzzle.
+ *
+ * This is a set of constraints on a square grid of numbers
  * @param n the dimension of the grid
  * @param cageConstraints cage constraints in the puzzle
  */
@@ -22,7 +24,7 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
 
   /**
    * A solution to the puzzle.
-   * @return puzzle solution or _None_ if it cannot be solved
+   * @return puzzle solution or `None` if it cannot be solved
    */
   def solution: Option[Grid] = solutions.take(1).toList match {
     case Nil => None
@@ -31,7 +33,7 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
 
   /**
    * All solutions to the puzzle.
-   * @return a view of all the grids that solve this puzzle
+   * @return a lazy sequence of all the grids that solve this puzzle
    */
   def solutions: SeqView[Grid, Seq[_]] = {
     // The search may turn up multiple copies of the same solution, so ensure

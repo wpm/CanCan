@@ -4,7 +4,7 @@ import collection.GenTraversableOnce
 
 
 /**
- * A nxn grid of possible values
+ * A ''n'' x ''n'' grid of possible values
  *
  * @param n the dimension of the grid
  * @param g map of grid positions to possible values
@@ -23,12 +23,12 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[(
   /**
    * Apply a constraint to the grid
    * @param constraint the constraint to apply
-   * @return tuple of the new grid and a list of changed cells or _None_ if the constraint cannot be satisfied
+   * @return tuple of the new grid and a list of changed cells or `None` if the constraint cannot be satisfied
    */
   def constrain(constraint: Constraint): Option[(Grid, List[(Int, Int)])] = {
     /**
-     * scala> val xs = List(('a, 1), ('b, 2), ('c, 3)); val ys = List(('a, 1), ('b, 3), ('c, 4))
-     * scala> tupleDiff(xs, ys) // List[(Symbol, Int)] = List(('b,3), ('c,4))
+     * `scala> val xs = List(('a, 1), ('b, 2), ('c, 3)); val ys = List(('a, 1), ('b, 3), ('c, 4))`
+     * `scala> tupleDiff(xs, ys) // List[(Symbol, Int)] = List(('b,3), ('c,4))`
      */
     def tupleDiff[A, B](xs: List[(A, B)], ys: List[(A, B)]): List[(A, B)] =
       xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)

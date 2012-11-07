@@ -14,7 +14,7 @@ abstract class Constraint(cs: List[(Int, Int)]) {
    * Apply the constraint to the values in a set of cells
    * @param xs sets of values in the cells
    * @return sets of values in the cells with the constraint applied or
-   *         _None_ if the constraint cannot be satisfied
+   *         `None` if the constraint cannot be satisfied
    */
   def apply(xs: List[Set[Int]]): Option[List[Set[Int]]]
 
@@ -90,9 +90,9 @@ abstract class ArithmeticConstraint(m: Int, cs: List[(Int, Int)]) extends Constr
   /**
    * Values that can fill the cells.
    *
-   * For example, a 2-cell +5 constraint might return List(List(2, 3), List(3, 2), List(4, 1)).
+   * For example, a 2-cell +5 constraint might return `List(List(2, 3), List(3, 2), List(4, 1))`.
    *
-   * @param xs cell possible values
+   *@param xs cell possible values
    * @return set of lists of possible values to fill the cells
    */
   def fills(xs: List[Set[Int]]): List[List[Int]]

@@ -2,6 +2,9 @@ package kenken
 
 import org.scalatest.FlatSpec
 
+/**
+ * Unit tests for the [[kenken.KenKen]] object.
+ */
 class KenKenSpec extends FlatSpec {
   "A 2x2 Latin square" should "have two solutions" in {
     val s1 = Grid(
