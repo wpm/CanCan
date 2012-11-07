@@ -1,0 +1,7 @@
+a=4x b=12x c=15+ d=3/ e=11+ f=1- g=11+ h=1- i=9+ j=2- k=60x l=3- m=4x n=1- o=5-
+a a b b c c
+a d d e e c
+f g h h i j
+f g g i i j
+k k l l m m
+k n n o o m

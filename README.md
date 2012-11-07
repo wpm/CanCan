@@ -10,11 +10,13 @@ Additionally, cells in the grid are grouped into sets called _cages_, and the se
 
 To see the program solve a puzzle, run either its unit tests or `KenKen` with a path to a puzzle file.
 
-	> scala -cp target/scala-2.9.2/classes kenken.KenKen src/main/resources/puzzle
-	2 1 4 3
-	4 3 2 1
-	1 4 3 2
-	3 2 1 4
+	> scala -cp target/scala-2.9.2/classes kenken.KenKen src/main/resources/6x6
+	1 2 3 4 5 6
+	2 3 1 5 6 4
+	5 6 2 1 4 3
+	6 1 4 2 3 5
+	4 5 6 3 2 1
+	3 4 5 6 1 2
 
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
 
