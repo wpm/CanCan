@@ -1,19 +1,20 @@
 KenKen Solver
 =============
 
-KenKen is a solver for [KenKen](http://www.kenken.com) puzzles.
-To see it solve a puzzle, run the unit tests or run `KenKen` with a path to a puzzle file.
+The KenKen program is a solver for [KenKen](http://www.kenken.com) puzzles.
+
+The objective of KenKen puzzles is to completely fill an _n_ x _n_ grid with the numbers 1 to _n_.
+Each row and column must contain a unique set of numbers.
+(Thus a solved KenKen puzzle is a [Latin Square](http://en.wikipedia.org/wiki/Latin_square).)
+Additionally, cells in the grid are grouped into sets called _cages_, and the sets of numbers in these cages must have certain arithmetic properties.
+
+To see the program solve a puzzle, run either its unit tests or `KenKen` with a path to a puzzle file.
 
 	> scala -cp target/scala-2.9.2/classes kenken.KenKen src/main/resources/puzzle
 	2 1 4 3
 	4 3 2 1
 	1 4 3 2
 	3 2 1 4
-
-The objective of KenKen puzzles is to completely fill an _n_ x _n_ grid with the numbers 1 to _n_.
-Each row and column must contain a unique set of numbers.
-(Thus a solved KenKen puzzle is a [Latin Square](http://en.wikipedia.org/wiki/Latin_square).)
-Additionally, cells in the grid are grouped into sets called _cages_, and the sets of numbers in these cages must have certain arithmetic properties.
 
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
 
@@ -67,23 +68,22 @@ Algorithm
 ---------
 
 A brute force solution would simply try all possible solutions for a grid.
-This could be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing a guess for one of the cells.
+This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing a guess for one of the cells.
 Vertices with no outgoing edges are possible solutions.
-Note that difference sequences of guesses may lead to the same possible solution, so the search space is a directed acyclic graph.
+Note that different sequences of guesses may lead to the same possible solution, so this search space is a directed acyclic graph.
 
-To search for solutions, do a depth-first search of the graph starting from a completely unsolved
-grid.
+A depth-first search of the graph starting from a completely unsolved grid will find all solutions.
 Since there are _n_<sup>_n_<sup>2</sup></sup> possible solutions, a completely exhaustive search is infeasible.
-However, at each guessed solution vertex we apply all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
-This process is called _constraint propagation_, and will eliminate possible values from some grids and reveal others as inconsistent with the constraints.
+However, at each guessed solution vertex we can apply all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
+This process is called _constraint propagation_, and eliminates possible values from some grids while revealing others as inconsistent with the constraints.
 At each node it reduces the size of the search space to the point where an exhaustive search of the constrained graph is tractable.
 
 Implementation
 --------------
 
-A partial solution is implemented in the `Grid` object, which is a map of cell coordinates to sets of possible values.
+In this program, a partial solution is represented by the `Grid` object, which is a map of cell coordinates to sets of possible values.
 The constraints are implemented as a hierarchy of `Constraint` objects which associate sets of cells coordinates with functions from possible values of those cells to constrained possible values.
-The `KenKen` object represents a single puzzle.
+The `KenKen` object represents a puzzle.
 It associates a set of constraints with a grid of a particular size.
 The search algorithm is implemented in the private recursive `search` function, which in turn calls a private recursive `propagateConstraints` function.
 
