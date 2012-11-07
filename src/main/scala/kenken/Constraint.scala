@@ -92,7 +92,7 @@ abstract class ArithmeticConstraint(m: Int, cs: List[(Int, Int)]) extends Constr
    *
    * For example, a 2-cell +5 constraint might return `List(List(2, 3), List(3, 2), List(4, 1))`.
    *
-   *@param xs cell possible values
+   * @param xs cell possible values
    * @return set of lists of possible values to fill the cells
    */
   def fills(xs: List[Set[Int]]): List[List[Int]]

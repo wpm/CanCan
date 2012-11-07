@@ -9,7 +9,7 @@ import java.io.FileReader
 object Parsers {
   private val eol = sys.props("line.separator")
 
-  object GridParser extends RegexParsers {
+  private object GridParser extends RegexParsers {
     override val whiteSpace = """[ \t]+""".r
 
     // 123 123 12
@@ -25,7 +25,7 @@ object Parsers {
     def cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set[Int](s.toList.map(_.toString.toInt): _*))
   }
 
-  object PuzzleParser extends JavaTokenParsers {
+  private object PuzzleParser extends JavaTokenParsers {
     override val whiteSpace = """[ \t]+""".r
 
     private val opRegex = """(\d+)([+-x/])?""".r
@@ -93,11 +93,17 @@ object Parsers {
     implicit def parsePuzzleFile(r: FileReader) = parseAll(puzzle, r)
   }
 
+  /**
+   * Create a grid from a string representation.
+   */
   def parseGrid(s: String): Grid = GridParser.parseAll(GridParser.grid, s) match {
     case GridParser.Success(a, _) => a
     case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
   }
 
+  /**
+   * Create a KenKen puzzle from a file or string.
+   */
   def parsePuzzle[T](implicit r: PuzzleParser.ParseResult[T]) = r match {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
