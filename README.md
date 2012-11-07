@@ -10,7 +10,7 @@ To see it solve a puzzle, run the unit tests or run `KenKen` with a path to a pu
 	1 4 3 2
 	3 2 1 4
 
-The objective of KenKen puzzles is to completely fill an _n_x_n_ grid with the numbers 1 to _n_.
+The objective of KenKen puzzles is to completely fill an _n_ x _n_ grid with the numbers 1 to _n_.
 Each row and column must contain a unique set of numbers.
 (Thus a solved KenKen puzzle is a [Latin Square](http://en.wikipedia.org/wiki/Latin_square).)
 Additionally, cells in the grid are grouped into sets called _cages_, and the sets of numbers in these cages must have certain arithmetic properties.
@@ -22,7 +22,7 @@ Data Structures
 
 The strategy is to use the constraints to eliminate possible values from the cells in the grid.
 
-A _partial solution grid_ is an _n_x_n_ grid of sets of numbers that are consistent with a puzzle's constraints.
+A _partial solution grid_ is an _n_ x _n_ grid of sets of numbers that are consistent with a puzzle's constraints.
 In a completely unsolved grid, all the cells contain the numbers 1 to _n_.
 A cell is _solved_ if it contains exactly one number.
 A grid is solved if all its cells are solved.
