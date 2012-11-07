@@ -55,14 +55,13 @@ For each row and column, this has two consequences which are analyzed as separat
 
 * _Definiteness_
 
- All solved cells in a row or column must have different values.
+ All solved cells in a row or column must have different values. For example, given the row {123} {1} {13}, definiteness returns {23} {1} {3}.
 
 * _Uniqueness_
 
- If a value only appears in a single cell in a row or column, it must be the solution for that cell.
+ If a value only appears in a single cell in a row or column, it must be the solution for that cell. For example, given the column {23} {123} {23}, uniqueness returns {23} {1} {23}.
 
-Given a partial solution grid, the constraints may serve to eliminate possible values from cells.
-For example, given a partial solution with the row {123} {1} {13}, the definiteness constraint will restrict the possible values to {23} {1} {3}.
+Given a partial solution grid, the constraints may serve to eliminate possible values from cells or reveal that partial solution as inconsistent with the puzzle.
 
 Algorithm
 ---------
@@ -75,8 +74,7 @@ Note that difference sequences of guesses may lead to the same possible solution
 To search for solutions, do a depth-first search of the graph starting from a completely unsolved
 grid.
 Since there are _n_<sup>_n_<sup>2</sup></sup> possible solutions, a completely exhaustive search is infeasible.
-However, at each guessed solution vertex we apply all the constraints.
-Note that after a constraint is applied, other constraints may alter the new grid, so constraint application must be called recursively.
+However, at each guessed solution vertex we apply all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
 This process is called _constraint propagation_, and will eliminate possible values from some grids and reveal others as inconsistent with the constraints.
 At each node it reduces the size of the search space to the point where an exhaustive search of the constrained graph is tractable.
 
