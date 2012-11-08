@@ -90,8 +90,8 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
   override def toString = constraintMap.toString()
 
   private def latinSquareConstraints(n: Int) = {
-    def row(r: Int) = List((1 to n).map((r, _)): _*)
-    def col(c: Int) = List((1 to n).map((_, c)): _*)
+    def row(r: Int) = Grid.row(n)(r)
+    def col(c: Int) = Grid.col(n)(c)
 
     (for (i <- (1 to n)) yield
       DefinitenessConstraint(row(i)) ::
