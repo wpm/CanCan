@@ -20,6 +20,10 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[(
 
   def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = new Grid(n, g ++ xs)
 
+  def row(r: Int) = Grid.row(n)(r)
+
+  def col(c: Int) = Grid.col(n)(c)
+
   /**
    * Apply a constraint to the grid
    * @param constraint the constraint to apply
@@ -87,4 +91,8 @@ object Grid {
    * @return new grid
    */
   def apply(s: String): Grid = Parsers.parseGrid(s: String)
+
+  def row(n: Int)(r: Int) = List((1 to n).map((r, _)): _*)
+
+  def col(n: Int)(c: Int) = List((1 to n).map((_, c)): _*)
 }

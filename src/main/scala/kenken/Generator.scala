@@ -1,11 +1,26 @@
 package kenken
 
 import annotation.tailrec
+import scala.util.Random._
 
 /**
  * Generator of random KenKen puzzles
  */
 object Generator {
+  /**
+   * Generate a random Latin Square
+   *
+   * This is unusably slow fro n>4.
+   * @param n size
+   * @return random solved grid
+   */
+  def randomLatinSquare(n: Int): Grid = {
+    val diagonal = shuffle((1 to n).toList).zipWithIndex.map {
+      case (m, i) => SpecifiedConstraint(m, (i + 1, i + 1))
+    }
+    KenKen(n, diagonal).solution.get
+  }
+
   /**
    * Find the connected components in an directed graph
    * @param ns the nodes in the graph
@@ -43,5 +58,7 @@ object Generator {
     val nodes = edges.keys ++ edges.values.flatMap(x => x)
     val cs = connectedComponents(nodes, adjacent(edges)(_: Symbol))
     println(cs)
+
+    println(randomLatinSquare(4))
   }
 }
