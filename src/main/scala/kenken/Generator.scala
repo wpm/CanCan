@@ -99,9 +99,19 @@ object Generator {
       (cells, adjacency)
     }
 
+    def samplePoisson(mean: Int) = {
+      val lambda = math.exp(-mean)
+      var k = 0
+      var p = 1.0
+      do {
+        k += 1
+        p *= nextDouble
+      } while (p >= lambda)
+      k - 1
+    }
+
     val (cells, edges) = randomUndirectedCellGraph
-    // TODO Set maximum connected component size from a Poisson distribution?
-    connectedComponents(cells, edges(_: (Int, Int)), n)
+    connectedComponents(cells, edges(_: (Int, Int)), samplePoisson(n / 2))
   }
 
   /**
@@ -117,7 +127,9 @@ object Generator {
    */
   def connectedComponents[N](ns: Traversable[N], adjacent: N => Traversable[N], m: Int): List[Set[N]] = {
     /**
-     * Build a connected component from a set of frontier nodes
+     * Build a connected component from a set of frontier nodes.
+     *
+     * The size of the component is limited to a maximum value.
      * @param fs frontier nodes
      * @param vs visited nodes
      * @param cs current connected component
@@ -127,6 +139,7 @@ object Generator {
     def connectedComponent(fs: List[N], vs: Set[N], cs: Set[N]): (Set[N], Set[N]) = {
       if (fs.isEmpty || cs.size >= m) (vs, cs)
       else {
+        // TODO Why do I get a bug when I add .take(m - cs.size)?
         val as = fs.flatMap(adjacent(_)).filter(!vs.contains(_))
         connectedComponent(as, vs ++ as, cs ++ as)
       }
@@ -134,7 +147,6 @@ object Generator {
 
     ((Set[N](), List[Set[N]]()) /: ns) {
       case ((vs, css), n) => if (!vs.contains(n)) {
-        // TODO && css.size < maxSize
         val (nvs, ncs) = connectedComponent(List(n), vs, Set[N](n))
         (vs ++ nvs, ncs :: css)
       } else (vs, css)
@@ -152,9 +164,11 @@ object Generator {
 
     println(latinSquareToString(randomLatinSquare(9)))
 
-    println()
+    println("Random Puzzles")
 
-    val (solution, puzzle) = randomPuzzle(6)
-    println(latinSquareToString(solution) + "\n\n" + puzzle)
+    for (_ <- (1 to 5)) {
+      val (solution, puzzle) = randomPuzzle(9)
+      println(latinSquareToString(solution) + "\n\n" + puzzle + "\n\n")
+    }
   }
 }
