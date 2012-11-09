@@ -87,8 +87,27 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     }.view
   }
 
-  // TODO Print grid for KenKen stringification.
-  override def toString = constraintMap.toString()
+  override def toString = {
+    // Map of cells to the cages that contain them.
+    val cageMap = Map() ++ constraintMap.map {
+      case (cell, constraints) =>
+        val cageConstraints = constraints.filter(!_.isInstanceOf[UniquenessConstraint])
+        require(cageConstraints.size == 1)
+        cell -> cageConstraints.head
+    }
+    // Map of cages to representative characters.
+    // TODO Handle more than 26 cages.
+    // TODO Sort lexicographically by cell.
+    val cageName = Map() ++ cageMap.values.toList.distinct.zipWithIndex.map {
+      case (cage, i) => cage -> ('a'.toInt + i).toChar.toString
+    }
+    (for (r <- (1 to n)) yield {
+      for (c <- (1 to n)) yield cageName(cageMap(r, c))
+    }.mkString(" ")).mkString("\n") + "\n" +
+      cageName.map {
+        case (cage, name) => name + "=" + cage
+      }.mkString(" ")
+  }
 
   private def latinSquareConstraints(n: Int) = {
     def row(r: Int) = Grid.row(n)(r)
