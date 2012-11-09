@@ -87,13 +87,20 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     }.view
   }
 
+  /**
+   * This is the inverse of `KenKen(s)`
+   */
   override def toString = {
     // Map of cells to the cages that contain them.
     val cageMap = Map() ++ constraintMap.map {
       case (cell, constraints) =>
         val cageConstraints = constraints.filter(_.isInstanceOf[CageConstraint])
-        require(cageConstraints.size == 1)
-        cell -> cageConstraints.head
+        require(cageConstraints.size <= 1, "More than one cage constraint for " + cell)
+        cell -> cageConstraints
+    }.filter {
+      case (cell, constraints) => !constraints.isEmpty
+    }.map {
+      case (cell, constraints) => cell -> constraints.head
     }
     // Map of cages to representative characters.
     // TODO Handle more than 26 cages.
@@ -101,15 +108,18 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
       cageMap.values.toList.distinct.sortBy(_.cells.head).zipWithIndex.map {
         case (cage, i) => cage -> ('a'.toInt + i).toChar.toString
       }
-
-    // Cage names
-    cageName.map {
+    // Write the cages line above a grid with representative characters.
+    val cageNames: List[String] = if (cageName.isEmpty) Nil
+    else cageName.map {
       case (cage: CageConstraint, name) => name + "=" + cage.cageName
-    }.toList.sorted.mkString(" ") + "\n" +
-      // Grid
-      (for (r <- (1 to n)) yield {
-        for (c <- (1 to n)) yield cageName(cageMap(r, c))
-      }.mkString(" ")).mkString("\n")
+    }.toList.sorted.mkString(" ") :: Nil
+    val grid: List[String] = (for (r <- (1 to n)) yield {
+      for (c <- (1 to n)) yield cageMap.get((r, c)) match {
+        case None => "." // Write this if the cell is not in a cage.
+        case Some(cage) => cageName(cage)
+      }
+    }.mkString(" ")).toList
+    (cageNames ::: grid).mkString("\n")
   }
 
   private def latinSquareConstraints(n: Int) = {

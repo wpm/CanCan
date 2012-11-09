@@ -6,7 +6,10 @@ import org.scalatest.FlatSpec
  * Unit tests for the [[kenken.KenKen]] object.
  */
 class KenKenSpec extends FlatSpec {
-  "A 2x2 Latin square" should "have two solutions" in {
+
+  behavior of "A 2x2 Latin square"
+
+  it should "have two solutions" in {
     val s1 = Grid(
       """1 2
         |2 1""".stripMargin)
@@ -18,7 +21,14 @@ class KenKenSpec extends FlatSpec {
     }
   }
 
-  def create4x4Fixture = (
+  it should "print as a grid" in {
+    expect( """. .
+              |. .""".stripMargin) {
+      KenKen(2).toString
+    }
+  }
+
+  def kenKen4x4Fixture = (
     """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
       |a b b b
       |a c d d
@@ -37,10 +47,10 @@ class KenKenSpec extends FlatSpec {
     )
 
 
-  behavior of "Set of example 4x4 KenKen puzzles"
+  behavior of "A set of example 4x4 KenKen puzzles"
 
   it should "have solutions" in {
-    val (p1, p2, p3) = create4x4Fixture
+    val (p1, p2, p3) = kenKen4x4Fixture
     expect(Option(Grid(
       """4 3 1 2
         |3 1 2 4
@@ -67,7 +77,7 @@ class KenKenSpec extends FlatSpec {
   }
 
   it should "print as grids" in {
-    val (p1, p2, p3) = create4x4Fixture
+    val (p1, p2, p3) = kenKen4x4Fixture
 
     expect(p1) {
       KenKen(p1).toString
