@@ -21,6 +21,7 @@ abstract class Constraint(cs: List[(Int, Int)]) {
   override def toString = cells.mkString(" ")
 }
 
+// TODO Specified is a degenerate case of Subset. Eliminate shared values in subsets within same row/column.
 /**
  * The value of a single cell is specified.
  * @param m the value
