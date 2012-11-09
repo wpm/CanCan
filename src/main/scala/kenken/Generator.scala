@@ -99,7 +99,7 @@ object Generator {
     }
 
     val (cells, edges) = randomUndirectedCellGraph
-    // TODO Set a maximum connected component size?
+    // TODO Set a maximum connected component size? Recursively subdivide oversized connected components.
     connectedComponents(cells, edges(_: (Int, Int)))
   }
 
