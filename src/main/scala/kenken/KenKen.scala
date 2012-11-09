@@ -87,6 +87,7 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     }.view
   }
 
+  // TODO Print grid for KenKen stringification.
   override def toString = constraintMap.toString()
 
   private def latinSquareConstraints(n: Int) = {
