@@ -8,6 +8,15 @@ import scala.util.Random._
  */
 object Generator {
   /**
+   * Ratio of puzzle size to mean maximum cage size
+   */
+  private val alpha = 0.5
+  /**
+   * Probability of assigning an associative operator to a 2-cell cage
+   */
+  private val beta = 1 / 3.0
+
+  /**
    * Generate a random KenKen puzzle and its solution
    * @param n puzzle size
    * @return (solution, puzzle) tuple
@@ -42,9 +51,7 @@ object Generator {
     }
     cage.size match {
       case 1 => SpecifiedConstraint(values.head, cage.head)
-      // TODO Make this a configurable probability.
-      // 2-cell cages choose a non-associative constraint 2/3s of the time
-      case 2 => if (nextInt(3) == 1) randomAssociativeConstraint(values) else randomNonAssociativeConstraint(values)
+      case 2 => if (nextDouble <= beta) randomAssociativeConstraint(values) else randomNonAssociativeConstraint(values)
       case _ => randomAssociativeConstraint(values)
     }
   }
@@ -111,7 +118,7 @@ object Generator {
     }
 
     val (cells, edges) = randomUndirectedCellGraph
-    connectedComponents(cells, edges(_: (Int, Int)), samplePoisson(n / 2))
+    connectedComponents(cells, edges(_: (Int, Int)), samplePoisson((n * alpha).toInt))
   }
 
   /**
