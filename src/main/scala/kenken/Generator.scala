@@ -42,6 +42,7 @@ object Generator {
     }
     cage.size match {
       case 1 => SpecifiedConstraint(values.head, cage.head)
+      // TODO Make this a configurable probability.
       // 2-cell cages choose a non-associative constraint 2/3s of the time
       case 2 => if (nextInt(3) == 1) randomAssociativeConstraint(values) else randomNonAssociativeConstraint(values)
       case _ => randomAssociativeConstraint(values)
@@ -99,8 +100,8 @@ object Generator {
     }
 
     val (cells, edges) = randomUndirectedCellGraph
-    // TODO Set a maximum connected component size? Recursively subdivide oversized connected components.
-    connectedComponents(cells, edges(_: (Int, Int)))
+    // TODO Set maximum connected component size from a Poisson distribution?
+    connectedComponents(cells, edges(_: (Int, Int)), n)
   }
 
   /**
@@ -110,10 +111,11 @@ object Generator {
    * between nodes defined by `adjacent` must be symmetric.
    * @param ns the nodes in the graph
    * @param adjacent a function from a node to all its adjacent nodes
+   * @param m maximum component size
    * @tparam N node type
    * @return list of sets of nodes in connected components
    */
-  def connectedComponents[N](ns: Traversable[N], adjacent: N => Traversable[N]): List[Set[N]] = {
+  def connectedComponents[N](ns: Traversable[N], adjacent: N => Traversable[N], m: Int): List[Set[N]] = {
     /**
      * Build a connected component from a set of frontier nodes
      * @param fs frontier nodes
@@ -122,15 +124,17 @@ object Generator {
      * @return (visited nodes, connected component) tuple
      */
     @tailrec
-    def connectedComponent(fs: List[N], vs: Set[N], cs: Set[N]): (Set[N], Set[N]) = fs match {
-      case Nil => (vs, cs)
-      case _ => {
+    def connectedComponent(fs: List[N], vs: Set[N], cs: Set[N]): (Set[N], Set[N]) = {
+      if (fs.isEmpty || cs.size >= m) (vs, cs)
+      else {
         val as = fs.flatMap(adjacent(_)).filter(!vs.contains(_))
         connectedComponent(as, vs ++ as, cs ++ as)
       }
     }
+
     ((Set[N](), List[Set[N]]()) /: ns) {
       case ((vs, css), n) => if (!vs.contains(n)) {
+        // TODO && css.size < maxSize
         val (nvs, ncs) = connectedComponent(List(n), vs, Set[N](n))
         (vs ++ nvs, ncs :: css)
       } else (vs, css)
@@ -143,13 +147,14 @@ object Generator {
     val edges = Map('a -> List('b, 'c), 'b -> List('a, 'c), 'c -> List('a, 'b),
       'd -> List('e), 'e -> List('d), 'f -> Nil)
     val nodes = edges.keys ++ edges.values.flatMap(x => x)
-    val cs = connectedComponents(nodes, adjacent(edges)(_: Symbol))
+    val cs = connectedComponents(nodes, adjacent(edges)(_: Symbol), 3)
     println(cs)
 
     println(latinSquareToString(randomLatinSquare(9)))
 
+    println()
+
     val (solution, puzzle) = randomPuzzle(6)
-    println(latinSquareToString(solution))
-    println(puzzle)
+    println(latinSquareToString(solution) + "\n\n" + puzzle)
   }
 }
