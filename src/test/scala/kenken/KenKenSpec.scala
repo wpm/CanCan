@@ -18,17 +18,35 @@ class KenKenSpec extends FlatSpec {
     }
   }
 
-  "Some example 4x4 KenKen puzzles" should "have solutions" in {
+  def create4x4Fixture = (
+    """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
+      |a b b b
+      |a c d d
+      |e c d f
+      |e e f f""".stripMargin,
+    """a=2/ b=1- c=12x d=1- e=1 f=12x g=2/ h=3+
+      |a a b b
+      |c d d e
+      |c f f g
+      |c h h g""".stripMargin,
+    """a=12+ b=3+ c=7+ d=9+ e=5+ f=4+
+      |a a a b
+      |c a d b
+      |c e d d
+      |c e f f""".stripMargin
+    )
+
+
+  behavior of "Set of example 4x4 KenKen puzzles"
+
+  it should "have solutions" in {
+    val (p1, p2, p3) = create4x4Fixture
     expect(Option(Grid(
       """4 3 1 2
         |3 1 2 4
         |2 4 3 1
         |1 2 4 3""".stripMargin))) {
-      KenKen( """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
-                |a b b b
-                |a c d d
-                |e c d f
-                |e e f f""".stripMargin).solution
+      KenKen(p1).solution
     }
 
     expect(Option(Grid(
@@ -36,11 +54,7 @@ class KenKenSpec extends FlatSpec {
         |4 3 2 1
         |1 4 3 2
         |3 2 1 4""".stripMargin))) {
-      KenKen( """a=2/ b=1- c=12x d=1- e=1 f=12x g=2/ h=3+
-                |a a b b
-                |c d d e
-                |c f f g
-                |c h h g""".stripMargin).solution
+      KenKen(p2).solution
     }
 
     expect(Option(Grid(
@@ -48,11 +62,23 @@ class KenKenSpec extends FlatSpec {
         |2 4 3 1
         |1 3 2 4
         |4 2 1 3""".stripMargin))) {
-      KenKen( """a=12+ b=3+ c=7+ d=9+ e=5+ f=4+
-                |a a a b
-                |c a d b
-                |c e d d
-                |c e f f""".stripMargin).solution
+      KenKen(p3).solution
+    }
+  }
+
+  it should "print as grids" in {
+    val (p1, p2, p3) = create4x4Fixture
+
+    expect(p1) {
+      KenKen(p1).toString
+    }
+
+    expect(p2) {
+      KenKen(p2).toString
+    }
+
+    expect(p3) {
+      KenKen(p3).toString
     }
   }
 }

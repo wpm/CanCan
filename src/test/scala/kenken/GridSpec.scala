@@ -6,7 +6,7 @@ import org.scalatest.FlatSpec
  * Unit tests for the [[kenken.Grid]] object.
  */
 class GridSpec extends FlatSpec {
-  "A grid" should "be created from a string" in {
+  "A grid" can "be created from a string" in {
     val g = Grid(
       """12 23
         |13 123""".stripMargin)

@@ -91,22 +91,25 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     // Map of cells to the cages that contain them.
     val cageMap = Map() ++ constraintMap.map {
       case (cell, constraints) =>
-        val cageConstraints = constraints.filter(!_.isInstanceOf[UniquenessConstraint])
+        val cageConstraints = constraints.filter(_.isInstanceOf[CageConstraint])
         require(cageConstraints.size == 1)
         cell -> cageConstraints.head
     }
     // Map of cages to representative characters.
     // TODO Handle more than 26 cages.
-    // TODO Sort lexicographically by cell.
-    val cageName = Map() ++ cageMap.values.toList.distinct.zipWithIndex.map {
-      case (cage, i) => cage -> ('a'.toInt + i).toChar.toString
-    }
-    (for (r <- (1 to n)) yield {
-      for (c <- (1 to n)) yield cageName(cageMap(r, c))
-    }.mkString(" ")).mkString("\n") + "\n" +
-      cageName.map {
-        case (cage, name) => name + "=" + cage
-      }.mkString(" ")
+    val cageName = Map() ++
+      cageMap.values.toList.distinct.sortBy(_.cells.head).zipWithIndex.map {
+        case (cage, i) => cage -> ('a'.toInt + i).toChar.toString
+      }
+
+    // Cage names
+    cageName.map {
+      case (cage: CageConstraint, name) => name + "=" + cage.cageName
+    }.toList.sorted.mkString(" ") + "\n" +
+      // Grid
+      (for (r <- (1 to n)) yield {
+        for (c <- (1 to n)) yield cageName(cageMap(r, c))
+      }.mkString(" ")).mkString("\n")
   }
 
   private def latinSquareConstraints(n: Int) = {

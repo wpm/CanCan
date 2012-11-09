@@ -21,29 +21,12 @@ abstract class Constraint(cs: List[(Int, Int)]) {
   override def toString = cells.mkString(" ")
 }
 
-// TODO Specified is a degenerate case of Subset. Eliminate shared values in subsets within same row/column.
-/**
- * The value of a single cell is specified.
- * @param m the value
- * @param cell the cell to which the constraint applies
- */
-case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends Constraint(cell :: Nil) {
-  def apply(xs: List[Set[Int]]) = if (xs.head.contains(m)) Some(List(Set(m))) else None
-
-  override def toString = m + ": " + super.toString
-}
-
-/**
- * All values in a row or column must be unique.
- */
-abstract class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs)
-
 /**
  * All solved cells contain distinct values.
  *
  * The constraint is violated if the solved values are not all distinct.
  */
-case class DefinitenessConstraint(cs: List[(Int, Int)]) extends UniquenessConstraint(cs) {
+case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
@@ -69,7 +52,7 @@ case class DefinitenessConstraint(cs: List[(Int, Int)]) extends UniquenessConstr
 /**
  * If a value only appears in one cell, that cell is solved.
  */
-case class SoleValueConstraint(cs: List[(Int, Int)]) extends UniquenessConstraint(cs) {
+case class SoleValueConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     Some(xs.map {
       x =>
@@ -85,9 +68,34 @@ case class SoleValueConstraint(cs: List[(Int, Int)]) extends UniquenessConstrain
 }
 
 /**
+ * A constraint parameterized by an integer value.
+ */
+abstract class CageConstraint(m: Int, cs: List[(Int, Int)]) extends Constraint(cs) {
+  /**
+   * Short name of constraint that contains the parameter but not the list of cells
+   */
+  def cageName: String
+
+  override def toString = cageName + ": " + super.toString
+}
+
+// TODO Specified is a degenerate case of Subset. Eliminate shared values in subsets within same row/column.
+/**
+ * The value of a single cell is specified.
+ * @param m the value
+ * @param cell the cell to which the constraint applies
+ */
+case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends CageConstraint(m, cell :: Nil) {
+  def apply(xs: List[Set[Int]]) = if (xs.head.contains(m)) Some(List(Set(m))) else None
+
+  override def cageName = m.toString
+}
+
+
+/**
  * A set of cells whose values must combine arithmetically to a specified value.
  */
-abstract class ArithmeticConstraint(m: Int, cs: List[(Int, Int)]) extends Constraint(cs) {
+abstract class ArithmeticConstraint(m: Int, cs: List[(Int, Int)]) extends CageConstraint(m, cs) {
   def apply(xs: List[Set[Int]]) = {
     val f = fills(xs)
     if (f.isEmpty) None else Some(f.transpose.map(Set(_: _*)))
@@ -131,7 +139,7 @@ abstract class NonAssociativeConstraint(m: Int, c1: (Int, Int), c2: (Int, Int))
 case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
   def satisfied(x: Int, y: Int) = x - y == m
 
-  override def toString = m + "-: " + super.toString
+  override def cageName = m + "-"
 }
 
 /**
@@ -140,7 +148,7 @@ case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAs
 case class DivideConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
   def satisfied(x: Int, y: Int) = x % y == 0 && x / y == m
 
-  override def toString = m + "/: " + super.toString
+  override def cageName = m + "/"
 }
 
 /**
@@ -164,7 +172,7 @@ abstract class AssociativeConstraint(m: Int, cs: List[(Int, Int)]) extends Arith
 case class PlusConstraint(m: Int, cs: List[(Int, Int)]) extends AssociativeConstraint(m, cs) {
   def combine(x: Int, y: Int) = x + y
 
-  override def toString = m + "+: " + super.toString
+  override def cageName = m + "+"
 }
 
 /**
@@ -173,5 +181,5 @@ case class PlusConstraint(m: Int, cs: List[(Int, Int)]) extends AssociativeConst
 case class TimesConstraint(m: Int, cs: List[(Int, Int)]) extends AssociativeConstraint(m, cs) {
   def combine(x: Int, y: Int) = x * y
 
-  override def toString = m + "x: " + super.toString
+  override def cageName = m + "x"
 }
