@@ -96,9 +96,9 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
 
     (for (i <- (1 to n)) yield
       DefinitenessConstraint(row(i)) ::
-        UniquenessConstraint(row(i)) ::
+        SoleValueConstraint(row(i)) ::
         DefinitenessConstraint(col(i)) ::
-        UniquenessConstraint(col(i)) ::
+        SoleValueConstraint(col(i)) ::
         Nil).flatten.toList
   }
 

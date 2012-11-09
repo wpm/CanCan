@@ -60,7 +60,7 @@ For each row and column, this has two consequences which are analyzed as separat
 
  All solved cells in a row or column must have different values. For example, given the row {123} {1} {13}, definiteness returns {23} {1} {3}.
 
-* _Uniqueness_
+* _Solve Value_
 
  If a value only appears in a single cell in a row or column, it must be the solution for that cell. For example, given the column {23} {123} {23}, uniqueness returns {23} {1} {23}.
 

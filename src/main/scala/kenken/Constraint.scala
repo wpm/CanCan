@@ -34,11 +34,16 @@ case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends Constraint(cell
 }
 
 /**
+ * All values in a row or column must be unique.
+ */
+abstract class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs)
+
+/**
  * All solved cells contain distinct values.
  *
  * The constraint is violated if the solved values are not all distinct.
  */
-case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+case class DefinitenessConstraint(cs: List[(Int, Int)]) extends UniquenessConstraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
@@ -64,7 +69,7 @@ case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
 /**
  * If a value only appears in one cell, that cell is solved.
  */
-case class UniquenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+case class SoleValueConstraint(cs: List[(Int, Int)]) extends UniquenessConstraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     Some(xs.map {
       x =>
