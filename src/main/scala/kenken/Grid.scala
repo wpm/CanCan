@@ -69,7 +69,7 @@ object Grid {
    */
   def apply(n: Int) = {
     val init = for (r <- (1 to n); c <- (1 to n)) yield (r, c) -> Set((1 to n): _*)
-    new Grid(n, Map(init: _*))
+    new Grid(n, Map() ++ init)
   }
 
   /**
@@ -82,7 +82,16 @@ object Grid {
     // The array must be square.
     require(m.forall(_.length == n), "The grid is not square:\n" + m)
     val init = for ((row, r) <- m.zipWithIndex; (item, c) <- row.zipWithIndex) yield ((r + 1, c + 1), item)
-    new Grid(n, Map(init: _*))
+    new Grid(n, Map() ++ init)
+  }
+
+  /**
+   * Create a solved grid from a square array of integes
+   * @param m array of integers
+   * @return new grid
+   */
+  def apply(m: Array[Array[Int]]): Grid = {
+    apply(m.map(_.map(Set(_))))
   }
 
   /**

@@ -161,21 +161,13 @@ object Generator {
   }
 
   def main(args: Array[String]) {
-    def latinSquareToString(s: Array[Array[Int]]) = s.map(_.mkString(" ")).mkString("\n")
-    def adjacent[N](edges: Map[N, List[N]])(n: N): List[N] = edges.getOrElse(n, Nil)
-    val edges = Map('a -> List('b, 'c), 'b -> List('a, 'c), 'c -> List('a, 'b),
-      'd -> List('e), 'e -> List('d), 'f -> Nil)
-    val nodes = edges.keys ++ edges.values.flatMap(x => x)
-    val cs = connectedComponents(nodes, adjacent(edges)(_: Symbol), 3)
-    println(cs)
-
-    println(latinSquareToString(randomLatinSquare(9)))
-
-    println("Random Puzzles")
-
-    for (_ <- (1 to 5)) {
-      val (solution, puzzle) = randomPuzzle(9)
-      println(latinSquareToString(solution) + "\n\n" + puzzle + "\n\n")
+    val m = args(0).toInt
+    val n = args(1).toInt
+    for (_ <- (1 to m)) {
+      val (solution, puzzle) = randomPuzzle(n)
+      val expect = Grid(solution)
+      println(puzzle + "\n\n" + expect + "\n\n")
+      require(puzzle.solutions.exists(_ == expect), "Did not solve the puzzle.")
     }
   }
 }
