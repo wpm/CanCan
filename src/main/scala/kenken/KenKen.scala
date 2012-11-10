@@ -76,6 +76,10 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     }
   }
 
+  def guess(grid: Grid, cell: (Int, Int), value: Int): Option[Grid] = {
+    propagateConstraints(grid + (cell -> Set(value)), constraintMap(cell))
+  }
+
   /**
    * Unsolved cells and their values in order of the number of possible values
    */
