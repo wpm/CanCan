@@ -22,11 +22,24 @@ abstract class Constraint(cs: List[(Int, Int)]) {
 }
 
 /**
+ * A row or column where all the values must be unique
+ */
+abstract class LineConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+  override def toString = {
+    val (r, c) = (cs.head._1, cs.head._2)
+    if (cs.forall(_._1 == r))
+      "Row " + r
+    else
+      "Col " + c
+  }
+}
+
+/**
  * All solved cells contain distinct values.
  *
  * The constraint is violated if the solved values are not all distinct.
  */
-case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+case class DefinitenessConstraint(cs: List[(Int, Int)]) extends LineConstraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
@@ -52,7 +65,7 @@ case class DefinitenessConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
 /**
  * If a value only appears in one cell, that cell is solved.
  */
-case class SoleValueConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
+case class SoleValueConstraint(cs: List[(Int, Int)]) extends LineConstraint(cs) {
   def apply(xs: List[Set[Int]]) = {
     Some(xs.map {
       x =>
@@ -64,7 +77,7 @@ case class SoleValueConstraint(cs: List[(Int, Int)]) extends Constraint(cs) {
     })
   }
 
-  override def toString = "Unique: " + super.toString
+  override def toString = "Sole: " + super.toString
 }
 
 /**
