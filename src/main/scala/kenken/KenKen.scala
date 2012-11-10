@@ -50,7 +50,7 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
         }
         case Some(g: Grid) => unsolvedCells(g).flatMap {
           case (cell, values) =>
-            values.flatMap(value => search(g + (cell -> Set(value)), constraintMap(cell)))
+            values.view.flatMap(value => search(g + (cell -> Set(value)), constraintMap(cell)))
         }
       }
     }
