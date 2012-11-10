@@ -20,7 +20,7 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
-  private val constraintMap = createConstraintMap(latinSquareConstraints(n) ::: cageConstraints)
+  private val constraintMap = createConstraintMap(Constraint.latinSquareConstraints(n) ::: cageConstraints)
 
   /**
    * A solution to the puzzle.
@@ -120,18 +120,6 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
       }
     }.mkString(" ")).toList
     (cageNames ::: grid).mkString("\n")
-  }
-
-  private def latinSquareConstraints(n: Int) = {
-    def row(r: Int) = Grid.row(n)(r)
-    def col(c: Int) = Grid.col(n)(c)
-
-    (for (i <- (1 to n)) yield
-      DefinitenessConstraint(row(i)) ::
-        SoleValueConstraint(row(i)) ::
-        DefinitenessConstraint(col(i)) ::
-        SoleValueConstraint(col(i)) ::
-        Nil).flatten.toList
   }
 
   private def createConstraintMap(constraints: List[Constraint]) = {
