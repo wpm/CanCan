@@ -26,6 +26,12 @@ To see the program generate and solve a random set of puzzles, run `Generate` wh
 	d e f
 	g h i
 
+	Expect
+	2 1 3
+	3 2 1
+	1 3 2
+
+	Found
 	2 1 3
 	3 2 1
 	1 3 2
@@ -35,6 +41,12 @@ To see the program generate and solve a random set of puzzles, run `Generate` wh
 	a c d
 	e c d
 
+	Expect
+	3 2 1
+	2 1 3
+	1 3 2
+
+	Found
 	3 2 1
 	2 1 3
 	1 3 2
@@ -122,6 +134,8 @@ Puzzles are generated in the following way:
 
 To generate the cells in step (2), find the connected components of a random sub-graph of a graph where every cell is adjacent to the ones with which it shares an edge.
 The sizes of the connected components have a Poisson distribution with a mean equal to half the puzzle size.
+
+There is no guarantee that the puzzle will have a unique solution.
 
 References
 ----------
