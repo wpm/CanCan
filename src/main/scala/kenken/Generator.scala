@@ -166,7 +166,7 @@ object Generator {
     for (_ <- (1 to m)) {
       val (solution, puzzle) = randomPuzzle(n)
       val expect = Grid(solution)
-      println(puzzle + "\n\n" + expect + "\n\n")
+      println(puzzle + "\n\n" + expect + "\n")
       require(puzzle.solutions.exists(_ == expect), "Did not solve the puzzle.")
     }
   }

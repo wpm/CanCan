@@ -1,7 +1,7 @@
 KenKen Solver
 =============
 
-The KenKen program is a solver for [KenKen](http://www.kenken.com) puzzles.
+This package implements a solver and generator of [KenKen](http://www.kenken.com) puzzles.
 
 The objective of KenKen puzzles is to completely fill an _n_ x _n_ grid with the numbers 1 to _n_.
 Each row and column must contain a unique set of numbers.
@@ -17,6 +17,27 @@ To see the program solve a puzzle, run either its unit tests or `KenKen` with a 
 	6 1 4 2 3 5
 	4 5 6 3 2 1
 	3 4 5 6 1 2
+
+To see the program generate and solve a random set of puzzles, run `Generate` where the first argument is a number of puzzles and the second is the puzzle size.
+
+	> scala -cp target/scala-2.9.2/classes kenken.Generator 2 3
+	a=2 b=1 c=3 d=3 e=2 f=1 g=1 h=3 i=2
+	a b c
+	d e f
+	g h i
+
+	2 1 3
+	3 2 1
+	1 3 2
+
+	a=12x b=1 c=4+ d=1- e=1
+	a a b
+	a c d
+	e c d
+
+	3 2 1
+	2 1 3
+	1 3 2
 
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
 
@@ -60,14 +81,14 @@ For each row and column, this has two consequences which are analyzed as separat
 
  All solved cells in a row or column must have different values. For example, given the row {123} {1} {13}, definiteness returns {23} {1} {3}.
 
-* _Solve Value_
+* _Sole Value_
 
  If a value only appears in a single cell in a row or column, it must be the solution for that cell. For example, given the column {23} {123} {23}, uniqueness returns {23} {1} {23}.
 
 Given a partial solution grid, the constraints may serve to eliminate possible values from cells or reveal that partial solution as inconsistent with the puzzle.
 
-Algorithm
----------
+Puzzle Solving
+--------------
 
 A brute force solution would simply try all possible solutions for a grid.
 This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing a guess for one of the cells.
@@ -80,9 +101,6 @@ However, at each guessed solution vertex we can apply all the constraints, then 
 This process is called _constraint propagation_, and eliminates possible values from some grids while revealing others as inconsistent with the constraints.
 At each node it reduces the size of the search space to the point where an exhaustive search of the constrained graph is tractable.
 
-Implementation
---------------
-
 In this program, a partial solution is represented by the `Grid` object, which is a map of cell coordinates to sets of possible values.
 The constraints are implemented as a hierarchy of `Constraint` objects which associate sets of cells coordinates with functions from possible values of those cells to constrained possible values.
 The `KenKen` object represents a puzzle.
@@ -92,6 +110,18 @@ The search algorithm is implemented in the private recursive `search` function, 
 The `KenKen.solutions` method returns all solutions as a lazily-evaluated sequence.
 Because the search algorithm may find the same solution via multiple paths, this method maintains a private set of all solved grids it has encountered so far.
 If you just want to find a single solution, you may call the `KenKen.solution` method instead.
+
+Puzzle Generation
+-----------------
+
+Puzzles are generated in the following way:
+
+1. A random Latin Square is generated.
+2. Contiguous cells in the grid are randomly grouped into cells.
+3. An operation is randomly assigned to each cell and the value is calculated.
+
+To generate the cells in step (2), find the connected components of a random sub-graph of a graph where every cell is adjacent to the ones with which it shares an edge.
+The sizes of the connected components have a Poisson distribution with a mean equal to half the puzzle size.
 
 References
 ----------
