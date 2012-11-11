@@ -23,10 +23,10 @@ object Misc {
                        |c h h g""".stripMargin)
 
   val p1 = KenKen( """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
-                        |a b b b
-                        |a c d d
-                        |e c d f
-                        |e e f f""".stripMargin)
+                     |a b b b
+                     |a c d d
+                     |e c d f
+                     |e e f f""".stripMargin)
 
 
   val p3 = KenKen( """a=12+ b=3+ c=7+ d=9+ e=5+ f=4+
@@ -35,11 +35,17 @@ object Misc {
                      |c e d d
                      |c e f f""".stripMargin)
 
+  val unsolvable = KenKen( """a=24x b=13+ c=5 d=6x e=7+ f=30x g=10+ h=15+ i=12+ j=1- k=9+ l=24x m=3- n=6
+                             |a a b c d d
+                             |e e b b d f
+                             |g e b h h f
+                             |g i i j h f
+                             |g i k j l l
+                             |m m k k n l""".stripMargin)
 
   def main(args: Array[String]) {
-    //    val s = p1.solutions()
-    //    println(s.toList)
-    val q = p3.solution
+    println(unsolvable)
+    val q = unsolvable.solution
     println(q)
   }
 }
