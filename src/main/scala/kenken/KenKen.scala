@@ -37,7 +37,6 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     if (i.hasNext) Some(i.next()) else None
   }
 
-  // TODO What about grids we've already seen?
   /**
    * All solutions to the puzzle.
    * @return a lazy sequence of all the grids that solve this puzzle
@@ -58,12 +57,10 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
         Vector(grid).view
       else for {newGrid <- nextGrids(grid)
                 if (!visited.contains(newGrid))
+                _ = visited += newGrid
                 solution <- search(newGrid)
       }
-      yield {
-        visited += solution
-        solution
-      }
+      yield solution
     }
 
     applyConstraints(grid, cageConstraints) match {
