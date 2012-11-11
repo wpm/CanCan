@@ -17,7 +17,7 @@ class KenKenSpec extends FlatSpec {
       """2 1
         |1 2""".stripMargin)
     expect(Set(s1, s2)) {
-      Set(KenKen(2).solutions.toList: _*)
+      Set() ++ KenKen(2).solutions.toList
     }
   }
 

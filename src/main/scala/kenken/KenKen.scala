@@ -16,11 +16,45 @@ import java.io.FileReader
  * @param n the dimension of the grid
  * @param cageConstraints cage constraints in the puzzle
  */
-class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
+class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
-  private val constraintMap = createConstraintMap(Constraint.latinSquareConstraints(n) ::: cageConstraints)
+  private val constraintMap: Map[(Int, Int), Set[Constraint]] =
+    (Map[(Int, Int), Set[Constraint]]() /:
+      (for {constraint <- cageConstraints ++ Constraint.latinSquareConstraints(n)
+            cell <- constraint.cells}
+      yield (cell -> constraint))) {
+      case (m, (cell, constraint)) => m + (cell -> (m.getOrElse(cell, Set()) + constraint))
+    }
+
+  // TODO What about grids we've already seen?
+  //  def findSolutions(grid: Grid): List[Grid] = {
+  //    if (grid.isSolved)
+  //      List(grid)
+  //    else {
+  //      for {(cell, values) <- grid.unsolved.sortWith(candidatesThenPosition)
+  //           guess <- values
+  //           newGrid <- applyConstraints(grid + (cell -> guess), constraintMap(cell))
+  //           solution <- findSolutions(newGrid)}
+  //      yield solution
+  //    }
+  //  }
+
+  /**
+   * Apply constraints to the grid
+   */
+  @tailrec
+  final def applyConstraints(grid: Grid, constraints: Set[Constraint] = Set() ++ cageConstraints): Option[Grid] = {
+    if (constraints.isEmpty) Option(grid)
+    else {
+      val constraint = constraints.head
+      grid.constrain(constraint) match {
+        case Some((g, cells)) => applyConstraints(g, constraints ++ cells.flatMap(constraintMap(_)) - constraint)
+        case None => None
+      }
+    }
+  }
 
   /**
    * A solution to the puzzle.
@@ -40,8 +74,8 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     // that this function returns a unique list.
     val visited = mutable.Set[Grid]()
 
-    def search(grid: Grid, constraints: List[Constraint]): SeqView[Grid, Seq[_]] = {
-      propagateConstraints(grid, Set(constraints: _*)) match {
+    def search(grid: Grid, constraints: Set[Constraint]): SeqView[Grid, Seq[_]] = {
+      applyConstraints(grid, constraints) match {
         case None => Nil.view
         case Some(g) if (visited.contains(g)) => Nil.view
         case Some(g) if (g.isSolved) => {
@@ -57,33 +91,14 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     search(Grid(n), cageConstraints)
   }
 
-  /**
-   * Propagate constraints to the grid
-   */
-  @tailrec
-  private def propagateConstraints(grid: Grid, constraints: Set[Constraint]): Option[Grid] = {
-    if (constraints.isEmpty) Option(grid)
-    else {
-      val constraint = constraints.head
-      grid.constrain(constraint) match {
-        case None => None
-        case Some((g, cells)) =>
-          propagateConstraints(
-            g,
-            constraints ++ cells.flatMap(constraintMap(_)) - constraint
-          )
-      }
-    }
-  }
-
   def guess(grid: Grid, cell: (Int, Int), value: Int): Option[Grid] = {
-    propagateConstraints(grid + (cell -> Set(value)), constraintMap(cell))
+    applyConstraints(grid + (cell -> Set(value)), Set() ++ constraintMap(cell))
   }
 
   /**
    * Unsolved cells and their values in order of the number of possible values
    */
-  private def unsolvedCells(grid: Grid) = {
+  def unsolvedCells(grid: Grid) = {
     grid.filter {
       case (cell, values) => values.size > 1
     }.toList.sortWith {
@@ -126,18 +141,22 @@ class KenKen(n: Int, cageConstraints: List[Constraint] = Nil) {
     (cageNames ::: grid).mkString("\n")
   }
 
-  private def createConstraintMap(constraints: List[Constraint]) = {
-    val cs = for (constraint <- constraints; cell <- constraint.cells) yield (cell -> constraint)
-    (Map[(Int, Int), List[Constraint]]() /: cs) {
-      case (m, (cell, constraint)) => m + (cell -> (constraint :: m.getOrElse(cell, Nil)))
-    }
-  }
+  //val constraints = constraintMap.values.flatten.toList.distinct
+
+  //  def validate(g: Grid): Boolean = constraints.forall(g.constrain(_) != None)
+  //
+  //  def violated(g: Grid) = constraints.filter(g.constrain(_) == None)
 }
 
 object KenKen {
-  def apply(n: Int, cageConstraints: List[Constraint] = Nil): KenKen = new KenKen(n, cageConstraints)
+  // TODO Make this argument a set.
+  def apply(n: Int, cageConstraints: Traversable[Constraint] = Set()): KenKen = new KenKen(n, Set() ++ cageConstraints)
 
   def apply(s: String): KenKen = Parsers.parsePuzzle(s)
+
+  def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean = {
+    Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
+  }
 
   def main(args: Array[String]) {
     val in: FileReader = new FileReader(args(0))

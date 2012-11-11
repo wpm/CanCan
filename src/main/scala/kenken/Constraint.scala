@@ -201,15 +201,10 @@ object Constraint {
   /**
    * Constraints for a Latin Square of size `n`
    */
-  def latinSquareConstraints(n: Int): List[Constraint] = {
-    def row(r: Int) = Grid.row(n)(r)
-    def col(c: Int) = Grid.col(n)(c)
-
-    (for (i <- (1 to n)) yield
-      DefinitenessConstraint(row(i)) ::
-        SoleValueConstraint(row(i)) ::
-        DefinitenessConstraint(col(i)) ::
-        SoleValueConstraint(col(i)) ::
-        Nil).flatten.toList
+  def latinSquareConstraints(n: Int) = {
+    for {i <- (1 to n)
+         cells <- List(Grid.row(n)(i), Grid.col(n)(i))
+         constraint <- List(DefinitenessConstraint(cells), SoleValueConstraint(cells))
+    } yield constraint
   }
 }

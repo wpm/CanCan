@@ -12,7 +12,9 @@ import collection.GenTraversableOnce
 case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
   def iterator = g.iterator
 
-  def isSolved = g.values.forall(_.size == 1)
+  def isSolved: Boolean = g.values.forall(_.size == 1)
+
+  def unsolved = Seq() ++ g.filter(_._2.size > 1)
 
   def apply(key: (Int, Int)) = g(key)
 
@@ -86,7 +88,7 @@ object Grid {
   }
 
   /**
-   * Create a solved grid from a square array of integes
+   * Create a solved grid from a square array of integers
    * @param m array of integers
    * @return new grid
    */

@@ -50,7 +50,7 @@ object Parsers {
               case (null, cell :: Nil) => SpecifiedConstraint(value, cell)
               case _ => throw new IllegalArgumentException("Invalid cage " + label)
             }
-        }.toList
+        }
         KenKen(n, cageConstraints)
     }
 
