@@ -20,7 +20,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
-  private val constraintMap: Map[(Int, Int), Set[Constraint]] =
+  val constraintMap: Map[(Int, Int), Set[Constraint]] =
     (Map[(Int, Int), Set[Constraint]]() /:
       (for {constraint <- cageConstraints ++ Constraint.latinSquareConstraints(n)
             cell <- constraint.cells}
@@ -29,17 +29,20 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }
 
   // TODO What about grids we've already seen?
-  //  def findSolutions(grid: Grid): List[Grid] = {
-  //    if (grid.isSolved)
-  //      List(grid)
-  //    else {
-  //      for {(cell, values) <- grid.unsolved.sortWith(candidatesThenPosition)
-  //           guess <- values
-  //           newGrid <- applyConstraints(grid + (cell -> guess), constraintMap(cell))
-  //           solution <- findSolutions(newGrid)}
-  //      yield solution
-  //    }
-  //  }
+  def findSolutions(grid: Grid): SeqView[Grid, Seq[_]] = {
+    // TODO Why can't I put nextGrids into the for loop below?
+    def nextGrids(grid: Grid) = {
+      for {(cell, values) <- grid.unsolved.sortWith(KenKen.sizeThenPosition).view
+           guess <- values
+           newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
+      yield newGrid
+    }
+    if (grid.isSolved)
+      Vector(grid).view
+    else for {g <- nextGrids(grid)
+              solution <- findSolutions(g)}
+    yield solution
+  }
 
   /**
    * Apply constraints to the grid
