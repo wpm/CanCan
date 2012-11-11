@@ -21,4 +21,25 @@ object Misc {
                        |c d d e
                        |c f f g
                        |c h h g""".stripMargin)
+
+  val other = KenKen( """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
+                        |a b b b
+                        |a c d d
+                        |e c d f
+                        |e e f f""".stripMargin)
+
+
+  val p3 = KenKen( """a=12+ b=3+ c=7+ d=9+ e=5+ f=4+
+                     |a a a b
+                     |c a d b
+                     |c e d d
+                     |c e f f""".stripMargin)
+
+
+  def main(args: Array[String]) {
+    //    val s = other.solutions()
+    //    println(s.toList)
+    val q = p3.solution
+    println(q)
+  }
 }

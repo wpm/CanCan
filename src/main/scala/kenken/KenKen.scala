@@ -33,8 +33,9 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * @return puzzle solution or `None` if it cannot be solved
    */
   def solution: Option[Grid] = {
-    val ss = solutions()
-    if (ss.isEmpty) None else Some(ss.head)
+    Some(solutions().take(1).head)
+    // TODO Throws "next on empty iterator" error if the puzzle does not have a solution.
+//    if (ss.isEmpty) None else Some(ss.head)
   }
 
   // TODO What about grids we've already seen?
@@ -45,7 +46,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   def solutions(grid: Grid = Grid(n), visited: mutable.Set[Grid] = mutable.Set[Grid]()): SeqView[Grid, Seq[_]] = {
     require(grid.n == n, "Incorrect sized grid")
 
-    def search(grid: Grid) = {
+    def search(grid: Grid): SeqView[Grid, Seq[_]] = {
       // TODO Why can't I put nextGrids into the for loop below?
       def nextGrids(grid: Grid): SeqView[Grid, Seq[_]] = {
         for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
@@ -53,22 +54,30 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
              newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
         yield newGrid
       }
-      visited += grid
+
       if (grid.isSolved)
         Vector(grid).view
       else for {g <- nextGrids(grid)
-                solution <- solutions(g)
-                if (!visited.contains(solution))}
-      yield solution
+                solution <- search(g)
+                if (!visited.contains(solution))
+      }
+      yield {
+        visited += solution
+        solution
+      }
     }
-    search(grid)
+
+    applyConstraints(grid, cageConstraints) match {
+      case Some(g) => search(g)
+      case None => Vector().view
+    }
   }
 
   /**
    * Apply constraints to the grid
    */
   @tailrec
-  private def applyConstraints(grid: Grid, constraints: Set[Constraint] = Set() ++ cageConstraints): Option[Grid] = {
+  private def applyConstraints(grid: Grid, constraints: Set[Constraint]): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head

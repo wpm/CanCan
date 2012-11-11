@@ -51,6 +51,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solutions" in {
     val (p1, p2, p3) = kenKen4x4Fixture
+
     expect(Option(Grid(
       """4 3 1 2
         |3 1 2 4
