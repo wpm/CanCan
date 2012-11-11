@@ -2,6 +2,7 @@ package kenken
 
 import scala._
 import annotation.tailrec
+import collection.mutable
 import collection.SeqView
 import scala.Predef._
 import scala.Some
@@ -31,7 +32,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * A solution to the puzzle.
    * @return puzzle solution or `None` if it cannot be solved
    */
-  def solution:Option[Grid] = {
+  def solution: Option[Grid] = {
     val ss = solutions()
     if (ss.isEmpty) None else Some(ss.head)
   }
@@ -41,26 +42,33 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * All solutions to the puzzle.
    * @return a lazy sequence of all the grids that solve this puzzle
    */
-  def solutions(grid: Grid = Grid(n)): SeqView[Grid, Seq[_]] = {
-    // TODO Why can't I put nextGrids into the for loop below?
-    def nextGrids(grid: Grid) = {
-      for {(cell, values) <- grid.unsolved.sortWith(KenKen.sizeThenPosition).view
-           guess <- values
-           newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
-      yield newGrid
+  def solutions(grid: Grid = Grid(n), visited: mutable.Set[Grid] = mutable.Set[Grid]()): SeqView[Grid, Seq[_]] = {
+    require(grid.n == n, "Incorrect sized grid")
+
+    def search(grid: Grid) = {
+      // TODO Why can't I put nextGrids into the for loop below?
+      def nextGrids(grid: Grid): SeqView[Grid, Seq[_]] = {
+        for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
+             guess <- values
+             newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
+        yield newGrid
+      }
+      visited += grid
+      if (grid.isSolved)
+        Vector(grid).view
+      else for {g <- nextGrids(grid)
+                solution <- solutions(g)
+                if (!visited.contains(solution))}
+      yield solution
     }
-    if (grid.isSolved)
-      Vector(grid).view
-    else for {g <- nextGrids(grid)
-              solution <- solutions(g)}
-    yield solution
+    search(grid)
   }
 
   /**
    * Apply constraints to the grid
    */
   @tailrec
-  final def applyConstraints(grid: Grid, constraints: Set[Constraint] = Set() ++ cageConstraints): Option[Grid] = {
+  private def applyConstraints(grid: Grid, constraints: Set[Constraint] = Set() ++ cageConstraints): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head
@@ -69,6 +77,10 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
         case None => None
       }
     }
+  }
+
+  private def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean = {
+    Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
   }
 
   /**
@@ -112,10 +124,6 @@ object KenKen {
   def apply(n: Int, cageConstraints: Traversable[Constraint] = Set()): KenKen = new KenKen(n, Set() ++ cageConstraints)
 
   def apply(s: String): KenKen = Parsers.parsePuzzle(s)
-
-  def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean = {
-    Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
-  }
 
   def main(args: Array[String]) {
     val in: FileReader = new FileReader(args(0))

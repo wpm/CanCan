@@ -9,9 +9,7 @@ import collection.GenTraversableOnce
  * @param n the dimension of the grid
  * @param g map of grid positions to possible values
  */
-case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[((Int, Int), Set[Int])] {
-  def iterator = g.iterator
-
+case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
   def isSolved: Boolean = g.values.forall(_.size == 1)
 
   def unsolved = Seq() ++ g.filter(_._2.size > 1)
@@ -21,10 +19,6 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[(
   def +(kv: ((Int, Int), Set[Int])) = new Grid(n, g + kv)
 
   def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = new Grid(n, g ++ xs)
-
-  def row(r: Int) = Grid.row(n)(r)
-
-  def col(c: Int) = Grid.col(n)(c)
 
   /**
    * Apply a constraint to the grid
@@ -50,7 +44,7 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) extends Iterable[(
     }
   }
 
-  override def toString() = {
+  override def toString = {
     def centered(s: String, width: Int) = {
       val pad = (width - s.length) / 2
       ("%" + width + "s").format(" " * pad + s)
