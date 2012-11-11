@@ -45,14 +45,22 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     require(grid.n == n, "Incorrect sized grid")
 
     def search(grid: Grid): SeqView[Grid, Seq[_]] = {
+      // I can incorporate nextGrids into the for loop below by putting .toSeq at the end of applyConstraints(), but
+      // that causes some runs for the first grid to be unusably slow.
+      def nextGrids(grid: Grid): SeqView[Grid, Seq[_]] = {
+        for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
+             guess <- values
+             newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
+        yield newGrid
+      }
+
       if (grid.isSolved)
         Vector(grid).view
-      else for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
-                guess <- values
-                newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell)).toSeq
+      else for {newGrid <- nextGrids(grid)
                 if (!visited.contains(newGrid))
                 _ = visited += newGrid
-                solution <- search(newGrid)}
+                solution <- search(newGrid)
+      }
       yield solution
     }
 
