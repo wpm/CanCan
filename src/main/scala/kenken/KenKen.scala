@@ -33,9 +33,8 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * @return puzzle solution or `None` if it cannot be solved
    */
   def solution: Option[Grid] = {
-    Some(solutions().take(1).head)
-    // TODO Throws "next on empty iterator" error if the puzzle does not have a solution.
-//    if (ss.isEmpty) None else Some(ss.head)
+    val i = solutions().iterator
+    if (i.hasNext) Some(i.next()) else None
   }
 
   // TODO What about grids we've already seen?
@@ -57,9 +56,9 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
 
       if (grid.isSolved)
         Vector(grid).view
-      else for {g <- nextGrids(grid)
-                solution <- search(g)
-                if (!visited.contains(solution))
+      else for {newGrid <- nextGrids(grid)
+                if (!visited.contains(newGrid))
+                solution <- search(newGrid)
       }
       yield {
         visited += solution

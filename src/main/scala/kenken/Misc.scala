@@ -22,7 +22,7 @@ object Misc {
                        |c f f g
                        |c h h g""".stripMargin)
 
-  val other = KenKen( """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
+  val p1 = KenKen( """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
                         |a b b b
                         |a c d d
                         |e c d f
@@ -37,7 +37,7 @@ object Misc {
 
 
   def main(args: Array[String]) {
-    //    val s = other.solutions()
+    //    val s = p1.solutions()
     //    println(s.toList)
     val q = p3.solution
     println(q)
