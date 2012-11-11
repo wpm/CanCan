@@ -25,12 +25,12 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
    * @param constraint the constraint to apply
    * @return tuple of the new grid and a list of changed cells or `None` if the constraint cannot be satisfied
    */
-  def constrain(constraint: Constraint): Option[(Grid, List[(Int, Int)])] = {
+  def constrain(constraint: Constraint): Option[(Grid, Vector[(Int, Int)])] = {
     /**
-     * `scala> val xs = List(('a, 1), ('b, 2), ('c, 3)); val ys = List(('a, 1), ('b, 3), ('c, 4))`
-     * `scala> tupleDiff(xs, ys) // List[(Symbol, Int)] = List(('b,3), ('c,4))`
+     * `scala> val xs = Vector(('a, 1), ('b, 2), ('c, 3)); val ys = Vector(('a, 1), ('b, 3), ('c, 4))`
+     * `scala> tupleDiff(xs, ys) // Vector[(Symbol, Int)] = Vector(('b,3), ('c,4))`
      */
-    def tupleDiff[A, B](xs: List[(A, B)], ys: List[(A, B)]): List[(A, B)] =
+    def tupleDiff[A, B](xs: Vector[(A, B)], ys: Vector[(A, B)]): Vector[(A, B)] =
       xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
 
     val before = constraint.cells.map(cell => (cell, g(cell)))
@@ -97,7 +97,7 @@ object Grid {
    */
   def apply(s: String): Grid = Parsers.parseGrid(s: String)
 
-  def row(n: Int)(r: Int) = List((1 to n).map((r, _)): _*)
+  def row(n: Int)(r: Int) = Vector((1 to n).map((r, _)): _*)
 
-  def col(n: Int)(c: Int) = List((1 to n).map((_, c)): _*)
+  def col(n: Int)(c: Int) = Vector((1 to n).map((_, c)): _*)
 }

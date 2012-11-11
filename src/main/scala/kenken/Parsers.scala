@@ -44,10 +44,10 @@ object Parsers {
             require(t.contains(label), "Table missing cage for " + label + " " + value + "" + op)
             (op, t(label)) match {
               case ("+", cells) => PlusConstraint(value, cells)
-              case ("-", cell1 :: cell2 :: Nil) => MinusConstraint(value, cell1, cell2)
+              case ("-", Vector(cell1, cell2)) => MinusConstraint(value, cell1, cell2)
               case ("x", cells) => TimesConstraint(value, cells)
-              case ("/", cell1 :: cell2 :: Nil) => DivideConstraint(value, cell1, cell2)
-              case (null, cell :: Nil) => SpecifiedConstraint(value, cell)
+              case ("/", Vector(cell1, cell2)) => DivideConstraint(value, cell1, cell2)
+              case (null, Vector(cell)) => SpecifiedConstraint(value, cell)
               case _ => throw new IllegalArgumentException("Invalid cage " + label)
             }
         }
@@ -73,15 +73,15 @@ object Parsers {
     // a b b
     // c c d
     //
-    def table: Parser[Map[String, List[(Int, Int)]]] = repsep(tableRow, eol) ^^ {
+    def table: Parser[Map[String, Vector[(Int, Int)]]] = repsep(tableRow, eol) ^^ {
       labels: List[List[String]] =>
         val n = labels.length
         require(labels.forall(_.length == n), "The table is not square:\n" + labels)
         val labeledCells = for ((row, r) <- labels.zipWithIndex;
                                 (label, c) <- row.zipWithIndex)
         yield (label, (r + 1, c + 1))
-        (Map[String, List[(Int, Int)]]() /: labeledCells) {
-          case (m, (label, cell)) => m + (label -> (cell :: m.getOrElse(label, Nil)))
+        (Map[String, Vector[(Int, Int)]]() /: labeledCells) {
+          case (m, (label, cell)) => m + (label -> (cell +: m.getOrElse(label, Vector())))
         }
     }
 

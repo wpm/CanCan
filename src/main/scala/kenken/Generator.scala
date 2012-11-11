@@ -24,21 +24,21 @@ object Generator {
   def randomPuzzle(n: Int): (Array[Array[Int]], KenKen) = {
     val solution = randomLatinSquare(n)
     val cages = randomCageLayout(n)
-    (solution, KenKen(n, cages.map(cage => randomCageConstraint(solution, cage.toList))))
+    (solution, KenKen(n, cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
   }
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  def randomCageConstraint(solution: Array[Array[Int]], cage: List[(Int, Int)]): Constraint = {
-    def randomAssociativeConstraint(values: List[Int]) = {
+  def randomCageConstraint(solution: Array[Array[Int]], cage: Vector[(Int, Int)]): Constraint = {
+    def randomAssociativeConstraint(values: Vector[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
         case _ => TimesConstraint(values.product, cage)
       }
     }
 
-    def randomNonAssociativeConstraint(values: List[Int]) = {
+    def randomNonAssociativeConstraint(values: Vector[Int]) = {
       require(values.size == 2)
       val (smaller, larger) = (values.sorted.head, values.sorted.last)
       require(smaller != larger)

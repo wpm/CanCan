@@ -44,8 +44,9 @@ object Misc {
                              |m m k k n l""".stripMargin)
 
   def main(args: Array[String]) {
-    println(unsolvable)
-    val q = unsolvable.solution
+    val puzzle = p6x6
+    println(puzzle)
+    val q = puzzle.solution
     println(q)
   }
 }
