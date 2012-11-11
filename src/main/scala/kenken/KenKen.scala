@@ -45,21 +45,14 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     require(grid.n == n, "Incorrect sized grid")
 
     def search(grid: Grid): SeqView[Grid, Seq[_]] = {
-      // TODO Why can't I put nextGrids into the for loop below?
-      def nextGrids(grid: Grid): SeqView[Grid, Seq[_]] = {
-        for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
-             guess <- values
-             newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
-        yield newGrid
-      }
-
       if (grid.isSolved)
         Vector(grid).view
-      else for {newGrid <- nextGrids(grid)
+      else for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
+                guess <- values
+                newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell)).toSeq
                 if (!visited.contains(newGrid))
                 _ = visited += newGrid
-                solution <- search(newGrid)
-      }
+                solution <- search(newGrid)}
       yield solution
     }
 
