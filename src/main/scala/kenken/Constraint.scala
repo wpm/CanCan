@@ -90,6 +90,14 @@ abstract class CageConstraint(m: Int, cs: Vector[(Int, Int)]) extends Constraint
   def cageName: String
 
   override def toString = cageName + ": " + super.toString
+
+  val nekNekSymbol: String
+
+  /**
+   * String representation of the constraint in the format recognized by the NekNek solver.
+   */
+  def toNekNekString: String =
+    nekNekSymbol + "\t" + m + "\t" + Parsers.toNekNekCells(cells).mkString(" ")
 }
 
 // TODO Specified is a degenerate case of Subset. Eliminate shared values in subsets within same row/column.
@@ -102,6 +110,8 @@ case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends CageConstraint(
   def apply(xs: Vector[Set[Int]]) = if (xs.head.contains(m)) Some(Vector(Set(m))) else None
 
   override def cageName = m.toString
+
+  override val nekNekSymbol = "!"
 }
 
 
@@ -153,6 +163,8 @@ case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAs
   def satisfied(x: Int, y: Int) = x - y == m
 
   override def cageName = m + "-"
+
+  override val nekNekSymbol = "-"
 }
 
 /**
@@ -162,6 +174,8 @@ case class DivideConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonA
   def satisfied(x: Int, y: Int) = x % y == 0 && x / y == m
 
   override def cageName = m + "/"
+
+  override val nekNekSymbol = "/"
 }
 
 /**
@@ -186,6 +200,8 @@ case class PlusConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeCon
   def combine(x: Int, y: Int) = x + y
 
   override def cageName = m + "+"
+
+  override val nekNekSymbol = "+"
 }
 
 /**
@@ -195,6 +211,8 @@ case class TimesConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeCo
   def combine(x: Int, y: Int) = x * y
 
   override def cageName = m + "x"
+
+  override val nekNekSymbol = "*"
 }
 
 object Constraint {

@@ -123,6 +123,16 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }.mkString(" ")).toList
     (cageNames ::: grid).mkString("\n")
   }
+
+  /**
+   * String representation of the puzzle in the format recognized by the NekNek solver.
+   */
+  def toNekNekString: String = {
+    require(n < 10, "The largest puzzle Nek Nek handles is 9x9")
+    "#\t" + n + "\n" + constraintMap.values.flatten.
+      filter(_.isInstanceOf[CageConstraint]).toList.distinct.map(_.asInstanceOf[CageConstraint].toNekNekString).
+      mkString("\n")
+  }
 }
 
 object KenKen {
