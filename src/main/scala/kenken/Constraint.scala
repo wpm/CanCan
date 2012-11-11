@@ -87,7 +87,7 @@ abstract class CageConstraint(m: Int, cs: Vector[(Int, Int)]) extends Constraint
   /**
    * Short name of constraint that contains the parameter but not the list of cells
    */
-  def cageName: String
+  val cageName: String
 
   override def toString = cageName + ": " + super.toString
 
@@ -109,7 +109,7 @@ abstract class CageConstraint(m: Int, cs: Vector[(Int, Int)]) extends Constraint
 case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends CageConstraint(m, Vector(cell)) {
   def apply(xs: Vector[Set[Int]]) = if (xs.head.contains(m)) Some(Vector(Set(m))) else None
 
-  override def cageName = m.toString
+  override val cageName = m.toString
 
   override val nekNekSymbol = "!"
 }
@@ -162,7 +162,7 @@ abstract class NonAssociativeConstraint(m: Int, c1: (Int, Int), c2: (Int, Int))
 case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
   def satisfied(x: Int, y: Int) = x - y == m
 
-  override def cageName = m + "-"
+  override val cageName = m + "-"
 
   override val nekNekSymbol = "-"
 }
@@ -173,7 +173,7 @@ case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAs
 case class DivideConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
   def satisfied(x: Int, y: Int) = x % y == 0 && x / y == m
 
-  override def cageName = m + "/"
+  override val cageName = m + "/"
 
   override val nekNekSymbol = "/"
 }
@@ -199,7 +199,7 @@ abstract class AssociativeConstraint(m: Int, cs: Vector[(Int, Int)]) extends Ari
 case class PlusConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeConstraint(m, cs) {
   def combine(x: Int, y: Int) = x + y
 
-  override def cageName = m + "+"
+  override val cageName = m + "+"
 
   override val nekNekSymbol = "+"
 }
@@ -210,7 +210,7 @@ case class PlusConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeCon
 case class TimesConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeConstraint(m, cs) {
   def combine(x: Int, y: Int) = x * y
 
-  override def cageName = m + "x"
+  override val cageName = m + "x"
 
   override val nekNekSymbol = "*"
 }
