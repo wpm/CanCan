@@ -51,9 +51,8 @@ object Misc {
                              |m m k k n l""".stripMargin)
 
   def main(args: Array[String]) {
-    val puzzle = p6x6
+    val puzzle = unsolvable
     println(puzzle)
-    val q = puzzle.solution
-    println(q)
+    println(puzzle.solutions().toList)
   }
 }

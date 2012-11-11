@@ -2,7 +2,6 @@ package kenken
 
 import scala._
 import annotation.tailrec
-import collection.mutable
 import collection.SeqView
 import scala.Predef._
 import scala.Some
@@ -41,32 +40,24 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * All solutions to the puzzle.
    * @return a lazy sequence of all the grids that solve this puzzle
    */
-  def solutions(grid: Grid = Grid(n), visited: mutable.Set[Grid] = mutable.Set[Grid]()): SeqView[Grid, Seq[_]] = {
+  def solutions(grid: Grid = Grid(n)): SeqView[Grid, Seq[_]] = {
     require(grid.n == n, "Incorrect sized grid")
-
-    def search(grid: Grid): SeqView[Grid, Seq[_]] = {
-      // I can incorporate nextGrids into the for loop below by putting .toSeq at the end of applyConstraints(), but
-      // that causes some runs for the first grid to be unusably slow.
-      def nextGrids(grid: Grid): SeqView[Grid, Seq[_]] = {
-        for {(cell, values) <- grid.unsolved.sortWith(sizeThenPosition).view
-             guess <- values
-             newGrid <- applyConstraints(grid + (cell -> Set(guess)), constraintMap(cell))}
-        yield newGrid
-      }
-
-      if (grid.isSolved)
-        Vector(grid).view
-      else for {newGrid <- nextGrids(grid)
-                if (!visited.contains(newGrid))
-                _ = visited += newGrid
-                solution <- search(newGrid)
-      }
-      yield solution
-    }
-
     applyConstraints(grid, cageConstraints) match {
       case Some(g) => search(g)
       case None => Vector().view
+    }
+  }
+
+  def search(grid: Grid): SeqView[Grid, Seq[_]] = {
+    if (grid.isSolved)
+      Vector(grid).view
+    else {
+      val (cell, values) = grid.unsolved.sortWith(sizeThenPosition).head
+      for {valuesGuess <- values.map(values - _).toSeq.view
+           gridGuess = grid + (cell -> valuesGuess)
+           constrainedGrid <- applyConstraints(gridGuess, constraintMap(cell)).toSeq
+           solution <- search(constrainedGrid)
+      } yield solution
     }
   }
 
@@ -74,7 +65,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * Apply constraints to the grid
    */
   @tailrec
-  private def applyConstraints(grid: Grid, constraints: Set[Constraint]): Option[Grid] = {
+  final def applyConstraints(grid: Grid, constraints: Set[Constraint] = cageConstraints): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head
@@ -85,7 +76,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }
   }
 
-  private def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean = {
+  def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean = {
     Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
   }
 
