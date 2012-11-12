@@ -130,7 +130,8 @@ Puzzles are generated in the following way:
 3. An operation is randomly assigned to each cell and the value is calculated.
 
 To generate the cells in step (2), find the connected components of a random sub-graph of a graph where every cell is adjacent to the ones with which it shares an edge.
-The sizes of the connected components have a Poisson distribution with a mean equal to half the puzzle size.
+The sizes of the connected components have a Poisson distribution with a mean equal to half the puzzle size,
+and no more than 10% of the cells will be specified constraints.
 
 There is no guarantee that the puzzle will have a unique solution.
 

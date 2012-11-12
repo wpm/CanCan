@@ -15,6 +15,10 @@ object Generator {
    * Probability of assigning an associative operator to a 2-cell cage
    */
   private val beta = 1 / 3.0
+  /**
+   * Percentage of cells that may be specified constraints
+   */
+  private val gamma = 1 / 10.0
 
   /**
    * Generate a random KenKen puzzle and its solution
@@ -23,15 +27,17 @@ object Generator {
    */
   def randomPuzzle(n: Int): (Array[Array[Int]], KenKen) = {
     val solution = randomLatinSquare(n)
+    // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
+    val cages = Iterator.continually(randomCageLayout(n)).
+      find(cages => cages.filter(cage => cage.size == 1).size < n * n * gamma).get
     // TODO Make randomCageLayout return sets.
-    val cages = Set() ++ randomCageLayout(n)
-    (solution, KenKen(n, cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
+    (solution, KenKen(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
   }
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  def randomCageConstraint(solution: Array[Array[Int]], cage: Vector[(Int, Int)]): Constraint = {
+  private def randomCageConstraint(solution: Array[Array[Int]], cage: Vector[(Int, Int)]): Constraint = {
     def randomAssociativeConstraint(values: Vector[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
@@ -57,10 +63,11 @@ object Generator {
     }
   }
 
-  def randomLatinSquare(n: Int): Array[Array[Int]] = {
+  /**
+   * Write a random permutation in the first row, generate successive rows by rotation, then shuffle the rows.
+   */
+  private def randomLatinSquare(n: Int): Array[Array[Int]] = {
     def rotate[E](xs: List[E]) = (xs.head :: xs.tail.reverse).reverse
-    // Write a random permutation in the first row, generate successive rows
-    // by rotation, then shuffle the rows.
     shuffle((List(shuffle((1 to n).toList)) /: (1 to n - 1)) {
       case (rows, _) => rotate(rows.head) :: rows
     }).map(_.toArray).toArray
@@ -71,7 +78,7 @@ object Generator {
    * @param n size of the grid
    * @return sets of cells in cages
    */
-  def randomCageLayout(n: Int) = {
+  private def randomCageLayout(n: Int) = {
 
     /**
      * Create a random graph between adjacent cells in a grid
@@ -148,7 +155,7 @@ object Generator {
       if (fs.isEmpty || cs.size >= m) (vs, cs)
       else {
         // The as are the nodes adjacent to the frontier not in the frontier and not previously visited.
-        // They are added to the connected compoenent. If necessary, this set is truncated so that the
+        // They are added to the connected component. If necessary, this set is truncated so that the
         // connected component stays beneath its maximum size.
         val as = fs.flatMap(adjacent(_)).filter(n => !vs.contains(n) && !fs.contains(n)).take(m - cs.size)
         connectedComponent(as, vs ++ as ++ fs, cs ++ as)
