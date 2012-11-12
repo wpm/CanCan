@@ -18,38 +18,35 @@ To see the program solve a puzzle, run either its unit tests or `KenKen` with a 
 	4 5 6 3 2 1
 	3 4 5 6 1 2
 
-To see the program generate and solve a random set of puzzles, run `Generate` where the first argument is a number of puzzles and the second is the puzzle size.
+To generate a random set of puzzles, run `Generate` where the first argument is a number of puzzles and the second is the puzzle size.
 
-	> scala -cp target/scala-2.9.2/classes kenken.Generator 2 3
-	a=2 b=1 c=3 d=3 e=2 f=1 g=1 h=3 i=2
-	a b c
-	d e f
-	g h i
+	> scala -cp target/scala-2.9.2/classes kenken.Generator 2 5
+	a=11+ b=10+ c=6x d=8+ e=1- f=60x g=6x h=40x i=5/
+    a a b b c
+    a d b c c
+    e d f f f
+    e d g g h
+    i i g h h
 
-	Expect
-	2 1 3
-	3 2 1
-	1 3 2
+    4 2 1 5 3
+    5 3 4 2 1
+    2 1 5 3 4
+    3 4 2 1 5
+    1 5 3 4 2
 
-	Found
-	2 1 3
-	3 2 1
-	1 3 2
 
-	a=12x b=1 c=4+ d=1- e=1
-	a a b
-	a c d
-	e c d
+    a=10x b=10+ c=1- d=11+ e=6+ f=32x g=2 h=5 i=20x j=6x
+    a a b b c
+    a d b e c
+    f d d e g
+    f f h e i
+    j j j i i
 
-	Expect
-	3 2 1
-	2 1 3
-	1 3 2
-
-	Found
-	3 2 1
-	2 1 3
-	1 3 2
+    1 2 4 5 3
+    5 3 1 2 4
+    4 5 3 1 2
+    2 4 5 3 1
+    3 1 2 4 5
 
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
 

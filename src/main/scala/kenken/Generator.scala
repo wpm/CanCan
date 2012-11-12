@@ -176,11 +176,7 @@ object Generator {
     val n = args(1).toInt
     for (_ <- (1 to m)) {
       val (solution, puzzle) = randomPuzzle(n)
-      val expect = Grid(solution)
-      println(puzzle + "\n\nExpect\n" + expect + "\n\nFound")
-      require(puzzle.solutions.exists {
-        found => println(found + "\n"); found == expect
-      }, "Did not solve the puzzle.")
+      println(puzzle + "\n\n" + Grid(solution) + "\n\n")
     }
   }
 }
