@@ -49,14 +49,24 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   }
 
   def search(grid: Grid): SeqView[Grid, Seq[_]] = {
+    def leastAmbiguousCell = {
+      def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean =
+        Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
+      grid.unsolved.sortWith(sizeThenPosition).head
+    }
+
+    def valuesGuesses(values: Set[Int]) = values.map(values - _).toSeq.view
+
+    def makeGuess(cell: (Int, Int), guess: Set[Int]) =
+      applyConstraints(grid + (cell -> guess), constraintMap(cell)).toSeq
+
     if (grid.isSolved)
       Vector(grid).view
     else {
-      val (cell, values) = grid.unsolved.sortWith(sizeThenPosition).head
-      for {valuesGuess <- values.map(values - _).toSeq.view
-           gridGuess = grid + (cell -> valuesGuess)
-           constrainedGrid <- applyConstraints(gridGuess, constraintMap(cell)).toSeq
-           solution <- search(constrainedGrid)
+      val (cell, values) = leastAmbiguousCell
+      for {guess <- valuesGuesses(values)
+           newGrid <- makeGuess(cell, guess)
+           solution <- search(newGrid)
       } yield solution
     }
   }
@@ -74,10 +84,6 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
         case None => None
       }
     }
-  }
-
-  def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean = {
-    Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
   }
 
   /**
