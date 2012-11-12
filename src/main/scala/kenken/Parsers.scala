@@ -51,7 +51,7 @@ object Parsers {
               case _ => throw new IllegalArgumentException("Invalid cage " + label)
             }
         }
-        KenKen(n, cageConstraints)
+        KenKen(n, Set() ++ cageConstraints)
     }
 
     // a=5 b=7+ c=3x d=2-

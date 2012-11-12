@@ -23,7 +23,8 @@ object Generator {
    */
   def randomPuzzle(n: Int): (Array[Array[Int]], KenKen) = {
     val solution = randomLatinSquare(n)
-    val cages = randomCageLayout(n)
+    // TODO Make randomCageLayout return sets.
+    val cages = Set() ++ randomCageLayout(n)
     (solution, KenKen(n, cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
   }
 

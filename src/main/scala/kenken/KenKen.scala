@@ -123,8 +123,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
 }
 
 object KenKen {
-  // TODO Make this argument a set.
-  def apply(n: Int, cageConstraints: Traversable[Constraint] = Set()): KenKen = new KenKen(n, Set() ++ cageConstraints)
+  def apply(n: Int, cageConstraints: Set[Constraint] = Set()): KenKen = new KenKen(n, cageConstraints)
 
   def apply(s: String): KenKen = Parsers.parsePuzzle(s)
 
