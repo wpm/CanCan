@@ -4,20 +4,45 @@ import collection.GenTraversableOnce
 
 
 /**
- * A ''n'' x ''n'' grid of possible values
+ * An ''n'' x ''n'' grid containing a puzzle solution
  *
- * @param n the dimension of the grid
- * @param g map of grid positions to possible values
+ * A grid is a square array of ''cells''. Each cell contains a set of numbers from 1 to ''n'' which may possibly occupy
+ * that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1) is in the upper left hand
+ * corner.
  */
 case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
+  /**
+   * Is this grid solved?
+   *
+   * A grid is solved if all its cells contain a single value.
+   */
   def isSolved: Boolean = g.values.forall(_.size == 1)
 
+  /**
+   * The unsolved cells in the grid
+   * @return sequence of (cell, values) tuples
+   */
   def unsolved = Seq() ++ g.filter(_._2.size > 1)
 
-  def apply(key: (Int, Int)) = g(key)
+  /**
+   * Get the values in a cell
+   * @param cell a cell in the grid
+   * @return values in the cell
+   */
+  def apply(cell: (Int, Int)) = g(cell)
 
+  /**
+   * Specify the values for a cell
+   * @param kv cell/values pair
+   * @return new grid with the cell values set
+   */
   def +(kv: ((Int, Int), Set[Int])) = Grid(n, g + kv)
 
+  /**
+   * Specify the values for a set of cells
+   * @param xs cell/values pairs
+   * @return new grid with the cell values set
+   */
   def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = Grid(n, g ++ xs)
 
   /**
@@ -97,7 +122,19 @@ object Grid {
    */
   def apply(s: String): Grid = Parsers.parseGrid(s: String)
 
+  /**
+   * Cells in a row
+   * @param n size of the grid
+   * @param r row number
+   * @return the cells in the row
+   */
   def row(n: Int)(r: Int) = Vector((1 to n).map((r, _)): _*)
 
+  /**
+   * Cells in a column
+   * @param n size of the grid
+   * @param c column number
+   * @return the cells in the column
+   */
   def col(n: Int)(c: Int) = Vector((1 to n).map((_, c)): _*)
 }

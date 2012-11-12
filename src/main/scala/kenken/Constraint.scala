@@ -95,7 +95,8 @@ abstract class CageConstraint(m: Int, cs: Vector[(Int, Int)]) extends Constraint
   val nekNekSymbol: String
 
   /**
-   * String representation of the constraint in the format recognized by the NekNek solver.
+   * String representation of the constraint in the format recognized by the
+   * [[http://www.mlsite.net/neknek NekNek solver]].
    */
   def toNekNekString: String =
     nekNekSymbol + "\t" + m + "\t" + Parsers.toNekNekCells(cells).mkString(" ")
@@ -191,6 +192,12 @@ abstract class AssociativeConstraint(m: Int, cs: Vector[(Int, Int)]) extends Ari
     Vector() ++ cartesianProduct(xs).filter(_.reduceLeft(combine) == m).map(Vector() ++ _)
   }
 
+  /**
+   * Combine two values with this constraint's operator
+   * @param x a value
+   * @param y a value
+   * @return either x+y or x*y
+   */
   def combine(x: Int, y: Int): Int
 }
 

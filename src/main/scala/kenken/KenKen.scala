@@ -19,7 +19,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
-  val constraintMap: Map[(Int, Int), Set[Constraint]] =
+  private val constraintMap: Map[(Int, Int), Set[Constraint]] =
     (Map[(Int, Int), Set[Constraint]]() /:
       (for {constraint <- cageConstraints ++ Constraint.latinSquareConstraints(n)
             cell <- constraint.cells}
@@ -112,7 +112,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   }
 
   /**
-   * String representation of the puzzle in the format recognized by the NekNek solver.
+   * String representation of the puzzle in the format recognized by the [[http://www.mlsite.net/neknek NekNek solver]].
    */
   def toNekNekString: String = {
     require(n < 10, "The largest puzzle Nek Nek handles is 9x9")
