@@ -18,7 +18,7 @@ To see the program solve a puzzle, run either its unit tests or `KenKen` with a 
 	4 5 6 3 2 1
 	3 4 5 6 1 2
 
-To generate a random set of puzzles, run `Generate` where the first argument is a number of puzzles and the second is the puzzle size.
+To generate a random set of puzzles, run `Generator` where the first argument is a number of puzzles and the second is the puzzle size.
 
 	> scala -cp target/scala-2.9.2/classes kenken.Generator 2 5
 	a=11+ b=10+ c=6x d=8+ e=1- f=60x g=6x h=40x i=5/
