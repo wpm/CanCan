@@ -65,7 +65,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * constraints.
    */
   @tailrec
-  final def applyConstraints(grid: Grid, constraints: Set[Constraint] = cageConstraints): Option[Grid] = {
+  private def applyConstraints(grid: Grid, constraints: Set[Constraint] = cageConstraints): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head
