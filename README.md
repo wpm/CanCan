@@ -141,3 +141,4 @@ References
 KenKen is a cousin of [Sudoku](http://en.wikipedia.org/wiki/Sudoku), and the algorithm implemented here is based on Peter Norvig's [Sudoku solver](http://norvig.com/sudoku.html).
 
 Michael Heyeck has written a KenKen solver in Python called [neknek](http://www.mlsite.net/neknek).
+This package can write puzzles in the format recognized by nekenk.
