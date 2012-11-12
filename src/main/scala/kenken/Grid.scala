@@ -45,30 +45,6 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
    */
   def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = Grid(n, g ++ xs)
 
-  /**
-   * Apply a constraint to the grid
-   * @param constraint the constraint to apply
-   * @return tuple of the new grid and a list of changed cells or `None` if the constraint cannot be satisfied
-   */
-  def constrain(constraint: Constraint): Option[(Grid, Vector[(Int, Int)])] = {
-    /**
-     * `scala> val xs = Vector(('a, 1), ('b, 2), ('c, 3)); val ys = Vector(('a, 1), ('b, 3), ('c, 4))`
-     * `scala> tupleDiff(xs, ys) // Vector[(Symbol, Int)] = Vector(('b,3), ('c,4))`
-     */
-    def tupleDiff[A, B](xs: Vector[(A, B)], ys: Vector[(A, B)]): Vector[(A, B)] =
-      xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
-
-    val before = constraint.cells.map(cell => (cell, g(cell)))
-    val values = before.map(_._2)
-    constraint(values) match {
-      case None => None
-      case after => {
-        val changed = tupleDiff(before, constraint.cells.zip(after.get))
-        Option((this ++ changed, changed.map(_._1)))
-      }
-    }
-  }
-
   override def toString = {
     def centered(s: String, width: Int) = {
       val pad = (width - s.length) / 2

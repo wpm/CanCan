@@ -1,37 +1,73 @@
 package kenken
 
 /**
- * A constraint on the possible values of a set of cells in a grid.
- * @param cs the cells to which the constraint applies
+ * Constraint on a region of cells in a grid
+ * @param region region of cells in the grid
  */
-abstract class Constraint(cs: Vector[(Int, Int)]) {
-  /**
-   * The cells to which this constraint applies
-   */
-  val cells = cs.sorted
+abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq[((Int, Int), Set[Int])]]) {
+  val cells = region.sorted
 
   /**
-   * Apply the constraint to the values in a set of cells
-   * @param xs sets of values in the cells
-   * @return sets of values in the cells with the constraint applied or
-   *         `None` if the constraint cannot be satisfied
+   * Apply the constraint to the grid
+   * @return sequence of (cell, values) tuples for all changed cells or `None` if the constraint cannot be satisfied
    */
-  def apply(xs: Vector[Set[Int]]): Option[Vector[Set[Int]]]
+  override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = {
+    /**
+     * `scala> val xs = Vector(('a, 1), ('b, 2), ('c, 3)); val ys = Vector(('a, 1), ('b, 3), ('c, 4))`
+     * `scala> tupleDiff(xs, ys) // Vector[(Symbol, Int)] = Vector(('b,3), ('c,4))`
+     */
+    def tupleDiff[A, B](xs: Seq[(A, B)], ys: Seq[(A, B)]): Seq[(A, B)] =
+      xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
 
-  override def toString = cells.mkString(" ")
+    val before = values(grid)
+    constrainedValues(before) match {
+      case None => None
+      case Some(after) => Some(tupleDiff(cells.zip(before), cells.zip(after)))
+    }
+  }
+
+  /**
+   * Values in the cells
+   * @param grid a grid
+   * @return the values in the grid for this constraint's cells
+   */
+  protected def values(grid: Grid): Seq[Set[Int]] = cells.map(grid(_))
+
+  /**
+   * Changes this constraint makes to a set of cell values
+   * @param values original values in the grid
+   * @return constrained values or `None` if the constraint cannot be satisfied
+   */
+  protected def constrainedValues(values: Seq[Set[Int]]): Option[Seq[Set[Int]]] = None
+
+  override def toString() = cells.mkString(" ")
 }
 
 /**
- * A row or column where all the values must be unique
+ * Constraint that applies to a row or column of a grid
  */
-abstract class LineConstraint(cs: Vector[(Int, Int)]) extends Constraint(cs) {
-  override def toString = {
-    val (r, c) = (cs.head._1, cs.head._2)
-    if (cs.forall(_._1 == r))
+abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(region) {
+  override def toString() = {
+    val (r, c) = (cells.head._1, cells.head._2)
+    if (cells.forall(_._1 == r))
       "Row " + r
-    else
+    else {
+      require(cells.forall(_._2 == c), "Not a row or column constraint")
       "Col " + c
+    }
   }
+}
+
+/**
+ * All solved cells in the row or column must be unique.
+ */
+case class Uniqueness(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+  override protected def constrainedValues(values: Seq[Set[Int]]) =
+    if (isDistinct(solvedValues(values))) Some(Seq[Set[Int]]()) else None
+
+  private def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
+
+  private def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
 }
 
 /**
@@ -39,102 +75,102 @@ abstract class LineConstraint(cs: Vector[(Int, Int)]) extends Constraint(cs) {
  *
  * The constraint is violated if the solved values are not all distinct.
  */
-case class DefinitenessConstraint(cs: Vector[(Int, Int)]) extends LineConstraint(cs) {
-  def apply(xs: Vector[Set[Int]]) = {
+case class DefinitenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+  override protected def constrainedValues(values: Seq[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
-    val d = xs.filter(_.size == 1).foldLeft(List[Int]())((memo, x) => x.head :: memo)
+    val d = values.filter(_.size == 1).foldLeft(List[Int]())((memo, x) => x.head :: memo)
     if (d.distinct != d)
       None
     else {
       //
-      val s = Set(d: _*)
-      val ncs = xs.map {
-        x =>
-          x.size match {
-            case 1 => x
-            case _ => x -- s
+      val s = Set() ++ d
+      val ncs = values.map {
+        value =>
+          value.size match {
+            case 1 => value
+            case _ => value -- s
           }
       }
       if (ncs.exists(_.isEmpty)) None else Some(ncs)
     }
   }
 
-  override def toString = "Definite: " + super.toString
+  override def toString() = "Definite: " + super.toString
 }
 
 /**
  * If a value only appears in one cell, that cell is solved.
  */
-case class SoleValueConstraint(cs: Vector[(Int, Int)]) extends LineConstraint(cs) {
-  def apply(xs: Vector[Set[Int]]) = {
-    Some(xs.map {
-      x =>
-        val u = x -- (xs.filter(y => !(y eq x)).reduceLeft(_ | _))
+case class SoleValueConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+
+  override protected def constrainedValues(values: Seq[Set[Int]]) = {
+    Some(values.map {
+      value =>
+      // Values only appearing in this cell.
+        val u = value -- (values.filter(y => !(y eq value)).reduceLeft(_ | _))
         u.size match {
           case 1 => u
-          case _ => x
+          case _ => value
         }
     })
   }
 
-  override def toString = "Sole: " + super.toString
+  override def toString() = "Sole: " + super.toString
 }
+
 
 /**
  * A constraint parameterized by an integer value.
  */
-abstract class CageConstraint(m: Int, cs: Vector[(Int, Int)]) extends Constraint(cs) {
-  /**
-   * Short name of constraint that contains the parameter but not the list of cells
-   */
-  val cageName: String
+abstract class CageConstraint(value: Int, region: Seq[(Int, Int)]) extends Constraint(region) {
+  protected val symbol: String
+  lazy protected val nekNekSymbol: String = symbol
 
-  override def toString = cageName + ": " + super.toString
-
-  val nekNekSymbol: String
+  override def toString() = value + "" + symbol
 
   /**
    * String representation of the constraint in the format recognized by the
    * [[http://www.mlsite.net/neknek NekNek solver]].
    */
-  def toNekNekString: String =
-    nekNekSymbol + "\t" + m + "\t" + Parsers.toNekNekCells(cells).mkString(" ")
+  def toNekNekString: String = {
+    val nekNekCells = cells.map {
+      case (r, c) => ('A'.toInt + r - 1).toChar + c.toString
+    }
+    nekNekSymbol + "\t" + value + "\t" + nekNekCells.mkString(" ")
+  }
 }
 
-// TODO Specified is a degenerate case of Subset. Eliminate shared values in subsets within same row/column.
 /**
- * The value of a single cell is specified.
- * @param m the value
- * @param cell the cell to which the constraint applies
+ * A single cell contains a specified value
+ * @param value the value the cell must contain
+ * @param cell the cell
  */
-case class SpecifiedConstraint(m: Int, cell: (Int, Int)) extends CageConstraint(m, Vector(cell)) {
-  def apply(xs: Vector[Set[Int]]) = if (xs.head.contains(m)) Some(Vector(Set(m))) else None
+case class SpecifiedConstraint(value: Int, cell: (Int, Int)) extends CageConstraint(value, Seq(cell)) {
+  override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = if (grid(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
 
-  override val cageName = m.toString
-
-  override val nekNekSymbol = "!"
+  override protected val symbol = ""
+  lazy override protected val nekNekSymbol = "!"
 }
-
 
 /**
  * A set of cells whose values must combine arithmetically to a specified value.
  */
-abstract class ArithmeticConstraint(m: Int, cs: Vector[(Int, Int)]) extends CageConstraint(m, cs) {
-  def apply(xs: Vector[Set[Int]]) = {
-    val f = fills(xs)
-    if (f.isEmpty) None else Some(f.transpose.map(Set(_: _*)))
+abstract class ArithmeticConstraint(value: Int, region: Seq[(Int, Int)]) extends CageConstraint(value, region) {
+  override protected def constrainedValues(values: Seq[Set[Int]]) = {
+    val f = fills(values)
+    if (f.isEmpty) None else Some(f.transpose.map(Set() ++ _))
   }
 
   /**
    * Values that can fill the cells.
    *
-   * For example, a 2-cell +5 constraint might return `Vector(Vector(2, 3), Vector(3, 2), Vector(4, 1))`.
+   * For example, a 2-cell +5 constraint might return `List(List(2, 3), List(3, 2), List(4, 1))`.
    *
-   * @param xs cell possible values
+   * @param xs current cell values
    * @return lists of possible values to fill the cells
    */
-  def fills(xs: Vector[Set[Int]]): Vector[Vector[Int]]
+  def fills(xs: Seq[Set[Int]]): Seq[Seq[Int]]
 }
 
 /**
@@ -143,11 +179,11 @@ abstract class ArithmeticConstraint(m: Int, cs: Vector[(Int, Int)]) extends Cage
  * A non-associative constraint must apply to exactly two cells.
  * The constraint is satisfied if either ordering of the cells produces the specified value.
  */
-abstract class NonAssociativeConstraint(m: Int, c1: (Int, Int), c2: (Int, Int))
-  extends ArithmeticConstraint(m, Vector(c1, c2)) {
+abstract class NonAssociativeConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int))
+  extends ArithmeticConstraint(value, Seq(cell1, cell2)) {
 
-  def fills(xs: Vector[Set[Int]]) =
-    Vector() ++ (for (a <- xs.head; b <- xs.tail.head; if satisfied(a, b) || satisfied(b, a)) yield Vector(a, b))
+  def fills(xs: Seq[Set[Int]]) =
+    (for (a <- xs.head; b <- xs.last; if satisfied(a, b) || satisfied(b, a)) yield Seq(a, b)).toSeq
 
   /**
    * Does this pair of numbers satisfy the constraint?
@@ -161,35 +197,31 @@ abstract class NonAssociativeConstraint(m: Int, c1: (Int, Int), c2: (Int, Int))
 /**
  * The difference of a pair of cells must be a specified value.
  */
-case class MinusConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
-  def satisfied(x: Int, y: Int) = x - y == m
+case class MinusConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) extends NonAssociativeConstraint(value, cell1, cell2) {
+  def satisfied(x: Int, y: Int) = x - y == value
 
-  override val cageName = m + "-"
-
-  override val nekNekSymbol = "-"
+  override protected val symbol = "-"
 }
 
 /**
  * The quotient of a pair of cells must be a specified value.
  */
-case class DivideConstraint(m: Int, c1: (Int, Int), c2: (Int, Int)) extends NonAssociativeConstraint(m, c1, c2) {
-  def satisfied(x: Int, y: Int) = x % y == 0 && x / y == m
+case class DivideConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) extends NonAssociativeConstraint(value, cell1, cell2) {
+  def satisfied(x: Int, y: Int) = x % y == 0 && x / y == value
 
-  override val cageName = m + "/"
-
-  override val nekNekSymbol = "/"
+  override protected val symbol = "/"
 }
 
 /**
  * A set of cells whose values combine with an associative operator
  */
-abstract class AssociativeConstraint(m: Int, cs: Vector[(Int, Int)]) extends ArithmeticConstraint(m, cs) {
-  def fills(xs: Vector[Set[Int]]) = {
+abstract class AssociativeConstraint(value: Int, region: Seq[(Int, Int)]) extends ArithmeticConstraint(value, region) {
+  def fills(xs: Seq[Set[Int]]) = {
     def cartesianProduct[A](zs: Traversable[Traversable[A]]): Seq[Seq[A]] =
       zs.foldLeft(Seq(Seq.empty[A])) {
         (x, y) => for (a <- x.view; b <- y) yield a :+ b
       }
-    Vector() ++ cartesianProduct(xs).filter(_.reduceLeft(combine) == m).map(Vector() ++ _)
+    cartesianProduct(xs).filter(_.reduceLeft(combine) == value)
   }
 
   /**
@@ -204,23 +236,20 @@ abstract class AssociativeConstraint(m: Int, cs: Vector[(Int, Int)]) extends Ari
 /**
  * The sum of the values in a set of cells must equal a specified value.
  */
-case class PlusConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeConstraint(m, cs) {
+case class PlusConstraint(value: Int, region: Seq[(Int, Int)]) extends AssociativeConstraint(value, region) {
   def combine(x: Int, y: Int) = x + y
 
-  override val cageName = m + "+"
-
-  override val nekNekSymbol = "+"
+  override protected val symbol = "+"
 }
 
 /**
  * The sum of the values in a set of cells must equal a specified value.
  */
-case class TimesConstraint(m: Int, cs: Vector[(Int, Int)]) extends AssociativeConstraint(m, cs) {
+case class TimesConstraint(m: Int, cs: Seq[(Int, Int)]) extends AssociativeConstraint(m, cs) {
   def combine(x: Int, y: Int) = x * y
 
-  override val cageName = m + "x"
-
-  override val nekNekSymbol = "*"
+  override protected val symbol = "x"
+  lazy override protected val nekNekSymbol = "*"
 }
 
 object Constraint {
@@ -229,8 +258,8 @@ object Constraint {
    */
   def latinSquareConstraints(n: Int) = {
     for {i <- (1 to n)
-         cells <- Vector(Grid.row(n)(i), Grid.col(n)(i))
-         constraint <- Vector(DefinitenessConstraint(cells), SoleValueConstraint(cells))
+         cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
+         constraint <- Seq(DefinitenessConstraint(cells), SoleValueConstraint(cells))
     } yield constraint
   }
 }

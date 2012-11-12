@@ -69,8 +69,12 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head
-      grid.constrain(constraint) match {
-        case Some((g, cells)) => applyConstraints(g, constraints ++ cells.flatMap(constraintMap(_)) - constraint)
+      constraint(grid) match {
+        case Some(changes) =>
+          applyConstraints(grid ++ changes,
+            constraints ++ changes.flatMap {
+              case (cell, _) => constraintMap(cell)
+            } - constraint)
         case None => None
       }
     }
@@ -100,7 +104,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     // Write the cages line above a grid with representative characters.
     val cageNames: List[String] = if (cageName.isEmpty) Nil
     else cageName.map {
-      case (cage: CageConstraint, name) => name + "=" + cage.cageName
+      case (cage: CageConstraint, name) => name + "=" + cage
     }.toList.sorted.mkString(" ") :: Nil
     val grid: List[String] = (for (r <- (1 to n)) yield {
       for (c <- (1 to n)) yield cageMap.get((r, c)) match {

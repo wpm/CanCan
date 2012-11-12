@@ -112,7 +112,7 @@ object Parsers {
   /**
    * Convert a vector of integer pair cells to the letter+number format used by neknek.
    */
-  def toNekNekCells(cells: Vector[(Int, Int)]) = cells.map {
+  def toNekNekCells(cells: Seq[(Int, Int)]) = cells.map {
     case (r, c) => ('A'.toInt + r - 1).toChar + c.toString
   }
 }
