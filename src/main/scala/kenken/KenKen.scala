@@ -28,51 +28,49 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }
 
   /**
-   * A solution to the puzzle.
-   * @return puzzle solution or `None` if it cannot be solved
+   * A solution to the puzzle or `None` if it cannot be solved
    */
   def solution: Option[Grid] = {
-    val s = solutions()
+    val s = solutions
     if (s.isEmpty) None else Some(s.head)
   }
 
   /**
-   * All solutions to the puzzle.
-   * @return a lazy sequence of all the grids that solve this puzzle
+   * A stream of grids that solve this puzzle.
    */
-  def solutions(grid: Grid = Grid(n)): Stream[Grid] = {
-    require(grid.n == n, "Incorrect sized grid")
-    applyConstraints(grid, cageConstraints) match {
-      case Some(g) => search(g).toStream.distinct
+  def solutions: Stream[Grid] = {
+    applyConstraints(Grid(n), cageConstraints) match {
+      case Some(g) => solve(g).toStream.distinct
       case None => Stream.empty[Grid]
     }
   }
 
-  def search(grid: Grid): SeqView[Grid, Seq[_]] = {
+  private def solve(grid: Grid = Grid(n)): SeqView[Grid, Seq[_]] = {
     def leastAmbiguousCell = {
       def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean =
         Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
       grid.unsolved.sortWith(sizeThenPosition).head
     }
 
-    def valuesGuesses(values: Set[Int]) = values.map(values - _).toSeq.view
+    def guessCellValues(values: Set[Int]) = values.map(values - _).toSeq.view
 
-    def makeGuess(cell: (Int, Int), guess: Set[Int]) =
+    def applyGuessToGrid(cell: (Int, Int), guess: Set[Int]) =
       applyConstraints(grid + (cell -> guess), constraintMap(cell)).toSeq
 
     if (grid.isSolved)
       Vector(grid).view
     else {
       val (cell, values) = leastAmbiguousCell
-      for {guess <- valuesGuesses(values)
-           newGrid <- makeGuess(cell, guess)
-           solution <- search(newGrid)
+      for {guess <- guessCellValues(values)
+           newGrid <- applyGuessToGrid(cell, guess)
+           solution <- solve(newGrid)
       } yield solution
     }
   }
 
   /**
-   * Apply constraints to the grid
+   * Return grid with the specified constraints applied. Return `None` if the grid is inconsistent with the
+   * constraints.
    */
   @tailrec
   final def applyConstraints(grid: Grid, constraints: Set[Constraint] = cageConstraints): Option[Grid] = {

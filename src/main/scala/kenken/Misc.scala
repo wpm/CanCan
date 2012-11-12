@@ -53,6 +53,6 @@ object Misc {
   def main(args: Array[String]) {
     val puzzle = unsolvable
     println(puzzle)
-    println(puzzle.solutions().toList)
+    println(puzzle.solutions)
   }
 }
