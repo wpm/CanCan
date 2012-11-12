@@ -42,13 +42,14 @@ object Misc {
   //  1 6 4 2 5 3
   //  4 2 5 3 1 6
   //  2 5 3 1 6 4
-  val unsolvable = KenKen( """a=24x b=13+ c=5 d=6x e=7+ f=30x g=10+ h=15+ i=12+ j=1- k=9+ l=24x m=3- n=6
-                             |a a b c d d
-                             |e e b b d f
-                             |g e b h h f
-                             |g i i j h f
-                             |g i k j l l
-                             |m m k k n l""".stripMargin)
+  val puz = """a=24x b=13+ c=5 d=6x e=7+ f=30x g=10+ h=15+ i=12+ j=1- k=9+ l=24x m=3- n=6
+              |a a b c d d
+              |e e b b d f
+              |g e b h h f
+              |g i i j h f
+              |g i k j l l
+              |m m k k n l""".stripMargin
+  val unsolvable = KenKen(puz)
 
   def main(args: Array[String]) {
     val puzzle = unsolvable

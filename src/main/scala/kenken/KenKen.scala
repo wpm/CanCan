@@ -28,16 +28,16 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }
 
   /**
-   * A stream of grids that solve this puzzle.
+   * A stream of all the grids that solve this puzzle.
    */
   lazy val solutions: Stream[Grid] = {
     applyConstraints(Grid(n), cageConstraints) match {
-      case Some(g) => solve(g).toStream.distinct
+      case Some(g) => search(g).toStream.distinct
       case None => Stream.empty[Grid]
     }
   }
 
-  private def solve(grid: Grid = Grid(n)): SeqView[Grid, Seq[_]] = {
+  private def search(grid: Grid = Grid(n)): SeqView[Grid, Seq[_]] = {
     def leastAmbiguousCell = {
       def sizeThenPosition(a: ((Int, Int), Set[Int]), b: ((Int, Int), Set[Int])): Boolean =
         Ordering[(Int, (Int, Int))].compare((a._2.size, a._1), (b._2.size, b._1)) < 0
@@ -55,7 +55,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
       val (cell, values) = leastAmbiguousCell
       for {guess <- guessCellValues(values)
            newGrid <- applyGuessToGrid(cell, guess)
-           solution <- solve(newGrid)
+           solution <- search(newGrid)
       } yield solution
     }
   }
