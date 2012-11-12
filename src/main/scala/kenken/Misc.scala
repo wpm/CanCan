@@ -51,6 +51,17 @@ object Misc {
               |m m k k n l""".stripMargin
   val unsolvable = KenKen(puz)
 
+  val p9x9 = """a=3 b=2 c=1814400x d=216x e=32+ f=8 g=7 h=13+ i=1 j=23+ k=39+ l=80640x m=1080x n=3 o=46+ p=4 q=378x r=504x s=33+ t=5- u=5
+               |a b c c d d d e f
+               |c c c c c g d e h
+               |i c j c k k e e h
+               |j j j k k k e e h
+               |l m m k n k o e h
+               |l l m m o o o p q
+               |l l l m m o o o q
+               |l l r r s s o q q
+               |t t r r s s s s u""".stripMargin
+
   def main(args: Array[String]) {
     val puzzle = unsolvable
     println(puzzle)
