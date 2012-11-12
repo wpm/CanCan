@@ -103,7 +103,7 @@ Puzzle Solving
 --------------
 
 A brute force solution would simply try all possible solutions for a grid.
-This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing a guess for one of the cells.
+This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing where a candidate number has been removed from one of the cells.
 Vertices with no outgoing edges are possible solutions.
 Note that different sequences of guesses may lead to the same possible solution, so this search space is a directed acyclic graph.
 
@@ -112,16 +112,13 @@ Since there are _n_<sup>_n_<sup>2</sup></sup> possible solutions, a completely e
 However, at each guessed solution vertex we can apply all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
 This process is called _constraint propagation_, and eliminates possible values from some grids while revealing others as inconsistent with the constraints.
 At each node it reduces the size of the search space to the point where an exhaustive search of the constrained graph is tractable.
+Each search iteration makes a guess about the _least ambiguous cell_, i.e. the one with the fewest candidate numbers.
 
 In this program, a partial solution is represented by the `Grid` object, which is a map of cell coordinates to sets of possible values.
 The constraints are implemented as a hierarchy of `Constraint` objects which associate sets of cells coordinates with functions from possible values of those cells to constrained possible values.
-The `KenKen` object represents a puzzle.
+The `KenKen` object represents a puzzle whose `solutions` value is a stream of all its solutions.
 It associates a set of constraints with a grid of a particular size.
-The search algorithm is implemented in the private recursive `search` function, which in turn calls a private recursive `propagateConstraints` function.
-
-The `KenKen.solutions` method returns all solutions as a lazily-evaluated sequence.
-Because the search algorithm may find the same solution via multiple paths, this method maintains a private set of all solved grids it has encountered so far.
-If you just want to find a single solution, you may call the `KenKen.solution` method instead.
+The search algorithm is implemented in the private recursive `search` function, which in turn calls a private recursive `applyConstraints` function.
 
 Puzzle Generation
 -----------------
