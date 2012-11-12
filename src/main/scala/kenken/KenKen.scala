@@ -32,19 +32,19 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * @return puzzle solution or `None` if it cannot be solved
    */
   def solution: Option[Grid] = {
-    val i = solutions().iterator
-    if (i.hasNext) Some(i.next()) else None
+    val s = solutions()
+    if (s.isEmpty) None else Some(s.head)
   }
 
   /**
    * All solutions to the puzzle.
    * @return a lazy sequence of all the grids that solve this puzzle
    */
-  def solutions(grid: Grid = Grid(n)): SeqView[Grid, Seq[_]] = {
+  def solutions(grid: Grid = Grid(n)): Stream[Grid] = {
     require(grid.n == n, "Incorrect sized grid")
     applyConstraints(grid, cageConstraints) match {
-      case Some(g) => search(g)
-      case None => Vector().view
+      case Some(g) => search(g).toStream.distinct
+      case None => Stream.empty[Grid]
     }
   }
 
