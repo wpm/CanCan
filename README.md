@@ -27,13 +27,11 @@ To generate a random set of puzzles, run `Generator` where the first argument is
     e d f f f
     e d g g h
     i i g h h
-
-    4 2 1 5 3
-    5 3 4 2 1
-    2 1 5 3 4
-    3 4 2 1 5
-    1 5 3 4 2
-
+    # 4 2 1 5 3
+    # 5 3 4 2 1
+    # 2 1 5 3 4
+    # 3 4 2 1 5
+    # 1 5 3 4 2
 
     a=10x b=10+ c=1- d=11+ e=6+ f=32x g=2 h=5 i=20x j=6x
     a a b b c
@@ -41,12 +39,11 @@ To generate a random set of puzzles, run `Generator` where the first argument is
     f d d e g
     f f h e i
     j j j i i
-
-    1 2 4 5 3
-    5 3 1 2 4
-    4 5 3 1 2
-    2 4 5 3 1
-    3 1 2 4 5
+    # 1 2 4 5 3
+    # 5 3 1 2 4
+    # 4 5 3 1 2
+    # 2 4 5 3 1
+    # 3 1 2 4 5
 
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
 

@@ -172,11 +172,13 @@ object Generator {
   }
 
   def main(args: Array[String]) {
+    def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
+
     val m = args(0).toInt
     val n = args(1).toInt
     for (_ <- (1 to m)) {
       val (solution, puzzle) = randomPuzzle(n)
-      println(puzzle + "\n\n" + Grid(solution) + "\n\n")
+      println(puzzle + "\n" + prepend(Grid(solution).toString, "# ") + "\n")
     }
   }
 }
