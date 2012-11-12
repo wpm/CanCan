@@ -28,17 +28,9 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }
 
   /**
-   * A solution to the puzzle or `None` if it cannot be solved
-   */
-  def solution: Option[Grid] = {
-    val s = solutions
-    if (s.isEmpty) None else Some(s.head)
-  }
-
-  /**
    * A stream of grids that solve this puzzle.
    */
-  def solutions: Stream[Grid] = {
+  lazy val solutions: Stream[Grid] = {
     applyConstraints(Grid(n), cageConstraints) match {
       case Some(g) => solve(g).toStream.distinct
       case None => Stream.empty[Grid]
@@ -139,9 +131,6 @@ object KenKen {
   def main(args: Array[String]) {
     val in: FileReader = new FileReader(args(0))
     val puzzle = Parsers.parsePuzzle(in)
-    puzzle.solution match {
-      case Some(solution) => println(solution)
-      case None => println("The puzzle cannot be solved.")
-    }
+    println(puzzle.solutions.mkString("\n"))
   }
 }
