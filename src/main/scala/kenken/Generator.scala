@@ -147,12 +147,15 @@ object Generator {
     def connectedComponent(fs: List[N], vs: Set[N], cs: Set[N]): (Set[N], Set[N]) = {
       if (fs.isEmpty || cs.size >= m) (vs, cs)
       else {
-        // TODO Why do I get a bug when I add .take(m - cs.size)?
-        val as = fs.flatMap(adjacent(_)).filter(!vs.contains(_))
-        connectedComponent(as, vs ++ as, cs ++ as)
+        // The as are the nodes adjacent to the frontier not in the frontier and not previously visited.
+        // They are added to the connected compoenent. If necessary, this set is truncated so that the
+        // connected component stays beneath its maximum size.
+        val as = fs.flatMap(adjacent(_)).filter(n => !vs.contains(n) && !fs.contains(n)).take(m - cs.size)
+        connectedComponent(as, vs ++ as ++ fs, cs ++ as)
       }
     }
 
+    // The fold memo is (visited nodes, List(connected component)).
     ((Set[N](), List[Set[N]]()) /: ns) {
       case ((vs, css), n) => if (!vs.contains(n)) {
         val (nvs, ncs) = connectedComponent(List(n), vs, Set[N](n))
@@ -168,10 +171,9 @@ object Generator {
       val (solution, puzzle) = randomPuzzle(n)
       val expect = Grid(solution)
       println(puzzle + "\n\nExpect\n" + expect + "\n\nFound")
-      println(puzzle.solutions.head)
-//      require(puzzle.solutions.exists {
-//        found => println(found + "\n"); found == expect
-//      }, "Did not solve the puzzle.")
+      require(puzzle.solutions.exists {
+        found => println(found + "\n"); found == expect
+      }, "Did not solve the puzzle.")
     }
   }
 }

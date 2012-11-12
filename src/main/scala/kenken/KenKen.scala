@@ -84,7 +84,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     val cageMap = Map() ++ constraintMap.map {
       case (cell, constraints) =>
         val cageConstraints = constraints.filter(_.isInstanceOf[CageConstraint])
-        require(cageConstraints.size <= 1, "More than one cage constraint for " + cell)
+        require(cageConstraints.size <= 1, "More than one cage constraint for " + cell + "\n" + cageConstraints)
         cell -> cageConstraints
     }.filter {
       case (cell, constraints) => !constraints.isEmpty
