@@ -140,4 +140,13 @@ class KenKenSpec extends FlatSpec {
       KenKen(kenken_6x6_puzzle).toString
     }
   }
+
+  "An unsolvable puzzle" should "have no solutions" in {
+    expect(Stream.empty) {
+      KenKen(
+        """a=1 b=2 c=1 d=2
+          |a b
+          |c d""".stripMargin).solutions
+    }
+  }
 }
