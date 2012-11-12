@@ -16,9 +16,9 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
 
   def apply(key: (Int, Int)) = g(key)
 
-  def +(kv: ((Int, Int), Set[Int])) = new Grid(n, g + kv)
+  def +(kv: ((Int, Int), Set[Int])) = Grid(n, g + kv)
 
-  def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = new Grid(n, g ++ xs)
+  def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = Grid(n, g ++ xs)
 
   /**
    * Apply a constraint to the grid
