@@ -49,13 +49,14 @@ case class DefinitenessConstraint(cs: Vector[(Int, Int)]) extends LineConstraint
     else {
       //
       val s = Set(d: _*)
-      Some(xs.map {
+      val ncs = xs.map {
         x =>
           x.size match {
             case 1 => x
             case _ => x -- s
           }
-      })
+      }
+      if (ncs.exists(_.isEmpty)) None else Some(ncs)
     }
   }
 

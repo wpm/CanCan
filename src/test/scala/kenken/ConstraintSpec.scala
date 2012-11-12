@@ -19,4 +19,11 @@ class ConstraintSpec extends FlatSpec {
       row2Definite.toString
     }
   }
+
+  "A definiteness constraint on a row (23 5 6 4 3 2)" should "be inconsistent" in {
+    expect(None) {
+      val c = DefinitenessConstraint(Grid.row(6)(4))
+      c(Vector(Set(2, 3), Set(5), Set(6), Set(4), Set(3), Set(2)))
+    }
+  }
 }
