@@ -181,10 +181,10 @@ abstract class ArithmeticConstraint(value: Int, region: Seq[(Int, Int)]) extends
    *
    * For example, a 2-cell +5 constraint might return `List(List(2, 3), List(3, 2), List(4, 1))`.
    *
-   * @param xs current cell values
+   * @param values current cell values
    * @return lists of possible values to fill the cells
    */
-  def fills(xs: Seq[Set[Int]]): Seq[Seq[Int]]
+  def fills(values: Seq[Set[Int]]): Seq[Seq[Int]]
 }
 
 /**
@@ -196,8 +196,8 @@ abstract class ArithmeticConstraint(value: Int, region: Seq[(Int, Int)]) extends
 abstract class NonAssociativeConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int))
   extends ArithmeticConstraint(value, Seq(cell1, cell2)) {
 
-  def fills(xs: Seq[Set[Int]]) =
-    (for (a <- xs.head; b <- xs.last; if satisfied(a, b) || satisfied(b, a)) yield Seq(a, b)).toSeq
+  def fills(values: Seq[Set[Int]]) =
+    (for (a <- values.head; b <- values.last; if satisfied(a, b) || satisfied(b, a)) yield Seq(a, b)).toSeq
 
   /**
    * Does this pair of numbers satisfy the constraint?
@@ -230,12 +230,12 @@ case class DivideConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) ex
  * A set of cells whose values combine with an associative operator
  */
 abstract class AssociativeConstraint(value: Int, region: Seq[(Int, Int)]) extends ArithmeticConstraint(value, region) {
-  def fills(xs: Seq[Set[Int]]) = {
+  def fills(values: Seq[Set[Int]]) = {
     def cartesianProduct[A](zs: Traversable[Traversable[A]]): Seq[Seq[A]] =
       zs.foldLeft(Seq(Seq.empty[A])) {
         (x, y) => for (a <- x.view; b <- y) yield a :+ b
       }
-    cartesianProduct(xs).filter(_.reduceLeft(combine) == value)
+    cartesianProduct(values).filter(_.reduceLeft(combine) == value)
   }
 
   /**
