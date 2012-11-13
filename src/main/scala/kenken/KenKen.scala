@@ -1,14 +1,10 @@
 package kenken
 
-import scala._
-import annotation.tailrec
-import collection.immutable.PagedSeq
 import collection.SeqView
+import annotation.tailrec
 import io.Source
-import scala.Predef._
-import scala.Some
 import util.parsing.input.PagedSeqReader
-
+import collection.immutable.PagedSeq
 
 /**
  * A [[http://www.kenken.com KenKen]] puzzle.
