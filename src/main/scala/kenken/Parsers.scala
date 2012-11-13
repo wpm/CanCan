@@ -108,4 +108,13 @@ object Parsers {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
   }
+
+  def tableToString[T](table: Traversable[Traversable[T]]) = {
+    def centered(s: String, width: Int) = {
+      val pad = (width - s.length) / 2
+      ("%" + width + "s").format(" " * pad + s)
+    }
+    val widest = (for (row <- table; col <- row) yield col.toString.size).max
+    table.map(row => row.map(col => centered(col.toString, widest)).mkString(" ")).mkString("\n")
+  }
 }

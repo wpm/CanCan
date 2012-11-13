@@ -45,18 +45,17 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
    */
   def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = Grid(n, g ++ xs)
 
+
+  /**
+   * Grid of numbers, delimited with commas if some of the cells could contain numbers with multiple digits
+   */
   override def toString = {
-    def centered(s: String, width: Int) = {
-      val pad = (width - s.length) / 2
-      ("%" + width + "s").format(" " * pad + s)
-    }
-    def widest = g.values.map(_.mkString("").length).max
-    (1 to n).map(r => (1 to n).map {
-      c => centered(g((r, c)).toList.sorted.mkString(""), widest)
-    }.mkString(" ")).mkString("\n")
+    val delimiter = if (n < 10) "" else ","
+    Parsers.tableToString(for (row <- (1 to n)) yield {
+      for (col <- 1 to n) yield g((row, col)).toSeq.sorted.mkString(delimiter)
+    })
   }
 }
-
 
 object Grid {
   /**

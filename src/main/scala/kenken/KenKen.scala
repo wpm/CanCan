@@ -95,6 +95,8 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     }
     // Map of cages to representative characters.
     // TODO Handle more than 26 cages.
+    // def letters(n:Int):Stream[Char] = {if (n>0) ('a'.toInt + (n-1) % 26).toChar #:: letters(n/26) else  Stream[Char]()}
+    // for (n<-(1 to 50)) yield letters(n).reverse.mkString("")
     val cageName = Map() ++
       cageMap.values.toList.distinct.sortBy(_.cells.head).zipWithIndex.map {
         case (cage, i) => cage -> ('a'.toInt + i).toChar.toString
