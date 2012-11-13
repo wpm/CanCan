@@ -11,12 +11,20 @@ Additionally, cells in the grid are grouped into sets called _cages_, and the se
 To see the program solve a puzzle, run either its unit tests or `KenKen` with a path to a puzzle file.
 
 	> scala -cp target/scala-2.9.2/classes kenken.KenKen src/main/resources/6x6
-	1 2 3 4 5 6
-	2 3 1 5 6 4
-	5 6 2 1 4 3
-	6 1 4 2 3 5
-	4 5 6 3 2 1
-	3 4 5 6 1 2
+    a=4x b=12x c=15+ d=3/ e=11+ f=1- g=11+ h=1- i=9+ j=2- k=60x l=3- m=4x n=1- o=5-
+    a a b b c c
+    a d d e e c
+    f g h h i j
+    f g g i i j
+    k k l l m m
+    k n n o o m
+
+    1 2 3 4 5 6
+    2 3 1 5 6 4
+    5 6 2 1 4 3
+    6 1 4 2 3 5
+    4 5 6 3 2 1
+    3 4 5 6 1 2
 
 To generate a random set of puzzles, run `Generator` where the first argument is a number of puzzles and the second is the puzzle size.
 

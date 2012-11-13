@@ -112,7 +112,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     val cageKey = cageToName.map {
       case (cage, name) => name + "=" + cage
     }.toSeq.sorted.mkString(" ")
-    (if (!cageKey.isEmpty) cageKey + "\n" else "") + Parsers.tableToString(table)
+    (if (!cageKey.isEmpty) cageKey + "\n" else "") + StringRepresentation.tableToString(table)
   }
 
   /**
@@ -129,13 +129,14 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
 object KenKen {
   def apply(n: Int, cageConstraints: Set[Constraint] = Set()): KenKen = new KenKen(n, cageConstraints)
 
-  def apply(s: String): KenKen = Parsers.parsePuzzle(s)
+  def apply(s: String): KenKen = StringRepresentation.parsePuzzle(s)
 
   def main(args: Array[String]) {
-    // Treat # as a comment delimiter and skip blank lines.
-    val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).filterNot(_.isEmpty)
+    // Treat # as a comment delimiter.
+    val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", ""))
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
-    val puzzle = Parsers.parsePuzzle(in)
-    println(puzzle.solutions.mkString("\n"))
+    StringRepresentation.parsePuzzles(in).foreach {
+      puzzle => println(puzzle + "\n\n" + puzzle.solutions.mkString("\n\n") + "\n\n")
+    }
   }
 }

@@ -51,7 +51,7 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
    */
   override def toString = {
     val delimiter = if (n < 10) "" else ","
-    Parsers.tableToString(for (row <- (1 to n)) yield {
+    StringRepresentation.tableToString(for (row <- (1 to n)) yield {
       for (col <- 1 to n) yield g((row, col)).toSeq.sorted.mkString(delimiter)
     })
   }
@@ -69,11 +69,11 @@ object Grid {
   }
 
   /**
-   * Create a grid from a square array of integer sets
-   * @param m array of integer sets
+   * Create a grid from a square table of integer sets
+   * @param m table of integer sets
    * @return new grid
    */
-  def apply(m: Array[Array[Set[Int]]]) = {
+  def apply(m: Seq[Seq[Set[Int]]]): Grid = {
     val n = m.length
     // The array must be square.
     require(m.forall(_.length == n), "The grid is not square:\n" + m)
@@ -82,20 +82,11 @@ object Grid {
   }
 
   /**
-   * Create a solved grid from a square array of integers
-   * @param m array of integers
-   * @return new grid
-   */
-  def apply(m: Array[Array[Int]]): Grid = {
-    apply(m.map(_.map(Set(_))))
-  }
-
-  /**
    * Convert an string array of numbers to a grid
    * @param s array of numbers
    * @return new grid
    */
-  def apply(s: String): Grid = Parsers.parseGrid(s: String)
+  def apply(s: String): Grid = StringRepresentation.parseGrid(s: String)
 
   /**
    * Cells in a row

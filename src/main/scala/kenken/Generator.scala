@@ -25,7 +25,7 @@ object Generator {
    * @param n puzzle size
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int): (Array[Array[Int]], KenKen) = {
+  def randomPuzzle(n: Int): (Seq[Seq[Int]], KenKen) = {
     val solution = randomLatinSquare(n)
     // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
     val cages = Iterator.continually(randomCageLayout(n)).
@@ -37,7 +37,7 @@ object Generator {
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  private def randomCageConstraint(solution: Array[Array[Int]], cage: Vector[(Int, Int)]): Constraint = {
+  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Vector[(Int, Int)]): Constraint = {
     def randomAssociativeConstraint(values: Vector[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
@@ -66,11 +66,12 @@ object Generator {
   /**
    * Write a random permutation in the first row, generate successive rows by rotation, then shuffle the rows.
    */
-  private def randomLatinSquare(n: Int): Array[Array[Int]] = {
+  private def randomLatinSquare(n: Int): Seq[Seq[Int]] = {
     def rotate[E](xs: List[E]) = (xs.head :: xs.tail.reverse).reverse
     shuffle((List(shuffle((1 to n).toList)) /: (1 to n - 1)) {
       case (rows, _) => rotate(rows.head) :: rows
-    }).map(_.toArray).toArray
+    })
+//    }).map(_.toArray).toArray
   }
 
   /**
@@ -178,7 +179,7 @@ object Generator {
     val n = args(1).toInt
     for (_ <- (1 to m)) {
       val (solution, puzzle) = randomPuzzle(n)
-      println(puzzle + "\n" + prepend(Grid(solution).toString, "# ") + "\n")
+      println(puzzle + "\n" + prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
     }
   }
 }
