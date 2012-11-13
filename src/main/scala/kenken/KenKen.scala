@@ -66,11 +66,13 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
     else {
       val constraint = constraints.head
       constraint(grid) match {
-        case Some(changes) =>
-          applyConstraints(grid ++ changes,
-            constraints ++ changes.flatMap {
-              case (cell, _) => constraintMap(cell)
-            } - constraint)
+        case Some(changes) => {
+          val newGrid: Grid = grid ++ changes
+          val triggeredConstraints = changes.flatMap {
+            case (cell, _) => constraintMap(cell)
+          }
+          applyConstraints(newGrid, constraints ++ triggeredConstraints - constraint)
+        }
         case None => None
       }
     }
