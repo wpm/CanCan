@@ -13,8 +13,10 @@ abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq
    */
   override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = {
     /**
-     * `scala> val xs = Vector(('a, 1), ('b, 2), ('c, 3)); val ys = Vector(('a, 1), ('b, 3), ('c, 4))`
-     * `scala> tupleDiff(xs, ys) // Vector[(Symbol, Int)] = Vector(('b,3), ('c,4))`
+     * {{{
+     * val xs = Vector(('a, 1), ('b, 2), ('c, 3)); val ys = Vector(('a, 1), ('b, 3), ('c, 4))
+     * tupleDiff(xs, ys) // Vector[(Symbol, Int)] = Vector(('b,3), ('c,4))
+     * }}}
      */
     def tupleDiff[A, B](xs: Seq[(A, B)], ys: Seq[(A, B)]): Seq[(A, B)] =
       xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
@@ -59,9 +61,15 @@ abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(r
 }
 
 /**
- * All solved cells in the row or column must be unique.
+ * All solved cells in the region must be unique.
+ *
+ * This constraint does not change any values in the grid but can be violated.
+ *
+ *  - `[123 123 123] -> [123 123 123]`
+ *  - `[1   23  123] -> [1   23  123]`
+ *  - `[1   23  1]   -> None`
  */
-case class Uniqueness(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+case class LatinSquareConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) =
     if (isDistinct(solvedValues(values))) Some(Seq[Set[Int]]()) else None
 
@@ -71,11 +79,15 @@ case class Uniqueness(region: Seq[(Int, Int)]) extends RowColumnConstraint(regio
 }
 
 /**
- * All solved cells contain distinct values.
+ * Values from all solved cells in a are removed from all the other cells in the region.
  *
  * The constraint is violated if the solved values are not all distinct.
+ * The [[kenken.LatinSquareConstraint]] is a subset of this one.
+ *
+ *  - `[1 2 1234 234] -> [1 2 34 34]`
+ *  - `[1 1 123] -> None`
  */
-case class DefinitenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
@@ -100,9 +112,11 @@ case class DefinitenessConstraint(region: Seq[(Int, Int)]) extends RowColumnCons
 }
 
 /**
- * If a value only appears in one cell, that cell is solved.
+ * If a value only appears in a single cell in the region, that cell is solved.
+ *
+ *  - `[12 23 23] -> [1 23 23]`
  */
-case class SoleValueConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
 
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
@@ -195,7 +209,7 @@ abstract class NonAssociativeConstraint(value: Int, cell1: (Int, Int), cell2: (I
 }
 
 /**
- * The difference of a pair of cells must be a specified value.
+ * The difference of a pair of cells must equal a specified value.
  */
 case class MinusConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) extends NonAssociativeConstraint(value, cell1, cell2) {
   def satisfied(x: Int, y: Int) = x - y == value
@@ -204,7 +218,7 @@ case class MinusConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) ext
 }
 
 /**
- * The quotient of a pair of cells must be a specified value.
+ * The quotient of a pair of cells must equal a specified value.
  */
 case class DivideConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) extends NonAssociativeConstraint(value, cell1, cell2) {
   def satisfied(x: Int, y: Int) = x % y == 0 && x / y == value
@@ -259,7 +273,7 @@ object Constraint {
   def latinSquareConstraints(n: Int) = {
     for {i <- (1 to n)
          cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
-         constraint <- Seq(DefinitenessConstraint(cells), SoleValueConstraint(cells))
+         constraint <- Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells))
     } yield constraint
   }
 }

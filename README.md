@@ -83,13 +83,16 @@ Either ordering of the cells will satisfy the constraint.
 The Latin Square constraints require that numbers in rows and columns be unique.
 For each row and column, this has two consequences which are analyzed as separate constraints:
 
-* _Definiteness_
+* _Solved Cells_
 
- All solved cells in a row or column must have different values. For example, given the row {123} {1} {13}, definiteness returns {23} {1} {3}.
+ The values from all solved cells are removed from unsolved cells.
+ For example, given the row {123} {1} {13}, this contraint returns {23} {1} {3}.
+ The constraint is violated if all solved cells do not have distinct values.
 
-* _Sole Value_
+* _Uniqueness_
 
- If a value only appears in a single cell in a row or column, it must be the solution for that cell. For example, given the column {23} {123} {23}, uniqueness returns {23} {1} {23}.
+ If a value only appears in a single cell in a row or column, it must be the solution for that cell.
+ For example, given the column {23} {123} {23}, uniqueness returns {23} {1} {23}.
 
 Given a partial solution grid, the constraints may serve to eliminate possible values from cells or reveal that partial solution as inconsistent with the puzzle.
 
