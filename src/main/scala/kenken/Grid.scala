@@ -20,9 +20,9 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
 
   /**
    * The unsolved cells in the grid
-   * @return sequence of (cell, values) tuples
+   * @return (cell, values) tuples where the number of values is greater than 1
    */
-  def unsolved = Seq() ++ g.filter(_._2.size > 1)
+  def unsolved = g.filter(_._2.size > 1)
 
   /**
    * Get the values in a cell
