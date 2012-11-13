@@ -2,10 +2,12 @@ package kenken
 
 import scala._
 import annotation.tailrec
+import collection.immutable.PagedSeq
 import collection.SeqView
+import io.Source
 import scala.Predef._
 import scala.Some
-import java.io.FileReader
+import util.parsing.input.PagedSeqReader
 
 
 /**
@@ -132,7 +134,9 @@ object KenKen {
   def apply(s: String): KenKen = Parsers.parsePuzzle(s)
 
   def main(args: Array[String]) {
-    val in: FileReader = new FileReader(args(0))
+    // Treat # as a comment delimiter and skip blank lines.
+    val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).filterNot(_.isEmpty)
+    val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     val puzzle = Parsers.parsePuzzle(in)
     println(puzzle.solutions.mkString("\n"))
   }

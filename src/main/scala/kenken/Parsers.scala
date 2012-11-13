@@ -1,7 +1,7 @@
 package kenken
 
 import util.parsing.combinator.{RegexParsers, JavaTokenParsers}
-import java.io.FileReader
+import util.parsing.input.Reader
 
 /**
  * Parsers for string representations of grid and puzzle objects.
@@ -90,7 +90,7 @@ object Parsers {
 
     implicit def parsePuzzleString(s: String) = parseAll(puzzle, s)
 
-    implicit def parsePuzzleFile(r: FileReader) = parseAll(puzzle, r)
+    implicit def parsePuzzleFile(r: Reader[Char]) = parseAll(puzzle, r)
   }
 
   /**
