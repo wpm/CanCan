@@ -5,6 +5,7 @@ import annotation.tailrec
 import io.Source
 import util.parsing.input.PagedSeqReader
 import collection.immutable.PagedSeq
+import scala.math.Ordering.Implicits._
 
 /**
  * A [[http://www.kenken.com KenKen]] puzzle.
@@ -17,7 +18,7 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
-  private val constraintMap: Map[(Int, Int), Set[Constraint]] =
+  val constraintMap: Map[(Int, Int), Set[Constraint]] =
     (Map[(Int, Int), Set[Constraint]]() /:
       (for {constraint <- cageConstraints ++ Constraint.latinSquareConstraints(n)
             cell <- constraint.cells}
@@ -82,37 +83,35 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    * This is the inverse of `KenKen(s)`
    */
   override def toString = {
-    // Map of cells to the cages that contain them.
-    val cageMap = Map() ++ constraintMap.map {
-      case (cell, constraints) =>
-        val cageConstraints = constraints.filter(_.isInstanceOf[CageConstraint])
-        require(cageConstraints.size <= 1, "More than one cage constraint for " + cell + "\n" + cageConstraints)
-        cell -> cageConstraints
-    }.filter {
-      case (cell, constraints) => !constraints.isEmpty
-    }.map {
-      case (cell, constraints) => cell -> constraints.head
+    def base26AlphabeticString(n: Int) = {
+      def digits(n: Int, b: Int): Stream[Int] = (n % b) #:: (if (n / b > 0) digits(n / b, b) else Stream[Int]())
+      digits(n, 26).map(digit => ('a'.toInt + digit).toChar).reverse.mkString("")
     }
-    // Map of cages to representative characters.
-    // TODO Handle more than 26 cages.
-    // def letters(n:Int):Stream[Char] = {if (n>0) ('a'.toInt + (n-1) % 26).toChar #:: letters(n/26) else  Stream[Char]()}
-    // for (n<-(1 to 50)) yield letters(n).reverse.mkString("")
-    val cageName = Map() ++
-      cageMap.values.toList.distinct.sortBy(_.cells.head).zipWithIndex.map {
-        case (cage, i) => cage -> ('a'.toInt + i).toChar.toString
+    // Map of cells to the cages that contain them. Each cell is contained by at most one cage.
+    val cellToCage = Map() ++ (for {(cell, cs) <- constraintMap.toSeq
+                                    c <- cs
+                                    if (c.isInstanceOf[CageConstraint])}
+    yield (cell, c))
+    // Cages sorted by proximity to upper left hand corner of the puzzle.
+    val cages = cellToCage.values.toList.distinct.sortWith((a, b) => a.cells.head < b.cells.head)
+    // Map of cages to short alphabetic names.
+    val cageToName = Map() ++
+      cages.zipWithIndex.map {
+        case (cage, i) => (cage, base26AlphabeticString(i))
       }
-    // Write the cages line above a grid with representative characters.
-    val cageNames: List[String] = if (cageName.isEmpty) Nil
-    else cageName.map {
-      case (cage: CageConstraint, name) => name + "=" + cage
-    }.toList.sorted.mkString(" ") :: Nil
-    val grid: List[String] = (for (r <- (1 to n)) yield {
-      for (c <- (1 to n)) yield cageMap.get((r, c)) match {
-        case None => "." // Write this if the cell is not in a cage.
-        case Some(cage) => cageName(cage)
-      }
-    }.mkString(" ")).toList
-    (cageNames ::: grid).mkString("\n")
+    // Map of cells to cage names.
+    val cellToName = Map() ++ cellToCage.map {
+      case (cell, cage) => (cell, cageToName(cage))
+    }
+    // Table of cage names using '.' for cells not in cages.
+    val table = for (r <- (1 to n)) yield {
+      for (c <- (1 to n); cell = (r, c)) yield cellToName.getOrElse(cell, ".")
+    }
+    // List of cage constraints followed by grid of letters representing cages.
+    val cageKey = cageToName.map {
+      case (cage, name) => name + "=" + cage
+    }.toSeq.sorted.mkString(" ")
+    (if (!cageKey.isEmpty) cageKey + "\n" else "") + Parsers.tableToString(table)
   }
 
   /**

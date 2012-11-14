@@ -109,6 +109,12 @@ object Parsers {
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
   }
 
+  /**
+   * Print a 2-dimensional array of objects as a grid, centering each element.
+   * @param table 2-dimensional array of objects
+   * @tparam T object in the array
+   * @return string representation
+   */
   def tableToString[T](table: Traversable[Traversable[T]]) = {
     def centered(s: String, width: Int) = {
       val pad = (width - s.length) / 2
