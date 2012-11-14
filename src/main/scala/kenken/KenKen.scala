@@ -84,7 +84,8 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
    */
   override def toString = {
     def base26AlphabeticString(n: Int) = {
-      def digits(n: Int, b: Int): Stream[Int] = (n % b) #:: (if (n / b > 0) digits(n / b, b) else Stream[Int]())
+      def digits(n: Int, base: Int): Stream[Int] =
+        (n % base) #:: (if (n / base > 0) digits(n / base, base) else Stream[Int]())
       digits(n, 26).map(digit => ('a'.toInt + digit).toChar).reverse.mkString("")
     }
     // Map of cells to the cages that contain them. Each cell is contained by at most one cage.
