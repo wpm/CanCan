@@ -65,9 +65,9 @@ abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(r
  *
  * This constraint does not change any values in the grid but can be violated.
  *
- *  - `[123 123 123] -> [123 123 123]`
- *  - `[1   23  123] -> [1   23  123]`
- *  - `[1   23  1]   -> None`
+ * - `[123 123 123] -> [123 123 123]`
+ * - `[1   23  123] -> [1   23  123]`
+ * - `[1   23  1]   -> None`
  */
 case class LatinSquareConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) =
@@ -84,8 +84,8 @@ case class LatinSquareConstraint(region: Seq[(Int, Int)]) extends RowColumnConst
  * The constraint is violated if the solved values are not all distinct.
  * The [[kenken.LatinSquareConstraint]] is a subset of this one.
  *
- *  - `[1 2 1234 234] -> [1 2 34 34]`
- *  - `[1 1 123] -> None`
+ * - `[1 2 1234 234] -> [1 2 34 34]`
+ * - `[1 1 123] -> None`
  */
 case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
@@ -114,7 +114,7 @@ case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConst
 /**
  * If a value only appears in a single cell in the region, that cell is solved.
  *
- *  - `[12 23 23] -> [1 23 23]`
+ * - `[12 23 23] -> [1 23 23]`
  */
 case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
 
@@ -235,6 +235,7 @@ abstract class AssociativeConstraint(value: Int, region: Seq[(Int, Int)]) extend
       zs.foldLeft(Seq(Seq.empty[A])) {
         (x, y) => for (a <- x.view; b <- y) yield a :+ b
       }
+    // TODO values.map(_.filterNot(_ > value)) Since these are always monotonically increasing functions.
     cartesianProduct(values).filter(_.reduceLeft(combine) == value)
   }
 
