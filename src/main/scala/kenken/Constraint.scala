@@ -49,6 +49,10 @@ abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq
  * Constraint that applies to a row or column of a grid
  */
 abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(region) {
+  protected def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
+
+  protected def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
+
   override def toString() = {
     val (r, c) = (cells.head._1, cells.head._2)
     if (cells.forall(_._1 == r))
@@ -72,10 +76,6 @@ abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(r
 case class LatinSquareConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) =
     if (isDistinct(solvedValues(values))) Some(Seq[Set[Int]]()) else None
-
-  private def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
-
-  private def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
 }
 
 /**
@@ -91,21 +91,20 @@ case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConst
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
-    val d = values.filter(_.size == 1).foldLeft(List[Int]())((memo, x) => x.head :: memo)
-    if (d.distinct != d)
-      None
-    else {
-      //
-      val s = Set() ++ d
+    val distinct = solvedValues(values).foldLeft(List[Int]())((value, x) => x.head :: value)
+    if (isDistinct(distinct)) {
+      val solved = Set() ++ distinct
       val ncs = values.map {
         value =>
           value.size match {
             case 1 => value
-            case _ => value -- s
+            case _ => value -- solved
           }
       }
       if (ncs.exists(_.isEmpty)) None else Some(ncs)
     }
+    else
+      None
   }
 
   override def toString() = "Definite: " + super.toString
@@ -121,7 +120,7 @@ case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstr
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
       value =>
-      // Values only appearing in this cell.
+        // Values only appearing in this cell.
         val u = value -- (values.filter(y => !(y eq value)).reduceLeft(_ | _))
         u.size match {
           case 1 => u
