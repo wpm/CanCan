@@ -2,6 +2,7 @@ package kenken
 
 import collection.GenTraversableOnce
 
+// TODO Add case class Cell(row:Int, col:Int)? Specify toString and ordering.
 
 /**
  * An ''n'' x ''n'' grid containing a puzzle solution
