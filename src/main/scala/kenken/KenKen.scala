@@ -136,7 +136,7 @@ object KenKen {
     val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
-      puzzle => println(puzzle + "\n\n" + puzzle.solutions.mkString("\n\n") + "\n\n")
+      puzzle:KenKen => println(puzzle + "\n\n" + puzzle.solutions.mkString("\n\n") + "\n\n")
     }
   }
 }

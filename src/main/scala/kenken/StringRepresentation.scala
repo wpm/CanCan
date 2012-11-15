@@ -98,9 +98,9 @@ object StringRepresentation {
 
     def puzzles: Parser[List[KenKen]] = repsep(puzzle, rep1(eol)) <~ opt(rep(eol))
 
-    implicit def parsePuzzleString(s: String) = parseAll(puzzle, s)
+    implicit def parsePuzzlesString(s: String) = parseAll(puzzles, s)
 
-    implicit def parsePuzzleFile(r: Reader[Char]) = parseAll(puzzle, r)
+    implicit def parsePuzzlesFile(r: Reader[Char]) = parseAll(puzzles, r)
   }
 
 
@@ -115,16 +115,15 @@ object StringRepresentation {
   /**
    * Create a KenKen puzzle from a file or string.
    */
-  def parsePuzzle[T](implicit r: PuzzleParser.ParseResult[T]) = r match {
-    case PuzzleParser.Success(a, _) => a
-    case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
-  }
+  def parsePuzzle(implicit r: PuzzleParser.ParseResult[List[KenKen]]) = parsePuzzles.head
 
   /**
    * Read a set of KenKen puzzles from a file
    */
-  def parsePuzzles(r: Reader[Char]) =
-    StringRepresentation.PuzzleParser.parseAll(StringRepresentation.PuzzleParser.puzzles, r).get
+  def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[KenKen]]) = r match {
+    case PuzzleParser.Success(a, _) => a
+    case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
 
   /**
    * Print a 2-dimensional array of objects as a grid, centering each element.
