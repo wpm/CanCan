@@ -127,8 +127,24 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
 }
 
 object KenKen {
+  /**
+   * Create a puzzle from a set of cage constraints.
+   *
+   * Note that the Latin Square constraints are added automatically by the constructor and do not need to be specified
+   * here.
+   * @param n puzzle dimension
+   * @param cageConstraints cage constraints
+   * @return KenKen puzzle
+   */
   def apply(n: Int, cageConstraints: Set[Constraint] = Set()): KenKen = new KenKen(n, cageConstraints)
 
+  /**
+   * Create a puzzle from a string representation.
+   *
+   * This is the inverse of `toString`.
+   * @param s string representation
+   * @return KenKen puzzle
+   */
   def apply(s: String): KenKen = StringRepresentation.parsePuzzle(s)
 
   def main(args: Array[String]) {
@@ -136,7 +152,7 @@ object KenKen {
     val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
-      puzzle:KenKen => println(puzzle + "\n\n" + puzzle.solutions.mkString("\n\n") + "\n\n")
+      puzzle: KenKen => println(puzzle + "\n\n" + puzzle.solutions.mkString("\n\n") + "\n\n")
     }
   }
 }

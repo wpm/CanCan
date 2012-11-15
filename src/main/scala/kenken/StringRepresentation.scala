@@ -118,7 +118,7 @@ object StringRepresentation {
   def parsePuzzle(implicit r: PuzzleParser.ParseResult[List[KenKen]]) = parsePuzzles.head
 
   /**
-   * Read a set of KenKen puzzles from a file
+   * Read a set of KenKen puzzles from a file or string
    */
   def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[KenKen]]) = r match {
     case PuzzleParser.Success(a, _) => a
