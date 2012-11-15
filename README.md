@@ -8,9 +8,9 @@ Each row and column must contain a unique set of numbers.
 (Thus a solved KenKen puzzle is a [Latin Square](http://en.wikipedia.org/wiki/Latin_square).)
 Additionally, cells in the grid are grouped into sets called _cages_, and the sets of numbers in these cages must have certain arithmetic properties.
 
-To see the program solve a puzzle, run either its unit tests or `KenKen` with a path to a puzzle file.
+To see the program solve a puzzle, run either its unit tests or `Solver` with a path to a puzzle file.
 
-	> scala -cp target/scala-2.9.2/classes kenken.KenKen src/main/resources/6x6
+	> scala -cp target/scala-2.9.2/classes kenken.Solver src/main/resources/6x6
     a=4x b=12x c=15+ d=3/ e=11+ f=1- g=11+ h=1- i=9+ j=2- k=60x l=3- m=4x n=1- o=5-
     a a b b c c
     a d d e e c
@@ -121,9 +121,11 @@ Each search iteration makes a guess about the _least ambiguous cell_, i.e. the o
 
 In this program, a partial solution is represented by the `Grid` object, which is a map of cell coordinates to sets of possible values.
 The constraints are implemented as a hierarchy of `Constraint` objects which associate sets of cells coordinates with functions from possible values of those cells to constrained possible values.
-The `KenKen` object represents a puzzle whose `solutions` value is a stream of all its solutions.
-It associates a set of constraints with a grid of a particular size.
-The search algorithm is implemented in the private recursive `search` function, which in turn calls a private recursive `applyConstraints` function.
+The `Puzzle` object represents a puzzle.
+It associates a set of cage constraints with a grid of a particular size.
+A puzzle is passed to a `Solver` algorithm which finds to solutions.
+The core algorithm is is implemented in the private recursive `search` function, which in turn calls a private recursive `applyConstraints` function.
+The `solutions` value of a solver is a stream of all the its puzzle's solutions.
 
 Puzzle Generation
 -----------------

@@ -268,6 +268,17 @@ case class TimesConstraint(m: Int, cs: Seq[(Int, Int)]) extends AssociativeConst
 
 object Constraint {
   /**
+   * Map of cells in a puzzle grid to the constraints that contain them
+   */
+  def constraintMap(constraints:Set[_ <: Constraint]): Map[(Int, Int), Set[Constraint]] = {
+    (Map[(Int, Int), Set[Constraint]]() /:
+      (for (constraint <- constraints;cell <- constraint.cells)
+        yield (cell -> constraint))) {
+      case (m, (cell, constraint)) => m + (cell -> (m.getOrElse(cell, Set()) + constraint))
+    }
+  }
+
+  /**
    * Constraints for a Latin Square of size `n`
    */
   def latinSquareConstraints(n: Int) = {

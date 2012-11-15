@@ -3,7 +3,7 @@ package kenken
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.KenKen]] object.
+ * Unit tests for the [[kenken.Puzzle]] object.
  */
 class KenKenSpec extends FlatSpec {
 
@@ -20,13 +20,13 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solutions\n" + ls_2x2_sol1 + "\n" + ls_2x2_sol2 in {
     expect(Set(Grid(ls_2x2_sol1), Grid(ls_2x2_sol2))) {
-      Set() ++ KenKen(2).solutions
+      Set() ++ Solver(Puzzle(2)).solutions
     }
   }
 
   it should "print as\n" + ls_2x2_puzzle in {
     expect(ls_2x2_puzzle) {
-      KenKen(2).toString
+      Puzzle(2).toString
     }
   }
 
@@ -46,13 +46,13 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken1_4x4_solution in {
     expect(List(Grid(kenken1_4x4_solution))) {
-      KenKen(kenken1_4x4_puzzle).solutions
+      Solver(Puzzle(kenken1_4x4_puzzle)).solutions
     }
   }
 
   it should "print as\n" + kenken1_4x4_puzzle in {
     expect(kenken1_4x4_puzzle) {
-      KenKen(kenken1_4x4_puzzle).toString
+      Puzzle(kenken1_4x4_puzzle).toString
     }
   }
 
@@ -73,13 +73,13 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken2_4x4_solution in {
     expect(List(Grid(kenken2_4x4_solution))) {
-      KenKen(kenken2_24x4_puzzle).solutions
+      Solver(Puzzle(kenken2_24x4_puzzle)).solutions
     }
   }
 
   it should "print as\n" + kenken2_24x4_puzzle in {
     expect(kenken2_24x4_puzzle) {
-      KenKen(kenken2_24x4_puzzle).toString
+      Puzzle(kenken2_24x4_puzzle).toString
     }
   }
 
@@ -100,13 +100,13 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken3_4x4_solution in {
     expect(List(Grid(kenken3_4x4_solution))) {
-      KenKen(kenken3_4x4_puzzle).solutions
+      Solver(Puzzle(kenken3_4x4_puzzle)).solutions
     }
   }
 
   it should "print as\n" + kenken3_4x4_puzzle in {
     expect(kenken3_4x4_puzzle) {
-      KenKen(kenken3_4x4_puzzle).toString
+      Puzzle(kenken3_4x4_puzzle).toString
     }
   }
 
@@ -131,13 +131,13 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken_6x6_solution in {
     expect(List(Grid(kenken_6x6_solution))) {
-      KenKen(kenken_6x6_puzzle).solutions
+      Solver(Puzzle(kenken_6x6_puzzle)).solutions
     }
   }
 
   it should "print as\n" + kenken_6x6_puzzle in {
     expect(kenken_6x6_puzzle) {
-      KenKen(kenken_6x6_puzzle).toString
+      Puzzle(kenken_6x6_puzzle).toString
     }
   }
 
@@ -146,7 +146,7 @@ class KenKenSpec extends FlatSpec {
                      |c d""".stripMargin
   "An unsolvable puzzle" should "have no solutions" in {
     expect(Stream.empty) {
-      KenKen(unsolvable).solutions
+      Solver(Puzzle(unsolvable)).solutions
     }
   }
 }

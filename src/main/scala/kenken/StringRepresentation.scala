@@ -77,7 +77,7 @@ object StringRepresentation {
     // a a b
     // a b b
     // c c d
-    def puzzle: Parser[KenKen] = cages ~ table ^^ {
+    def puzzle: Parser[Puzzle] = cages ~ table ^^ {
       case (c ~ t) =>
         // The dimension of the grid is equal to the largest cell coordinate.
         val n = t.values.flatten.flatMap(cell => List(cell._1, cell._2)).max
@@ -93,10 +93,10 @@ object StringRepresentation {
               case _ => throw new IllegalArgumentException("Invalid cage " + label + "=" + value + "" + op)
             }
         }
-        KenKen(n, Set() ++ cageConstraints)
+        Puzzle(n, Set() ++ cageConstraints)
     }
 
-    def puzzles: Parser[List[KenKen]] = repsep(puzzle, rep1(eol)) <~ opt(rep(eol))
+    def puzzles: Parser[List[Puzzle]] = repsep(puzzle, rep1(eol)) <~ opt(rep(eol))
 
     implicit def parsePuzzlesString(s: String) = parseAll(puzzles, s)
 
@@ -115,12 +115,12 @@ object StringRepresentation {
   /**
    * Create a KenKen puzzle from a file or string.
    */
-  def parsePuzzle(implicit r: PuzzleParser.ParseResult[List[KenKen]]) = parsePuzzles.head
+  def parsePuzzle(implicit r: PuzzleParser.ParseResult[List[Puzzle]]) = parsePuzzles.head
 
   /**
    * Read a set of KenKen puzzles from a file or string
    */
-  def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[KenKen]]) = r match {
+  def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[Puzzle]]) = r match {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
   }

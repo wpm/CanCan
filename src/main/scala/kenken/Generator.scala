@@ -26,19 +26,19 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int, cageSize: DiscreteDistribution): (Seq[Seq[Int]], KenKen) = {
+  def randomPuzzle(n: Int, cageSize: DiscreteDistribution): (Seq[Seq[Int]], Puzzle) = {
     val solution = randomLatinSquare(n)
     // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
     val cages = Iterator.continually(randomCageLayout(n, cageSize)).
       find(cages => cages.filter(cage => cage.size == 1).size < n * n * gamma).get
     // TODO Make randomCageLayout return sets.
-    (solution, KenKen(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
+    (solution, Puzzle(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
   }
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Vector[(Int, Int)]): Constraint = {
+  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Vector[(Int, Int)]): CageConstraint = {
     def randomAssociativeConstraint(values: Vector[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
