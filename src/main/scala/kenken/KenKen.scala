@@ -132,8 +132,8 @@ object KenKen {
   def apply(s: String): KenKen = StringRepresentation.parsePuzzle(s)
 
   def main(args: Array[String]) {
-    // Treat # as a comment delimiter.
-    val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", ""))
+    // Treat # as a comment delimiter and skip leading blank lines.
+    val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
       puzzle => println(puzzle + "\n\n" + puzzle.solutions.mkString("\n\n") + "\n\n")
