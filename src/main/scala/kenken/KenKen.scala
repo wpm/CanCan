@@ -124,6 +124,8 @@ class KenKen(n: Int, cageConstraints: Set[Constraint] = Set()) {
       filter(_.isInstanceOf[CageConstraint]).toList.distinct.map(_.asInstanceOf[CageConstraint].toNekNekString).
       mkString("\n")
   }
+
+  // TODO add isPossibleSolution(grid:Grid):Booelan as a debugging utility?
 }
 
 object KenKen {
