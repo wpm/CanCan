@@ -107,7 +107,7 @@ case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConst
       None
   }
 
-  override def toString() = "Definite: " + super.toString
+  override def toString() = "Solved: " + super.toString
 }
 
 /**
@@ -129,7 +129,7 @@ case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstr
     })
   }
 
-  override def toString() = "Sole: " + super.toString
+  override def toString() = "Uniqueness: " + super.toString
 }
 
 
@@ -276,15 +276,5 @@ object Constraint {
         yield (cell -> constraint))) {
       case (m, (cell, constraint)) => m + (cell -> (m.getOrElse(cell, Set()) + constraint))
     }
-  }
-
-  /**
-   * Constraints for a Latin Square of size `n`
-   */
-  def latinSquareConstraints(n: Int) = {
-    for {i <- (1 to n)
-         cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
-         constraint <- Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells))
-    } yield constraint
   }
 }

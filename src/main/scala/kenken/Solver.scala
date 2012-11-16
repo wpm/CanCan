@@ -10,7 +10,12 @@ import collection.immutable.PagedSeq
  * An algorithm that solves a KenKen puzzle.
  * @param puzzle the puzzle to solve
  */
-class Solver(puzzle: Puzzle) {
+abstract class Solver(puzzle: Puzzle) {
+  /**
+   * Map of cells in the puzzle grid to the constraints that contain them
+   */
+  val constraintMap: Map[(Int, Int), Set[Constraint]]
+
   /**
    * A stream of all the grids that solve this puzzle.
    */
@@ -67,23 +72,48 @@ class Solver(puzzle: Puzzle) {
     }
   }
 
-  /**
-   * Map of cells in the puzzle grid to the constraints that contain them
-   */
-  val constraintMap = Constraint.constraintMap(puzzle.cageConstraints ++ Constraint.latinSquareConstraints(puzzle.n))
-
   // TODO add isPossibleSolution(grid:Grid):Booelan as a debugging utility?
+
+  /**
+   * Utility to create row and column constraints for all row and columns in a puzzle
+   * @param n the puzzle size
+   * @param constraints function that creates contraints for a given row or column
+   * @return row and column constraints for the entire puzzle
+   */
+  protected def rowColumnConstraints(n: Int, constraints: Seq[(Int, Int)] => Seq[RowColumnConstraint]) = {
+    for {i <- (1 to n)
+         cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
+         constraint <- constraints(cells)
+    } yield constraint
+
+  }
+}
+
+/**
+ * Solver that doesn't use any heuristics.
+ */
+case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
+  override val constraintMap =
+    Constraint.constraintMap(puzzle.cageConstraints ++
+      rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
+}
+
+/**
+ * Solver that uses the [[kenken.SolvedCellsConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
+ */
+case class BasicSolver(puzzle: Puzzle) extends Solver(puzzle) {
+  override val constraintMap =
+    Constraint.constraintMap(puzzle.cageConstraints ++
+      rowColumnConstraints(puzzle.n, (cells => Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells)))))
 }
 
 object Solver {
-  def apply(puzzle: Puzzle): Solver = new Solver(puzzle)
-
   def main(args: Array[String]) {
     // Treat # as a comment delimiter and skip leading blank lines.
     val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
-      puzzle: Puzzle => println(puzzle + "\n\n" + Solver(puzzle).solutions.mkString("\n\n") + "\n\n")
+      puzzle: Puzzle => println(puzzle + "\n\n" + BasicSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
     }
   }
 }
