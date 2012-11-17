@@ -6,17 +6,17 @@ import org.scalatest.FlatSpec
  * Unit tests for the [[kenken.Constraint]] objects.
  */
 class ConstraintSpec extends FlatSpec {
-  "A definiteness constraint on row 2 of a 3x3 puzzle" should "have the string representation 'Definite: Row 2'" in {
-    val row2Definite = SolvedCellsConstraint(Seq((2, 1), (2, 2), (2, 3)))
-    expect("Definite: Row 2") {
-      row2Definite.toString()
+  "A solved cell constraint on row 2 of a 3x3 puzzle" should "have the string representation 'Solved: Row 2'" in {
+    val row2Solved = SolvedCellsConstraint(Seq((2, 1), (2, 2), (2, 3)))
+    expect("Solved: Row 2") {
+      row2Solved.toString()
     }
   }
 
-  "A definiteness constraint on col 2 of a 3x3 puzzle" should "have the string representation 'Definite: Col 2'" in {
-    val row2Definite = SolvedCellsConstraint(Seq((1, 2), (2, 2), (3, 2)))
-    expect("Definite: Col 2") {
-      row2Definite.toString()
+  "A solved cell constraint on col 2 of a 3x3 puzzle" should "have the string representation 'Solved: Col 2'" in {
+    val col2Solved = SolvedCellsConstraint(Seq((1, 2), (2, 2), (3, 2)))
+    expect("Solved: Col 2") {
+      col2Solved.toString()
     }
   }
 

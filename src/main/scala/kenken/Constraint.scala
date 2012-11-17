@@ -1,5 +1,8 @@
 package kenken
 
+import scala._
+import scala.Some
+
 /**
  * Constraint on a region of cells in a grid
  * @param region region of cells in the grid
@@ -12,20 +15,15 @@ abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq
    * @return sequence of (cell, values) tuples for all changed cells or `None` if the constraint cannot be satisfied
    */
   override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = {
-    /**
-     * {{{
-     * val xs = Vector(('a, 1), ('b, 2), ('c, 3)); val ys = Vector(('a, 1), ('b, 3), ('c, 4))
-     * tupleDiff(xs, ys) // Vector[(Symbol, Int)] = Vector(('b,3), ('c,4))
-     * }}}
-     */
-    def tupleDiff[A, B](xs: Seq[(A, B)], ys: Seq[(A, B)]): Seq[(A, B)] =
-      xs.zip(ys).filter(p => p._1._2 != p._2._2).map(_._2)
-
     val before = values(grid)
     constrainedValues(before) match {
       case None => None
-      case Some(after) => Some(tupleDiff(cells.zip(before), cells.zip(after)))
+      case Some(after) => Some(changedValues(cells, before, after))
     }
+  }
+
+  protected def changedValues(cells: Seq[(Int, Int)], before: Seq[Set[Int]], after: Seq[Set[Int]]): Seq[((Int, Int), Set[Int])] = {
+    List(cells.zip(before), cells.zip(after)).transpose.filterNot(l => l(0)._2 == l(1)._2).map(_(1))
   }
 
   /**
@@ -120,7 +118,7 @@ case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstr
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
       value =>
-        // Values only appearing in this cell.
+      // Values only appearing in this cell.
         val u = value -- (values.filter(y => !(y eq value)).reduceLeft(_ | _))
         u.size match {
           case 1 => u
@@ -266,14 +264,39 @@ case class TimesConstraint(m: Int, cs: Seq[(Int, Int)]) extends AssociativeConst
   lazy override protected val nekNekSymbol = "*"
 }
 
+case class LinearComplementConstraint(n: Int, region: Seq[(Int, Int)]) extends Constraint(region) {
+  protected def unsolvedValues(values: Seq[Set[Int]]) = values.filter(_.size > 1)
+
+  override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = {
+    val unsolved = cells.filter(grid(_).size > 1)
+    val values = (Set[Int]() /: unsolved.map(grid(_)))(_ ++ _)
+    if (values.size == unsolved.size && !unsolved.isEmpty) {
+      val complement = linearComplement(unsolved)
+      val before = complement.map(grid(_))
+      val after = before.map(_ -- values)
+      if (after.exists(_.isEmpty)) None else Some(changedValues(complement, before, after))
+    }
+    else Some(Seq[((Int, Int), Set[Int])]())
+  }
+
+  def linearComplement(region: Seq[(Int, Int)]): Seq[(Int, Int)] = {
+    val row = region.head._1
+    val col = region.head._2
+    (if (region.tail.forall(_._1 == row)) Grid.row(n)(row).diff(region) else Nil) ++
+      (if (region.tail.forall(_._2 == col)) Grid.col(n)(col).diff(region) else Nil)
+  }
+
+  override def toString() = "Linear Comp:" + cells.head
+}
+
 object Constraint {
   /**
    * Map of cells in a puzzle grid to the constraints that contain them
    */
-  def constraintMap(constraints:Set[_ <: Constraint]): Map[(Int, Int), Set[Constraint]] = {
+  def constraintMap(constraints: Set[_ <: Constraint]): Map[(Int, Int), Set[Constraint]] = {
     (Map[(Int, Int), Set[Constraint]]() /:
-      (for (constraint <- constraints;cell <- constraint.cells)
-        yield (cell -> constraint))) {
+      (for (constraint <- constraints; cell <- constraint.cells)
+      yield (cell -> constraint))) {
       case (m, (cell, constraint)) => m + (cell -> (m.getOrElse(cell, Set()) + constraint))
     }
   }

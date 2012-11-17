@@ -97,6 +97,7 @@ object Grid {
    */
   def row(n: Int)(r: Int) = Vector((1 to n).map((r, _)): _*)
 
+  // TODO Change Vector to Seq
   /**
    * Cells in a column
    * @param n size of the grid

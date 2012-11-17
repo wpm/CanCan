@@ -55,7 +55,7 @@ abstract class Solver(puzzle: Puzzle) {
    * constraints.
    */
   @tailrec
-  private def applyConstraints(grid: Grid, constraints: Set[_ <: Constraint]): Option[Grid] = {
+  private def applyConstraints(grid: Grid, constraints: Set[_ <: Constraint] = puzzle.cageConstraints): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head
@@ -80,12 +80,11 @@ abstract class Solver(puzzle: Puzzle) {
    * @param constraints function that creates contraints for a given row or column
    * @return row and column constraints for the entire puzzle
    */
-  protected def rowColumnConstraints(n: Int, constraints: Seq[(Int, Int)] => Seq[RowColumnConstraint]) = {
+  protected def rowColumnConstraints(n: Int, constraints: Seq[(Int, Int)] => Seq[Constraint]) = {
     for {i <- (1 to n)
          cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
          constraint <- constraints(cells)
     } yield constraint
-
   }
 }
 
@@ -99,12 +98,30 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 /**
- * Solver that uses the [[kenken.SolvedCellsConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
+ * Solver that uses the [[kenken.LinearComplementConstraint]], [[kenken.SolvedCellsConstraint]] and
+ * [[kenken.UniquenessConstraint]] heuristics.
  */
 case class BasicSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints(puzzle.n, (cells => Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells)))))
+}
+
+/**
+ * Solver that uses the [[kenken.SolvedCellsConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
+ */
+case class FastSolver(puzzle: Puzzle) extends Solver(puzzle) {
+  override val constraintMap =
+    Constraint.constraintMap(puzzle.cageConstraints ++
+      linearComplementConstraints(puzzle) ++
+      rowColumnConstraints(puzzle.n,
+        (cells => Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells)))))
+
+  private def linearComplementConstraints(puzzle: Puzzle): Set[LinearComplementConstraint] = {
+    puzzle.cageConstraints.map {
+      c: CageConstraint => LinearComplementConstraint(puzzle.n, c.cells)
+    }
+  }
 }
 
 object Solver {
@@ -113,7 +130,7 @@ object Solver {
     val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
-      puzzle: Puzzle => println(puzzle + "\n\n" + BasicSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
+      puzzle: Puzzle => println(puzzle + "\n\n" + FastSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
     }
   }
 }
