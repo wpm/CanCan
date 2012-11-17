@@ -130,7 +130,9 @@ object Solver {
     val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
-      puzzle: Puzzle => println(puzzle + "\n\n" + FastSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
+      puzzle: Puzzle =>
+        println(puzzle)
+        println(FastSolver(puzzle).solutions.head + "\n\n")
     }
   }
 }
