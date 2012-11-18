@@ -8,7 +8,7 @@ import scala.util.Random._
  */
 object Generator {
   /**
-   * Ratio of puzzle size to mean maximum cage size
+   * Ratio of puzzle size to mean maximum cage size in a Poisson distribution
    */
   private val alpha = 0.5
   /**
@@ -23,12 +23,13 @@ object Generator {
   /**
    * Generate a random KenKen puzzle and its solution
    * @param n puzzle size
+   * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int): (Seq[Seq[Int]], KenKen) = {
+  def randomPuzzle(n: Int, cageSize: DiscreteDistribution): (Seq[Seq[Int]], KenKen) = {
     val solution = randomLatinSquare(n)
     // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
-    val cages = Iterator.continually(randomCageLayout(n)).
+    val cages = Iterator.continually(randomCageLayout(n, cageSize)).
       find(cages => cages.filter(cage => cage.size == 1).size < n * n * gamma).get
     // TODO Make randomCageLayout return sets.
     (solution, KenKen(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
@@ -71,15 +72,15 @@ object Generator {
     shuffle((List(shuffle((1 to n).toList)) /: (1 to n - 1)) {
       case (rows, _) => rotate(rows.head) :: rows
     })
-//    }).map(_.toArray).toArray
   }
 
   /**
    * Randomly group adjacent cells in a grid into cages
    * @param n size of the grid
+   * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
-  private def randomCageLayout(n: Int) = {
+  private def randomCageLayout(n: Int, cageSize: DiscreteDistribution) = {
 
     /**
      * Create a random graph between adjacent cells in a grid
@@ -115,19 +116,8 @@ object Generator {
       (cells, adjacency)
     }
 
-    def samplePoisson(mean: Int) = {
-      val lambda = math.exp(-mean)
-      var k = 0
-      var p = 1.0
-      do {
-        k += 1
-        p *= nextDouble
-      } while (p >= lambda)
-      k - 1
-    }
-
     val (cells, edges) = randomUndirectedCellGraph
-    connectedComponents(cells, edges(_: (Int, Int)), samplePoisson((n * alpha).toInt))
+    connectedComponents(cells, edges(_: (Int, Int)), cageSize.sample())
   }
 
   /**
@@ -177,8 +167,10 @@ object Generator {
 
     val m = args(0).toInt
     val n = args(1).toInt
+    val cageSize = Multinomial(0.1, 0.3, 0.3, 0.3)
+    //    val cageSize = Poisson(n * alpha)
     for (_ <- (1 to m)) {
-      val (solution, puzzle) = randomPuzzle(n)
+      val (solution, puzzle) = randomPuzzle(n, cageSize)
       println(puzzle + "\n" + prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
     }
   }
