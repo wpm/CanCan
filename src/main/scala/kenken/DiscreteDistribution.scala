@@ -2,6 +2,9 @@ package kenken
 
 import scala.util.Random._
 
+/**
+ * Discrete probability distribution over the support of the integers greater than zero.
+ */
 trait DiscreteDistribution {
   def sample(): Int
 }
@@ -22,7 +25,7 @@ case class Poisson(mean: Int) extends DiscreteDistribution {
 case class Multinomial(xs: Double*) extends DiscreteDistribution {
   val cdf = (1 to xs.size).map(xs.map(_ / xs.sum).slice(0, _).sum)
 
-  override def sample() = cdf.indexWhere(_ > nextDouble)
+  override def sample() = cdf.indexWhere(_ > nextDouble) + 1
 
   override def toString = cdf.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString(" ")
 }

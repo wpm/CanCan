@@ -10,7 +10,8 @@ object Generator {
   /**
    * Ratio of puzzle size to mean maximum cage size in a Poisson distribution
    */
-  private val alpha = 0.5
+  //  private val alpha = 0.5
+
   /**
    * Probability of assigning an associative operator to a 2-cell cage
    */
@@ -18,7 +19,7 @@ object Generator {
   /**
    * Percentage of cells that may be specified constraints
    */
-  private val gamma = 1 / 10.0
+  private val gamma = 0.05
 
   /**
    * Generate a random KenKen puzzle and its solution
@@ -162,16 +163,28 @@ object Generator {
     }._2
   }
 
+  /**
+   * Cage size distribution in puzzles.
+   * @param puzzles set of puzzles
+   * @return table of cage size distribution across the puzzles
+   */
+  def empiricalCageSizeDistribution(puzzles: Traversable[Puzzle]) = {
+    val f = (Map[Int, Int]() /: puzzles.flatMap(_.cageConstraints).
+      map(_.cells.size))((m, v) => m + (v -> (m.getOrElse(v, 0) + 1)))
+    val d = f.values.sum.toDouble
+    f.toList.map(t => (t._1, t._2 / d)).sorted.map(t => "%d:%.3f".format(t._1, t._2)).mkString("\n")
+  }
+
   def main(args: Array[String]) {
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
     val m = args(0).toInt
     val n = args(1).toInt
-    val cageSize = Multinomial(0.1, 0.3, 0.3, 0.3)
-    //    val cageSize = Poisson(n * alpha)
-    for (_ <- (1 to m)) {
-      val (solution, puzzle) = randomPuzzle(n, cageSize)
+    //  val cageSize = Poisson(n * alpha)
+    val cageSize = Multinomial(0, 0.07, 0.47, 0.46)
+    val puzzles = for (_ <- (1 to m))
+    yield randomPuzzle(n, cageSize)
+    for ((solution, puzzle) <- puzzles)
       println(puzzle + "\n" + prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
-    }
   }
 }

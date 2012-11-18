@@ -145,8 +145,8 @@ object Solver {
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
     StringRepresentation.parsePuzzles(in).foreach {
       puzzle: Puzzle =>
-        println(puzzle)
-        println(FastSolver(puzzle).solutions.head + "\n\n")
+        println(puzzle + "\n")
+        println(FastSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
     }
   }
 }
