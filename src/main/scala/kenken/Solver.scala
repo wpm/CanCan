@@ -17,6 +17,20 @@ abstract class Solver(puzzle: Puzzle) {
   val constraintMap: Map[(Int, Int), Set[Constraint]]
 
   /**
+   * Map of cells in the puzzle grid to the size of the cages that contain them
+   */
+  lazy val cageSize: Map[(Int, Int), Int] =
+    constraintMap.map {
+      case (cell, constraints) => (cell, cageSize(constraints))
+    }
+
+  private def cageSize(constraints: Set[Constraint]): Int = {
+    val cages = constraints.filter(_.isInstanceOf[CageConstraint])
+    require(cages.size <= 1, "Multiple cages for cell:" + cages)
+    if (cages.size == 1) cages.head.cells.size else 0
+  }
+
+  /**
    * A stream of all the grids that solve this puzzle.
    */
   lazy val solutions: Stream[Grid] = {
@@ -31,8 +45,8 @@ abstract class Solver(puzzle: Puzzle) {
    */
   private def search(grid: Grid = Grid(puzzle.n)): SeqView[Grid, Seq[_]] = {
     def leastAmbiguousCell = grid.unsolved.map {
-      case (cell, values) => (values.size, cell)
-    }.min._2
+      case (cell, values) => (values.size, cageSize(cell), cell)
+    }.min._3
 
     def guessCellValues(values: Set[Int]) = values.map(values - _).toSeq.view
 
