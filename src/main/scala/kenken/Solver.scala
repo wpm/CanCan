@@ -112,8 +112,7 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 /**
- * Solver that uses the [[kenken.LinearComplementConstraint]], [[kenken.SolvedCellsConstraint]] and
- * [[kenken.UniquenessConstraint]] heuristics.
+ * Solver that uses the [[kenken.SolvedCellsConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
  */
 case class BasicSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
@@ -122,7 +121,8 @@ case class BasicSolver(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 /**
- * Solver that uses the [[kenken.SolvedCellsConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
+ * Solver that uses the [[kenken.LinearComplementConstraint]], [[kenken.SolvedCellsConstraint]] and
+ * [[kenken.UniquenessConstraint]] heuristics.
  */
 case class FastSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
