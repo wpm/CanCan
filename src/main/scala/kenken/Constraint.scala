@@ -232,8 +232,8 @@ abstract class AssociativeConstraint(value: Int, region: Seq[(Int, Int)]) extend
       zs.foldLeft(Seq(Seq.empty[A])) {
         (x, y) => for (a <- x.view; b <- y) yield a :+ b
       }
-    // TODO values.map(_.filterNot(_ > value)) Since these are always monotonically increasing functions.
-    cartesianProduct(values).filter(_.reduceLeft(combine) == value)
+    // Skip values larger than the target value.
+    cartesianProduct(values.map(_.filterNot(_ > value))).filter(_.reduceLeft(combine) == value)
   }
 
   /**
