@@ -147,3 +147,5 @@ KenKen is a cousin of [Sudoku](http://en.wikipedia.org/wiki/Sudoku), and the alg
 
 Michael Heyeck has written a KenKen solver in Python called [neknek](http://www.mlsite.net/neknek).
 This package can write puzzles in the format recognized by neknek.
+
+"The complexity of completing partial Latin squares" Charles Colbourn, Discrete Applied Mathematics, Volume 8, Issue 1, April 1984, Pages 25-30

@@ -112,19 +112,10 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 /**
- * Solver that uses the [[kenken.SolvedCellsConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
- */
-case class BasicSolver(puzzle: Puzzle) extends Solver(puzzle) {
-  override val constraintMap =
-    Constraint.constraintMap(puzzle.cageConstraints ++
-      rowColumnConstraints(puzzle.n, (cells => Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells)))))
-}
-
-/**
  * Solver that uses the [[kenken.LinearComplementConstraint]], [[kenken.SolvedCellsConstraint]] and
  * [[kenken.UniquenessConstraint]] heuristics.
  */
-case class FastSolver(puzzle: Puzzle) extends Solver(puzzle) {
+case class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       linearComplementConstraints(puzzle) ++
@@ -146,7 +137,7 @@ object Solver {
     StringRepresentation.parsePuzzles(in).foreach {
       puzzle: Puzzle =>
         println(puzzle + "\n")
-        println(FastSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
+        println(HeuristicSolver(puzzle).solutions.mkString("\n\n") + "\n\n")
     }
   }
 }
