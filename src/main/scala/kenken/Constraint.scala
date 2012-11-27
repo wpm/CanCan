@@ -1,20 +1,18 @@
 package kenken
 
-import scala._
-import scala.Some
 
 /**
  * Constraint on a region of cells in a grid
  * @param region region of cells in the grid
  */
-abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq[((Int, Int), Set[Int])]]) {
+abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell, Set[Int])]]) {
   val cells = region.sorted
 
   /**
    * Apply the constraint to the grid
    * @return sequence of (cell, values) tuples for all changed cells or `None` if the constraint cannot be satisfied
    */
-  override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = {
+  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = {
     val before = values(grid)
     constrainedValues(before) match {
       case None => None
@@ -22,7 +20,7 @@ abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq
     }
   }
 
-  protected def changedValues(cells: Seq[(Int, Int)], before: Seq[Set[Int]], after: Seq[Set[Int]]): Seq[((Int, Int), Set[Int])] = {
+  protected def changedValues(cells: Seq[Cell], before: Seq[Set[Int]], after: Seq[Set[Int]]): Seq[(Cell, Set[Int])] = {
     List(cells.zip(before), cells.zip(after)).transpose.filterNot(l => l(0)._2 == l(1)._2).map(_(1))
   }
 
@@ -46,17 +44,17 @@ abstract class Constraint(region: Seq[(Int, Int)]) extends ((Grid) => Option[Seq
 /**
  * Constraint that applies to a row or column of a grid
  */
-abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(region) {
+abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region) {
   protected def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
 
   protected def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
 
   override def toString() = {
-    val (r, c) = (cells.head._1, cells.head._2)
-    if (cells.forall(_._1 == r))
+    val (r, c) = (cells.head.row, cells.head.col)
+    if (cells.forall(_.row == r))
       "Row " + r
     else {
-      require(cells.forall(_._2 == c), "Not a row or column constraint")
+      require(cells.forall(_.col == c), "Not a row or column constraint")
       "Col " + c
     }
   }
@@ -67,11 +65,11 @@ abstract class RowColumnConstraint(region: Seq[(Int, Int)]) extends Constraint(r
  *
  * This constraint does not change any values in the grid but can be violated.
  *
- *  - `[123 123 123] -> [123 123 123]`
- *  - `[1   23  123] -> [1   23  123]`
- *  - `[1   23  1]   -> None`
+ * - `[123 123 123] -> [123 123 123]`
+ * - `[1   23  123] -> [1   23  123]`
+ * - `[1   23  1]   -> None`
  */
-case class LatinSquareConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) =
     if (isDistinct(solvedValues(values))) Some(Seq[Set[Int]]()) else None
 }
@@ -82,10 +80,10 @@ case class LatinSquareConstraint(region: Seq[(Int, Int)]) extends RowColumnConst
  * The constraint is violated if the solved values are not all distinct.
  * The [[kenken.LatinSquareConstraint]] is a subset of this one.
  *
- *  - `[1 2 1234 234] -> [1 2 34 34]`
- *  - `[1 1 123] -> None`
+ * - `[1 2 1234 234] -> [1 2 34 34]`
+ * - `[1 1 123] -> None`
  */
-case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+case class SolvedCellsConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     // Partition input into solved and non-solved and subtract the union of
     // the non-solved values from the solved.
@@ -111,9 +109,9 @@ case class SolvedCellsConstraint(region: Seq[(Int, Int)]) extends RowColumnConst
 /**
  * If a value only appears in a single cell in the region, that cell is solved.
  *
- *  - `[12 23 23] -> [1 23 23]`
+ * - `[12 23 23] -> [1 23 23]`
  */
-case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstraint(region) {
+case class UniquenessConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
 
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
@@ -134,7 +132,7 @@ case class UniquenessConstraint(region: Seq[(Int, Int)]) extends RowColumnConstr
 /**
  * A constraint parameterized by an integer value.
  */
-abstract class CageConstraint(value: Int, region: Seq[(Int, Int)]) extends Constraint(region) {
+abstract class CageConstraint(value: Int, region: Seq[Cell]) extends Constraint(region) {
   protected val symbol: String
   lazy protected val nekNekSymbol: String = symbol
 
@@ -145,10 +143,7 @@ abstract class CageConstraint(value: Int, region: Seq[(Int, Int)]) extends Const
    * [[http://www.mlsite.net/neknek NekNek solver]].
    */
   def toNekNekString: String = {
-    val nekNekCells = cells.map {
-      case (r, c) => ('A'.toInt + r - 1).toChar + c.toString
-    }
-    nekNekSymbol + "\t" + value + "\t" + nekNekCells.mkString(" ")
+    nekNekSymbol + "\t" + value + "\t" + cells.map(_.toNekNekString).mkString(" ")
   }
 }
 
@@ -157,8 +152,8 @@ abstract class CageConstraint(value: Int, region: Seq[(Int, Int)]) extends Const
  * @param value the value the cell must contain
  * @param cell the cell
  */
-case class SpecifiedConstraint(value: Int, cell: (Int, Int)) extends CageConstraint(value, Seq(cell)) {
-  override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = if (grid(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
+case class SpecifiedConstraint(value: Int, cell: Cell) extends CageConstraint(value, Seq(cell)) {
+  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = if (grid(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
 
   override protected val symbol = ""
   lazy override protected val nekNekSymbol = "!"
@@ -167,7 +162,7 @@ case class SpecifiedConstraint(value: Int, cell: (Int, Int)) extends CageConstra
 /**
  * A set of cells whose values must combine arithmetically to a specified value.
  */
-abstract class ArithmeticConstraint(value: Int, region: Seq[(Int, Int)]) extends CageConstraint(value, region) {
+abstract class ArithmeticConstraint(value: Int, region: Seq[Cell]) extends CageConstraint(value, region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     val f = fills(values)
     if (f.isEmpty) None else Some(f.transpose.map(Set() ++ _))
@@ -190,7 +185,7 @@ abstract class ArithmeticConstraint(value: Int, region: Seq[(Int, Int)]) extends
  * A non-associative constraint must apply to exactly two cells.
  * The constraint is satisfied if either ordering of the cells produces the specified value.
  */
-abstract class NonAssociativeConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int))
+abstract class NonAssociativeConstraint(value: Int, cell1: Cell, cell2: Cell)
   extends ArithmeticConstraint(value, Seq(cell1, cell2)) {
 
   def fills(values: Seq[Set[Int]]) =
@@ -208,7 +203,7 @@ abstract class NonAssociativeConstraint(value: Int, cell1: (Int, Int), cell2: (I
 /**
  * The difference of a pair of cells must equal a specified value.
  */
-case class MinusConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) extends NonAssociativeConstraint(value, cell1, cell2) {
+case class MinusConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAssociativeConstraint(value, cell1, cell2) {
   def satisfied(x: Int, y: Int) = x - y == value
 
   override protected val symbol = "-"
@@ -217,7 +212,7 @@ case class MinusConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) ext
 /**
  * The quotient of a pair of cells must equal a specified value.
  */
-case class DivideConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) extends NonAssociativeConstraint(value, cell1, cell2) {
+case class DivideConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAssociativeConstraint(value, cell1, cell2) {
   def satisfied(x: Int, y: Int) = x % y == 0 && x / y == value
 
   override protected val symbol = "/"
@@ -226,7 +221,7 @@ case class DivideConstraint(value: Int, cell1: (Int, Int), cell2: (Int, Int)) ex
 /**
  * A set of cells whose values combine with an associative operator
  */
-abstract class AssociativeConstraint(value: Int, region: Seq[(Int, Int)]) extends ArithmeticConstraint(value, region) {
+abstract class AssociativeConstraint(value: Int, region: Seq[Cell]) extends ArithmeticConstraint(value, region) {
   def fills(values: Seq[Set[Int]]) = {
     def cartesianProduct[A](zs: Traversable[Traversable[A]]): Seq[Seq[A]] =
       zs.foldLeft(Seq(Seq.empty[A])) {
@@ -248,7 +243,7 @@ abstract class AssociativeConstraint(value: Int, region: Seq[(Int, Int)]) extend
 /**
  * The sum of the values in a set of cells must equal a specified value.
  */
-case class PlusConstraint(value: Int, region: Seq[(Int, Int)]) extends AssociativeConstraint(value, region) {
+case class PlusConstraint(value: Int, region: Seq[Cell]) extends AssociativeConstraint(value, region) {
   def combine(x: Int, y: Int) = x + y
 
   override protected val symbol = "+"
@@ -257,17 +252,17 @@ case class PlusConstraint(value: Int, region: Seq[(Int, Int)]) extends Associati
 /**
  * The sum of the values in a set of cells must equal a specified value.
  */
-case class TimesConstraint(m: Int, cs: Seq[(Int, Int)]) extends AssociativeConstraint(m, cs) {
+case class TimesConstraint(m: Int, cs: Seq[Cell]) extends AssociativeConstraint(m, cs) {
   def combine(x: Int, y: Int) = x * y
 
   override protected val symbol = "x"
   lazy override protected val nekNekSymbol = "*"
 }
 
-case class LinearComplementConstraint(n: Int, region: Seq[(Int, Int)]) extends Constraint(region) {
+case class LinearComplementConstraint(n: Int, region: Seq[Cell]) extends Constraint(region) {
   protected def unsolvedValues(values: Seq[Set[Int]]) = values.filter(_.size > 1)
 
-  override def apply(grid: Grid): Option[Seq[((Int, Int), Set[Int])]] = {
+  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = {
     val unsolved = cells.filter(grid(_).size > 1)
     val values = (Set[Int]() /: unsolved.map(grid(_)))(_ ++ _)
     if (values.size == unsolved.size && !unsolved.isEmpty) {
@@ -276,14 +271,14 @@ case class LinearComplementConstraint(n: Int, region: Seq[(Int, Int)]) extends C
       val after = before.map(_ -- values)
       if (after.exists(_.isEmpty)) None else Some(changedValues(complement, before, after))
     }
-    else Some(Seq[((Int, Int), Set[Int])]())
+    else Some(Seq[(Cell, Set[Int])]())
   }
 
-  def linearComplement(region: Seq[(Int, Int)]): Seq[(Int, Int)] = {
-    val row = region.head._1
-    val col = region.head._2
-    (if (region.tail.forall(_._1 == row)) Grid.row(n)(row).diff(region) else Nil) ++
-      (if (region.tail.forall(_._2 == col)) Grid.col(n)(col).diff(region) else Nil)
+  def linearComplement(region: Seq[Cell]): Seq[Cell] = {
+    val row = region.head.row
+    val col = region.head.col
+    (if (region.tail.forall(_.row == row)) Grid.row(n)(row).diff(region) else Nil) ++
+      (if (region.tail.forall(_.col == col)) Grid.col(n)(col).diff(region) else Nil)
   }
 
   override def toString() = "Linear Comp:" + cells.head
@@ -293,8 +288,8 @@ object Constraint {
   /**
    * Map of cells in a puzzle grid to the constraints that contain them
    */
-  def constraintMap(constraints: Set[_ <: Constraint]): Map[(Int, Int), Set[Constraint]] = {
-    (Map[(Int, Int), Set[Constraint]]() /:
+  def constraintMap(constraints: Set[_ <: Constraint]): Map[Cell, Set[Constraint]] = {
+    (Map[Cell, Set[Constraint]]() /:
       (for (constraint <- constraints; cell <- constraint.cells)
       yield (cell -> constraint))) {
       case (m, (cell, constraint)) => m + (cell -> (m.getOrElse(cell, Set()) + constraint))

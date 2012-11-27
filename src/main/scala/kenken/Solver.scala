@@ -14,12 +14,12 @@ abstract class Solver(puzzle: Puzzle) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
-  val constraintMap: Map[(Int, Int), Set[Constraint]]
+  val constraintMap: Map[Cell, Set[Constraint]]
 
   /**
    * Map of cells in the puzzle grid to the size of the cages that contain them
    */
-  lazy val cageSize: Map[(Int, Int), Int] =
+  lazy val cageSize: Map[Cell, Int] =
     constraintMap.map {
       case (cell, constraints) => (cell, cageSize(constraints))
     }
@@ -50,7 +50,7 @@ abstract class Solver(puzzle: Puzzle) {
 
     def guessCellValues(values: Set[Int]) = values.map(values - _).toSeq.view
 
-    def applyGuessToGrid(cell: (Int, Int), guess: Set[Int]) =
+    def applyGuessToGrid(cell: Cell, guess: Set[Int]) =
       applyConstraints(grid + (cell -> guess), constraintMap(cell)).toSeq
 
     if (grid.isSolved)
@@ -86,15 +86,15 @@ abstract class Solver(puzzle: Puzzle) {
     }
   }
 
-  // TODO add isPossibleSolution(grid:Grid):Booelan as a debugging utility?
+  // TODO add isPossibleSolution(grid:Grid):Boolean as a debugging utility?
 
   /**
    * Utility to create row and column constraints for all row and columns in a puzzle
    * @param n the puzzle size
-   * @param constraints function that creates contraints for a given row or column
+   * @param constraints function that creates constraints for a given row or column
    * @return row and column constraints for the entire puzzle
    */
-  protected def rowColumnConstraints(n: Int, constraints: Seq[(Int, Int)] => Seq[Constraint]) = {
+  protected def rowColumnConstraints(n: Int, constraints: Seq[Cell] => Seq[Constraint]) = {
     for {i <- (1 to n)
          cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
          constraint <- constraints(cells)

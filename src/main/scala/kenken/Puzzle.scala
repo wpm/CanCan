@@ -1,7 +1,5 @@
 package kenken
 
-import scala.math.Ordering.Implicits._
-
 /**
  * A [[http://www.kenken.com KenKen]] puzzle.
  *
@@ -24,7 +22,7 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
                                     c <- cs}
     yield (cell, c))
     // Cages sorted by proximity to upper left hand corner of the puzzle.
-    val cages = cellToCage.values.toList.distinct.sortWith((a, b) => a.cells.head < b.cells.head)
+    val cages = cellToCage.values.toList.distinct.sortWith((a, b) => a.cells.head.compare(b.cells.head) < 0)
     // Map of cages to short alphabetic names.
     val cageToName = Map() ++
       cages.zipWithIndex.map {
@@ -36,7 +34,7 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
     }
     // Table of cage names using '.' for cells not in cages.
     val table = for (r <- (1 to n)) yield {
-      for (c <- (1 to n); cell = (r, c)) yield cellToName.getOrElse(cell, ".")
+      for (c <- (1 to n); cell = Cell(r, c)) yield cellToName.getOrElse(cell, ".")
     }
     // List of cage constraints followed by grid of letters representing cages.
     val cageKey = cageToName.map {

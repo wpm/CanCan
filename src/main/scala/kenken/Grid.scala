@@ -2,8 +2,6 @@ package kenken
 
 import collection.GenTraversableOnce
 
-// TODO Add case class Cell(row:Int, col:Int)? Specify toString and ordering.
-
 /**
  * An ''n'' x ''n'' grid containing a puzzle solution
  *
@@ -11,7 +9,7 @@ import collection.GenTraversableOnce
  * that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1) is in the upper left hand
  * corner.
  */
-case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
+case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
   /**
    * Is this grid solved?
    *
@@ -30,21 +28,21 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
    * @param cell a cell in the grid
    * @return values in the cell
    */
-  def apply(cell: (Int, Int)) = g(cell)
+  def apply(cell: Cell) = g(cell)
 
   /**
    * Specify the values for a cell
    * @param kv cell/values pair
    * @return new grid with the cell values set
    */
-  def +(kv: ((Int, Int), Set[Int])) = Grid(n, g + kv)
+  def +(kv: (Cell, Set[Int])) = Grid(n, g + kv)
 
   /**
    * Specify the values for a set of cells
    * @param xs cell/values pairs
    * @return new grid with the cell values set
    */
-  def ++(xs: GenTraversableOnce[((Int, Int), Set[Int])]) = Grid(n, g ++ xs)
+  def ++(xs: GenTraversableOnce[(Cell, Set[Int])]) = Grid(n, g ++ xs)
 
 
   /**
@@ -53,7 +51,7 @@ case class Grid private(n: Int, g: Map[(Int, Int), Set[Int]]) {
   override def toString = {
     val delimiter = if (n < 10) "" else ","
     StringRepresentation.tableToString(for (row <- (1 to n)) yield {
-      for (col <- 1 to n) yield g((row, col)).toSeq.sorted.mkString(delimiter)
+      for (col <- 1 to n) yield g(Cell(row, col)).toSeq.sorted.mkString(delimiter)
     })
   }
 }
@@ -65,7 +63,7 @@ object Grid {
    * @return empty grid
    */
   def apply(n: Int) = {
-    val init = for (r <- (1 to n); c <- (1 to n)) yield (r, c) -> Set((1 to n): _*)
+    val init = for (r <- (1 to n); c <- (1 to n)) yield Cell(r, c) -> Set((1 to n): _*)
     new Grid(n, Map() ++ init)
   }
 
@@ -78,7 +76,7 @@ object Grid {
     val n = m.length
     // The array must be square.
     require(m.forall(_.length == n), "The grid is not square:\n" + m)
-    val init = for ((row, r) <- m.zipWithIndex; (item, c) <- row.zipWithIndex) yield ((r + 1, c + 1), item)
+    val init = for ((row, r) <- m.zipWithIndex; (item, c) <- row.zipWithIndex) yield (Cell(r + 1, c + 1), item)
     new Grid(n, Map() ++ init)
   }
 
@@ -95,14 +93,13 @@ object Grid {
    * @param r row number
    * @return the cells in the row
    */
-  def row(n: Int)(r: Int) = Vector((1 to n).map((r, _)): _*)
+  def row(n: Int)(r: Int) = Seq((1 to n).map(Cell(r, _)): _*)
 
-  // TODO Change Vector to Seq
   /**
    * Cells in a column
    * @param n size of the grid
    * @param c column number
    * @return the cells in the column
    */
-  def col(n: Int)(c: Int) = Vector((1 to n).map((_, c)): _*)
+  def col(n: Int)(c: Int) = Seq((1 to n).map(Cell(_, c)): _*)
 }

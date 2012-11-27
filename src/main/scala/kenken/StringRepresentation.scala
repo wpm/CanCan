@@ -61,14 +61,14 @@ object StringRepresentation {
     // a a b
     // a b b
     // c c d
-    def table: Parser[Map[String, Seq[(Int, Int)]]] = rep(row) ^^ {
+    def table: Parser[Map[String, Seq[Cell]]] = rep(row) ^^ {
       labels: List[List[String]] =>
         val n = labels.length
         require(labels.forall(_.length == n), "The table is not square:\n" + labels)
         val labeledCells = for ((row, r) <- labels.zipWithIndex;
                                 (label, c) <- row.zipWithIndex)
-        yield (label, (r + 1, c + 1))
-        (Map[String, Seq[(Int, Int)]]() /: labeledCells) {
+        yield (label, Cell(r + 1, c + 1))
+        (Map[String, Seq[Cell]]() /: labeledCells) {
           case (m, (label, cell)) => m + (label -> (cell +: m.getOrElse(label, Nil)))
         }
     }
@@ -80,7 +80,7 @@ object StringRepresentation {
     def puzzle: Parser[Puzzle] = cages ~ table ^^ {
       case (c ~ t) =>
         // The dimension of the grid is equal to the largest cell coordinate.
-        val n = t.values.flatten.flatMap(cell => List(cell._1, cell._2)).max
+        val n = t.values.flatten.flatMap(cell => List(cell.row, cell.col)).max
         val cageConstraints = c.map {
           case (label, (value, op)) =>
             require(t.contains(label), "Table missing cage for " + label + " " + value + "" + op)

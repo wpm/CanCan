@@ -39,7 +39,7 @@ object Generator {
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Vector[(Int, Int)]): CageConstraint = {
+  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Vector[Cell]): CageConstraint = {
     def randomAssociativeConstraint(values: Vector[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
@@ -56,7 +56,7 @@ object Generator {
     }
 
     val values = cage.map {
-      case (r, c) => solution(r - 1)(c - 1)
+      case Cell(r, c) => solution(r - 1)(c - 1)
     }
     cage.size match {
       case 1 => SpecifiedConstraint(values.head, cage.head)
@@ -91,7 +91,7 @@ object Generator {
        * Given a cell, choose a random set of adjacent cells and create
        * symmetric edges between them.
        */
-      def randomUndirectedEdges(cell: (Int, Int)) = {
+      def randomUndirectedEdges(cell: Cell) = {
         /**
          * Cells above, below, to the left and right of a cell
          */
@@ -100,25 +100,26 @@ object Generator {
                y <- (-1 to 1)
                if ((x == 0 || y == 0) && x != y)
           )
-          yield (x + cell._1, y + cell._2)
+          yield Cell(x + cell.row, y + cell.col)
         }.filter {
-          case (r, c) => r > 0 && r <= n && c > 0 && c <= n
+          case Cell(r, c) => r > 0 && r <= n && c > 0 && c <= n
         }
         val cells = adjacentCells
         val randomAdjacent = shuffle(cells).take(nextInt(cells.size))
         randomAdjacent.flatMap(adjacent => List(cell -> adjacent, adjacent -> cell))
       }
 
-      val cells = for (x <- (1 to n); y <- (1 to n)) yield (x, y)
+      val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
       val edges = cells.flatMap(cell => randomUndirectedEdges(cell))
-      val adjacency = ((Map() ++ cells.map(cell => cell -> Set[(Int, Int)]())) /: edges) {
+      val emptyAdjacency = Map[Cell, Set[Cell]]() ++ cells.map(cell => cell -> Set[Cell]())
+      val adjacency = (emptyAdjacency /: edges) {
         case (m, (s, d)) => m + (s -> (m(s) + d))
       }
       (cells, adjacency)
     }
 
     val (cells, edges) = randomUndirectedCellGraph
-    connectedComponents(cells, edges(_: (Int, Int)), cageSize.sample())
+    connectedComponents(cells, edges(_: Cell), cageSize.sample())
   }
 
   /**
