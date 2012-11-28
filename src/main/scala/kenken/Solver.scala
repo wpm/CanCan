@@ -17,11 +17,24 @@ abstract class Solver(puzzle: Puzzle) {
   val constraintMap: Map[Cell, Set[Constraint]]
 
   /**
-   * All the possible solutions for this puzzle.
+   * A solution of this puzzle. If there is more than one solution one will be returned arbitrarily.
+   */
+  lazy val solution: Grid = solutions.head
+
+  /**
+   * All the solutions for this puzzle.
    */
   lazy val solutions: TraversableView[Grid, Traversable[_]] = {
+    partialSolutions.filter(_.isSolved)
+  }
+
+  /**
+   * All the partial solutions of this puzzle, including the complete solutions.
+   * @return all the partial solutions of this puzzle
+   */
+  def partialSolutions: TraversableView[Grid, Traversable[_]] = {
     applyConstraints(Grid(puzzle.n), puzzle.cageConstraints) match {
-      case Some(g) => search(g).filter(_.isSolved)
+      case Some(g) => search(g)
       case None => Traversable[Grid]().view
     }
   }
@@ -164,6 +177,7 @@ object Solver {
         args match {
           case Nil => (positional.reverse, option)
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
+          case "-c" :: tail => parseCommandLineRec(tail, positional, option + ('count -> ""))
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
@@ -172,6 +186,13 @@ object Solver {
 
     def printSolutions(solutions: TraversableView[Grid, Traversable[_]]) {
       println(solutions.mkString("\n\n") + "\n\n")
+    }
+
+    def printSolutionCounts(partialSolutions: TraversableView[Grid, Traversable[_]]) {
+      val ss = partialSolutions.force
+      val n = ss.size
+      val m = ss.filter(_.isSolved).size
+      println(m + " solution(s), " + n + " step(s)\n\n")
     }
 
     def printSolutionsAndValidate(validator: Solver, solutions: TraversableView[Grid, Traversable[_]]) {
@@ -189,6 +210,7 @@ object Solver {
     val (positional, option) = parseCommandLine(args)
     require(positional.size == 1, "Incorrect number of arguments")
     val validate = option.contains('validate)
+    val count = option.contains('count)
 
     // Treat # as a comment delimiter and skip leading blank lines.
     val lines = Source.fromFile(positional.head).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
@@ -197,11 +219,14 @@ object Solver {
     StringRepresentation.parsePuzzles(in).zipWithIndex.foreach {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
-        val solutions = HeuristicSolver2(puzzle).solutions
-        if (validate)
-          printSolutionsAndValidate(MinimalSolver(puzzle), solutions)
+        val solver = HeuristicSolver2(puzzle)
+        if (count)
+          printSolutionCounts(solver.partialSolutions)
+        else if (validate)
+          printSolutionsAndValidate(MinimalSolver(puzzle), solver.solutions)
         else
-          printSolutions(solutions)
+          printSolutions(solver.solutions)
     }
   }
+
 }
