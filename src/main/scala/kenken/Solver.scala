@@ -24,9 +24,7 @@ abstract class Solver(puzzle: Puzzle) {
   /**
    * All the solutions for this puzzle.
    */
-  lazy val solutions: TraversableView[Grid, Traversable[_]] = {
-    partialSolutions.filter(_.isSolved)
-  }
+  lazy val solutions: TraversableView[Grid, Traversable[_]] = partialSolutions.filter(_.isSolved)
 
   /**
    * All the partial solutions of this puzzle, including the complete solutions.
@@ -166,7 +164,8 @@ object Solver {
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + 'validate)
           case "-c" :: tail => parseCommandLineRec(tail, positional, option + 'count)
           case s :: tail if (s(0) == '-') => {
-            println("Invalid switch " + s); sys.exit(-1)
+            println("Invalid switch " + s)
+            sys.exit(-1)
           }
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
