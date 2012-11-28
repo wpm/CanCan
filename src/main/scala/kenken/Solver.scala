@@ -17,7 +17,7 @@ abstract class Solver(puzzle: Puzzle) {
   val constraintMap: Map[Cell, Set[Constraint]]
 
   /**
-   * A solution of this puzzle. If there is more than one solution one will be returned arbitrarily.
+   * A solution of this puzzle. If there are multiple solutions one will be returned arbitrarily.
    */
   lazy val solution: Grid = solutions.head
 
@@ -137,11 +137,11 @@ case class HeuristicSolver2(puzzle: Puzzle) extends HeuristicSolver(puzzle) {
   }
 }
 
-case class HeuristicSolver1(puzzle: Puzzle) extends HeuristicSolver(puzzle)
-
 /**
  * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
  */
+case class HeuristicSolver1(puzzle: Puzzle) extends HeuristicSolver(puzzle)
+
 abstract class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
