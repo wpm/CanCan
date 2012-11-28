@@ -40,8 +40,30 @@ object Misc {
   //  4 6 1 7 5 2 9 3 8
   //  6 1 7 5 2 9 3 8 4
 
+  // 5 steps, 1 solution
+  val p4 = Puzzle( """a=15+ b=9x c=560x d=12+ e=21+ f=3- g=4x h=19+ i=15+ j=22+ k=36x l=3 m=30x n=18+ o=4x
+                     |a a b b c c c
+                     |a d d b b c e
+                     |a d d f f e e
+                     |g h h i i i e
+                     |g h j j i k k
+                     |l h j j m k k
+                     |n n n m m o o""".stripMargin)
+
+  //  2 solutions, 63 steps
+  val p5 = Puzzle( """a=72x b=19+ c=120x d=5- e=10+ f=21+ g=40x h=420x i=3 j=14+ k=6 l=1- m=30x n=84x o=18+
+                     |a b b b c d d
+                     |a a b c c c e
+                     |f a g g h e e
+                     |f i g g h j e
+                     |f f k h h j j
+                     |l m m n n j o
+                     |l m m n n o o""".stripMargin)
+
 
   def main(args: Array[String]) {
-    HeuristicSolver1(p3).solutions.foreach(println)
+    val solutions = HeuristicSolver1(p5).solutions.force
+    solutions.foreach(solution => println(solution + "\n"))
+    println(solutions.headOption)
   }
 }
