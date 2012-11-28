@@ -8,7 +8,7 @@ object Misc {
                      |f g g i i j
                      |k k l l m m
                      |k n n o o m""".stripMargin)
-  val s1 = HeuristicSolver(p1)
+  val s1 = HeuristicSolver2(p1)
 
   val p2 = Puzzle( """a=19+ b=12x c=1 d=22+ e=600x f=22+ g=3 h=16+ i=72x
                      |a b b c d d
@@ -17,5 +17,5 @@ object Misc {
                      |a e e f f f
                      |h e e i f f
                      |h h h i i i""".stripMargin)
-  val s2 = HeuristicSolver(p2)
+  val s2 = HeuristicSolver2(p2)
 }

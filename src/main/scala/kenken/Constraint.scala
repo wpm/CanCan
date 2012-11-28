@@ -41,7 +41,6 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
   override def toString() = cells.mkString(" ")
 }
 
-// TODO Embed Latin Square constraints in generic Rank constraint.
 /**
  * Constraint that applies to a row or column of a grid
  */
@@ -66,13 +65,39 @@ abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region)
  *
  * This constraint does not change any values in the grid but can be violated.
  *
- * - `[123 123 123] -> [123 123 123]`
- * - `[1   23  123] -> [1   23  123]`
- * - `[1   23  1]   -> None`
+ *  - `[123 123 123] -> [123 123 123]`
+ *  - `[1   23  123] -> [1   23  123]`
+ *  - `[1   23  1]   -> None`
  */
 case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) =
     if (isDistinct(solvedValues(values))) Some(Seq[Set[Int]]()) else None
+
+  override def toString() = "Latin Square: " + super.toString
+}
+
+case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends Constraint(region) {
+  override protected def constrainedValues(values: Seq[Set[Int]]) = {
+    val cs = valueCounts(values).filter {
+      case (s, c) => s.size <= c && c != n
+    }
+    if (cs.exists {
+      case (s, c) => s.size < c // e.g. 1 1 123
+    }) None
+    else {
+      val ps = cs.map(_._1)
+      val constrained = values.map(v => (v /: ps.filterNot(v == _))(_ -- _))
+      if (constrained.exists(_.isEmpty)) None else Some(constrained)
+    }
+  }
+
+  // TODO Calculate this as you go inside Grid.
+  def valueCounts(values: Seq[Set[Int]]): Map[Set[Int], Int] =
+    (Map[Set[Int], Int]().withDefaultValue(0) /: values) {
+      case (m, s) => m + (s -> (m(s) + 1))
+    }
+
+  override def toString() = "Permutation Set: " + super.toString
 }
 
 /**
@@ -81,8 +106,8 @@ case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(
  * The constraint is violated if the solved values are not all distinct.
  * The [[kenken.LatinSquareConstraint]] is a subset of this one.
  *
- * - `[1 2 1234 234] -> [1 2 34 34]`
- * - `[1 1 123] -> None`
+ *  - `[1 2 1234 234] -> [1 2 34 34]`
+ *  - `[1 1 123] -> None`
  */
 case class SolvedCellsConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
@@ -110,7 +135,7 @@ case class SolvedCellsConstraint(region: Seq[Cell]) extends RowColumnConstraint(
 /**
  * If a value only appears in a single cell in the region, that cell is solved.
  *
- * - `[12 23 23] -> [1 23 23]`
+ *  - `[12 23 23] -> [1 23 23]`
  */
 case class UniquenessConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
 

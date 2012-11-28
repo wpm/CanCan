@@ -6,6 +6,74 @@ import org.scalatest.FlatSpec
  * Unit tests for the [[kenken.Constraint]] objects.
  */
 class ConstraintSpec extends FlatSpec {
+  behavior of "A rank constraint"
+
+  def r5Fixture = PermutationSetConstraint(5, Grid.row(5)(1))
+
+  it should "handle a single solved cell" in {
+    expect(Some(List(
+      (Cell(1, 2), Set(2, 3, 4, 5)),
+      (Cell(1, 3), Set(2, 3, 4, 5)),
+      (Cell(1, 4), Set(2, 3, 4, 5)),
+      (Cell(1, 5), Set(2, 3, 4, 5))))) {
+      val g = Grid(
+        """1 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345""".stripMargin)
+      r5Fixture(g)
+    }
+  }
+
+  it should "handle multiple pemutation sets" in {
+    expect(Some(List((Cell(1, 5), Set(5))))) {
+      val g = Grid(
+        """12 12 34 34 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345""".stripMargin)
+      r5Fixture(g)
+    }
+  }
+
+  it should "do nothing if there are no permuation sets" in {
+    expect(Some(Nil)) {
+      val g = Grid(
+        """12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345""".stripMargin)
+      r5Fixture(g)
+    }
+  }
+
+  it should "detect an invalid configuration with multiple permutation sets" in {
+    expect(None) {
+      val g = Grid(
+        """12 12 34 34 1234
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345""".stripMargin)
+      r5Fixture(g)
+    }
+  }
+
+  it should "detect an invalid configuration with multiple solved cells" in {
+    expect(None) {
+      val g = Grid(
+        """1 12345 12345 12345 1
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345
+          |12345 12345 12345 12345 12345""".stripMargin)
+      r5Fixture(g)
+    }
+  }
+
   "A solved cell constraint on row 2 of a 3x3 puzzle" should "have the string representation 'Solved: Row 2'" in {
     val row2Solved = SolvedCellsConstraint(Seq(Cell(2, 1), Cell(2, 2), Cell(2, 3)))
     expect("Solved: Row 2") {
