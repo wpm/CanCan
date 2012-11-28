@@ -171,9 +171,9 @@ object Solver {
     val lines = Source.fromFile(positional.head).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
 
-    StringRepresentation.parsePuzzles(in).foreach {
-      puzzle: Puzzle =>
-        println(puzzle + "\n")
+    StringRepresentation.parsePuzzles(in).zipWithIndex.foreach {
+      case (puzzle, i) =>
+        println((i + 1) + ".\n" + puzzle + "\n")
         val solutions = HeuristicSolver2(puzzle).solutions
         if (validate)
           printSolutionsAndValidate(MinimalSolver(puzzle), solutions)

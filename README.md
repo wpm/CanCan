@@ -11,6 +11,7 @@ Additionally, cells in the grid are grouped into sets called _cages_, and the se
 To see the program solve a puzzle, run either its unit tests or `Solver` with a path to a puzzle file.
 
 	> scala -cp target/scala-2.9.2/classes kenken.Solver src/main/resources/6x6
+	1.
     a=4x b=12x c=15+ d=3/ e=11+ f=1- g=11+ h=1- i=9+ j=2- k=60x l=3- m=4x n=1- o=5-
     a a b b c c
     a d d e e c
