@@ -102,7 +102,7 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 /**
- * Solver that uses the [[kenken.PermutationSetConstraint.`]] and [[kenken.UniquenessConstraint]] heuristics.
+ * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
  */
 case class HeuristicSolver2(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
