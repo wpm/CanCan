@@ -114,6 +114,7 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
       rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
 }
 
+// TODO Fix deprecation warning about case-to-case inheritance
 /**
  * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics and sorts
  * guess cells by cage ambiguity.
