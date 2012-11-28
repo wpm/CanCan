@@ -42,6 +42,6 @@ object Misc {
 
 
   def main(args: Array[String]) {
-    MinimalSolver(p2).isPossibleSolution(Grid(6))
+    HeuristicSolver2(p3).solutions.foreach(println)
   }
 }
