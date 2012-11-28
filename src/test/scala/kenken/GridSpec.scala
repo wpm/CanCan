@@ -33,6 +33,12 @@ class GridSpec extends FlatSpec {
     }
   }
 
+  it should "have unsolved cells (1,1) and (2,2)" in {
+    expect(Map(Cell(1, 1) -> Set(1, 2), Cell(2, 2) -> Set(1, 2))) {
+      Grid(g2x2).unsolved
+    }
+  }
+
   "Row 3 of a 4x4 grid" should "contain cells (3,1), (3,2), (3,3), and (3,4)" in {
     expect(List(Cell(3, 1), Cell(3, 2), Cell(3, 3), Cell(3, 4))) {
       Grid.row(4)(3)

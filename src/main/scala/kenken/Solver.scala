@@ -1,6 +1,6 @@
 package kenken
 
-import collection.SeqView
+import collection.TraversableView
 import annotation.tailrec
 import io.Source
 import util.parsing.input.PagedSeqReader
@@ -17,51 +17,32 @@ abstract class Solver(puzzle: Puzzle) {
   val constraintMap: Map[Cell, Set[Constraint]]
 
   /**
-   * Map of cells in the puzzle grid to the size of the cages that contain them
+   * All the possible solutions for this puzzle.
    */
-  lazy val cageSize: Map[Cell, Int] =
-    constraintMap.map {
-      case (cell, constraints) => (cell, cageSize(constraints))
-    }
-
-  private def cageSize(constraints: Set[Constraint]): Int = {
-    val cages = constraints.filter(_.isInstanceOf[CageConstraint])
-    require(cages.size <= 1, "Multiple cages for cell:" + cages)
-    if (cages.size == 1) cages.head.cells.size else 0
-  }
-
-  /**
-   * A stream of all the grids that solve this puzzle.
-   */
-  lazy val solutions: Stream[Grid] = {
+  lazy val solutions: TraversableView[Grid, Traversable[_]] = {
     applyConstraints(Grid(puzzle.n), puzzle.cageConstraints) match {
-      case Some(g) => search(g).toStream.distinct
-      case None => Stream.empty[Grid]
+      case Some(g) => search(g).filter(_.isSolved)
+      case None => Traversable[Grid]().view
     }
   }
 
-  /**
-   * Search the space of possible solutions consistent with a given starting grid, applying constraints at each step.
-   */
-  private def search(grid: Grid = Grid(puzzle.n)): SeqView[Grid, Seq[_]] = {
-    def leastAmbiguousCell = grid.unsolved.map {
-      case (cell, values) => (values.size, cageSize(cell), cell)
-    }.min._3
+  private def search(grid: Grid): TraversableView[Grid, Traversable[_]] = {
+    Traversable(grid).view ++ nextGrids(grid).flatMap(g => search(g))
+  }
 
-    def guessCellValues(values: Set[Int]) = values.map(values - _).toSeq.view
+  private def nextGrids(grid: Grid): TraversableView[Grid, Traversable[_]] = {
+    for {cell <- guessCell(grid).toTraversable.view
+         value <- grid(cell)
+         next <- applyConstraints(grid + (cell -> Set(value)), constraintMap(cell))}
+    yield next
+  }
 
-    def applyGuessToGrid(cell: Cell, guess: Set[Int]) =
-      applyConstraints(grid + (cell -> guess), constraintMap(cell)).toSeq
-
-    if (grid.isSolved)
-      Vector(grid).view
-    else {
-      val cell = leastAmbiguousCell
-      for {guess <- guessCellValues(grid(cell))
-           newGrid <- applyGuessToGrid(cell, guess)
-           solution <- search(newGrid)
-      } yield solution
-    }
+  private def guessCell(grid: Grid): Option[Cell] = {
+    val u = grid.unsolved
+    if (u.isEmpty) None
+    else Some(u.toSeq.map {
+      case (cell, values) => (values.size, cell)
+    }.min._2)
   }
 
   /**
@@ -86,7 +67,7 @@ abstract class Solver(puzzle: Puzzle) {
     }
   }
 
-  // TODO add isPossibleSolution(grid:Grid):Boolean as a debugging utility?
+  // TODO Add isPossibleSolution(grid:Grid):Boolean as a debugging utility.
 
   /**
    * Utility to create row and column constraints for all row and columns in a puzzle

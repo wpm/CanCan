@@ -41,6 +41,7 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
   override def toString() = cells.mkString(" ")
 }
 
+// TODO Embed Latin Square constraints in generic Rank constraint.
 /**
  * Constraint that applies to a row or column of a grid
  */
