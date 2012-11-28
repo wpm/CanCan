@@ -20,7 +20,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solutions\n" + ls_2x2_sol1 + "\n" + ls_2x2_sol2 in {
     expect(Set(Grid(ls_2x2_sol1), Grid(ls_2x2_sol2))) {
-      Set() ++ HeuristicSolver2(Puzzle(2)).solutions
+      Set() ++ HeuristicSolver1(Puzzle(2)).solutions
     }
   }
 
@@ -46,7 +46,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken1_4x4_solution in {
     expect(List(Grid(kenken1_4x4_solution))) {
-      HeuristicSolver2(Puzzle(kenken1_4x4_puzzle)).solutions
+      HeuristicSolver1(Puzzle(kenken1_4x4_puzzle)).solutions
     }
   }
 
@@ -73,7 +73,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken2_4x4_solution in {
     expect(List(Grid(kenken2_4x4_solution))) {
-      HeuristicSolver2(Puzzle(kenken2_24x4_puzzle)).solutions
+      HeuristicSolver1(Puzzle(kenken2_24x4_puzzle)).solutions
     }
   }
 
@@ -100,7 +100,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken3_4x4_solution in {
     expect(List(Grid(kenken3_4x4_solution))) {
-      HeuristicSolver2(Puzzle(kenken3_4x4_puzzle)).solutions
+      HeuristicSolver1(Puzzle(kenken3_4x4_puzzle)).solutions
     }
   }
 
@@ -131,7 +131,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken_6x6_solution in {
     expect(List(Grid(kenken_6x6_solution))) {
-      HeuristicSolver2(Puzzle(kenken_6x6_puzzle)).solutions
+      HeuristicSolver1(Puzzle(kenken_6x6_puzzle)).solutions
     }
   }
 
@@ -146,7 +146,7 @@ class KenKenSpec extends FlatSpec {
                      |c d""".stripMargin
   "An unsolvable puzzle" should "have no solutions" in {
     expect(Stream.empty) {
-      HeuristicSolver2(Puzzle(unsolvable)).solutions
+      HeuristicSolver1(Puzzle(unsolvable)).solutions
     }
   }
 }

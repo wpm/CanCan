@@ -114,12 +114,11 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
       rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
 }
 
-// TODO Fix deprecation warning about case-to-case inheritance
 /**
  * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics and sorts
  * guess cells by cage ambiguity.
  */
-case class HeuristicSolver3(override val puzzle: Puzzle) extends HeuristicSolver2(puzzle) {
+case class HeuristicSolver2(puzzle: Puzzle) extends HeuristicSolver(puzzle) {
   def cageAmbiguity(grid: Grid): Map[Constraint, Int] = {
     Map[Constraint, Int]().withDefaultValue(0) ++
       puzzle.containingCages.values.map(cage => cage -> (1 /: cage.cells.map(grid(_).size))(_ * _))
@@ -138,10 +137,12 @@ case class HeuristicSolver3(override val puzzle: Puzzle) extends HeuristicSolver
   }
 }
 
+case class HeuristicSolver1(puzzle: Puzzle) extends HeuristicSolver(puzzle)
+
 /**
  * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
  */
-case class HeuristicSolver2(puzzle: Puzzle) extends Solver(puzzle) {
+abstract class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints(puzzle.n,
@@ -202,7 +203,7 @@ object Solver {
     StringRepresentation.parsePuzzles(in).zipWithIndex.foreach {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
-        val solver = HeuristicSolver2(puzzle)
+        val solver = HeuristicSolver1(puzzle)
         if (count)
           printSolutionCounts(solver.partialSolutions)
         else if (validate)
