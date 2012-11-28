@@ -71,7 +71,7 @@ abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region)
  */
 case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) =
-    if (isDistinct(solvedValues(values))) Some(Seq[Set[Int]]()) else None
+    if (isDistinct(solvedValues(values))) Some(values) else None
 
   override def toString() = "Latin Square: " + super.toString
 }

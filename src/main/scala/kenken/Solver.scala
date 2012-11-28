@@ -46,8 +46,10 @@ abstract class Solver(puzzle: Puzzle) {
   }
 
   /**
-   * Return grid with the specified constraints applied. Return `None` if the grid is inconsistent with the
-   * constraints.
+   * Apply the specified constraints to a grid
+   * @param grid the grid to constrain
+   * @param constraints the constraints to apply, by default the puzzle's cage constraints
+   * @return a constrained grid or `None` if the grid is inconsistent with the constraints
    */
   @tailrec
   private def applyConstraints(grid: Grid, constraints: Set[_ <: Constraint] = puzzle.cageConstraints): Option[Grid] = {
@@ -67,7 +69,14 @@ abstract class Solver(puzzle: Puzzle) {
     }
   }
 
-  // TODO Add isPossibleSolution(grid:Grid):Boolean as a debugging utility.
+  /**
+   * Does the specified grid satisfy all the constraints in this puzzle?
+   *
+   * This function is provided as a debugging utility to check that the solver is returning the correct answers.
+   * @param grid the grid to check
+   * @return `true` if the grid satisfies the constrains, `false` if any constraints are violated
+   */
+  def isPossibleSolution(grid: Grid): Boolean = applyConstraints(grid, constraintMap.values.reduce(_ ++ _)) != None
 
   /**
    * Utility to create row and column constraints for all row and columns in a puzzle
@@ -121,14 +130,55 @@ case class HeuristicSolver1(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 object Solver {
+  /**
+   * Solve all the puzzles in a file. Also validate the answers if a '-v' switch is provided.
+   */
   def main(args: Array[String]) {
+    def parseCommandLine(args: Array[String]): (List[String], Map[Symbol, String]) = {
+      def parseCommandLineRec(args: List[String],
+                              positional: List[String],
+                              option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
+        args match {
+          case Nil => (positional.reverse, option)
+          case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
+          case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
+        }
+      }
+      parseCommandLineRec(args.toList, Nil, Map())
+    }
+
+    def printSolutions(solutions: TraversableView[Grid, Traversable[_]]) {
+      println(solutions.mkString("\n\n") + "\n\n")
+    }
+
+    def printSolutionsAndValidate(validator: Solver, solutions: TraversableView[Grid, Traversable[_]]) {
+      solutions.foreach {
+        solution =>
+          println(solution)
+          validator.isPossibleSolution(solution) match {
+            case true => println("VALID\n")
+            case false => println("INVALID\n")
+          }
+      }
+      println()
+    }
+
+    val (positional, option) = parseCommandLine(args)
+    require(positional.size == 1, "Incorrect number of arguments")
+    val validate = option.contains('validate)
+
     // Treat # as a comment delimiter and skip leading blank lines.
-    val lines = Source.fromFile(args(0)).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
+    val lines = Source.fromFile(positional.head).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
+
     StringRepresentation.parsePuzzles(in).foreach {
       puzzle: Puzzle =>
         println(puzzle + "\n")
-        println(HeuristicSolver2(puzzle).solutions.mkString("\n\n") + "\n\n")
+        val solutions = HeuristicSolver2(puzzle).solutions
+        if (validate)
+          printSolutionsAndValidate(MinimalSolver(puzzle), solutions)
+        else
+          printSolutions(solutions)
     }
   }
 }

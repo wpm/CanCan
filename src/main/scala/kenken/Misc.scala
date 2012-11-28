@@ -18,4 +18,8 @@ object Misc {
                      |h e e i f f
                      |h h h i i i""".stripMargin)
   val s2 = HeuristicSolver2(p2)
+
+  def main(args: Array[String]) {
+    MinimalSolver(p2).isPossibleSolution(Grid(6))
+  }
 }
