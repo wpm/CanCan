@@ -165,6 +165,9 @@ object Solver {
           case Nil => (positional.reverse, option)
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + 'validate)
           case "-c" :: tail => parseCommandLineRec(tail, positional, option + 'count)
+          case s :: tail if (s(0) == '-') => {
+            println("Invalid switch " + s); sys.exit(-1)
+          }
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
