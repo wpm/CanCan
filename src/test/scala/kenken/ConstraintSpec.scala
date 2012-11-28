@@ -74,21 +74,19 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  "A solved cell constraint on row 2 of a 3x3 puzzle" should "have the string representation 'Solved: Row 2'" in {
-    val row2Solved = SolvedCellsConstraint(Seq(Cell(2, 1), Cell(2, 2), Cell(2, 3)))
-    expect("Solved: Row 2") {
-      row2Solved.toString()
+  "A uniqueness constraint on row 2 of a 3x3 puzzle" should "have the string representation 'Uniqueness: Row 2'" in {
+    expect("Uniqueness: Row 2") {
+      UniquenessConstraint(Seq(Cell(2, 1), Cell(2, 2), Cell(2, 3))).toString()
     }
   }
 
-  "A solved cell constraint on col 2 of a 3x3 puzzle" should "have the string representation 'Solved: Col 2'" in {
-    val col2Solved = SolvedCellsConstraint(Seq(Cell(1, 2), Cell(2, 2), Cell(3, 2)))
-    expect("Solved: Col 2") {
-      col2Solved.toString()
+  "A uniqueness constraint on col 2 of a 3x3 puzzle" should "have the string representation 'Uniquenss: Col 2'" in {
+    expect("Uniqueness: Col 2") {
+      UniquenessConstraint(Seq(Cell(1, 2), Cell(2, 2), Cell(3, 2))).toString()
     }
   }
 
-  "A definiteness constraint on a row (23 5 6 4 3 2)" should "be inconsistent" in {
+  "A permustation set constraint on a row (23 5 6 4 3 2)" should "be inconsistent" in {
     expect(None) {
       val g = Grid(
         """23 5 6 4 3 2
@@ -97,7 +95,7 @@ class ConstraintSpec extends FlatSpec {
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456""".stripMargin)
-      val c = SolvedCellsConstraint(Grid.row(6)(1))
+      val c = PermutationSetConstraint(6, Grid.row(6)(1))
       c(g)
     }
   }

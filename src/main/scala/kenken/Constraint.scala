@@ -47,8 +47,6 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
 abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region) {
   protected def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
 
-  protected def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
-
   override def toString() = {
     val (r, c) = (cells.head.row, cells.head.col)
     if (cells.forall(_.row == r))
@@ -70,13 +68,15 @@ abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region)
  *  - `[1   23  1]   -> None`
  */
 case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
+  private def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
+
   override protected def constrainedValues(values: Seq[Set[Int]]) =
     if (isDistinct(solvedValues(values))) Some(values) else None
 
   override def toString() = "Latin Square: " + super.toString
 }
 
-case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends Constraint(region) {
+case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     val cs = valueCounts(values).filter {
       case (s, c) => s.size <= c && c != n
@@ -100,37 +100,6 @@ case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends Constrain
   override def toString() = "Permutation Set: " + super.toString
 }
 
-/**
- * Values from all solved cells in a are removed from all the other cells in the region.
- *
- * The constraint is violated if the solved values are not all distinct.
- * The [[kenken.LatinSquareConstraint]] is a subset of this one.
- *
- *  - `[1 2 1234 234] -> [1 2 34 34]`
- *  - `[1 1 123] -> None`
- */
-case class SolvedCellsConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
-  override protected def constrainedValues(values: Seq[Set[Int]]) = {
-    // Partition input into solved and non-solved and subtract the union of
-    // the non-solved values from the solved.
-    val distinct = solvedValues(values).foldLeft(List[Int]())((value, x) => x.head :: value)
-    if (isDistinct(distinct)) {
-      val solved = Set() ++ distinct
-      val ncs = values.map {
-        value =>
-          value.size match {
-            case 1 => value
-            case _ => value -- solved
-          }
-      }
-      if (ncs.exists(_.isEmpty)) None else Some(ncs)
-    }
-    else
-      None
-  }
-
-  override def toString() = "Solved: " + super.toString
-}
 
 /**
  * If a value only appears in a single cell in the region, that cell is solved.
@@ -179,7 +148,8 @@ abstract class CageConstraint(value: Int, region: Seq[Cell]) extends Constraint(
  * @param cell the cell
  */
 case class SpecifiedConstraint(value: Int, cell: Cell) extends CageConstraint(value, Seq(cell)) {
-  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = if (grid(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
+  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] =
+    if (grid(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
 
   override protected val symbol = ""
   lazy override protected val nekNekSymbol = "!"
@@ -283,31 +253,6 @@ case class TimesConstraint(m: Int, cs: Seq[Cell]) extends AssociativeConstraint(
 
   override protected val symbol = "x"
   lazy override protected val nekNekSymbol = "*"
-}
-
-case class LinearComplementConstraint(n: Int, region: Seq[Cell]) extends Constraint(region) {
-  protected def unsolvedValues(values: Seq[Set[Int]]) = values.filter(_.size > 1)
-
-  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = {
-    val unsolved = cells.filter(grid(_).size > 1)
-    val values = (Set[Int]() /: unsolved.map(grid(_)))(_ ++ _)
-    if (values.size == unsolved.size && !unsolved.isEmpty) {
-      val complement = linearComplement(unsolved)
-      val before = complement.map(grid(_))
-      val after = before.map(_ -- values)
-      if (after.exists(_.isEmpty)) None else Some(changedValues(complement, before, after))
-    }
-    else Some(Seq[(Cell, Set[Int])]())
-  }
-
-  def linearComplement(region: Seq[Cell]): Seq[Cell] = {
-    val row = region.head.row
-    val col = region.head.col
-    (if (region.tail.forall(_.row == row)) Grid.row(n)(row).diff(region) else Nil) ++
-      (if (region.tail.forall(_.col == col)) Grid.col(n)(col).diff(region) else Nil)
-  }
-
-  override def toString() = "Linear Comp:" + cells.head
 }
 
 object Constraint {

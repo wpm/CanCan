@@ -148,24 +148,6 @@ case class HeuristicSolver2(puzzle: Puzzle) extends Solver(puzzle) {
         (cells => Seq(PermutationSetConstraint(puzzle.n, cells), UniquenessConstraint(cells)))))
 }
 
-/**
- * Solver that uses the [[kenken.LinearComplementConstraint]], [[kenken.SolvedCellsConstraint]] and
- * [[kenken.UniquenessConstraint]] heuristics.
- */
-case class HeuristicSolver1(puzzle: Puzzle) extends Solver(puzzle) {
-  override val constraintMap =
-    Constraint.constraintMap(puzzle.cageConstraints ++
-      linearComplementConstraints(puzzle) ++
-      rowColumnConstraints(puzzle.n,
-        (cells => Seq(SolvedCellsConstraint(cells), UniquenessConstraint(cells)))))
-
-  private def linearComplementConstraints(puzzle: Puzzle): Set[LinearComplementConstraint] = {
-    puzzle.cageConstraints.map {
-      c: CageConstraint => LinearComplementConstraint(puzzle.n, c.cells)
-    }
-  }
-}
-
 object Solver {
   /**
    * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Print total step counts if a
