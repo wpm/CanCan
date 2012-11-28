@@ -191,7 +191,7 @@ abstract class NonAssociativeConstraint(value: Int, cell1: Cell, cell2: Cell)
    * Does this pair of numbers satisfy the constraint?
    * @param x a number in a cell
    * @param y a number in a cell
-   * @return _true_ if the combination satisfies the constraint
+   * @return `true` if the combination satisfies the constraint
    */
   def satisfied(x: Int, y: Int): Boolean
 }
