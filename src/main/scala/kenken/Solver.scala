@@ -19,7 +19,7 @@ abstract class Solver(puzzle: Puzzle) {
   /**
    * A solution of this puzzle. If there are multiple solutions one will be returned arbitrarily.
    */
-  lazy val solution: Grid = solutions.head
+  lazy val solution: Option[Grid] = solutions.headOption
 
   /**
    * All the solutions for this puzzle.
