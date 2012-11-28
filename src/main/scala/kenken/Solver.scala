@@ -167,10 +167,13 @@ case class HeuristicSolver1(puzzle: Puzzle) extends Solver(puzzle) {
 
 object Solver {
   /**
-   * Solve all the puzzles in a file. Also validate the answers if a '-v' switch is provided.
+   * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Print total step counts if a
+   * '-c' switch is provided.
+   *
+   * Treat # as a comment delimiter in the puzzle file and skip leading blank lines.
    */
   def main(args: Array[String]) {
-    def parseCommandLine(args: Array[String]): (List[String], Map[Symbol, String]) = {
+    def parseCommandLine(args: Array[String]): (String, Boolean, Boolean) = {
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
@@ -181,7 +184,9 @@ object Solver {
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
-      parseCommandLineRec(args.toList, Nil, Map())
+      val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
+      require(positional.size == 1, "Incorrect number of arguments")
+      (positional.head, option.contains('validate), option.contains('count))
     }
 
     def printSolutions(solutions: TraversableView[Grid, Traversable[_]]) {
@@ -207,13 +212,8 @@ object Solver {
       println()
     }
 
-    val (positional, option) = parseCommandLine(args)
-    require(positional.size == 1, "Incorrect number of arguments")
-    val validate = option.contains('validate)
-    val count = option.contains('count)
-
-    // Treat # as a comment delimiter and skip leading blank lines.
-    val lines = Source.fromFile(positional.head).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
+    val (filename, validate, count) = parseCommandLine(args)
+    val lines = Source.fromFile(filename).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
     val in = new PagedSeqReader(PagedSeq.fromLines(lines))
 
     StringRepresentation.parsePuzzles(in).zipWithIndex.foreach {
@@ -228,5 +228,4 @@ object Solver {
           printSolutions(solver.solutions)
     }
   }
-
 }
