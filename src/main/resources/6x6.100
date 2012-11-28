@@ -1,0 +1,1402 @@
+# Solved in 27 seconds
+
+a=48x b=1- c=180x d=13+ e=24x f=360x g=30x h=36x i=96x j=5/ k=6
+a b b c d d
+a a a c d e
+f f c c d e
+f g g h h e
+f g g i h h
+j j i i i k
+# 2 3 4 6 1 5
+# 4 6 1 5 2 3
+# 3 4 6 1 5 2
+# 6 1 5 2 3 4
+# 5 2 3 4 6 1
+# 1 5 2 3 4 6
+
+a=12+ b=16+ c=14+ d=11+ e=48x f=360x g=480x h=30x i=2x j=3 k=6/
+a a b b c c
+a a b b c c
+d d e e f f
+d d e e f f
+g g h h i i
+g g j h k k
+# 3 2 1 6 4 5
+# 1 6 4 5 3 2
+# 2 1 6 4 5 3
+# 5 3 2 1 6 4
+# 6 4 5 3 2 1
+# 4 5 3 2 1 6
+
+a=6 b=14+ c=9+ d=3- e=16+ f=19+ g=45x h=16+ i=240x j=8+ k=3/
+a b b b c c
+d b e e f c
+d e e f f c
+g g g h f i
+g j h h h i
+j j k k i i
+# 6 2 5 3 1 4
+# 1 4 6 2 5 3
+# 4 6 2 5 3 1
+# 5 3 1 4 6 2
+# 3 1 4 6 2 5
+# 2 5 3 1 4 6
+
+a=14+ b=60x c=9x d=1- e=72x f=5 g=16+ h=96x i=9x j=1- k=6x l=1-
+a a a b b b
+a c c d b e
+c c f d e e
+g g h h h i
+j g g h i i
+j k k k l l
+# 4 6 2 3 1 5
+# 2 3 1 5 4 6
+# 3 1 5 4 6 2
+# 1 5 4 6 2 3
+# 5 4 6 2 3 1
+# 6 2 3 1 5 4
+
+a=36x b=6+ c=10x d=1- e=1- f=10+ g=25x h=96x i=9+ j=1- k=12x l=3 m=3- n=15+
+a b b c d d
+a a b c e f
+g h h c e f
+g g h i i f
+j k k l i m
+j k n n n m
+# 6 2 3 1 5 4
+# 2 3 1 5 4 6
+# 5 4 6 2 3 1
+# 1 5 4 6 2 3
+# 4 6 2 3 1 5
+# 3 1 5 4 6 2
+
+a=7+ b=300x c=10+ d=24x e=14+ f=60x g=5 h=96x i=90x j=15+ k=5/
+a a a b b c
+d d d e b c
+f f e e b c
+f f g e h h
+i i j j h h
+i i j j k k
+# 4 2 1 5 6 3
+# 3 4 2 1 5 6
+# 5 6 3 4 2 1
+# 2 1 5 6 3 4
+# 1 5 6 3 4 2
+# 6 3 4 2 1 5
+
+a=72x b=15+ c=96x d=13+ e=14+ f=2/ g=14+ h=8+ i=48x j=5 k=9+
+a a a b b b
+c a d b e e
+c c d d e e
+f c d g g g
+f h h h g i
+j k k k i i
+# 1 2 6 4 3 5
+# 2 6 4 3 5 1
+# 4 3 5 1 2 6
+# 6 4 3 5 1 2
+# 3 5 1 2 6 4
+# 5 1 2 6 4 3
+
+a=18x b=13+ c=4 d=120x e=80x f=14+ g=15x h=360x i=120x j=5- k=1-
+a b b c d d
+a a b b d d
+e f f f f g
+e e e h g g
+i i h h h g
+i i j j k k
+# 6 1 3 4 5 2
+# 1 3 4 5 2 6
+# 2 6 1 3 4 5
+# 4 5 2 6 1 3
+# 3 4 5 2 6 1
+# 5 2 6 1 3 4
+
+a=5 b=12x c=12x d=11+ e=24x f=10+ g=24x h=18x i=12+ j=12x k=60x l=8+ m=13+
+a b b c c d
+e e f c d d
+g e f f h h
+g i j j j h
+g i i k k k
+l l l m m m
+# 5 2 6 1 3 4
+# 6 1 3 4 5 2
+# 3 4 5 2 6 1
+# 4 5 2 6 1 3
+# 2 6 1 3 4 5
+# 1 3 4 5 2 6
+
+a=15+ b=36x c=360x d=1 e=24x f=180x g=18x h=6+ i=5/ j=1- k=14+ l=7+
+a b b c c d
+a a b b c c
+a e e f f f
+g e e f h h
+g i j k k l
+g i j k k l
+# 5 6 2 4 3 1
+# 2 4 3 1 5 6
+# 4 3 1 5 6 2
+# 6 2 4 3 1 5
+# 3 1 5 6 2 4
+# 1 5 6 2 4 3
+
+a=1 b=32x c=13+ d=21+ e=60x f=360x g=24x h=10+ i=14+ j=2- k=3-
+a b c c d d
+b b c c e d
+f b g e e d
+f f g g e h
+f i i g h h
+j j i k k h
+# 1 2 3 5 6 4
+# 4 1 2 3 5 6
+# 6 4 1 2 3 5
+# 5 6 4 1 2 3
+# 2 3 5 6 4 1
+# 3 5 6 4 1 2
+
+a=24x b=22+ c=60x d=6x e=360x f=3/ g=17+ h=10+ i=9+ j=3 k=1-
+a a a a b b
+c c c b b d
+e c f f d d
+e g g g h d
+e i g h h h
+e i i j k k
+# 2 1 3 4 5 6
+# 1 3 4 5 6 2
+# 4 5 6 2 1 3
+# 3 4 5 6 2 1
+# 5 6 2 1 3 4
+# 6 2 1 3 4 5
+
+a=3/ b=12+ c=14+ d=12+ e=13+ f=6 g=1- h=11+ i=48x j=30x k=16+
+a b b b c c
+a d b c c e
+d d f e e e
+g d h i i i
+g j h h i k
+j j h k k k
+# 6 1 5 2 3 4
+# 2 3 4 6 1 5
+# 3 4 6 1 5 2
+# 5 2 3 4 6 1
+# 4 6 1 5 2 3
+# 1 5 2 3 4 6
+
+a=14+ b=360x c=10+ d=240x e=36x f=13+ g=14+ h=36x i=240x
+a a b b c c
+a a b b c c
+d d d d e e
+f f f g e e
+h f g g g i
+h h h i i i
+# 1 2 6 5 4 3
+# 6 5 4 3 1 2
+# 2 6 5 4 3 1
+# 5 4 3 1 2 6
+# 3 1 2 6 5 4
+# 4 3 1 2 6 5
+
+a=96x b=30x c=12x d=10+ e=72x f=6+ g=6+ h=18x i=5 j=1- k=3- l=9+ m=15+ n=1-
+a b b b c c
+a a d e c f
+g g d e e f
+g h d i j j
+k h l l m n
+k h l m m n
+# 4 5 3 2 1 6
+# 6 4 5 3 2 1
+# 3 2 1 6 4 5
+# 1 6 4 5 3 2
+# 5 3 2 1 6 4
+# 2 1 6 4 5 3
+
+a=24x b=240x c=6x d=90x e=60x f=20x g=24x h=6 i=360x j=12+ k=18x
+a a b c c d
+a a b b c d
+e e b f f d
+e e g g h d
+i i g g j j
+i i k k j j
+# 4 3 6 1 2 5
+# 1 2 5 4 3 6
+# 6 1 2 5 4 3
+# 2 5 4 3 6 1
+# 3 6 1 2 5 4
+# 5 4 3 6 1 2
+
+a=12+ b=30x c=9+ d=13+ e=8+ f=11+ g=13+ h=9x i=24x j=15+ k=20x l=3x m=2
+a a b b c d
+a e b c c d
+e e f f g d
+h h f i g g
+h j i i k k
+j j l l k m
+# 2 6 5 1 3 4
+# 4 2 6 5 1 3
+# 5 1 3 4 2 6
+# 1 3 4 2 6 5
+# 3 4 2 6 5 1
+# 6 5 1 3 4 2
+
+a=12x b=24x c=60x d=6+ e=11+ f=90x g=10+ h=24x i=60x j=10+ k=40x l=4+ m=4
+a a b c c d
+e a b b c d
+e f g g g d
+e f f h h i
+j j k h i i
+j k k l l m
+# 1 4 6 2 5 3
+# 5 3 1 4 6 2
+# 4 6 2 5 3 1
+# 2 5 3 1 4 6
+# 3 1 4 6 2 5
+# 6 2 5 3 1 4
+
+a=60x b=8x c=10+ d=14+ e=7+ f=90x g=13+ h=12+ i=7+ j=24x k=3 l=8x m=11+
+a b b c d d
+a b c c d e
+a f f g e e
+h f g g i i
+h h j j i k
+l l l j m m
+# 5 2 4 1 3 6
+# 4 1 3 6 5 2
+# 3 6 5 2 4 1
+# 1 3 6 5 2 4
+# 6 5 2 4 1 3
+# 2 4 1 3 6 5
+
+a=19+ b=7+ c=14+ d=24x e=48x f=2- g=24x h=15+ i=3- j=90x k=4/
+a a b b c c
+a d d d c c
+a d e e e f
+g g e h h f
+g g i h h j
+k k i j j j
+# 6 5 3 4 1 2
+# 3 4 1 2 6 5
+# 5 3 4 1 2 6
+# 1 2 6 5 3 4
+# 2 6 5 3 4 1
+# 4 1 2 6 5 3
+
+a=11+ b=48x c=3 d=72x e=9+ f=12+ g=10x h=8+ i=24x j=54x k=5x l=18x m=5x n=8x
+a a b b b c
+d a e f f f
+d d e e g g
+h h i j g k
+l h i j j k
+l l m m n n
+# 5 1 2 4 6 3
+# 3 5 1 2 4 6
+# 4 6 3 5 1 2
+# 2 4 6 3 5 1
+# 1 2 4 6 3 5
+# 6 3 5 1 2 4
+
+a=4+ b=8+ c=16+ d=1- e=1- f=5x g=30x h=5- i=1- j=16+ k=20x l=3 m=1- n=120x o=2/
+a a b c c d
+e a b b c d
+e f f g g h
+i i j k g h
+l j j k k m
+n n n o o m
+# 1 2 3 6 4 5
+# 5 1 2 3 6 4
+# 4 5 1 2 3 6
+# 2 3 6 4 5 1
+# 3 6 4 5 1 2
+# 6 4 5 1 2 3
+
+a=75x b=11+ c=17+ d=48x e=16+ f=60x g=2- h=16+ i=2- j=1- k=4x
+a a b b c c
+a a b b c c
+d d e e f f
+d d e e f f
+g h h i i j
+g h h k k j
+# 5 1 4 2 6 3
+# 3 5 1 4 2 6
+# 1 4 2 6 3 5
+# 2 6 3 5 1 4
+# 4 2 6 3 5 1
+# 6 3 5 1 4 2
+
+a=12+ b=72x c=240x d=10+ e=120x f=14+ g=3 h=90x i=3/ j=24x k=9+
+a b b c d d
+a b b c c d
+a e e c f f
+a e e g f f
+h h i j j k
+h h i j j k
+# 2 4 3 5 6 1
+# 5 6 1 2 4 3
+# 4 3 5 6 1 2
+# 1 2 4 3 5 6
+# 3 5 6 1 2 4
+# 6 1 2 4 3 5
+
+a=3- b=9+ c=4 d=11+ e=2- f=11+ g=120x h=2/ i=9+ j=2- k=3+ l=2/ m=14+ n=7+ o=2/
+a a b b c d
+e e b f d d
+g h h f i i
+g g j f i k
+l l j m m k
+n n n m o o
+# 3 6 1 2 4 5
+# 5 3 6 1 2 4
+# 6 1 2 4 5 3
+# 4 5 3 6 1 2
+# 2 4 5 3 6 1
+# 1 2 4 5 3 6
+
+a=4- b=16+ c=14+ d=2 e=12+ f=24x g=19+ h=14+ i=2/ j=3- k=1- l=19+
+a b b c c d
+a b c c e e
+f b g g g e
+f h g i i e
+f h j k l l
+h h j k l l
+# 1 4 3 5 6 2
+# 5 6 2 1 4 3
+# 4 3 5 6 2 1
+# 3 5 6 2 1 4
+# 2 1 4 3 5 6
+# 6 2 1 4 3 5
+
+a=12+ b=9x c=12+ d=10+ e=48x f=11+ g=12x h=30x i=150x j=9+ k=12+ l=2/ m=1
+a a b b c c
+d a b e e c
+d f f g e h
+d f i g g h
+j j i i k h
+j l l k k m
+# 6 5 1 3 2 4
+# 5 1 3 2 4 6
+# 1 3 2 4 6 5
+# 4 6 5 1 3 2
+# 2 4 6 5 1 3
+# 3 2 4 6 5 1
+
+a=9+ b=12x c=12+ d=12x e=72x f=12+ g=48x h=9+ i=2- j=40x k=10x l=18x m=4
+a a b c c d
+e a b b c d
+e e f f g d
+h h f g g i
+h j k k l i
+j j k l l m
+# 1 3 6 4 5 2
+# 4 5 2 1 3 6
+# 3 6 4 5 2 1
+# 2 1 3 6 4 5
+# 6 4 5 2 1 3
+# 5 2 1 3 6 4
+
+a=240x b=30x c=11+ d=10+ e=144x f=200x g=14+ h=3 i=15+ j=4/ k=3-
+a a b b b c
+d a a e b c
+d d e e f c
+d g g e f f
+h g g i f j
+k k i i i j
+# 6 4 5 2 1 3
+# 4 5 2 1 3 6
+# 1 3 6 4 5 2
+# 2 1 3 6 4 5
+# 3 6 4 5 2 1
+# 5 2 1 3 6 4
+
+a=12+ b=16+ c=30x d=3 e=36x f=14+ g=120x h=72x i=10+ j=480x
+a b b c c d
+a b b c c e
+a f f g e e
+f f h g g e
+i i h g j j
+i i h h j j
+# 2 6 4 5 1 3
+# 4 5 1 3 2 6
+# 6 4 5 1 3 2
+# 3 2 6 4 5 1
+# 1 3 2 6 4 5
+# 5 1 3 2 6 4
+
+a=12x b=14+ c=360x d=20x e=1- f=1- g=3 h=16+ i=60x j=48x k=3- l=10x
+a a b b b c
+d a b e e c
+d d f g c c
+d h f i i j
+k h h h i j
+k l l l j j
+# 4 3 6 5 1 2
+# 5 1 2 4 3 6
+# 1 2 4 3 6 5
+# 2 4 3 6 5 1
+# 3 6 5 1 2 4
+# 6 5 1 2 4 3
+
+a=15x b=24x c=12+ d=30x e=12+ f=12x g=12x h=9+ i=9+ j=48x k=30x l=9+ m=5
+a a b c c d
+a e b c f d
+e e b f f g
+h h h i g g
+j k k i l l
+j j k i m l
+# 1 5 3 4 2 6
+# 3 4 2 6 1 5
+# 5 3 4 2 6 1
+# 2 6 1 5 3 4
+# 6 1 5 3 4 2
+# 4 2 6 1 5 3
+
+a=15+ b=180x c=13+ d=120x e=20x f=1- g=72x h=15+ i=60x j=7+ k=3
+a a a b b b
+c a d b e e
+c f d e e g
+c f d d g g
+c h i i i j
+h h k i j j
+# 2 1 6 4 3 5
+# 1 6 4 3 5 2
+# 4 3 5 2 1 6
+# 5 2 1 6 4 3
+# 3 5 2 1 6 4
+# 6 4 3 5 2 1
+
+a=8+ b=13+ c=12+ d=6+ e=4- f=120x g=5+ h=30x i=18x j=40x k=12x l=1- m=3- n=3
+a a a b b c
+d d e e b c
+d f f g g c
+h f i i j k
+h h i j j k
+l l m m n k
+# 4 1 3 2 6 5
+# 1 3 2 6 5 4
+# 2 6 5 4 1 3
+# 5 4 1 3 2 6
+# 3 2 6 5 4 1
+# 6 5 4 1 3 2
+
+a=72x b=15+ c=5x d=7+ e=10x f=24x g=120x h=30x i=6+ j=72x k=2 l=13+ m=5/
+a b b c c d
+a a b c d d
+e e f f g g
+e h f i g j
+h h i i j j
+k l l l m m
+# 3 4 6 5 1 2
+# 4 6 5 1 2 3
+# 1 2 3 4 6 5
+# 5 1 2 3 4 6
+# 6 5 1 2 3 4
+# 2 3 4 6 5 1
+
+a=48x b=10x c=8+ d=10+ e=11+ f=14+ g=9x h=14+ i=8x j=48x k=90x l=15x
+a a a b c c
+d d d b c e
+f f g b h e
+f g g h h e
+i j j j k k
+i i l l l k
+# 6 2 4 5 3 1
+# 3 1 6 2 4 5
+# 4 5 3 1 6 2
+# 5 3 1 6 2 4
+# 1 6 2 4 5 3
+# 2 4 5 3 1 6
+
+a=360x b=40x c=36x d=12+ e=1- f=12+ g=60x h=11+ i=15+ j=4 k=9+
+a a a b b b
+c a d d b e
+c c d f f e
+c g d f f h
+g g i i h h
+j g i i k k
+# 5 3 6 4 2 1
+# 6 4 2 1 5 3
+# 2 1 5 3 6 4
+# 3 6 4 2 1 5
+# 1 5 3 6 4 2
+# 4 2 1 5 3 6
+
+a=360x b=24x c=16+ d=3+ e=90x f=15+ g=5 h=6x i=5+ j=288x k=150x
+a a b b b b
+a c c c d d
+a e e c f f
+g e h h f f
+i e j j k k
+i i j j k k
+# 6 5 1 2 3 4
+# 3 4 6 5 1 2
+# 4 6 5 1 2 3
+# 5 1 2 3 4 6
+# 2 3 4 6 5 1
+# 1 2 3 4 6 5
+
+a=13+ b=12+ c=1- d=7+ e=5+ f=60x g=13+ h=3 i=75x j=9+ k=9+ l=8+ m=3/ n=8+
+a a b b c c
+a d b e e f
+d d g h f f
+i i g g j j
+k i l m m j
+k k l l n n
+# 6 4 1 5 3 2
+# 3 2 6 4 1 5
+# 4 1 5 3 2 6
+# 5 3 2 6 4 1
+# 1 5 3 2 6 4
+# 2 6 4 1 5 3
+
+a=48x b=300x c=9x d=360x e=17+ f=12x g=14+ h=60x i=2- j=2- k=4
+a b b b c c
+a a b c c d
+a e e d d d
+e e f f g h
+i i f g g h
+j j f k g h
+# 4 2 6 5 3 1
+# 2 6 5 3 1 4
+# 1 4 2 6 5 3
+# 6 5 3 1 4 2
+# 3 1 4 2 6 5
+# 5 3 1 4 2 6
+
+a=24x b=21+ c=11+ d=15+ e=2- f=17+ g=10x h=11+ i=16+ j=12x k=3/
+a a a a b b
+c c c c b b
+d e e f g g
+d d h f f g
+i d h f j k
+i i i j j k
+# 4 2 3 1 5 6
+# 2 3 1 5 6 4
+# 6 4 2 3 1 5
+# 3 1 5 6 4 2
+# 1 5 6 4 2 3
+# 5 6 4 2 3 1
+
+a=40x b=30x c=9+ d=6x e=8+ f=36x g=2 h=9+ i=14+ j=1- k=13+ l=9+ m=4- n=2-
+a a b b c d
+a e b c c d
+f e g h i i
+f e h h i j
+f k k l l j
+m m k l n n
+# 4 2 1 5 3 6
+# 5 3 6 4 2 1
+# 6 4 2 1 5 3
+# 2 1 5 3 6 4
+# 3 6 4 2 1 5
+# 1 5 3 6 4 2
+
+a=48x b=17+ c=8+ d=18x e=60x f=13+ g=8+ h=21+ i=6+ j=2/ k=120x
+a a b b b c
+a a d b e c
+f d d d e g
+f h h e e g
+f h h i i i
+f j j k k k
+# 2 1 5 6 4 3
+# 6 4 3 2 1 5
+# 4 3 2 1 5 6
+# 1 5 6 4 3 2
+# 5 6 4 3 2 1
+# 3 2 1 5 6 4
+
+a=48x b=150x c=36x d=80x e=360x f=30x g=108x h=3- i=3- j=11+ k=4
+a b b b c c
+a a d b c c
+a d d d e e
+f f g g e e
+f f g g h i
+j j j k h i
+# 4 5 1 6 3 2
+# 3 2 4 5 1 6
+# 2 4 5 1 6 3
+# 1 6 3 2 4 5
+# 5 1 6 3 2 4
+# 6 3 2 4 5 1
+
+a=2- b=36x c=60x d=4 e=360x f=180x g=40x h=3- i=15+ j=60x k=2/ l=4x
+a a b b c d
+e e b b c c
+e e f f g c
+h h f f g g
+i i j j j k
+i i l l j k
+# 1 3 6 2 5 4
+# 5 4 1 3 6 2
+# 3 6 2 5 4 1
+# 4 1 3 6 2 5
+# 6 2 5 4 1 3
+# 2 5 4 1 3 6
+
+a=17+ b=6x c=240x d=17+ e=6+ f=6x g=16+ h=60x i=4- j=18+
+a a b b c c
+a d b b c c
+a d d e e e
+f f g g h i
+f j g g h i
+f j j j h h
+# 6 2 1 3 4 5
+# 5 6 2 1 3 4
+# 4 5 6 2 1 3
+# 2 1 3 4 5 6
+# 1 3 4 5 6 2
+# 3 4 5 6 2 1
+
+a=180x b=40x c=120x d=36x e=14+ f=90x g=80x h=16+ i=5+ j=8+
+a a a a b b
+c c d d b e
+c c d d b e
+f f g g e e
+f f g g h h
+i i j j h h
+# 6 2 3 5 4 1
+# 5 4 1 6 2 3
+# 1 6 2 3 5 4
+# 2 3 5 4 1 6
+# 3 5 4 1 6 2
+# 4 1 6 2 3 5
+
+a=72x b=24x c=150x d=4 e=16+ f=30x g=144x h=60x i=16+ j=24x
+a a b b b c
+a a d b c c
+e e f f g c
+e e f f g g
+h h i i g j
+h h i i j j
+# 3 2 6 4 1 5
+# 2 6 4 1 5 3
+# 6 4 1 5 3 2
+# 1 5 3 2 6 4
+# 4 1 5 3 2 6
+# 5 3 2 6 4 1
+
+a=9+ b=15+ c=1 d=60x e=7+ f=10+ g=9+ h=12+ i=40x j=15x k=15+ l=48x m=3x
+a a b b c d
+a e b f d d
+g e e f f h
+g i i j j h
+g k i j l h
+k k m m l l
+# 6 2 5 4 1 3
+# 1 3 6 2 5 4
+# 4 1 3 6 2 5
+# 2 5 4 1 3 6
+# 3 6 2 5 4 1
+# 5 4 1 3 6 2
+
+a=16+ b=16+ c=13+ d=2 e=120x f=16x g=120x h=108x i=40x j=13+
+a a a b b b
+c a d b e e
+c c f f e e
+c f f g g h
+i i j g g h
+i i j j h h
+# 2 6 3 4 1 5
+# 1 5 2 6 3 4
+# 6 3 4 1 5 2
+# 3 4 1 5 2 6
+# 5 2 6 3 4 1
+# 4 1 5 2 6 3
+
+a=15+ b=10x c=6x d=12x e=144x f=11+ g=30x h=3x i=72x j=1- k=6x l=2 m=120x
+a a a b b c
+d d e b f c
+d g e e f c
+g g h h f i
+j j k h i i
+l k k m m m
+# 4 6 5 2 1 3
+# 3 4 6 5 2 1
+# 1 3 4 6 5 2
+# 5 2 1 3 4 6
+# 6 5 2 1 3 4
+# 2 1 3 4 6 5
+
+a=60x b=5x c=9+ d=72x e=6+ f=13+ g=5 h=12x i=40x j=90x k=12+ l=6x m=10x
+a b c c c d
+a b b e e d
+a f f g e d
+h f i i j j
+h k i l j m
+h k k l m m
+# 5 1 3 2 4 6
+# 6 5 1 3 2 4
+# 2 4 6 5 1 3
+# 1 3 2 4 6 5
+# 4 6 5 1 3 2
+# 3 2 4 6 5 1
+
+a=10+ b=40x c=18x d=2/ e=4- f=4 g=2/ h=13+ i=3- j=1- k=18x l=60x m=10x n=4x o=7+
+a a b b c d
+e a b c c d
+e f g h i i
+j j g h h k
+l l m n o k
+l m m n o k
+# 3 6 2 5 1 4
+# 5 1 4 3 6 2
+# 1 4 3 6 2 5
+# 4 3 6 2 5 1
+# 2 5 1 4 3 6
+# 6 2 5 1 4 3
+
+a=15+ b=8+ c=8+ d=10+ e=60x f=6+ g=60x h=12+ i=9+ j=24x k=9+ l=4 m=2-
+a a b b c c
+a d b e e c
+f d d e g g
+f h i i g j
+f h h i j j
+k k k l m m
+# 5 6 2 1 4 3
+# 4 3 5 6 2 1
+# 1 4 3 5 6 2
+# 2 1 4 3 5 6
+# 3 5 6 2 1 4
+# 6 2 1 4 3 5
+
+a=12+ b=16+ c=9+ d=6x e=11+ f=8+ g=120x h=9+ i=6x j=60x k=3 l=3/ m=20x
+a b b c d d
+a b c c e d
+a f f e e g
+h f i i j g
+h h i j j g
+k l l m m m
+# 2 6 5 4 1 3
+# 6 5 4 1 3 2
+# 4 1 3 2 6 5
+# 5 4 1 3 2 6
+# 1 3 2 6 5 4
+# 3 2 6 5 4 1
+
+a=216x b=17+ c=2 d=40x e=15+ f=13+ g=15+ h=10+ i=80x j=72x
+a a b b b c
+a a d b e e
+f f d d e e
+f f d g g h
+i i g g h h
+i i j j j h
+# 4 3 6 1 5 2
+# 3 6 1 5 2 4
+# 1 5 2 4 3 6
+# 6 1 5 2 4 3
+# 2 4 3 6 1 5
+# 5 2 4 3 6 1
+
+a=10+ b=24x c=3- d=120x e=2 f=3- g=120x h=40x i=180x j=24x k=20x l=2/
+a a b c c d
+e a b b d d
+f f b g g d
+h h i g g j
+h h i i j j
+k k i l l j
+# 6 1 4 5 2 3
+# 2 3 6 1 4 5
+# 3 6 1 4 5 2
+# 1 4 5 2 3 6
+# 5 2 3 6 1 4
+# 4 5 2 3 6 1
+
+a=4/ b=3- c=3- d=7+ e=1- f=1- g=3- h=3x i=3+ j=1- k=1- l=2/ m=11+ n=2- o=6/ p=6x q=4/ r=2-
+a b c c d e
+a b f f d e
+g h i j j k
+g h i l l k
+m m n o p q
+r r n o p q
+# 4 5 6 3 1 2
+# 1 2 4 5 6 3
+# 3 1 2 4 5 6
+# 6 3 1 2 4 5
+# 5 6 3 1 2 4
+# 2 4 5 6 3 1
+
+a=30x b=30x c=2- d=6 e=9+ f=9+ g=3- h=10+ i=11+ j=12+ k=11+ l=60x m=12x n=4+
+a a b c c d
+e a b f f g
+e e b h f g
+i j h h k k
+i j j l l k
+i m m l n n
+# 5 1 3 4 2 6
+# 2 6 5 1 3 4
+# 3 4 2 6 5 1
+# 6 5 1 3 4 2
+# 1 3 4 2 6 5
+# 4 2 6 5 1 3
+
+a=16+ b=36x c=12+ d=72x e=40x f=120x g=90x h=360x i=4 j=9+
+a a b b c c
+a a b d c c
+e e b d d d
+e f f f f g
+e h h h g g
+i h j j j g
+# 6 5 4 3 2 1
+# 3 2 1 6 5 4
+# 5 4 3 2 1 6
+# 2 1 6 5 4 3
+# 1 6 5 4 3 2
+# 4 3 2 1 6 5
+
+a=11+ b=18+ c=7+ d=48x e=18+ f=13+ g=75x h=13+ i=16+ j=4
+a a b c c d
+a a b b c d
+e e b f c d
+e e f f f g
+h h i i g g
+h h i i j g
+# 5 3 4 1 2 6
+# 1 2 6 5 3 4
+# 6 5 3 4 1 2
+# 3 4 1 2 6 5
+# 4 1 2 6 5 3
+# 2 6 5 3 4 1
+
+a=72x b=80x c=5 d=10+ e=14+ f=18+ g=1- h=40x i=180x j=4x k=18x
+a a a a b c
+d d b b b e
+d d f f e e
+g g f f h e
+i i j h h h
+i i j k k k
+# 4 3 6 1 2 5
+# 6 1 2 5 4 3
+# 1 2 5 4 3 6
+# 5 4 3 6 1 2
+# 3 6 1 2 5 4
+# 2 5 4 3 6 1
+
+a=11+ b=48x c=60x d=14+ e=144x f=18+ g=14+ h=30x i=13+ j=3
+a a b c c c
+a a b b c d
+e e b f f d
+e e g f d d
+h h g f i i
+h g g i i j
+# 2 1 6 3 5 4
+# 3 5 4 2 1 6
+# 4 2 1 6 3 5
+# 6 3 5 4 2 1
+# 1 6 3 5 4 2
+# 5 4 2 1 6 3
+
+a=90x b=11+ c=15+ d=14+ e=3/ f=12+ g=90x h=12x i=15+ j=120x
+a a b c c d
+a a b c c d
+e e b b d d
+f f g g h h
+f f g g i i
+j j j j i i
+# 6 1 4 3 5 2
+# 3 5 2 6 1 4
+# 2 6 1 4 3 5
+# 5 2 6 1 4 3
+# 1 4 3 5 2 6
+# 4 3 5 2 6 1
+
+a=10x b=180x c=24x d=4 e=3/ f=72x g=14+ h=3/ i=120x j=36x k=15+ l=5/
+a b b c c c
+a b b c d e
+f f g g h e
+f f g g h i
+j j j k l i
+j k k k l i
+# 5 6 1 4 3 2
+# 2 5 6 1 4 3
+# 4 3 2 5 6 1
+# 6 1 4 3 2 5
+# 1 4 3 2 5 6
+# 3 2 5 6 1 4
+
+a=10x b=8+ c=15+ d=90x e=6+ f=9+ g=15+ h=36x i=11+ j=8+ k=3- l=10x m=9+
+a a a b c c
+d d b b c e
+d f f g g e
+h f i g j e
+h h i i j j
+k k l l m m
+# 1 5 2 3 6 4
+# 3 6 4 1 5 2
+# 5 2 3 6 4 1
+# 6 4 1 5 2 3
+# 2 3 6 4 1 5
+# 4 1 5 2 3 6
+
+a=30x b=11+ c=2- d=90x e=7+ f=12+ g=9+ h=12x i=11+ j=16x k=60x l=30x m=3
+a a b b c c
+d a b e e f
+d g g e h f
+d g i h h f
+j j i i k k
+j l l l m k
+# 1 6 5 3 4 2
+# 6 5 3 4 2 1
+# 3 4 2 1 6 5
+# 5 3 4 2 1 6
+# 4 2 1 6 5 3
+# 2 1 6 5 3 4
+
+a=1- b=12+ c=11+ d=12x e=36x f=14+ g=16+ h=11+ i=360x j=12+
+a b b c c c
+a b b c d d
+e e f f g g
+e e f f g g
+h h i i i j
+h h i j j j
+# 6 5 3 1 4 2
+# 5 3 1 4 2 6
+# 2 6 5 3 1 4
+# 3 1 4 2 6 5
+# 1 4 2 6 5 3
+# 4 2 6 5 3 1
+
+a=8+ b=24x c=90x d=40x e=360x f=14+ g=3 h=24x i=120x j=10+ k=11+
+a b b c c c
+a b b c d d
+e f f g d d
+e f f h i i
+e e h h h i
+j j j k k k
+# 2 1 4 5 6 3
+# 6 3 2 1 4 5
+# 4 5 6 3 2 1
+# 3 2 1 4 5 6
+# 5 6 3 2 1 4
+# 1 4 5 6 3 2
+
+a=11+ b=75x c=16x d=9+ e=14+ f=16x g=5+ h=6 i=15x j=1- k=10+ l=8+ m=4x n=3-
+a a a b c c
+d d d b b c
+e e f f g h
+e i i f g g
+j i k k l l
+j m m k n n
+# 2 6 3 5 4 1
+# 1 2 6 3 5 4
+# 3 5 4 1 2 6
+# 6 3 5 4 1 2
+# 4 1 2 6 3 5
+# 5 4 1 2 6 3
+
+a=32x b=12x c=8+ d=15x e=48x f=8+ g=45x h=13+ i=10+ j=14+ k=11+ l=10+ m=1
+a a b b c c
+d a b e f f
+d g g e f h
+d g i e h h
+j j i k k l
+j m i k l l
+# 4 2 6 1 5 3
+# 3 4 2 6 1 5
+# 1 5 3 4 2 6
+# 5 3 4 2 6 1
+# 2 6 1 5 3 4
+# 6 1 5 3 4 2
+
+a=24x b=12+ c=144x d=120x e=8+ f=16+ g=30x h=2/ i=144x j=72x k=5
+a b b b c c
+a b d c c e
+a a d d d e
+f f f g g h
+f i i g j h
+k i i g j j
+# 4 5 3 2 1 6
+# 3 2 1 6 4 5
+# 2 1 6 4 5 3
+# 6 4 5 3 2 1
+# 1 6 4 5 3 2
+# 5 3 2 1 6 4
+
+a=8x b=14+ c=18x d=6+ e=24x f=14+ g=2 h=30x i=13+ j=15+ k=6+ l=24x m=10+
+a b c c c d
+a b b e e d
+f f g e h d
+f i i h h j
+k i l l m j
+k k l m m j
+# 4 5 1 6 3 2
+# 2 4 5 1 6 3
+# 6 3 2 4 5 1
+# 5 1 6 3 2 4
+# 1 6 3 2 4 5
+# 3 2 4 5 1 6
+
+a=1- b=20x c=10+ d=5 e=10+ f=18x g=2/ h=13+ i=7+ j=13+ k=5+ l=25x m=2/ n=6+ o=3-
+a a b b c c
+d e b f f g
+e e h h f g
+i j h k k l
+i j j m l l
+i n n m o o
+# 3 2 5 1 4 6
+# 5 1 4 6 3 2
+# 6 3 2 5 1 4
+# 1 4 6 3 2 5
+# 4 6 3 2 5 1
+# 2 5 1 4 6 3
+
+a=24x b=120x c=2 d=15+ e=13+ f=360x g=8+ h=25x i=2- j=144x k=15x
+a a a b b c
+d d b b e e
+d d f f e e
+g g f f h h
+g i i h h j
+g k k j j j
+# 4 6 1 5 3 2
+# 5 3 2 4 6 1
+# 6 1 5 3 2 4
+# 3 2 4 6 1 5
+# 2 4 6 1 5 3
+# 1 5 3 2 4 6
+
+a=11+ b=9+ c=7+ d=14+ e=12+ f=3/ g=12+ h=9+ i=13+ j=120x k=12x l=6x m=5
+a a a b b c
+d d e b c c
+d e e f f g
+h h i i j g
+h k i l j g
+k k l l j m
+# 1 6 4 5 2 3
+# 6 4 5 2 3 1
+# 4 5 2 3 1 6
+# 3 1 6 4 5 2
+# 5 2 3 1 6 4
+# 2 3 1 6 4 5
+
+a=40x b=12x c=30x d=9+ e=2 f=12+ g=90x h=24x i=15x j=9+ k=9+ l=30x m=9+
+a a b b c c
+d a b e c f
+d d g h f f
+i g g h j j
+i k k l m j
+i k l l m m
+# 4 2 1 3 6 5
+# 6 5 4 2 1 3
+# 2 1 3 6 5 4
+# 3 6 5 4 2 1
+# 5 4 2 1 3 6
+# 1 3 6 5 4 2
+
+a=48x b=5 c=14+ d=18+ e=36x f=14+ g=96x h=2x i=12+ j=180x k=9+
+a a b c c c
+a a d d c e
+f f d d e e
+f f g g h i
+j j g g h i
+j j k k k i
+# 1 6 5 3 4 2
+# 4 2 1 6 5 3
+# 2 1 6 5 3 4
+# 6 5 3 4 2 1
+# 5 3 4 2 1 6
+# 3 4 2 1 6 5
+
+a=120x b=9+ c=9+ d=30x e=9+ f=24x g=12+ h=18x i=10+ j=9+ k=13+ l=3/ m=5
+a a b b c c
+d a b e c f
+d d e e f f
+g h h i j j
+g g h i j k
+l l m i k k
+# 5 4 2 6 1 3
+# 2 6 1 3 5 4
+# 3 5 4 2 6 1
+# 6 1 3 5 4 2
+# 4 2 6 1 3 5
+# 1 3 5 4 2 6
+
+a=8+ b=14+ c=18+ d=60x e=90x f=12+ g=40x h=240x i=5+ j=2 k=18x
+a a b b b c
+d a b e c c
+d f e e c g
+d f f e g g
+d h f i g j
+h h h i k k
+# 3 4 5 2 1 6
+# 2 1 6 3 4 5
+# 5 2 1 6 3 4
+# 6 3 4 5 2 1
+# 1 6 3 4 5 2
+# 4 5 2 1 6 3
+
+a=8+ b=10x c=90x d=24x e=11+ f=5+ g=13+ h=108x i=9+ j=9+ k=2- l=30x m=3-
+a a b b c c
+a d b e c f
+g d d e e f
+g g h h i i
+j j h k i l
+j m m k l l
+# 1 4 5 2 3 6
+# 3 6 1 4 5 2
+# 6 1 4 5 2 3
+# 5 2 3 6 1 4
+# 2 3 6 1 4 5
+# 4 5 2 3 6 1
+
+a=17+ b=8+ c=16+ d=11+ e=15+ f=17+ g=48x h=16+ i=2- j=1-
+a a a b b b
+c a d d b e
+c c f d d e
+c f f f e e
+g g g g h i
+j j h h h i
+# 6 5 3 2 4 1
+# 5 3 2 4 1 6
+# 1 6 5 3 2 4
+# 4 1 6 5 3 2
+# 2 4 1 6 5 3
+# 3 2 4 1 6 5
+
+a=14+ b=16+ c=16+ d=10x e=240x f=3+ g=288x h=36x i=3- j=6x k=1 l=1-
+a b b c d d
+a b b c c d
+a e e c f g
+a e e h f g
+i j h h g g
+i j k h l l
+# 3 1 4 6 5 2
+# 4 6 5 2 3 1
+# 1 4 6 5 2 3
+# 6 5 2 3 1 4
+# 5 2 3 1 4 6
+# 2 3 1 4 6 5
+
+a=24x b=8+ c=13+ d=5x e=9+ f=90x g=7+ h=9+ i=150x j=7+ k=9+ l=8+ m=11+
+a b b b c d
+a a e c c d
+f e e g h h
+f i g g j k
+f i i j j k
+l l l m m k
+# 2 1 4 3 6 5
+# 4 3 6 5 2 1
+# 5 2 1 4 3 6
+# 6 5 2 1 4 3
+# 3 6 5 2 1 4
+# 1 4 3 6 5 2
+
+a=12+ b=20+ c=10+ d=3- e=72x f=18+ g=4x h=1 i=8x j=13+ k=36x l=30x
+a b b c c d
+a a b c c d
+a e b f f g
+e e e f f g
+h i i j j k
+l l j j k k
+# 3 5 6 1 4 2
+# 6 1 4 2 3 5
+# 2 3 5 6 1 4
+# 4 2 3 5 6 1
+# 1 4 2 3 5 6
+# 5 6 1 4 2 3
+
+a=10x b=17+ c=13+ d=120x e=144x f=90x g=1- h=16+ i=360x j=3 k=2/
+a a b b c d
+a a b c c d
+e f b g d d
+e f f g h h
+e i f j h h
+e i i i k k
+# 1 2 4 6 3 5
+# 5 1 2 4 6 3
+# 6 3 5 1 2 4
+# 3 5 1 2 4 6
+# 2 4 6 3 5 1
+# 4 6 3 5 1 2
+
+a=6x b=90x c=7+ d=2- e=30x f=4 g=11+ h=30x i=12+ j=10+ k=7+ l=10+ m=120x
+a a a b b c
+d e f b c c
+d e e g g h
+i i j g h h
+i k j j l l
+k k m m m l
+# 3 2 1 6 5 4
+# 6 5 4 3 2 1
+# 4 3 2 1 6 5
+# 1 6 5 4 3 2
+# 5 4 3 2 1 6
+# 2 1 6 5 4 3
+
+a=20x b=36x c=2- d=11+ e=90x f=9+ g=9+ h=12+ i=12+ j=2- k=60x l=4- m=1 n=1-
+a a a b b c
+d e e f b c
+d e g f h h
+d g g f h i
+j j k k i i
+l l k m n n
+# 1 4 5 6 2 3
+# 4 5 6 2 3 1
+# 2 3 1 4 5 6
+# 5 6 2 3 1 4
+# 3 1 4 5 6 2
+# 6 2 3 1 4 5
+
+a=30x b=2- c=144x d=11+ e=400x f=13+ g=108x h=8+ i=120x j=9+ k=6
+a a a b c c
+d d e b c c
+d d e e f f
+g g h e f f
+g g h h i i
+j j h k i i
+# 5 1 6 3 2 4
+# 2 4 5 1 6 3
+# 3 2 4 5 1 6
+# 6 3 2 4 5 1
+# 1 6 3 2 4 5
+# 4 5 1 6 3 2
+
+a=13+ b=12+ c=19+ d=16+ e=150x f=12x g=10+ h=180x i=4/ j=1- k=2
+a a b b c c
+a a b c c d
+e f b d d d
+e f f f g g
+e e h g g i
+j j h h k i
+# 6 2 1 4 3 5
+# 1 4 3 5 6 2
+# 2 1 4 3 5 6
+# 5 6 2 1 4 3
+# 3 5 6 2 1 4
+# 4 3 5 6 2 1
+
+a=11+ b=2- c=6+ d=10+ e=15x f=8+ g=60x h=16x i=36x j=9+ k=7+ l=9+ m=6+ n=2-
+a a a b c c
+d d e b c f
+d e e g g f
+h i i g j j
+h h i k l m
+n n k k l m
+# 5 4 2 6 1 3
+# 1 3 5 4 2 6
+# 6 1 3 5 4 2
+# 2 6 1 3 5 4
+# 4 2 6 1 3 5
+# 3 5 4 2 6 1
+
+a=240x b=90x c=6+ d=48x e=12+ f=360x g=120x h=10+ i=17+ j=4
+a a b b c c
+a a b b d c
+e f f d d d
+e f f g g g
+e h h h g i
+e j h i i i
+# 4 2 5 6 1 3
+# 5 6 1 3 4 2
+# 2 5 6 1 3 4
+# 1 3 4 2 5 6
+# 6 1 3 4 2 5
+# 3 4 2 5 6 1
+
+a=6/ b=9+ c=45x d=9+ e=9+ f=2 g=13+ h=9+ i=2- j=36x k=15+ l=6x m=6x n=1-
+a a b c c d
+e b b f c d
+e e g g h h
+i i g j j h
+k k l j m m
+k l l n n m
+# 1 6 2 3 5 4
+# 4 1 6 2 3 5
+# 2 3 5 4 1 6
+# 3 5 4 1 6 2
+# 5 4 1 6 2 3
+# 6 2 3 5 4 1
+
+a=12x b=12+ c=10x d=90x e=16x f=13+ g=7+ h=120x i=30x j=10+ k=11+ l=1 m=1-
+a b b c d d
+a a b c d e
+f g g c e e
+f g h h i i
+f j h k k i
+j j l k m m
+# 2 5 4 1 6 3
+# 1 6 3 2 5 4
+# 6 3 2 5 4 1
+# 3 2 5 4 1 6
+# 4 1 6 3 2 5
+# 5 4 1 6 3 2
+
+a=12+ b=60x c=1- d=180x e=14+ f=48x g=72x h=15+ i=12+ j=4 k=3x
+a a b b c c
+a a b b d d
+e e e e d f
+g g h h d f
+g g i h f f
+j i i h k k
+# 2 6 1 3 4 5
+# 1 3 4 5 2 6
+# 5 2 6 1 3 4
+# 6 1 3 4 5 2
+# 3 4 5 2 6 1
+# 4 5 2 6 1 3
+
+a=60x b=10+ c=13+ d=18+ e=10+ f=216x g=12+ h=14+ i=72x j=8+
+a a a b b b
+c c c b d d
+c e e f d d
+g e e f h h
+g g f f h h
+i i i j j j
+# 3 4 5 2 1 6
+# 4 5 2 1 6 3
+# 2 1 6 3 4 5
+# 5 2 1 6 3 4
+# 1 6 3 4 5 2
+# 6 3 4 5 2 1
+
+a=14+ b=60x c=11+ d=216x e=16+ f=360x g=9+ h=1- i=8+ j=15x k=4
+a a b b b b
+a c c d d e
+a c c d d e
+f f g h e e
+f g g h i i
+f j j j k i
+# 2 6 3 5 1 4
+# 1 4 2 6 3 5
+# 5 1 4 2 6 3
+# 3 5 1 4 2 6
+# 4 2 6 3 5 1
+# 6 3 5 1 4 2
+
+a=13+ b=11+ c=14+ d=18+ e=13+ f=120x g=13+ h=2 i=13+ j=90x
+a a b b c c
+a d b b c c
+a d d e f f
+g d e e f h
+g g i e f j
+g i i j j j
+# 6 4 2 5 3 1
+# 2 5 3 1 6 4
+# 1 6 4 2 5 3
+# 5 3 1 6 4 2
+# 3 1 6 4 2 5
+# 4 2 5 3 1 6
+
+a=18x b=40x c=1 d=24x e=12+ f=11+ g=3- h=36x i=20x j=6/ k=16x l=12+ m=10x n=3-
+a a b b c d
+e a b f d d
+e e f f g g
+h h i i i j
+k h l m m j
+k k l l n n
+# 6 3 2 5 1 4
+# 5 1 4 6 3 2
+# 2 5 1 4 6 3
+# 3 2 5 1 4 6
+# 4 6 3 2 5 1
+# 1 4 6 3 2 5
+
+a=6 b=270x c=3- d=8x e=16x f=540x g=300x h=11+ i=3- j=3/ k=2/ l=12+
+a b b c c d
+e b b f d d
+e e e f g g
+h h f f g g
+h h i i j k
+l l l l j k
+# 6 3 5 4 1 2
+# 2 6 3 5 4 1
+# 4 1 2 6 3 5
+# 1 2 6 3 5 4
+# 3 5 4 1 2 6
+# 5 4 1 2 6 3
+
