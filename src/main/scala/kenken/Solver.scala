@@ -160,15 +160,15 @@ object Solver {
     def parseCommandLine(args: Array[String]): (String, Boolean, Boolean) = {
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
-                              option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
+                              option: Set[Symbol]): (List[String], Set[Symbol]) = {
         args match {
           case Nil => (positional.reverse, option)
-          case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
-          case "-c" :: tail => parseCommandLineRec(tail, positional, option + ('count -> ""))
+          case "-v" :: tail => parseCommandLineRec(tail, positional, option + 'validate)
+          case "-c" :: tail => parseCommandLineRec(tail, positional, option + 'count)
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
-      val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
+      val (positional, option) = parseCommandLineRec(args.toList, Nil, Set())
       require(positional.size == 1, "Incorrect number of arguments")
       (positional.head, option.contains('validate), option.contains('count))
     }
