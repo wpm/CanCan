@@ -19,6 +19,28 @@ object Misc {
                      |h h h i i i""".stripMargin)
   val s2 = HeuristicSolver2(p2)
 
+  // Still slow
+  val p3 = Puzzle( """a=315x b=1- c=24+ d=2- e=5 f=22+ g=25+ h=210x i=378x j=13+ k=22+ l=22+ m=144x n=18+ o=18+ p=24x q=5 r=22+ s=126x t=240x u=14+ v=24+ w=20+ x=6 y=1
+                     |a a a b c c c d d
+                     |e f a b g c h h i
+                     |f f f g g j h h i
+                     |k l l m g j j n i
+                     |k l l m o o j n i
+                     |k k m m o o p n q
+                     |r r s s t t p p p
+                     |r r s u t t v v w
+                     |x y s u u v v w w""".stripMargin)
+  //  1 7 5 2 9 3 8 4 6
+  //  5 2 9 3 8 4 6 1 7
+  //  9 3 8 4 6 1 7 5 2
+  //  8 4 6 1 7 5 2 9 3
+  //  3 8 4 6 1 7 5 2 9
+  //  2 9 3 8 4 6 1 7 5
+  //  7 5 2 9 3 8 4 6 1
+  //  4 6 1 7 5 2 9 3 8
+  //  6 1 7 5 2 9 3 8 4
+
+
   def main(args: Array[String]) {
     MinimalSolver(p2).isPossibleSolution(Grid(6))
   }

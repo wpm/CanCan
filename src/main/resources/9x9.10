@@ -1,0 +1,200 @@
+a=6 b=1440x ba=3 c=42x d=23+ e=6- f=15+ g=1350x h=19+ i=54x j=4/ k=96x l=17+ m=1470x n=11+ o=16+ p=96x q=1512x r=23+ s=48x t=18+ u=4- v=1 w=14+ x=4 y=42x z=4-
+ a  b  b  c  c  c  d  d  e
+ f  b  b  c  g  g  d  d  e
+ f  f  h  g  g  i  i  i  j
+ f  h  h  k  l  l  m  i  j
+ n  h  k  k  k  l  m  o  o
+ n  p  p  p  p  m  m  o  q
+ r  r  r  s  s  s  q  q  q
+ r  t  u  u  s  v  w  w  x
+ t  t  y  y  z  z  w  w ba
+# 6 5 9 2 1 3 8 4 7
+# 3 8 4 7 6 5 9 2 1
+# 4 7 6 5 9 2 1 3 8
+# 1 3 8 4 7 6 5 9 2
+# 9 2 1 3 8 4 7 6 5
+# 2 1 3 8 4 7 6 5 9
+# 5 9 2 1 3 8 4 7 6
+# 7 6 5 9 2 1 3 8 4
+# 8 4 7 6 5 9 2 1 3
+
+a=9 b=80x c=504x d=24+ e=28x f=216x g=48x h=23+ i=13+ j=1134x k=24+ l=48x m=270x n=80x o=1764x p=630x q=2 r=288x s=7 t=23+ u=12+ v=36x w=24x x=4 y=11+ z=2-
+a b b c c d d e e
+f b b c c d d g g
+f f h h i j j g g
+f h h i i j j k k
+l l m m n n o k k
+l l m m n n o o o
+p q r s t t u v v
+p p r r t w u v x
+p y y r w w u z z
+# 9 8 1 6 3 5 2 4 7
+# 3 5 2 4 7 9 8 1 6
+# 6 3 5 2 4 7 9 8 1
+# 4 7 9 8 1 6 3 5 2
+# 1 6 3 5 2 4 7 9 8
+# 8 1 6 3 5 2 4 7 9
+# 5 2 4 7 9 8 1 6 3
+# 7 9 8 1 6 3 5 2 4
+# 2 4 7 9 8 1 6 3 5
+
+a=18+ b=19+ ba=28x bb=8+ bc=6- bd=2 be=8 c=28x d=14+ e=5- f=8 g=18x h=20+ i=168x j=10+ k=8+ l=16+ m=4 n=15+ o=14+ p=15+ q=8+ r=23+ s=378x t=28x u=11+ v=15+ w=5/ x=23+ y=17+ z=72x
+ a  a  b  c  c  d  d  e  e
+ f  a  b  b  c  d  g  g  h
+ i  i  j  j  k  l  l  g  h
+ i  m  j  k  k  l  n  n  h
+ o  o  p  q  r  r  n  s  t
+ o  u  p  q  r  v  s  s  t
+ w  u  p  x  v  v  y  y  t
+ w  u  z  x  x ba  y bb bb
+bc bc  z  z ba ba bd bb be
+# 9 6 4 7 1 2 5 8 3
+# 8 3 9 6 4 7 1 2 5
+# 4 7 1 2 5 8 3 9 6
+# 6 4 7 1 2 5 8 3 9
+# 2 5 8 3 9 6 4 7 1
+# 7 1 2 5 8 3 9 6 4
+# 1 2 5 8 3 9 6 4 7
+# 5 8 3 9 6 4 7 1 2
+# 3 9 6 4 7 1 2 5 8
+
+a=17+ b=432x c=7 d=14+ e=25+ f=63x g=40x h=1- i=15+ j=112x k=21+ l=432x m=23+ n=60x o=288x p=28+ q=10+ r=1728x s=8 t=70x u=21x v=8 w=9 x=16+ y=1-
+a a a b b b c d d
+a e f b g g g d h
+e e f f g i i d h
+j e f k i i l l l
+j j m k k k l n n
+j m m o o o p p n
+q q m r o s p p t
+q q r r r u u u t
+v w x x x u y y t
+# 5 4 2 8 9 6 7 3 1
+# 6 7 3 1 5 4 2 8 9
+# 9 6 7 3 1 5 4 2 8
+# 7 3 1 5 4 2 8 9 6
+# 2 8 9 6 7 3 1 5 4
+# 1 5 4 2 8 9 6 7 3
+# 3 1 5 4 2 8 9 6 7
+# 4 2 8 9 6 7 3 1 5
+# 8 9 6 7 3 1 5 4 2
+
+a=315x b=1- c=24+ d=2- e=5 f=22+ g=25+ h=210x i=378x j=13+ k=22+ l=22+ m=144x n=18+ o=18+ p=24x q=5 r=22+ s=126x t=240x u=14+ v=24+ w=20+ x=6 y=1
+a a a b c c c d d
+e f a b g c h h i
+f f f g g j h h i
+k l l m g j j n i
+k l l m o o j n i
+k k m m o o p n q
+r r s s t t p p p
+r r s u t t v v w
+x y s u u v v w w
+# 1 7 5 2 9 3 8 4 6
+# 5 2 9 3 8 4 6 1 7
+# 9 3 8 4 6 1 7 5 2
+# 8 4 6 1 7 5 2 9 3
+# 3 8 4 6 1 7 5 2 9
+# 2 9 3 8 4 6 1 7 5
+# 7 5 2 9 3 8 4 6 1
+# 4 6 1 7 5 2 9 3 8
+# 6 1 7 5 2 9 3 8 4
+
+a=72x b=56x ba=9+ bb=9+ bc=6 bd=40x be=2 c=72x d=14+ e=14+ f=32x g=378x h=13+ i=12+ j=12+ k=9 l=144x m=5- n=5/ o=48x p=3 q=21x r=504x s=19+ t=18+ u=10+ v=192x w=9+ x=648x y=126x z=2-
+ a  a  a  b  b  b  c  c  d
+ e  f  f  g  g  h  c  d  d
+ e  e  f  g  i  h  j  j  k
+ l  l  m  m  i  h  j  n  n
+ l  o  o  p  i  q  r  r  r
+ s  s  o  t  t  q  u  u  v
+ s  w  w  t  x  q  y  u  v
+ z  w ba ba  x  x  y bb  v
+ z bc ba bd bd bd  y bb be
+# 1 8 9 7 2 4 6 3 5
+# 5 1 8 9 7 2 4 6 3
+# 7 2 4 6 3 5 1 8 9
+# 8 9 7 2 4 6 3 5 1
+# 2 4 6 3 5 1 8 9 7
+# 9 7 2 4 6 3 5 1 8
+# 3 5 1 8 9 7 2 4 6
+# 6 3 5 1 8 9 7 2 4
+# 4 6 3 5 1 8 9 7 2
+
+a=7- b=6- ba=4/ bb=6x bc=4- bd=10+ be=3/ bf=4x bg=3 bh=36x bi=1 bj=1- bk=7+ bl=6- bm=1- bn=3- bo=2/ bp=2- c=1- d=3- e=1- f=4 g=3- h=2- i=1- j=3- k=9+ l=3- m=1- n=4/ o=5- p=1- q=4/ r=9+ s=2- t=2- u=10x v=1- w=5- x=4/ y=9+ z=30x
+ a  b  c  c  d  d  e  e  f
+ a  b  g  h  h  i  i  j  j
+ k  k  g  l  l  m  m  n  n
+ o  p  p  q  q  r  r  s  s
+ o  t  u  v  v  w  x  y  y
+ z  t  u ba ba  w  x bb bc
+ z bd bd be bf bf bg bb bc
+bh bh bi be bj bj bk bl bm
+bn bn bo bo bp bp bk bl bm
+# 1 3 6 7 5 2 8 9 4
+# 8 9 4 1 3 6 7 5 2
+# 3 6 7 5 2 8 9 4 1
+# 2 8 9 4 1 3 6 7 5
+# 7 5 2 8 9 4 1 3 6
+# 6 7 5 2 8 9 4 1 3
+# 5 2 8 9 4 1 3 6 7
+# 9 4 1 3 6 7 5 2 8
+# 4 1 3 6 7 5 2 8 9
+
+a=30+ b=20+ c=14+ d=14+ e=168x f=280x g=12+ h=1944x i=5 j=19+ k=18+ l=70x m=288x n=9 o=13+ p=5- q=56x r=384x s=1512x t=75x u=16+ v=24+ w=9 x=30x
+a b b c c c d d e
+a a b c f f d d e
+a g g g f f h h e
+i j g k k k h h e
+j j j k l l m m n
+o p p l l m m q q
+o o r r s s s q t
+o u r r v v s t t
+u u u w v v x x x
+# 9 4 7 5 3 2 1 8 6
+# 8 6 9 4 7 5 3 2 1
+# 7 5 3 2 1 8 6 9 4
+# 5 3 2 1 8 6 9 4 7
+# 4 7 5 3 2 1 8 6 9
+# 6 9 4 7 5 3 2 1 8
+# 3 2 1 8 6 9 4 7 5
+# 2 1 8 6 9 4 7 5 3
+# 1 8 6 9 4 7 5 3 2
+
+a=21x b=40x ba=26+ bb=15+ bc=7 bd=1- be=7/ c=432x d=144x e=14+ f=84x g=10+ h=18+ i=3- j=10+ k=5 l=15+ m=72x n=30x o=10+ p=90x q=2/ r=20+ s=14+ t=56x u=42x v=45x w=6 x=40x y=9+ z=8+
+ a  a  a  b  b  b  c  c  c
+ d  d  d  e  f  f  g  g  g
+ h  i  j  e  k  f  l  l  m
+ h  i  j  e  n  n  l  o  m
+ h  p  p  q  n  r  o  o  s
+ t  t  p  q  u  r  r  s  s
+ v  t  w  u  u  x  x  y  y
+ v  v  z  z ba  x bb  y bc
+bd bd  z ba ba bb bb be be
+# 3 7 1 5 4 2 9 8 6
+# 2 9 8 6 3 7 1 5 4
+# 6 3 7 1 5 4 2 9 8
+# 8 6 3 7 1 5 4 2 9
+# 4 2 9 8 6 3 7 1 5
+# 7 1 5 4 2 9 8 6 3
+# 9 8 6 3 7 1 5 4 2
+# 1 5 4 2 9 8 6 3 7
+# 5 4 2 9 8 6 3 7 1
+
+a=90x b=90x c=15+ d=23+ e=8 f=2 g=1008x h=27+ i=5 j=360x k=21+ l=1008x m=5- n=16+ o=504x p=2 q=25+ r=420x s=13+ t=25+ u=16+ v=24+ w=240x x=3- y=9/
+a a b c c d d d e
+f a b b c d g g g
+h a b i c j j g k
+h l l m m j j n k
+h l l o o o p n k
+h q q o r r n n k
+s q q t r r u u u
+s v v t t t u w w
+s v v x x y y w w
+# 3 2 5 1 9 4 6 7 8
+# 2 5 1 9 4 6 7 8 3
+# 8 3 2 5 1 9 4 6 7
+# 4 6 7 8 3 2 5 1 9
+# 9 4 6 7 8 3 2 5 1
+# 6 7 8 3 2 5 1 9 4
+# 5 1 9 4 6 7 8 3 2
+# 1 9 4 6 7 8 3 2 5
+# 7 8 3 2 5 1 9 4 6
+
