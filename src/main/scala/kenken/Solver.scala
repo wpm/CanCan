@@ -37,7 +37,7 @@ abstract class Solver(puzzle: Puzzle) {
     yield next
   }
 
-  private def guessCell(grid: Grid): Option[Cell] = {
+  protected def guessCell(grid: Grid): Option[Cell] = {
     val u = grid.unsolved
     if (u.isEmpty) None
     else Some(u.toSeq.map {
@@ -52,7 +52,7 @@ abstract class Solver(puzzle: Puzzle) {
    * @return a constrained grid or `None` if the grid is inconsistent with the constraints
    */
   @tailrec
-  private def applyConstraints(grid: Grid, constraints: Set[_ <: Constraint] = puzzle.cageConstraints): Option[Grid] = {
+  final def applyConstraints(grid: Grid, constraints: Set[_ <: Constraint] = puzzle.cageConstraints): Option[Grid] = {
     if (constraints.isEmpty) Option(grid)
     else {
       val constraint = constraints.head
@@ -99,6 +99,29 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
+}
+
+/**
+ * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics and sorts
+ * guess cells by cage ambiguity.
+ */
+case class HeuristicSolver3(override val puzzle: Puzzle) extends HeuristicSolver2(puzzle) {
+  def cageAmbiguity(grid: Grid): Map[Constraint, Int] = {
+    Map[Constraint, Int]().withDefaultValue(0) ++
+      puzzle.containingCages.values.map(cage => cage -> (1 /: cage.cells.map(grid(_).size))(_ * _))
+  }
+
+  override protected def guessCell(grid: Grid): Option[Cell] = {
+    val u = grid.unsolved
+    if (u.isEmpty) None
+    else {
+      val cageSize = cageAmbiguity(grid)
+      Some(u.toSeq.map {
+        case (cell, values) =>
+          (cageSize(puzzle.containingCages(cell)), values.size, cell)
+      }.min._3)
+    }
+  }
 }
 
 /**
