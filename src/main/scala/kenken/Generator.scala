@@ -15,6 +15,10 @@ object Generator {
    * Percentage of cells that may be specified constraints
    */
   private val gamma = 0.05
+  /**
+   * Number of partial solutions to consider in a trial generated puzzle.
+   */
+  private val maxUniqueSearch = 1000
 
   /**
    * Generate a random KenKen puzzle and its solution
@@ -22,14 +26,24 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int, cageSize: Multinomial): (Seq[Seq[Int]], Puzzle) = {
+  def randomPuzzle(n: Int, cageSize: Multinomial, unique: Boolean): (Seq[Seq[Int]], Puzzle) = {
     // Does the puzzle have less than the maximum number of specified cells?
-    def singleCellCriteria(cages: Set[Set[Cell]]) = cages.filter(cage => cage.size == 1).size < n * n * gamma
+    def specifiedCells(cages: Set[Set[Cell]]) = cages.filter(cage => cage.size == 1).size < n * n * gamma
+    // Does the puzzle have a unique solution?
+    def uniqueSolution(puzzle: Puzzle) = HeuristicSolver2(puzzle).cappedSolution(maxUniqueSearch)._2
+
+    def puzzleFromLayout(solution: Seq[Seq[Int]], cages: Set[Set[Cell]]) =
+      Puzzle(n, cages.map(cage => randomCageConstraint(solution, Seq() ++ cage)))
+
     // Generate a random Latin Square then keep generating cage layouts for it until we have one that meets our
     // criteria.
     val solution = randomLatinSquare(n)
-    val cages = Iterator.continually(randomCageLayout(n, cageSize)).find(cages => singleCellCriteria(cages)).get
-    (solution, Puzzle(n, cages.map(cage => randomCageConstraint(solution, Seq() ++ cage))))
+    val cages = Iterator.continually(randomCageLayout(n, cageSize)).find(specifiedCells(_)).get
+    val puzzle = if (unique)
+      Iterator.continually(puzzleFromLayout(solution, cages)).find(uniqueSolution(_)).get
+    else
+      puzzleFromLayout(solution, cages)
+    (solution, puzzle)
   }
 
   /**
@@ -186,14 +200,35 @@ object Generator {
   }
 
   def main(args: Array[String]) {
+    def parseCommandLine(args: Array[String]): (Int, Int, Boolean) = {
+      def parseCommandLineRec(args: List[String],
+                              positional: List[String],
+                              option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
+        args match {
+          case Nil => (positional.reverse, option)
+          case "-u" :: tail => parseCommandLineRec(tail, positional, option + ('unique -> ""))
+          case s :: tail if (s(0) == '-') => {
+            println("Invalid switch " + s)
+            sys.exit(-1)
+          }
+          case arg :: tail if (arg.matches( """\d+""")) => parseCommandLineRec(tail, arg :: positional, option)
+          case arg :: tail => {
+            println("Unrecognized argument " + arg)
+            sys.exit(-1)
+          }
+        }
+      }
+      val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
+      require(positional.size == 2, "Invalid number of arguments")
+      (positional(0).toInt, positional(1).toInt, option.contains('unique))
+    }
+
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
-    require(args.size == 2, "Invalid number of arguments")
-    val numPuzzles = args(0).toInt
-    val n = args(1).toInt
+    val (numPuzzles, n, unique) = parseCommandLine(args)
     val cageSize = Multinomial(0, 0.07, 0.47, 0.46)
 
-    var puzzles = for (_ <- (1 to numPuzzles).toStream) yield randomPuzzle(n, cageSize)
+    var puzzles = for (_ <- (1 to numPuzzles).toStream) yield randomPuzzle(n, cageSize, unique)
     for (((solution, puzzle), i) <- puzzles.zipWithIndex)
       println("# " + (i + 1) + ".\n" + puzzle + "\n" +
         prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
