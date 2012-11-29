@@ -17,6 +17,16 @@ abstract class Solver(puzzle: Puzzle) {
   val constraintMap: Map[Cell, Set[Constraint]]
 
   /**
+   * Find all the puzzle solutions, abandoning the search after a maximum number of partial solutions.
+   * @param max the maxium number of partial iterations
+   * @return tuple (solutions, `true` if the entire space was searched)
+   */
+  def cappedSolutions(max: Int): (List[Grid], Boolean) = {
+    val i = search.toIterator
+    (i.take(max).filter(_.isSolved).toList, i.isEmpty)
+  }
+
+  /**
    * A solution of this puzzle. If there are multiple solutions one will be returned arbitrarily.
    */
   lazy val solution: Option[Grid] = solutions.headOption
@@ -24,21 +34,21 @@ abstract class Solver(puzzle: Puzzle) {
   /**
    * All the solutions for this puzzle.
    */
-  lazy val solutions: TraversableView[Grid, Traversable[_]] = partialSolutions.filter(_.isSolved)
+  lazy val solutions: TraversableView[Grid, Traversable[_]] = search.filter(_.isSolved)
 
   /**
    * All the partial solutions of this puzzle, including the complete solutions.
    * @return all the partial solutions of this puzzle
    */
-  def partialSolutions: TraversableView[Grid, Traversable[_]] = {
+  def search: TraversableView[Grid, Traversable[_]] = {
+    def searchRec(grid: Grid): TraversableView[Grid, Traversable[_]] = {
+      Traversable(grid).view ++ nextGrids(grid).flatMap(g => searchRec(g))
+    }
+
     applyConstraints(Grid(puzzle.n), puzzle.cageConstraints) match {
-      case Some(g) => search(g)
+      case Some(g) => searchRec(g)
       case None => Traversable[Grid]().view
     }
-  }
-
-  private def search(grid: Grid): TraversableView[Grid, Traversable[_]] = {
-    Traversable(grid).view ++ nextGrids(grid).flatMap(g => search(g))
   }
 
   private def nextGrids(grid: Grid): TraversableView[Grid, Traversable[_]] = {
@@ -207,7 +217,7 @@ object Solver {
         println((i + 1) + ".\n" + puzzle + "\n")
         val solver = HeuristicSolver1(puzzle)
         if (count)
-          printSolutionCounts(solver.partialSolutions)
+          printSolutionCounts(solver.search)
         else if (validate)
           printSolutionsAndValidate(MinimalSolver(puzzle), solver.solutions)
         else
