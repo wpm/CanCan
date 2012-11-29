@@ -76,7 +76,7 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
-  private def randomCageLayout(n: Int, cageSize: Multinomial) = {
+  def randomCageLayout(n: Int, cageSize: Multinomial): List[Set[Cell]] = {
 
     /**
      * Create a random graph between adjacent cells in a grid
@@ -104,7 +104,9 @@ object Generator {
         randomAdjacent.flatMap(adjacent => List(cell -> adjacent, adjacent -> cell))
       }
 
+      // The grid cells are the nodes in the graph.
       val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
+      // Draw edges between randomly adjacent cells and collect them into an adjacency list.
       val edges = cells.flatMap(cell => randomUndirectedEdges(cell))
       val emptyAdjacency = Map[Cell, Set[Cell]]() ++ cells.map(cell => cell -> Set[Cell]())
       val adjacency = (emptyAdjacency /: edges) {
@@ -185,12 +187,13 @@ object Generator {
   def main(args: Array[String]) {
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
-    val m = args(0).toInt
+    require(args.size == 2, "Invalid number of arguments")
+    val puzzles = args(0).toInt
     val n = args(1).toInt
     val cageSize = Multinomial(0, 0.07, 0.47, 0.46)
-    val puzzles = for (_ <- (1 to m))
-    yield randomPuzzle(n, cageSize)
-    for ((solution, puzzle) <- puzzles)
-      println(puzzle + "\n" + prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
+
+    for (((solution, puzzle), i) <- (for (_ <- (1 to puzzles)) yield randomPuzzle(n, cageSize)).zipWithIndex)
+      println("# " + (i + 1) + ".\n" + puzzle + "\n" +
+        prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
   }
 }
