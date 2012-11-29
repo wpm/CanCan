@@ -1,7 +1,9 @@
 package kenken
 
 import util.parsing.combinator.RegexParsers
-import util.parsing.input.Reader
+import util.parsing.input.{PagedSeqReader, Reader}
+import io.Source
+import collection.immutable.PagedSeq
 
 /**
  * String representations of grid and puzzle objects.
@@ -123,6 +125,16 @@ object StringRepresentation {
   def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[Puzzle]]) = r match {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
+
+  /**
+   * Read in a file, treating # as a comment delimiter and skipping leading blank lines.
+   * @param filename name of the file
+   * @return file reader
+   */
+  def readFile(filename: String): PagedSeqReader = {
+    val lines = Source.fromFile(filename).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
+    new PagedSeqReader(PagedSeq.fromLines(lines))
   }
 
   /**

@@ -2,9 +2,6 @@ package kenken
 
 import collection.TraversableView
 import annotation.tailrec
-import io.Source
-import util.parsing.input.PagedSeqReader
-import collection.immutable.PagedSeq
 
 /**
  * An algorithm that solves a KenKen puzzle.
@@ -209,8 +206,7 @@ object Solver {
     }
 
     val (filename, validate, count) = parseCommandLine(args)
-    val lines = Source.fromFile(filename).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
-    val in = new PagedSeqReader(PagedSeq.fromLines(lines))
+    val in = StringRepresentation.readFile(filename)
 
     StringRepresentation.parsePuzzles(in).zipWithIndex.foreach {
       case (puzzle, i) =>
