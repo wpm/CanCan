@@ -161,6 +161,17 @@ object Generator {
   }
 
   /**
+   * Discrete multinomial probability distribution over the support of the integers greater than zero.
+   */
+  case class Multinomial(xs: Double*) {
+    private val cdf = (1 to xs.size).map(xs.map(_ / xs.sum).slice(0, _).sum)
+
+    def sample() = cdf.indexWhere(_ > nextDouble) + 1
+
+    override def toString = cdf.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString(" ")
+  }
+
+  /**
    * Cage size distribution in puzzles.
    * @param puzzles set of puzzles
    * @return table of cage size distribution across the puzzles
@@ -172,27 +183,18 @@ object Generator {
     f.toList.map(t => (t._1, t._2 / d)).sorted.map(t => "%d:%.3f".format(t._1, t._2)).mkString("\n")
   }
 
-  /**
-   * Discrete multinomial probability distribution over the support of the integers greater than zero.
-   */
-  case class Multinomial(xs: Double*) {
-    private val cdf = (1 to xs.size).map(xs.map(_ / xs.sum).slice(0, _).sum)
-
-    def sample() = cdf.indexWhere(_ > nextDouble) + 1
-
-    override def toString = cdf.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString(" ")
-  }
-
   def main(args: Array[String]) {
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
     require(args.size == 2, "Invalid number of arguments")
-    val puzzles = args(0).toInt
+    val numPuzzles = args(0).toInt
     val n = args(1).toInt
     val cageSize = Multinomial(0, 0.07, 0.47, 0.46)
 
-    for (((solution, puzzle), i) <- (for (_ <- (1 to puzzles)) yield randomPuzzle(n, cageSize)).zipWithIndex)
+    var puzzles = for (_ <- (1 to numPuzzles).toStream) yield randomPuzzle(n, cageSize)
+    for (((solution, puzzle), i) <- puzzles.zipWithIndex)
       println("# " + (i + 1) + ".\n" + puzzle + "\n" +
         prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
+    println("\n" + prepend(empiricalCageSizeDistribution(puzzles.map(_._2)), "# "))
   }
 }
