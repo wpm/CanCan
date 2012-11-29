@@ -15,7 +15,7 @@ abstract class Solver(puzzle: Puzzle) {
 
   /**
    * Find all the puzzle solutions, abandoning the search after a maximum number of partial solutions.
-   * @param max the maxium number of partial iterations
+   * @param max the maximum number of partial iterations
    * @return tuple (solutions, `true` if the entire space was searched)
    */
   def cappedSolutions(max: Int): (List[Grid], Boolean) = {
@@ -156,20 +156,18 @@ abstract class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
 
 object Solver {
   /**
-   * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Print total step counts if a
-   * '-c' switch is provided.
+   * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided.
    *
    * Treat # as a comment delimiter in the puzzle file and skip leading blank lines.
    */
   def main(args: Array[String]) {
-    def parseCommandLine(args: Array[String]): (String, Boolean, Boolean) = {
+    def parseCommandLine(args: Array[String]): (String, Boolean) = {
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
                               option: Set[Symbol]): (List[String], Set[Symbol]) = {
         args match {
           case Nil => (positional.reverse, option)
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + 'validate)
-          case "-c" :: tail => parseCommandLineRec(tail, positional, option + 'count)
           case s :: tail if (s(0) == '-') => {
             println("Invalid switch " + s)
             sys.exit(-1)
@@ -179,45 +177,26 @@ object Solver {
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Set())
       require(positional.size == 1, "Incorrect number of arguments")
-      (positional.head, option.contains('validate), option.contains('count))
+      (positional.head, option.contains('validate))
     }
 
-    def printSolutions(solutions: TraversableView[Grid, Traversable[_]]) {
-      println(solutions.mkString("\n\n") + "\n\n")
-    }
-
-    def printSolutionCounts(partialSolutions: TraversableView[Grid, Traversable[_]]) {
-      val ss = partialSolutions.force
-      val n = ss.size
-      val m = ss.filter(_.isSolved).size
-      println(m + " solution(s), " + n + " step(s)\n\n")
-    }
-
-    def printSolutionsAndValidate(validator: Solver, solutions: TraversableView[Grid, Traversable[_]]) {
-      solutions.foreach {
-        solution =>
-          println(solution)
-          validator.isPossibleSolution(solution) match {
-            case true => println("VALID\n")
-            case false => println("INVALID\n")
-          }
-      }
-      println()
-    }
-
-    val (filename, validate, count) = parseCommandLine(args)
-    val in = StringRepresentation.readFile(filename)
-
-    StringRepresentation.parsePuzzles(in).zipWithIndex.foreach {
+    val (filename, validate) = parseCommandLine(args)
+    StringRepresentation.parsePuzzles(StringRepresentation.readFile(filename)).zipWithIndex.foreach {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
-        val solver = HeuristicSolver1(puzzle)
-        if (count)
-          printSolutionCounts(solver.search)
-        else if (validate)
-          printSolutionsAndValidate(MinimalSolver(puzzle), solver.solutions)
-        else
-          printSolutions(solver.solutions)
+        val solver = HeuristicSolver2(puzzle)
+        val validator = if (validate) Some(MinimalSolver(puzzle)) else None
+        solver.solutions.foreach {
+          solution =>
+            println(solution)
+            println(if (validate)
+              validator.get.isPossibleSolution(solution) match {
+                case true => "VALID\n"
+                case false => "INVALID\n"
+              }
+            else "")
+        }
+        println()
     }
   }
 }
