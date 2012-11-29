@@ -8,11 +8,6 @@ import scala.util.Random._
  */
 object Generator {
   /**
-   * Ratio of puzzle size to mean maximum cage size in a Poisson distribution
-   */
-  //  private val alpha = 0.5
-
-  /**
    * Probability of assigning an associative operator to a 2-cell cage
    */
   private val beta = 1 / 3.0
@@ -27,7 +22,7 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int, cageSize: DiscreteDistribution): (Seq[Seq[Int]], Puzzle) = {
+  def randomPuzzle(n: Int, cageSize: Multinomial): (Seq[Seq[Int]], Puzzle) = {
     val solution = randomLatinSquare(n)
     // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
     val cages = Iterator.continually(randomCageLayout(n, cageSize)).
@@ -81,7 +76,7 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
-  private def randomCageLayout(n: Int, cageSize: DiscreteDistribution) = {
+  private def randomCageLayout(n: Int, cageSize: Multinomial) = {
 
     /**
      * Create a random graph between adjacent cells in a grid
@@ -176,12 +171,22 @@ object Generator {
     f.toList.map(t => (t._1, t._2 / d)).sorted.map(t => "%d:%.3f".format(t._1, t._2)).mkString("\n")
   }
 
+  /**
+   * Discrete multinomial probability distribution over the support of the integers greater than zero.
+   */
+  case class Multinomial(xs: Double*) {
+    private val cdf = (1 to xs.size).map(xs.map(_ / xs.sum).slice(0, _).sum)
+
+    def sample() = cdf.indexWhere(_ > nextDouble) + 1
+
+    override def toString = cdf.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString(" ")
+  }
+
   def main(args: Array[String]) {
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
     val m = args(0).toInt
     val n = args(1).toInt
-    //  val cageSize = Poisson(n * alpha)
     val cageSize = Multinomial(0, 0.07, 0.47, 0.46)
     val puzzles = for (_ <- (1 to m))
     yield randomPuzzle(n, cageSize)
