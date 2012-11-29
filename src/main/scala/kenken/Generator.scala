@@ -23,10 +23,12 @@ object Generator {
    * @return (solution, puzzle) tuple
    */
   def randomPuzzle(n: Int, cageSize: Multinomial): (Seq[Seq[Int]], Puzzle) = {
+    // Does the puzzle have less than the maximum number of specified cells?
+    def singleCellCriteria(cages: Set[Set[Cell]]) = cages.filter(cage => cage.size == 1).size < n * n * gamma
+    // Generate a random Latin Square then keep generating cage layouts for it until we have one that meets our
+    // criteria.
     val solution = randomLatinSquare(n)
-    // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
-    val cages = Iterator.continually(randomCageLayout(n, cageSize)).
-      find(cages => cages.filter(cage => cage.size == 1).size < n * n * gamma).get
+    val cages = Iterator.continually(randomCageLayout(n, cageSize)).find(cages => singleCellCriteria(cages)).get
     (solution, Puzzle(n, cages.map(cage => randomCageConstraint(solution, Seq() ++ cage))))
   }
 
