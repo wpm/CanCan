@@ -27,8 +27,7 @@ object Generator {
     // Keep generating cage layouts until we have one that doesn't have too many single-cell components.
     val cages = Iterator.continually(randomCageLayout(n, cageSize)).
       find(cages => cages.filter(cage => cage.size == 1).size < n * n * gamma).get
-    // TODO Make randomCageLayout return sets.
-    (solution, Puzzle(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Seq() ++ cage))))
+    (solution, Puzzle(n, cages.map(cage => randomCageConstraint(solution, Seq() ++ cage))))
   }
 
   /**
@@ -76,7 +75,7 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
-  def randomCageLayout(n: Int, cageSize: Multinomial): List[Set[Cell]] = {
+  def randomCageLayout(n: Int, cageSize: Multinomial): Set[Set[Cell]] = {
 
     /**
      * Create a random graph between adjacent cells in a grid
@@ -130,7 +129,7 @@ object Generator {
    * @tparam N node type
    * @return list of sets of nodes in connected components
    */
-  def connectedComponents[N](ns: Traversable[N], adjacent: N => Traversable[N], m: Int): List[Set[N]] = {
+  def connectedComponents[N](ns: Traversable[N], adjacent: N => Traversable[N], m: Int): Set[Set[N]] = {
     /**
      * Build a connected component from a set of frontier nodes.
      *
@@ -152,11 +151,11 @@ object Generator {
       }
     }
 
-    // The fold memo is (visited nodes, List(connected component)).
-    ((Set[N](), List[Set[N]]()) /: ns) {
+    // The fold memo is (visited nodes, Set(connected component)).
+    ((Set[N](), Set[Set[N]]()) /: ns) {
       case ((vs, css), n) => if (!vs.contains(n)) {
         val (nvs, ncs) = connectedComponent(List(n), vs, Set[N](n))
-        (vs ++ nvs, ncs :: css)
+        (vs ++ nvs, css + ncs)
       } else (vs, css)
     }._2
   }
