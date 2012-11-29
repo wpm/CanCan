@@ -28,21 +28,21 @@ object Generator {
     val cages = Iterator.continually(randomCageLayout(n, cageSize)).
       find(cages => cages.filter(cage => cage.size == 1).size < n * n * gamma).get
     // TODO Make randomCageLayout return sets.
-    (solution, Puzzle(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Vector() ++ cage))))
+    (solution, Puzzle(n, Set() ++ cages.map(cage => randomCageConstraint(solution, Seq() ++ cage))))
   }
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Vector[Cell]): CageConstraint = {
-    def randomAssociativeConstraint(values: Vector[Int]) = {
+  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Seq[Cell]): CageConstraint = {
+    def randomAssociativeConstraint(values: Seq[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
         case _ => TimesConstraint(values.product, cage)
       }
     }
 
-    def randomNonAssociativeConstraint(values: Vector[Int]) = {
+    def randomNonAssociativeConstraint(values: Seq[Int]) = {
       require(values.size == 2)
       val (smaller, larger) = (values.sorted.head, values.sorted.last)
       require(smaller != larger)
