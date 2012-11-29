@@ -24,6 +24,22 @@ abstract class Solver(puzzle: Puzzle) {
   }
 
   /**
+   * Find a puzzle solution, abandoning the search after a maximum number of partial solutions.
+   *
+   * This function will only return `true` if the puzzle had a unique solution and we found it.
+   *
+   * If there are multiple solutions one will be returned arbitrarily.
+   * @param max the maximum number of partial iterations
+   * @return tuple (optional solution, `true` if the entire space was searched)
+   */
+  def cappedSolution(max: Int): (Option[Grid], Boolean) = {
+    val i = search.toIterator
+    val solutions = i.take(max).filter(_.isSolved)
+    val solution = if (solutions.hasNext) Some(solutions.next()) else None
+    (solution, i.isEmpty)
+  }
+
+  /**
    * A solution of this puzzle. If there are multiple solutions one will be returned arbitrarily.
    */
   lazy val solution: Option[Grid] = solutions.headOption
@@ -157,20 +173,21 @@ abstract class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
 object Solver {
   /**
    * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Only search a specified number
-   * of partial solutions if a '-m' switch is provided.
+   * of partial solutions if a '-m' switch is provided. Only print the first solution if the '-f' switch is provided.
    *
    * Treat # as a comment delimiter in the puzzle file and skip leading blank lines.
    */
   def main(args: Array[String]) {
-    def parseCommandLine(args: Array[String]): (String, Boolean, Option[Int]) = {
+    def parseCommandLine(args: Array[String]): (String, Boolean, Boolean, Option[Int]) = {
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
         args match {
           case Nil => (positional.reverse, option)
-          case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
+          case "-f" :: tail => parseCommandLineRec(tail, positional, option + ('first -> ""))
           case "-m" :: m :: tail if (m.matches( """\d+""")) =>
             parseCommandLineRec(tail, positional, option + ('max -> m))
+          case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
           case s :: tail if (s(0) == '-') => {
             println("Invalid switch " + s)
             sys.exit(-1)
@@ -184,18 +201,21 @@ object Solver {
         case Some(s) => Some(s.toInt)
         case None => None
       }
-      (positional.head, option.contains('validate), max)
+      (positional.head, option.contains('first), option.contains('validate), max)
     }
 
-    val (filename, validate, max) = parseCommandLine(args)
+    val (filename, firstOnly, validate, max) = parseCommandLine(args)
     StringRepresentation.parsePuzzles(StringRepresentation.readFile(filename)).zipWithIndex.foreach {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
         val solver = HeuristicSolver2(puzzle)
         val validator = if (validate) Some(MinimalSolver(puzzle)) else None
         val (solutions, complete) = max match {
-          case Some(m) => solver.cappedSolutions(m)
-          case None => (solver.solutions, true)
+          case Some(m) => if (firstOnly) {
+            val s = solver.cappedSolution(m)
+            (s._1.toSeq, s._2)
+          } else solver.cappedSolutions(m)
+          case None => if (firstOnly) (solver.solution.toSeq, true) else (solver.solutions, true)
         }
         solutions.foreach {
           solution =>
@@ -207,7 +227,7 @@ object Solver {
               }
             else "")
         }
-        println(if (complete) "" else "INCOMPLETE\n")
+        println(if (!complete) "INCOMPLETE\n" else "")
     }
   }
 }
