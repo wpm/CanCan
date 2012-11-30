@@ -24,6 +24,7 @@ object Generator {
    * Generate a random KenKen puzzle and its solution
    * @param n puzzle size
    * @param cageSize distribution from which to sample cage sizes
+   * @param unique ensure the puzzle has a unique solution
    * @return (solution, puzzle) tuple
    */
   def randomPuzzle(n: Int, cageSize: Multinomial, unique: Boolean): (Seq[Seq[Int]], Puzzle) = {
@@ -38,7 +39,8 @@ object Generator {
     // Generate a random Latin Square then keep generating cage layouts for it until we have one that meets our
     // criteria.
     val solution = randomLatinSquare(n)
-    val cages = Iterator.continually(randomCageLayout(n, cageSize)).find(specifiedCells(_)).get
+    val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
+    val cages = Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(_)).get
     val puzzle = if (unique)
       Iterator.continually(puzzleFromLayout(solution, cages)).find(uniqueSolution(_)).get
     else
@@ -49,7 +51,7 @@ object Generator {
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Seq[Cell]): CageConstraint = {
+  def randomCageConstraint(solution: Seq[Seq[Int]], cage: Seq[Cell]): CageConstraint = {
     def randomAssociativeConstraint(values: Seq[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
@@ -78,7 +80,7 @@ object Generator {
   /**
    * Write a random permutation in the first row, generate successive rows by rotation, then shuffle the rows.
    */
-  private def randomLatinSquare(n: Int): Seq[Seq[Int]] = {
+  def randomLatinSquare(n: Int): Seq[Seq[Int]] = {
     def rotate[E](xs: List[E]) = (xs.head :: xs.tail.reverse).reverse
     shuffle((List(shuffle((1 to n).toList)) /: (1 to n - 1)) {
       case (rows, _) => rotate(rows.head) :: rows
@@ -87,50 +89,37 @@ object Generator {
 
   /**
    * Randomly group adjacent cells in a grid into cages
-   * @param n size of the grid
+   * @param cells cells in the grid
    * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
-  def randomCageLayout(n: Int, cageSize: Multinomial): Set[Set[Cell]] = {
-
-    /**
-     * Create a random graph between adjacent cells in a grid
-     */
-    def randomUndirectedCellGraph = {
+  def randomCageLayout(cells: Seq[Cell], cageSize: Multinomial): Set[Set[Cell]] = {
+    // Create a random graph between adjacent cells in a grid
+    val edges = {
       /**
-       * Given a cell, choose a random set of adjacent cells and create
-       * symmetric edges between them.
+       * Given a cell, choose a random set of adjacent cells and create symmetric edges between them.
        */
       def randomUndirectedEdges(cell: Cell) = {
-        /**
-         * Cells above, below, to the left and right of a cell
-         */
-        def adjacentCells = {
+        // Cells above, below, to the left and right of a cell
+        val adjacentCells = {
           for (x <- (-1 to 1);
                y <- (-1 to 1)
                if ((x == 0 || y == 0) && x != y)
           )
           yield Cell(x + cell.row, y + cell.col)
-        }.filter {
-          case Cell(r, c) => r > 0 && r <= n && c > 0 && c <= n
-        }
-        val cells = adjacentCells
-        val randomAdjacent = shuffle(cells).take(nextInt(cells.size))
-        randomAdjacent.flatMap(adjacent => List(cell -> adjacent, adjacent -> cell))
+        }.filter(cells.contains(_))
+        val randomAdjacent = shuffle(adjacentCells).take(nextInt(adjacentCells.size))
+        randomAdjacent.flatMap(adjacent => Set(cell -> adjacent, adjacent -> cell))
       }
 
-      // The grid cells are the nodes in the graph.
-      val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
       // Draw edges between randomly adjacent cells and collect them into an adjacency list.
-      val edges = cells.flatMap(cell => randomUndirectedEdges(cell))
       val emptyAdjacency = Map[Cell, Set[Cell]]() ++ cells.map(cell => cell -> Set[Cell]())
-      val adjacency = (emptyAdjacency /: edges) {
+      val edges = cells.flatMap(cell => randomUndirectedEdges(cell))
+      (emptyAdjacency /: edges) {
         case (m, (s, d)) => m + (s -> (m(s) + d))
       }
-      (cells, adjacency)
     }
 
-    val (cells, edges) = randomUndirectedCellGraph
     connectedComponents(cells, edges(_: Cell), cageSize.sample())
   }
 
