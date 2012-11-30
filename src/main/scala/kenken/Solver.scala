@@ -7,6 +7,7 @@ import annotation.tailrec
  * An algorithm that solves a KenKen puzzle.
  * @param puzzle the puzzle to solve
  */
+// TODO Can take an optional initial grid as a hint.
 abstract class Solver(puzzle: Puzzle) {
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
@@ -47,6 +48,7 @@ abstract class Solver(puzzle: Puzzle) {
   /**
    * All the solutions for this puzzle.
    */
+  // TODO Should solutions be a stream? There aren't a lot of solutions, so we might as well cache them.
   lazy val solutions: TraversableView[Grid, Traversable[_]] = search.filter(_.isSolved)
 
   /**
@@ -171,6 +173,24 @@ abstract class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
 }
 
 object Solver {
+  private val defaultAlgorithm = HeuristicSolver2
+
+  /**
+   * Solutions of a puzzle using the default solving algorithm
+   * @param puzzle a puzzle
+   * @return the puzzle's solutions
+   */
+  def solutions(puzzle: Puzzle): TraversableView[Grid, Traversable[_]] = defaultAlgorithm(puzzle).solutions
+
+  /**
+   * Find all the puzzle solutions with the default algorithm, abandoning the search after a maximum number of partial
+   * solutions.
+   * @param puzzle a puzzle
+   * @param max the maximum number of partial iterations
+   * @return tuple (solutions, `true` if the entire space was searched)
+   */
+  def cappedSolutions(puzzle: Puzzle, max: Int): (List[Grid], Boolean) = defaultAlgorithm(puzzle).cappedSolutions(max)
+
   /**
    * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Only search a specified number
    * of partial solutions if a '-m' switch is provided. Only print the first solution if the '-f' switch is provided.
@@ -208,7 +228,7 @@ object Solver {
     StringRepresentation.parsePuzzles(StringRepresentation.readFile(filename)).zipWithIndex.foreach {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
-        val solver = HeuristicSolver2(puzzle)
+        val solver = defaultAlgorithm(puzzle)
         val validator = if (validate) Some(MinimalSolver(puzzle)) else None
         val (solutions, complete) = max match {
           case Some(m) => if (firstOnly) {

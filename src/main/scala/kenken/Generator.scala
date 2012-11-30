@@ -16,42 +16,88 @@ object Generator {
    */
   private val gamma = 0.05
   /**
-   * Number of partial solutions to consider in a trial generated puzzle.
+   * Default distribution of cage sizes
    */
-  private val maxUniqueSearch = 1000
+  private val defaultCageSizeDistribution = Multinomial(0, 0.07, 0.47, 0.46)
+  /**
+   * Maximum number of partial solutions before abandoning a generated grid
+   */
+  private val maxSearch = 1000
 
   /**
-   * Generate a random KenKen puzzle and its solution
+   * Generate a random puzzle and its unique solution.
+   *
    * @param n puzzle size
    * @param cageSize distribution from which to sample cage sizes
-   * @param unique ensure the puzzle has a unique solution
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int, cageSize: Multinomial, unique: Boolean): (Seq[Seq[Int]], Puzzle) = {
-    // Does the puzzle have less than the maximum number of specified cells?
-    def specifiedCells(cages: Set[Set[Cell]]) = cages.filter(cage => cage.size == 1).size < n * n * gamma
-    // Does the puzzle have a unique solution?
-    def uniqueSolution(puzzle: Puzzle) = HeuristicSolver2(puzzle).cappedSolution(maxUniqueSearch)._2
+  def uniqueRandomPuzzle(n: Int, cageSize: Multinomial = defaultCageSizeDistribution): (Puzzle, Seq[Seq[Int]]) = {
+    @tailrec
+    def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
+      Solver.cappedSolutions(puzzle, maxSearch) match {
+        case (_, false) => None // Unable to find this puzzle's solutions: abandon it.
+        case (grids, _) if (grids.size == 1) => Some(puzzle) // This puzzle has a unique solution.
+        case (grids, _) => {
+          // Partition cages into those whose values are equal across all the solutions and those who are not.
+          val (equal, unequal) = puzzle.cageConstraints.partition {
+            _.cells.forall(cell => grids.tail.forall(grid => grid(cell) == grids.head(cell)))
+          }
+          // Generate a new layout for the cells in the unequal cages. Skew the distribution of cage sizes towards the
+          // largest allowed size.
+          val unequalCells = unequal.flatMap(_.cells).toSeq
+          //        println("Cages " + unequal + ", Cells " + unequalCells.size)
+          val cages = randomCageLayout(unequalCells, Multinomial((1.0 :: List.fill(cageSize.max)(0.0)).reverse: _*))
+          val constraints = cages.map(cage => randomCageConstraint(solution, cage.toSeq))
+          // Create a puzzle with the equal cages and the new cages.
+          makeUnique(Puzzle(puzzle.n, equal ++ constraints), solution)
+        }
+      }
+    }
+    require(n > 1, "Invalid puzzle size " + n)
+    val (puzzle, solution) = Iterator.continually {
+      val (puzzle, solution) = randomPuzzle(n, cageSize)
+      (makeUnique(puzzle, solution), solution)
+    }.find {
+      // Generate another puzzle if...
+      _ match {
+        case (None, _) => false // ...we can't find all the solutions for this one.
+        case (Some(p), s) if (specifiedCells(n, p.cageConstraints.map(_.cells))) => true
+        case _ => false // ...this one has too many specified constraints.
+      }
+    }.get
+    (puzzle.get, solution)
+  }
 
+  /**
+   * Generate a random KenKen puzzle and its solution.
+   *
+   * The puzzle is not guaranteed to have a unique solution.
+   * @param n puzzle size
+   * @param cageSize distribution from which to sample cage sizes
+   * @return (solution, puzzle) tuple
+   */
+  def randomPuzzle(n: Int, cageSize: Multinomial): (Puzzle, Seq[Seq[Int]]) = {
     def puzzleFromLayout(solution: Seq[Seq[Int]], cages: Set[Set[Cell]]) =
-      Puzzle(n, cages.map(cage => randomCageConstraint(solution, Seq() ++ cage)))
+      Puzzle(n, cages.map(cage => randomCageConstraint(solution, cage.toSeq)))
 
+    require(n > 1, "Invalid puzzle size " + n)
     // Generate a random Latin Square then keep generating cage layouts for it until we have one that meets our
     // criteria.
     val solution = randomLatinSquare(n)
     val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
-    val cages = Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(_)).get
-    val puzzle = if (unique)
-      Iterator.continually(puzzleFromLayout(solution, cages)).find(uniqueSolution(_)).get
-    else
-      puzzleFromLayout(solution, cages)
-    (solution, puzzle)
+    val cages = Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(n, _)).get
+    (puzzleFromLayout(solution, cages), solution)
   }
+
+  // Does the puzzle have less than the maximum number of specified cells?
+  // TODO Doesn't work for n = 2.
+  private def specifiedCells(n: Int, cages: Set[_ <: Traversable[Cell]]): Boolean =
+    cages.filter(cage => cage.size == 1).size < n * n * gamma
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  def randomCageConstraint(solution: Seq[Seq[Int]], cage: Seq[Cell]): CageConstraint = {
+  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Seq[Cell]): CageConstraint = {
     def randomAssociativeConstraint(values: Seq[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
@@ -78,7 +124,11 @@ object Generator {
   }
 
   /**
+   * Generate a random Latin Square.
+   *
    * Write a random permutation in the first row, generate successive rows by rotation, then shuffle the rows.
+   * @param n the size of the Latin Square
+   * @return a random Latin Square
    */
   def randomLatinSquare(n: Int): Seq[Seq[Int]] = {
     def rotate[E](xs: List[E]) = (xs.head :: xs.tail.reverse).reverse
@@ -93,7 +143,7 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
-  def randomCageLayout(cells: Seq[Cell], cageSize: Multinomial): Set[Set[Cell]] = {
+  private def randomCageLayout(cells: Seq[Cell], cageSize: Multinomial): Set[Set[Cell]] = {
     // Create a random graph between adjacent cells in a grid
     val edges = {
       /**
@@ -168,10 +218,12 @@ object Generator {
   /**
    * Discrete multinomial probability distribution over the support of the integers greater than zero.
    */
-  case class Multinomial(xs: Double*) {
-    private val cdf = (1 to xs.size).map(xs.map(_ / xs.sum).slice(0, _).sum)
+  case class Multinomial(ps: Double*) {
+    private val cdf = (1 to ps.size).map(ps.map(_ / ps.sum).slice(0, _).sum)
 
     def sample() = cdf.indexWhere(_ > nextDouble) + 1
+
+    def max: Int = cdf.size
 
     override def toString = cdf.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString(" ")
   }
@@ -195,7 +247,7 @@ object Generator {
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
         args match {
           case Nil => (positional.reverse, option)
-          case "-u" :: tail => parseCommandLineRec(tail, positional, option + ('unique -> ""))
+          case "-n" :: tail => parseCommandLineRec(tail, positional, option + ('nonUnique -> ""))
           case s :: tail if (s(0) == '-') => {
             println("Invalid switch " + s)
             sys.exit(-1)
@@ -209,18 +261,19 @@ object Generator {
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
       require(positional.size == 2, "Invalid number of arguments")
-      (positional(0).toInt, positional(1).toInt, option.contains('unique))
+      (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique))
     }
 
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
     val (numPuzzles, n, unique) = parseCommandLine(args)
-    val cageSize = Multinomial(0, 0.07, 0.47, 0.46)
+    val cageSize = defaultCageSizeDistribution
 
-    var puzzles = for (_ <- (1 to numPuzzles).toStream) yield randomPuzzle(n, cageSize, unique)
-    for (((solution, puzzle), i) <- puzzles.zipWithIndex)
+    var puzzles = for (_ <- (1 to numPuzzles).toStream)
+    yield if (unique) uniqueRandomPuzzle(n, cageSize) else randomPuzzle(n, cageSize)
+    for (((puzzle, solution), i) <- puzzles.zipWithIndex)
       println("# " + (i + 1) + ".\n" + puzzle + "\n" +
         prepend(StringRepresentation.tableToString(solution), "# ") + "\n")
-    println("\n" + prepend(empiricalCageSizeDistribution(puzzles.map(_._2)), "# "))
+    println("\n" + prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
   }
 }

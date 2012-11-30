@@ -8,7 +8,7 @@ object Misc {
                      |f g g i i j
                      |k k l l m m
                      |k n n o o m""".stripMargin)
-  val s1 = HeuristicSolver1(p1)
+  val s1 = HeuristicSolver2(p1)
 
   val p2 = Puzzle( """a=19+ b=12x c=1 d=22+ e=600x f=22+ g=3 h=16+ i=72x
                      |a b b c d d
@@ -17,7 +17,7 @@ object Misc {
                      |a e e f f f
                      |h e e i f f
                      |h h h i i i""".stripMargin)
-  val s2 = HeuristicSolver1(p2)
+  val s2 = HeuristicSolver2(p2)
 
   // Still slow
   val p3 = Puzzle( """a=315x b=1- c=24+ d=2- e=5 f=22+ g=25+ h=210x i=378x j=13+ k=22+ l=22+ m=144x n=18+ o=18+ p=24x q=5 r=22+ s=126x t=240x u=14+ v=24+ w=20+ x=6 y=1
@@ -62,7 +62,7 @@ object Misc {
 
 
   def main(args: Array[String]) {
-    val solutions = HeuristicSolver1(p5).solutions.force
+    val solutions = HeuristicSolver2(p5).solutions.force
     solutions.foreach(solution => println(solution + "\n"))
     println(solutions.headOption)
   }

@@ -1,6 +1,6 @@
 package kenken
 
-import collection.GenTraversableOnce
+import scala.collection.GenTraversableOnce
 
 /**
  * An ''n'' x ''n'' grid containing a puzzle solution
@@ -58,9 +58,9 @@ case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
 
 object Grid {
   /**
-   * Create an empty grid
+   * Create a maximally ambiguous grid
    * @param n grid dimension
-   * @return empty grid
+   * @return maximally ambiguous grid
    */
   def apply(n: Int) = {
     val init = for (r <- (1 to n); c <- (1 to n)) yield Cell(r, c) -> Set((1 to n): _*)
@@ -68,24 +68,30 @@ object Grid {
   }
 
   /**
-   * Create a grid from a square table of integer sets
-   * @param m table of integer sets
-   * @return new grid
+   * Create a grid from a square matrix of integer sets
+   * @param matrix table of integer sets
+   * @return corresponding grid
    */
-  def apply(m: Seq[Seq[Set[Int]]]): Grid = {
-    val n = m.length
-    // The array must be square.
-    require(m.forall(_.length == n), "The grid is not square:\n" + m)
-    val init = for ((row, r) <- m.zipWithIndex; (item, c) <- row.zipWithIndex) yield (Cell(r + 1, c + 1), item)
+  implicit def apply(matrix: Seq[Seq[Set[Int]]]): Grid = {
+    val n = matrix.length
+    require(matrix.tail.forall(_.length == n), StringRepresentation.tableToString(matrix) + "\nis not square.")
+    val init = for ((row, r) <- matrix.zipWithIndex; (item, c) <- row.zipWithIndex) yield (Cell(r + 1, c + 1) -> item)
     new Grid(n, Map() ++ init)
   }
 
   /**
-   * Convert an string array of numbers to a grid
+   * Convert an string matrix of numbers to a grid
    * @param s array of numbers
-   * @return new grid
+   * @return corresponding grid
    */
-  def apply(s: String): Grid = StringRepresentation.parseGrid(s: String)
+  implicit def apply(s: String): Grid = StringRepresentation.parseGrid(s: String)
+
+  /**
+   * Create a grid from a square matrix of integers
+   * @param matrix table of integers
+   * @return corresponding grid
+   */
+  implicit def integerMatrixToGrid(matrix: Seq[Seq[Int]]): Grid = matrix.map(row => row.map(Set(_)))
 
   /**
    * Cells in a row

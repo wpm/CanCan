@@ -3,9 +3,9 @@ package kenken
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.Puzzle]] object.
+ * Unit tests for the [[kenken.Solver]] object.
  */
-class KenKenSpec extends FlatSpec {
+class SolverSpec extends FlatSpec {
 
   val (ls_2x2_puzzle, ls_2x2_sol1, ls_2x2_sol2) = (
     """. .
@@ -18,6 +18,7 @@ class KenKenSpec extends FlatSpec {
 
   behavior of "A 2x2 Latin square"
 
+  // TODO Error when solving a plain Latin Square with Heuristic2.
   it should "have solutions\n" + ls_2x2_sol1 + "\n" + ls_2x2_sol2 in {
     expect(Set(Grid(ls_2x2_sol1), Grid(ls_2x2_sol2))) {
       Set() ++ HeuristicSolver1(Puzzle(2)).solutions
@@ -46,7 +47,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken1_4x4_solution in {
     expect(List(Grid(kenken1_4x4_solution))) {
-      HeuristicSolver1(Puzzle(kenken1_4x4_puzzle)).solutions
+      Solver.solutions(Puzzle(kenken1_4x4_puzzle))
     }
   }
 
@@ -73,7 +74,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken2_4x4_solution in {
     expect(List(Grid(kenken2_4x4_solution))) {
-      HeuristicSolver1(Puzzle(kenken2_24x4_puzzle)).solutions
+      Solver.solutions(Puzzle(kenken2_24x4_puzzle))
     }
   }
 
@@ -100,7 +101,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken3_4x4_solution in {
     expect(List(Grid(kenken3_4x4_solution))) {
-      HeuristicSolver1(Puzzle(kenken3_4x4_puzzle)).solutions
+      Solver.solutions(Puzzle(kenken3_4x4_puzzle))
     }
   }
 
@@ -131,7 +132,7 @@ class KenKenSpec extends FlatSpec {
 
   it should "have solution\n" + kenken_6x6_solution in {
     expect(List(Grid(kenken_6x6_solution))) {
-      HeuristicSolver1(Puzzle(kenken_6x6_puzzle)).solutions
+      Solver.solutions(Puzzle(kenken_6x6_puzzle))
     }
   }
 
@@ -146,7 +147,7 @@ class KenKenSpec extends FlatSpec {
                      |c d""".stripMargin
   "An unsolvable puzzle" should "have no solutions" in {
     expect(Stream.empty) {
-      HeuristicSolver1(Puzzle(unsolvable)).solutions
+      Solver.solutions(Puzzle(unsolvable))
     }
   }
 }
