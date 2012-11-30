@@ -193,7 +193,8 @@ object Solver {
 
   /**
    * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Only search a specified number
-   * of partial solutions if a '-m' switch is provided. Only print the first solution if the '-f' switch is provided.
+   * of partial solutions if a '-m' switch is provided. Find all the solutions if the '-a' switch is provided;
+   * otherwise just return the first solution discovered.
    *
    * Treat # as a comment delimiter in the puzzle file and skip leading blank lines.
    */
@@ -204,7 +205,7 @@ object Solver {
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
         args match {
           case Nil => (positional.reverse, option)
-          case "-f" :: tail => parseCommandLineRec(tail, positional, option + ('first -> ""))
+          case "-a" :: tail => parseCommandLineRec(tail, positional, option + ('all -> ""))
           case "-m" :: m :: tail if (m.matches( """\d+""")) =>
             parseCommandLineRec(tail, positional, option + ('max -> m))
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
@@ -221,7 +222,7 @@ object Solver {
         case Some(s) => Some(s.toInt)
         case None => None
       }
-      (positional.head, option.contains('first), option.contains('validate), max)
+      (positional.head, !option.contains('all), option.contains('validate), max)
     }
 
     val (filename, firstOnly, validate, max) = parseCommandLine(args)
