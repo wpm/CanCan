@@ -27,6 +27,10 @@ object Generator {
   /**
    * Generate a random puzzle and its unique solution.
    *
+   * Ensure uniqueness by finding all solutions of the generated puzzle. If there is more than one, randomly change the
+   * cage layout for all the cells that are not in cages that have the same values in all the solutions. Keep doing
+   * this until we have a puzzle with a unique solution.
+   *
    * @param n puzzle size
    * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
