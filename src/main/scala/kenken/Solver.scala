@@ -6,9 +6,11 @@ import annotation.tailrec
 /**
  * An algorithm that solves a KenKen puzzle.
  * @param puzzle the puzzle to solve
+ * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
  */
-// TODO Can take an optional initial grid as a hint.
-abstract class Solver(puzzle: Puzzle) {
+abstract class Solver(puzzle: Puzzle, hint: Option[Grid]) {
+  private val init = if (hint == None) Grid(puzzle.n) else hint.get
+
   /**
    * Map of cells in the puzzle grid to the constraints that contain them
    */
@@ -60,7 +62,7 @@ abstract class Solver(puzzle: Puzzle) {
       Traversable(grid).view ++ nextGrids(grid).flatMap(g => searchRec(g))
     }
 
-    applyConstraints(Grid(puzzle.n), puzzle.cageConstraints) match {
+    applyConstraints(init, puzzle.cageConstraints) match {
       case Some(g) => searchRec(g)
       case None => Traversable[Grid]().view
     }
@@ -131,7 +133,7 @@ abstract class Solver(puzzle: Puzzle) {
 /**
  * Solver that doesn't use any heuristics.
  */
-case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
+case class MinimalSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends Solver(puzzle, hint) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
@@ -141,7 +143,7 @@ case class MinimalSolver(puzzle: Puzzle) extends Solver(puzzle) {
  * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics and sorts
  * guess cells by cage ambiguity.
  */
-case class HeuristicSolver2(puzzle: Puzzle) extends HeuristicSolver(puzzle) {
+case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint) {
   def cageAmbiguity(grid: Grid): Map[Constraint, Int] = {
     Map[Constraint, Int]().withDefaultValue(0) ++
       puzzle.containingCages.values.map(cage => cage -> (1 /: cage.cells.map(grid(_).size))(_ * _))
@@ -163,9 +165,9 @@ case class HeuristicSolver2(puzzle: Puzzle) extends HeuristicSolver(puzzle) {
 /**
  * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
  */
-case class HeuristicSolver1(puzzle: Puzzle) extends HeuristicSolver(puzzle)
+case class HeuristicSolver1(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint)
 
-abstract class HeuristicSolver(puzzle: Puzzle) extends Solver(puzzle) {
+abstract class HeuristicSolver(puzzle: Puzzle, hint: Option[Grid]) extends Solver(puzzle, hint) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints(puzzle.n,
@@ -178,18 +180,22 @@ object Solver {
   /**
    * Solutions of a puzzle using the default solving algorithm
    * @param puzzle a puzzle
+   * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
    * @return the puzzle's solutions
    */
-  def solutions(puzzle: Puzzle): TraversableView[Grid, Traversable[_]] = defaultAlgorithm(puzzle).solutions
+  def solutions(puzzle: Puzzle, hint: Option[Grid] = None): TraversableView[Grid, Traversable[_]] =
+    defaultAlgorithm(puzzle, hint).solutions
 
   /**
    * Find all the puzzle solutions with the default algorithm, abandoning the search after a maximum number of partial
    * solutions.
    * @param puzzle a puzzle
    * @param max the maximum number of partial iterations
+   * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
    * @return tuple (solutions, `true` if the entire space was searched)
    */
-  def cappedSolutions(puzzle: Puzzle, max: Int): (List[Grid], Boolean) = defaultAlgorithm(puzzle).cappedSolutions(max)
+  def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (List[Grid], Boolean) =
+    defaultAlgorithm(puzzle, hint).cappedSolutions(max)
 
   /**
    * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Only search a specified number
