@@ -115,9 +115,9 @@ abstract class Solver(puzzle: Puzzle, hint: Option[Grid]) {
 }
 
 /**
- * Solver that doesn't use any heuristics.
+ * Solver that just uses the Latin Square constraints and does not use any heuristics.
  */
-case class MinimalSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends Solver(puzzle, hint) {
+case class LatinSquareSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends Solver(puzzle, hint) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
@@ -202,7 +202,7 @@ object Solver {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
         val solver = defaultAlgorithm(puzzle)
-        val validator = if (validate) Some(MinimalSolver(puzzle)) else None
+        val validator = if (validate) Some(LatinSquareSolver(puzzle)) else None
         val (solutions, remaining) = max match {
           case Some(m) => solver.cappedSolutions(m)
           case None => (solver.solutions, Stream.Empty)
