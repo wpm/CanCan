@@ -174,7 +174,7 @@ abstract class HeuristicSolver(puzzle: Puzzle, hint: Option[Grid]) extends Solve
 }
 
 object Solver {
-  private val defaultAlgorithm = HeuristicSolver2
+  private val defaultAlgorithm = HeuristicSolver1
 
   /**
    * Solutions of a puzzle using the default solving algorithm
