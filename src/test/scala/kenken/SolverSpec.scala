@@ -18,10 +18,9 @@ class SolverSpec extends FlatSpec {
 
   behavior of "A 2x2 Latin square"
 
-  // TODO Error when solving a plain Latin Square with Heuristic2.
   it should "have solutions\n" + ls_2x2_sol1 + "\n" + ls_2x2_sol2 in {
     expect(Set(Grid(ls_2x2_sol1), Grid(ls_2x2_sol2))) {
-      Set() ++ HeuristicSolver1(Puzzle(2)).solutions
+      Set() ++ Solver.solutions(Puzzle(2))
     }
   }
 

@@ -144,9 +144,9 @@ case class MinimalSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends Solv
  * guess cells by cage ambiguity.
  */
 case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint) {
-  def cageAmbiguity(grid: Grid): Map[Constraint, Int] = {
-    Map[Constraint, Int]().withDefaultValue(0) ++
-      puzzle.containingCages.values.map(cage => cage -> (1 /: cage.cells.map(grid(_).size))(_ * _))
+  private def cageAmbiguity(grid: Grid): Map[Option[Constraint], Int] = {
+    Map[Option[Constraint], Int]().withDefaultValue(0) ++
+      puzzle.containingCages.values.map(cage => Some(cage) -> (1 /: cage.cells.map(grid(_).size))(_ * _))
   }
 
   override protected def guessCell(grid: Grid): Option[Cell] = {
@@ -156,7 +156,7 @@ case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends H
       val cageSize = cageAmbiguity(grid)
       Some(u.toSeq.map {
         case (cell, values) =>
-          (cageSize(puzzle.containingCages(cell)), values.size, cell)
+          (cageSize(puzzle.containingCages.get(cell)), values.size, cell)
       }.min._3)
     }
   }
