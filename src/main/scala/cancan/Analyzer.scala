@@ -32,13 +32,12 @@ object Analyzer {
     var total = 0.0
     puzzles.zipWithIndex.foreach {
       case (puzzle, i) =>
-        System.err.println((i + 1) + ".\n" + puzzle + "\n")
-        val partialSolutions = HeuristicSolver2(puzzle).search.force
-        val p = partialSolutions.size
-        val s = partialSolutions.filter(_.isSolved).size
-        println(p + "\t" + s)
-        total += p
+        val partialSolutions = defaultAlgorithm(puzzle).partialSolutions.zipWithIndex.filter(_._1.isSolved)
+        val s = for ((partialSolutionIndex, solution) <- partialSolutions.map(_._2).zipWithIndex)
+        yield (solution + 1, partialSolutionIndex + 1)
+        total += s.head._2
+        println(((i + 1) :: s.map(x => x._1 + ":" + x._2).toList).mkString("\t"))
     }
-    System.err.println("Mean partial solutions " + total / puzzles.size)
+    println("Mean steps to first solution " + total / puzzles.size)
   }
 }
