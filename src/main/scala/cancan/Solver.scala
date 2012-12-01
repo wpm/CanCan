@@ -208,7 +208,7 @@ object Solver {
   /**
    * Solve all the puzzles in a file.
    */
-  def main(args: Array[String]) {
+  def solve(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (String, Boolean, Boolean, Option[Int]) = {
       def parseCommandLineRec(args: List[String],
                               positional: List[String],

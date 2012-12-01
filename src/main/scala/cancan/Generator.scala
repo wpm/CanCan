@@ -258,7 +258,7 @@ object Generator {
       |
       |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
 
-  def main(args: Array[String]) {
+  def generate(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (Int, Int, Boolean) = {
       def parseCommandLineRec(args: List[String],
                               positional: List[String],

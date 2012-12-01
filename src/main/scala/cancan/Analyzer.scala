@@ -9,7 +9,7 @@ object Analyzer {
       |
       |Count the number of partial solutions in a set of puzzles""".stripMargin
 
-  def main(args: Array[String]) {
+  def analyze(args: Array[String]) {
     def parseCommandLine(args: Array[String]): String = {
       def parseCommandLineRec(args: List[String], positional: List[String]): List[String] = {
         args match {

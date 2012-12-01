@@ -22,9 +22,9 @@ object CanCan {
   def main(args: Array[String]) {
     errorIf(args.isEmpty, usage)
     args.head match {
-      case "solve" => Solver.main(args.tail)
-      case "generate" => Generator.main(args.tail)
-      case "analyze" => Analyzer.main(args.tail)
+      case "solve" => Solver.solve(args.tail)
+      case "generate" => Generator.generate(args.tail)
+      case "analyze" => Analyzer.analyze(args.tail)
       case "help" => error(usage)
       case command => error("Invalid command " + command + "\n" + usage)
     }
