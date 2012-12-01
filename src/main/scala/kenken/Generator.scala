@@ -246,6 +246,18 @@ object Generator {
     f.toList.map(t => (t._1, t._2 / d)).sorted.map(t => "%d:%.3f".format(t._1, t._2)).mkString("\n")
   }
 
+  private val usage =
+    """generate [-n] puzzles size
+      |
+      |Generate puzzles. By default generate puzzles with unique solutions.
+      |
+      |    puzzles - the number of puzzles to generate
+      |    size - the size of the puzzle
+      |
+      |    -n - generate puzzles that may have non-unique solutions
+      |
+      |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
+
   def main(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (Int, Int, Boolean) = {
       def parseCommandLineRec(args: List[String],
@@ -254,19 +266,14 @@ object Generator {
         args match {
           case Nil => (positional.reverse, option)
           case "-n" :: tail => parseCommandLineRec(tail, positional, option + ('nonUnique -> ""))
-          case s :: tail if (s(0) == '-') => {
-            println("Invalid switch " + s)
-            sys.exit(-1)
-          }
+          case "-h" :: tail => CanCan.error(usage)
+          case s :: tail if (s(0) == '-') => CanCan.error("Invalid switch " + s)
           case arg :: tail if (arg.matches( """\d+""")) => parseCommandLineRec(tail, arg :: positional, option)
-          case arg :: tail => {
-            println("Unrecognized argument " + arg)
-            sys.exit(-1)
-          }
+          case arg :: tail => CanCan.error("Invalid argument " + arg)
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      require(positional.size == 2, "Invalid number of arguments")
+      CanCan.errorIf(positional.size != 2, "Invalid number of arguments")
       (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique))
     }
 

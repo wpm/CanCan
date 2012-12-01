@@ -196,12 +196,17 @@ object Solver {
   def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (Seq[Grid], Boolean) =
     defaultAlgorithm(puzzle, hint).cappedSolutions(max)
 
+  private val usage =
+    """solve [-a|-m|-v] file
+      |
+      |Solve the puzzles in a file.
+      |
+      |    -a - find all solutions instead of just the first one
+      |    -m - maximum number of partial solutions to search before giving up
+      |    -v - validate the returned solutions""".stripMargin
+
   /**
-   * Solve all the puzzles in a file. Validate the answers if a '-v' switch is provided. Only search a specified number
-   * of partial solutions if a '-m' switch is provided. Find all the solutions if the '-a' switch is provided;
-   * otherwise just return the first solution discovered.
-   *
-   * Treat # as a comment delimiter in the puzzle file and skip leading blank lines.
+   * Solve all the puzzles in a file.
    */
   def main(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (String, Boolean, Boolean, Option[Int]) = {
@@ -214,15 +219,13 @@ object Solver {
           case "-m" :: m :: tail if (m.matches( """\d+""")) =>
             parseCommandLineRec(tail, positional, option + ('max -> m))
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
-          case s :: tail if (s(0) == '-') => {
-            println("Invalid switch " + s)
-            sys.exit(-1)
-          }
+          case "-h" :: tail => CanCan.error(usage)
+          case s :: tail if (s(0) == '-') => CanCan.error("Invalid switch " + s)
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      require(positional.size == 1, "Incorrect number of arguments")
+      CanCan.errorIf(positional.size != 1, "Incorrect number of arguments")
       val max = option.get('max) match {
         case Some(s) => Some(s.toInt)
         case None => None
