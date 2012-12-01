@@ -21,9 +21,9 @@ abstract class Solver(puzzle: Puzzle, hint: Option[Grid]) {
    * @param max the maximum number of partial iterations
    * @return tuple (solutions, `true` if the entire space was searched)
    */
-  def cappedSolutions(max: Int): (List[Grid], Boolean) = {
+  def cappedSolutions(max: Int): (Seq[Grid], Boolean) = {
     val i = search.toIterator
-    (i.take(max).filter(_.isSolved).toList, i.isEmpty)
+    (i.take(max).filter(_.isSolved).toSeq, i.isEmpty)
   }
 
   /**
@@ -50,8 +50,7 @@ abstract class Solver(puzzle: Puzzle, hint: Option[Grid]) {
   /**
    * All the solutions for this puzzle.
    */
-  // TODO Should solutions be a stream? There aren't a lot of solutions, so we might as well cache them.
-  lazy val solutions: TraversableView[Grid, Traversable[_]] = search.filter(_.isSolved)
+  lazy val solutions: Stream[Grid] = search.filter(_.isSolved).toStream
 
   /**
    * All the partial solutions of this puzzle, including the complete solutions.
@@ -183,7 +182,7 @@ object Solver {
    * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
    * @return the puzzle's solutions
    */
-  def solutions(puzzle: Puzzle, hint: Option[Grid] = None): TraversableView[Grid, Traversable[_]] =
+  def solutions(puzzle: Puzzle, hint: Option[Grid] = None): Stream[Grid] =
     defaultAlgorithm(puzzle, hint).solutions
 
   /**
@@ -194,7 +193,7 @@ object Solver {
    * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
    * @return tuple (solutions, `true` if the entire space was searched)
    */
-  def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (List[Grid], Boolean) =
+  def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (Seq[Grid], Boolean) =
     defaultAlgorithm(puzzle, hint).cappedSolutions(max)
 
   /**
