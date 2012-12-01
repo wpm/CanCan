@@ -97,9 +97,8 @@ object Generator {
   }
 
   // Does the puzzle have less than the maximum number of specified cells?
-  // TODO Doesn't work for n = 2.
   private def specifiedCells(n: Int, cages: Set[_ <: Traversable[Cell]]): Boolean =
-    cages.filter(cage => cage.size == 1).size < n * n * gamma
+    cages.filter(cage => cage.size == 1).size <= scala.math.ceil(n * n * gamma)
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
