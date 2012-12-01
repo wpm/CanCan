@@ -20,7 +20,7 @@ class SolverSpec extends FlatSpec {
 
   it should "have solutions\n" + ls_2x2_sol1 + "\n" + ls_2x2_sol2 in {
     expect(Set(Grid(ls_2x2_sol1), Grid(ls_2x2_sol2))) {
-      Set() ++ Solver.solutions(Puzzle(2))
+      Set() ++ solutions(Puzzle(2))
     }
   }
 
@@ -46,7 +46,7 @@ class SolverSpec extends FlatSpec {
 
   it should "have solution\n" + kenken1_4x4_solution in {
     expect(List(Grid(kenken1_4x4_solution))) {
-      Solver.solutions(Puzzle(kenken1_4x4_puzzle))
+      solutions(Puzzle(kenken1_4x4_puzzle))
     }
   }
 
@@ -73,7 +73,7 @@ class SolverSpec extends FlatSpec {
 
   it should "have solution\n" + kenken2_4x4_solution in {
     expect(List(Grid(kenken2_4x4_solution))) {
-      Solver.solutions(Puzzle(kenken2_24x4_puzzle))
+      solutions(Puzzle(kenken2_24x4_puzzle))
     }
   }
 
@@ -100,7 +100,7 @@ class SolverSpec extends FlatSpec {
 
   it should "have solution\n" + kenken3_4x4_solution in {
     expect(List(Grid(kenken3_4x4_solution))) {
-      Solver.solutions(Puzzle(kenken3_4x4_puzzle))
+      solutions(Puzzle(kenken3_4x4_puzzle))
     }
   }
 
@@ -131,7 +131,7 @@ class SolverSpec extends FlatSpec {
 
   it should "have solution\n" + kenken_6x6_solution in {
     expect(List(Grid(kenken_6x6_solution))) {
-      Solver.solutions(Puzzle(kenken_6x6_puzzle))
+      solutions(Puzzle(kenken_6x6_puzzle))
     }
   }
 
@@ -143,7 +143,7 @@ class SolverSpec extends FlatSpec {
                          |1 6 4 2 5 123456
                          |4 2 123456 3 1 6
                          |2 123456 3 1 6 4""".stripMargin)
-      Solver.solutions(Puzzle(kenken_6x6_puzzle), Some(hint))
+      solutions(Puzzle(kenken_6x6_puzzle), Some(hint))
     }
   }
 
@@ -158,7 +158,7 @@ class SolverSpec extends FlatSpec {
                      |c d""".stripMargin
   "An unsolvable puzzle" should "have no solutions" in {
     expect(Stream.empty) {
-      Solver.solutions(Puzzle(unsolvable))
+      solutions(Puzzle(unsolvable))
     }
   }
 }

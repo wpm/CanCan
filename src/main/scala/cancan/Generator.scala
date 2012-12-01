@@ -38,7 +38,7 @@ object Generator {
   def uniqueRandomPuzzle(n: Int, cageSize: Multinomial = defaultCageSizeDistribution): (Puzzle, Seq[Seq[Int]]) = {
     @tailrec
     def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]], hint: Option[Grid] = None): Option[Puzzle] = {
-      Solver.cappedSolutions(puzzle, maxSearch, hint)._1 match {
+      cappedSolutions(puzzle, maxSearch, hint)._1 match {
         case Stream.Empty => None // Unable to find this puzzle's solutions: abandon it.
         case grids if (grids.size == 1) => Some(puzzle) // This puzzle has a unique solution.
         case grids => {

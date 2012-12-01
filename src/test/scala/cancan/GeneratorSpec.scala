@@ -18,12 +18,12 @@ class GeneratorSpec extends FlatSpec {
 
   "A random puzzle with a unique solution" should "have only the solution reported for it" in {
     val (puzzle, solution) = Generator.uniqueRandomPuzzle(5)
-    val solutions = Solver.solutions(puzzle).force
+    val actual = solutions(puzzle).force
     expect(1) {
-      solutions.size
+      actual.size
     }
     expect(List[Grid](solution)) {
-      solutions
+      actual
     }
   }
 }

@@ -2,6 +2,9 @@ package cancan
 
 import org.scalatest.FlatSpec
 
+/**
+ * Unit tests for the [[cancan.StringRepresentation]] object.
+ */
 class StringRepresentationSpec extends FlatSpec {
   "A table of strings" should "print neatly" in {
     expect(
