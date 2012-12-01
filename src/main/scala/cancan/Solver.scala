@@ -17,40 +17,25 @@ abstract class Solver(puzzle: Puzzle, hint: Option[Grid]) {
   val constraintMap: Map[Cell, Set[Constraint]]
 
   /**
-   * Find all the puzzle solutions, abandoning the search after a maximum number of partial solutions.
-   * @param max the maximum number of partial iterations
-   * @return tuple (solutions, `true` if the entire space was searched)
-   */
-  def cappedSolutions(max: Int): (Seq[Grid], Boolean) = {
-    val i = search.toIterator
-    (i.take(max).filter(_.isSolved).toSeq, i.isEmpty)
-  }
-
-  /**
-   * Find a puzzle solution, abandoning the search after a maximum number of partial solutions.
-   *
-   * This function will only return `true` if the puzzle had a unique solution and we found it.
-   *
-   * If there are multiple solutions one will be returned arbitrarily.
-   * @param max the maximum number of partial iterations
-   * @return tuple (optional solution, `true` if the entire space was searched)
-   */
-  def cappedSolution(max: Int): (Option[Grid], Boolean) = {
-    val i = search.toIterator
-    val solutions = i.take(max).filter(_.isSolved)
-    val solution = if (solutions.hasNext) Some(solutions.next()) else None
-    (solution, i.isEmpty)
-  }
-
-  /**
-   * A solution of this puzzle. If there are multiple solutions one will be returned arbitrarily.
-   */
-  lazy val solution: Option[Grid] = solutions.headOption
-
-  /**
-   * All the solutions for this puzzle.
+   * All the solutions of the puzzle.
    */
   lazy val solutions: Stream[Grid] = search.filter(_.isSolved).toStream
+
+  /**
+   * All the solutions of the puzzle and the intermediary partial solutions encountered during the search.
+   */
+  lazy val partialSolutions: Stream[Grid] = search.toStream
+
+  /**
+   * All the solutions of the puzzle up to `max` partial solution states.
+   *
+   * This is used to abandon difficult to solve puzzles after a finite amount of time.
+   *
+   * @param max the maximum number of partial solutions to search
+   * @return tuple (solutions, stream of partial solutions beyond the ones searched)
+   */
+  def cappedSolutions(max: Int): (Stream[Grid], Stream[Grid]) =
+    (partialSolutions.take(max).filter(_.isSolved), partialSolutions.drop(max))
 
   /**
    * All the partial solutions of this puzzle, including the complete solutions.
@@ -185,16 +170,19 @@ object Solver {
   def solutions(puzzle: Puzzle, hint: Option[Grid] = None): Stream[Grid] =
     defaultAlgorithm(puzzle, hint).solutions
 
+
   /**
-   * Find all the puzzle solutions with the default algorithm, abandoning the search after a maximum number of partial
-   * solutions.
-   * @param puzzle a puzzle
-   * @param max the maximum number of partial iterations
-   * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
-   * @return tuple (solutions, `true` if the entire space was searched)
+   * All the solutions of the puzzle up to `max` partial solution states.
+   *
+   * This is used to abandon difficult to solve puzzles after a finite amount of time.
+   *
+   * @param max the maximum number of partial solutions to search
+   * @return tuple (solutions, stream of partial solutions beyond the ones searched)
    */
-  def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (Seq[Grid], Boolean) =
-    defaultAlgorithm(puzzle, hint).cappedSolutions(max)
+  def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (Stream[Grid], Stream[Grid]) = {
+    val partialSolutions = defaultAlgorithm(puzzle, hint).partialSolutions
+    (partialSolutions.take(max).filter(_.isSolved), partialSolutions.drop(max))
+  }
 
   private val usage =
     """solve [-a|-m|-v] file
@@ -239,24 +227,20 @@ object Solver {
         println((i + 1) + ".\n" + puzzle + "\n")
         val solver = defaultAlgorithm(puzzle)
         val validator = if (validate) Some(MinimalSolver(puzzle)) else None
-        val (solutions, complete) = max match {
-          case Some(m) => if (firstOnly) {
-            val s = solver.cappedSolution(m)
-            (s._1.toSeq, s._2)
-          } else solver.cappedSolutions(m)
-          case None => if (firstOnly) (solver.solution.toSeq, true) else (solver.solutions, true)
+        val (solutions, remaining) = max match {
+          case Some(m) => solver.cappedSolutions(m)
+          case None => (solver.solutions, Stream.Empty)
         }
-        solutions.foreach {
-          solution =>
-            println(solution)
-            println(if (validate)
-              validator.get.isPossibleSolution(solution) match {
-                case true => "VALID\n"
-                case false => "INVALID\n"
-              }
-            else "")
+        for (solution <- (if (firstOnly) solutions.headOption.toStream else solutions)) {
+          println(solution)
+          println(if (validate)
+            validator.get.isPossibleSolution(solution) match {
+              case true => "VALID\n"
+              case false => "INVALID\n"
+            }
+          else "")
         }
-        println(if (!complete) "INCOMPLETE\n" else "")
+        println(if (remaining.isEmpty) "" else "...\n")
     }
   }
 }
