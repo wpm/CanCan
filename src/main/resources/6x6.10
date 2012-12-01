@@ -1,0 +1,155 @@
+# 1.
+a=3 b=120x c=30x d=4/ e=4- f=11+ g=5/ h=6+ i=9+ j=80x k=4- l=12+ m=1- n=1- o=4+
+a b b b c d
+e e f c c d
+g f f h h h
+g i i j k k
+l i m j j n
+l l m o o n
+# 3 5 4 6 2 1
+# 6 2 1 3 5 4
+# 5 4 6 2 1 3
+# 1 3 5 4 6 2
+# 2 1 3 5 4 6
+# 4 6 2 1 3 5
+
+# 2.
+a=6/ b=12x c=12x d=7+ e=5/ f=12x g=1- h=1- i=3/ j=5/ k=1 l=1- m=4 n=3- o=1- p=3/ q=12x r=5+ s=4-
+a b b c c d
+a e e f f d
+g h i i j k
+g h l l j m
+n o o p q q
+n r r p s s
+# 1 4 3 2 6 5
+# 6 5 1 4 3 2
+# 4 3 2 6 5 1
+# 3 2 6 5 1 4
+# 2 6 5 1 4 3
+# 5 1 4 3 2 6
+
+# 3.
+a=6x b=8+ c=16+ d=240x e=6 f=9x g=16+ h=40x i=3 j=16+ k=1- l=1- m=2-
+a a b b c c
+a a d d c c
+e d d f f g
+h h f f g g
+i h j j k k
+l l j j m m
+# 2 1 3 5 6 4
+# 1 3 5 6 4 2
+# 6 4 2 1 3 5
+# 4 2 1 3 5 6
+# 3 5 6 4 2 1
+# 5 6 4 2 1 3
+
+# 4.
+a=60x b=120x c=48x d=72x e=12x f=3 g=18+ h=21+ i=11+ j=4 k=6+
+a b b b c c
+a a d d c c
+a e f d g g
+e e e d g g
+h h i i i j
+h h i k k k
+# 3 4 6 5 2 1
+# 5 2 1 3 4 6
+# 2 1 3 4 6 5
+# 1 3 4 6 5 2
+# 6 5 2 1 3 4
+# 4 6 5 2 1 3
+
+# 5.
+a=5x b=24x c=14+ d=24x e=12+ f=14+ g=5x h=13+ i=40x j=9+ k=17+ l=1 m=1-
+a a b b b c
+a d d d e c
+f f g e e c
+f h g g i i
+j h h k i l
+j j k k m m
+# 5 1 2 4 3 6
+# 1 2 4 3 6 5
+# 6 5 1 2 4 3
+# 3 6 5 1 2 4
+# 2 4 3 6 5 1
+# 4 3 6 5 1 2
+
+# 6.
+a=10+ b=12x c=180x d=4x e=18x f=1- g=9+ h=36x i=10+ j=60x k=6+ l=120x m=3
+a a a b b c
+d d e b c c
+d e e f f g
+h h h i g g
+j j i i k k
+j l l l k m
+# 5 4 1 3 2 6
+# 4 1 3 2 6 5
+# 1 3 2 6 5 4
+# 3 2 6 5 4 1
+# 6 5 4 1 3 2
+# 2 6 5 4 1 3
+
+# 7.
+a=75x b=13+ c=12x d=1 e=2- f=60x g=12x h=14+ i=90x j=120x k=8+ l=15x
+a a b c c d
+a e b b f g
+h e b f f g
+h i i i f j
+h h i k k j
+l l l k j j
+# 3 5 4 2 6 1
+# 5 4 2 6 1 3
+# 2 6 1 3 5 4
+# 6 1 3 5 4 2
+# 4 2 6 1 3 5
+# 1 3 5 4 2 6
+
+# 8.
+a=8x b=15+ c=25x d=48x e=8+ f=5 g=9+ h=36x i=11+ j=7+ k=2/ l=10+ m=1- n=6
+a a a b b c
+d d e b c c
+d f e e g g
+h h i i g j
+h k k i j j
+l l l m m n
+# 1 4 2 3 6 5
+# 4 2 3 6 5 1
+# 6 5 1 4 2 3
+# 3 6 5 1 4 2
+# 2 3 6 5 1 4
+# 5 1 4 2 3 6
+
+# 9.
+a=60x b=8+ c=3 d=9+ e=12+ f=30x g=4 h=12+ i=13+ j=60x k=48x l=4x m=6+ n=3-
+a a a b c d
+e e e b d d
+f f g b h h
+f i i j h k
+l i m j k k
+l m m j n n
+# 6 2 5 4 3 1
+# 5 4 3 1 6 2
+# 2 5 4 3 1 6
+# 3 1 6 2 5 4
+# 1 6 2 5 4 3
+# 4 3 1 6 2 5
+
+# 10.
+a=36x b=8+ c=4- d=12+ e=4 f=60x g=12+ h=9+ i=60x j=3x k=12x l=40x m=18x n=4
+a a b c d d
+a b b c d e
+f f g g g h
+f i i j h h
+k i l j j m
+k k l l n m
+# 4 3 1 6 2 5
+# 3 1 6 2 5 4
+# 6 2 5 4 3 1
+# 5 4 3 1 6 2
+# 2 5 4 3 1 6
+# 1 6 2 5 4 3
+
+
+# 1:0.116
+# 2:0.283
+# 3:0.478
+# 4:0.123

@@ -10,49 +10,56 @@ Additionally, cells in the grid are grouped into sets called _cages_, and the se
 
 To see the program solve a puzzle, run either its unit tests or `Solver` with a path to a puzzle file.
 
-	> scala -cp target/scala-2.9.2/classes kenken.Solver src/main/resources/6x6.1
-	1.
-    a=4x b=12x c=15+ d=3/ e=11+ f=1- g=11+ h=1- i=9+ j=2- k=60x l=3- m=4x n=1- o=5-
-    a a b b c c
-    a d d e e c
-    f g h h i j
-    f g g i i j
-    k k l l m m
-    k n n o o m
+    > scala -cp target/scala-2.9.2/classes kenken.Solver src/main/resources/6x6.1
+    1.
+    a=60x b=4+ c=16+ d=45x e=40x f=72x g=4x h=11+ i=4- j=12+ k=12x l=5 m=8+ n=2
+    a b b c c d
+    a b e c d d
+    a f e e g g
+    f f h i j g
+    k l h i j j
+    k k h m m n
 
-    1 2 3 4 5 6
-    2 3 1 5 6 4
-    5 6 2 1 4 3
-    6 1 4 2 3 5
-    4 5 6 3 2 1
-    3 4 5 6 1 2
+    5 2 1 4 6 3
+    2 1 4 6 3 5
+    6 3 5 2 1 4
+    4 6 3 5 2 1
+    3 5 2 1 4 6
+    1 4 6 3 5 2
 
 To generate a random set of puzzles, run `Generator` where the first argument is a number of puzzles and the second is the puzzle size.
 
 	> scala -cp target/scala-2.9.2/classes kenken.Generator 2 5
-	a=11+ b=10+ c=6x d=8+ e=1- f=60x g=6x h=40x i=5/
-    a a b b c
-    a d b c c
-    e d f f f
-    e d g g h
-    i i g h h
-    # 4 2 1 5 3
-    # 5 3 4 2 1
-    # 2 1 5 3 4
-    # 3 4 2 1 5
-    # 1 5 3 4 2
+	# 1.
+	a=10+ b=8+ c=60x d=8+ e=7+ f=2 g=20x h=24x i=3 j=5x
+	a b b c c
+	a b d c e
+	a d d f e
+	g g h h e
+	g i h j j
+	# 2 1 5 4 3
+	# 3 2 1 5 4
+	# 5 4 3 2 1
+	# 1 5 4 3 2
+	# 4 3 2 1 5
 
-    a=10x b=10+ c=1- d=11+ e=6+ f=32x g=2 h=5 i=20x j=6x
-    a a b b c
-    a d b e c
-    f d d e g
-    f f h e i
-    j j j i i
-    # 1 2 4 5 3
-    # 5 3 1 2 4
-    # 4 5 3 1 2
-    # 2 4 5 3 1
-    # 3 1 2 4 5
+	# 2.
+	a=8+ b=11+ c=24x d=25x e=6x f=2 g=9+ h=12x i=5x j=5
+	a b b b c
+	a a d d c
+	e e d f c
+	e g g h i
+	j g h h i
+	# 1 5 2 4 3
+	# 4 3 1 5 2
+	# 3 1 5 2 4
+	# 2 4 3 1 5
+	# 5 2 4 3 1
+
+
+	# 1:0.200
+	# 2:0.100
+	# 3:0.700
 
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
 

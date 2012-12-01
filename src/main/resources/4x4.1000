@@ -1,0 +1,11005 @@
+# 1.
+a=2- b=9x c=8+ d=16x e=6x f=4/
+a a b b
+c c d b
+c e d d
+e e f f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 2.
+a=36x b=8x c=8x d=4x e=7+ f=4
+a b b b
+a a c c
+d d c e
+d f e e
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 3.
+a=24x b=6+ c=6x d=8+ e=9+ f=2
+a a a b
+c c b b
+c d d e
+f d e e
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 4.
+a=24x b=7+ c=9x d=7+ e=3+ f=1-
+a a a b
+c c b b
+d c e e
+d d f f
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+
+# 5.
+a=10+ b=10+ c=18x d=10+ e=1
+a a a a
+b b b c
+b d c c
+e d d c
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 6.
+a=5+ b=24x c=5+ d=4 e=9+ f=12x
+a b b b
+a a c d
+e e c c
+e f f f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 7.
+a=8+ b=1- c=12x d=9+ e=1- f=3- g=2
+a a b b
+a c c d
+e c f d
+e g f d
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 8.
+a=12+ b=24x c=6x d=3- e=8x
+a a a b
+c a d b
+c c d b
+c e e b
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 9.
+a=8+ b=6+ c=2 d=4/ e=24x f=4/ g=1-
+a b b c
+a a b d
+e e e d
+f f g g
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 10.
+a=8+ b=9+ c=96x d=8+ e=2
+a a b b
+a a c b
+d d c b
+d c c e
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 11.
+a=6+ b=4 c=1- d=8x e=6+ f=3/ g=2/
+a a a b
+c d d e
+c d e e
+f f g g
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 12.
+a=4x b=3 c=24x d=2/ e=18x f=2/ g=4/
+a a b c
+d a c c
+d e f g
+e e f g
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+# 3 2 1 4
+
+# 13.
+a=12x b=9+ c=2/ d=9+ e=5+ f=2
+a a a b
+c a b b
+c d e e
+d d f e
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 14.
+a=16x b=5+ c=9+ d=1 e=3x f=7+ g=1-
+a a b b
+a c c d
+e e c f
+g g f f
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 15.
+a=6+ b=3 c=16x d=6x e=9+ f=7+
+a b c c
+a a c d
+e f f d
+e e f d
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+
+# 16.
+a=7+ b=8x c=3- d=1- e=10+ f=2 g=2-
+a a b b
+c a b d
+c e e d
+f e g g
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 17.
+a=8x b=9+ c=3/ d=12x e=10+ f=2
+a b b c
+a a b c
+d a e e
+d e e f
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 18.
+a=12x b=8x c=3 d=24x e=6x f=7+
+a a a b
+c d b b
+d d e e
+f f f e
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+
+# 19.
+a=36x b=9+ c=8x d=24x e=3/
+a a b b
+c a a b
+c d d d
+c d e e
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 20.
+a=8x b=6+ c=10+ d=3- e=24x f=2/
+a b b b
+a a c d
+e c c d
+e e f f
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 21.
+a=5+ b=32x c=9+ d=6+ e=6+ f=4
+a a b b
+c a d b
+c d d e
+c f e e
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 22.
+a=2/ b=36x c=9+ d=1 e=2x f=7+ g=1-
+a a b b
+c c b d
+c e e f
+g g f f
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 23.
+a=7+ b=12x c=8+ d=2x e=4 f=3x g=2-
+a b b b
+a a c d
+e c c d
+f f g g
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 24.
+a=6+ b=5+ c=8x d=7+ e=12x f=1 g=12x
+a a a b
+c d e b
+c d e e
+c f g g
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 25.
+a=24x b=6+ c=4 d=3x e=8x f=9+
+a a b c
+d a b b
+d d e e
+f f f e
+# 2 3 1 4
+# 1 4 2 3
+# 3 1 4 2
+# 4 2 3 1
+
+# 26.
+a=16x b=3 c=8+ d=4/ e=1- f=2- g=2/
+a a a b
+c a d d
+c c e e
+f f g g
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 27.
+a=24x b=1- c=12+ d=3/ e=7+ f=2
+a a b b
+a a c c
+d e c c
+d e e f
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+
+# 28.
+a=24x b=1- c=12x d=7+ e=3 f=8x
+a a b b
+a a c d
+e c c d
+f f c d
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+
+# 29.
+a=3x b=24x c=9+ d=10+ e=6x f=1
+a a b b
+a c c b
+d c e e
+d d e f
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 30.
+a=24x b=6x c=2x d=11+ e=3 f=8x
+a a a b
+c d d b
+c c d b
+e f f f
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 31.
+a=2- b=9+ c=7+ d=12+ e=2x f=3
+a b b b
+a c b d
+c c d d
+e e d f
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 32.
+a=48x b=7+ c=8+ d=24x e=4
+a a a b
+a c b b
+c c b d
+c e d d
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+
+# 33.
+a=8+ b=6x c=8x d=4 e=8x f=3/ g=1-
+a b b c
+a d c c
+a e e f
+g g e f
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+
+# 34.
+a=12x b=8+ c=8x d=48x e=1-
+a a a b
+a c b b
+c c d e
+d d d e
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+
+# 35.
+a=3 b=4+ c=48x d=7+ e=9+ f=6x
+a b b c
+d b c c
+d e e f
+d e f f
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 36.
+a=18x b=9+ c=9+ d=32x e=3
+a a b b
+a a c b
+d c c b
+d d c e
+# 1 3 2 4
+# 3 2 4 1
+# 4 1 3 2
+# 2 4 1 3
+
+# 37.
+a=3x b=16x c=32x d=9x e=2 f=12x
+a a b b
+a c b d
+c c d d
+e f f f
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 38.
+a=11+ b=10+ c=4x d=6x e=7+
+a a a b
+c a d b
+c d d b
+e e d b
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 39.
+a=24x b=2x c=6+ d=1- e=16x f=1-
+a a b b
+c a b d
+c e e d
+c e f f
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 40.
+a=6+ b=10+ c=12x d=7+ e=1- f=2/ g=3
+a a b b
+a c c b
+d c e e
+d f f g
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 41.
+a=12x b=6+ c=24x d=3 e=6+ f=24x
+a a b b
+a c b d
+e c c f
+e e f f
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+
+# 42.
+a=24x b=2- c=2 d=8x e=12x f=4+ g=8x
+a a b b
+c a d e
+f d d e
+f g g g
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+# 3 1 4 2
+
+# 43.
+a=1 b=24x c=10+ d=11+ e=5+ f=1-
+a b b b
+c c c b
+d d c e
+d f f e
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 44.
+a=8+ b=9+ c=3/ d=12+ e=2/ f=4
+a b b b
+a a a c
+d d d c
+e e d f
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+
+# 45.
+a=10+ b=2 c=72x d=8x e=8+
+a a a b
+c a d d
+c c d d
+c e e e
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+
+# 46.
+a=4x b=11+ c=6x d=10+ e=7+ f=1
+a b b c
+a a b c
+d d e c
+d f e e
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 47.
+a=6x b=48x c=11+ d=10+
+a a a b
+c a b b
+c d d b
+c c d d
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 48.
+a=9+ b=2- c=6x d=4 e=11+ f=2-
+a b b c
+a a d c
+a e e c
+e e f f
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+
+# 49.
+a=4/ b=6+ c=4 d=6+ e=24x f=2- g=2/
+a b b c
+a b d d
+e e d f
+e g g f
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 50.
+a=10+ b=6x c=32x d=10+ e=3
+a b b b
+a c b d
+a c c d
+a e d d
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 51.
+a=6x b=4/ c=12x d=1- e=1- f=4/ g=5+ h=12x
+a a b b
+c c d d
+e f f g
+e h h g
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+
+# 52.
+a=32x b=5+ c=1 d=3/ e=24x f=6+ g=3-
+a a b c
+d a b e
+d f e e
+f f g g
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 53.
+a=24x b=12x c=2/ d=6x e=4+ f=2/
+a b b b
+a c c b
+a a d d
+e e f f
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 54.
+a=12x b=8x c=8x d=24x e=6+ f=3
+a a a b
+c d b b
+c d e e
+c d e f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 55.
+a=11+ b=3x c=72x d=1 e=2x f=9+
+a a b b
+a c c c
+a d c e
+f f f e
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+
+# 56.
+a=24x b=3 c=4+ d=9+ e=4+ f=48x
+a b c c
+a a c d
+e f f d
+e e f d
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 57.
+a=8+ b=1- c=8x d=24x e=6+ f=5+
+a a b b
+a c d d
+c c d e
+f f e e
+# 1 4 2 3
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+
+# 58.
+a=36x b=10+ c=7+ d=8+ e=4
+a a a b
+c a b b
+c d b e
+c d d d
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 59.
+a=12x b=10+ c=10+ d=1- e=4/
+a b b b
+a b c c
+a a c d
+e e c d
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 60.
+a=1 b=12+ c=8+ d=13+ e=6+
+a b b c
+d b b c
+d d c c
+d e e e
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 61.
+a=7+ b=7+ c=9+ d=3- e=2 f=2- g=2-
+a a b b
+c a b d
+c c e d
+f f g g
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 62.
+a=8+ b=3x c=8x d=24x e=2- f=2- g=2
+a b b c
+a b d c
+a e d f
+g e d f
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 63.
+a=6x b=5+ c=24x d=10+ e=24x f=1
+a b b c
+a b d c
+a d d c
+e e e f
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 64.
+a=12+ b=7+ c=7+ d=32x e=3
+a b b b
+a a c c
+a d c c
+d d d e
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 65.
+a=11+ b=3x c=10+ d=3 e=7+ f=4/
+a a b b
+a a c c
+d c c e
+f f e e
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 66.
+a=3 b=9+ c=6+ d=8x e=3/ f=11+
+a b b c
+d b b c
+d e f c
+d e f f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 67.
+a=2/ b=36x c=9+ d=2x e=7+ f=1 g=2-
+a a b b
+c c d b
+c e d d
+f e g g
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 68.
+a=12x b=8+ c=12x d=3- e=24x f=2x
+a b b b
+a a c c
+d e c f
+d e e f
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+
+# 69.
+a=8x b=9+ c=4 d=18x e=32x
+a a b b
+c a b b
+d a e e
+d d d e
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 70.
+a=9+ b=4 c=7+ d=6+ e=6x f=12x
+a b c d
+a a c d
+e e c d
+e f f f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 71.
+a=2 b=24x c=8x d=12+ e=8+
+a b b b
+c c b d
+c c d d
+e e e d
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+
+# 72.
+a=6x b=24x c=7+ d=8+ e=9+ f=1
+a a b b
+a c b d
+c c d d
+e e e f
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 73.
+a=12x b=9+ c=6x d=5+ e=16x f=3
+a b b c
+a a b c
+d d e c
+f d e e
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+
+# 74.
+a=18x b=4+ c=12+ d=10+ e=1 f=2-
+a b b c
+a a c c
+a d c e
+d d f f
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 75.
+a=10+ b=6x c=2- d=7+ e=8+ f=2/
+a a b c
+a d b c
+d d b e
+f f e e
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 76.
+a=48x b=2x c=6x d=6x e=9+ f=4
+a a b c
+a b b c
+d d e c
+d e e f
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+
+# 77.
+a=10+ b=48x c=1 d=5+ e=1- f=12x
+a b b c
+a a b d
+e a b d
+e f f f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 78.
+a=6+ b=10+ c=8+ d=24x e=2x f=3
+a a b b
+a c c b
+d c e e
+d d e f
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 79.
+a=6+ b=24x c=9+ d=18x e=4x f=2/
+a a a b
+c c b b
+d c e f
+d d e f
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 80.
+a=12x b=8+ c=24x d=9+ e=4
+a a a b
+c a b b
+c c d b
+c d d e
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+
+# 81.
+a=1- b=8+ c=3/ d=12x e=1 f=2- g=6+
+a b b c
+a b d c
+e d d f
+g g g f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 82.
+a=4/ b=1- c=2- d=2x e=4+ f=1- g=3- h=1-
+a b c c
+a b d e
+f g d e
+f g h h
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+
+# 83.
+a=36x b=7+ c=6x d=8+ e=12x f=1
+a a b b
+a c c b
+d d c e
+f d e e
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 84.
+a=24x b=6x c=16x d=2x e=3 f=9+
+a a b b
+a a c c
+d c c e
+d f f f
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+
+# 85.
+a=8+ b=1 c=10+ d=6+ e=9+ f=6+
+a b c c
+a a d c
+e e d d
+e f f f
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+
+# 86.
+a=18x b=6+ c=6+ d=3- e=4 f=12x g=3/
+a b b c
+a a b c
+d e f g
+d f f g
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+
+# 87.
+a=8x b=144x c=6+ d=2/ e=24x
+a a a b
+c a b b
+c c b d
+e e e d
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 88.
+a=24x b=5+ c=1- d=1 e=7+ f=12+
+a b b c
+a a a c
+d e f f
+e e f f
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 89.
+a=6x b=32x c=5+ d=2- e=36x
+a a b b
+a a b c
+d e b c
+d e e e
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 90.
+a=8x b=1 c=1- d=8+ e=24x f=2/ g=4x
+a a b c
+a d e c
+d d e f
+g g e f
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+# 4 1 3 2
+
+# 91.
+a=12x b=9+ c=6x d=7+ e=3/ f=8x
+a b b b
+a c c d
+a c e d
+f f e d
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 92.
+a=8x b=12x c=6x d=24x e=6x f=4
+a a b b
+a c b d
+c c e d
+f e e d
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+
+# 93.
+a=9+ b=9+ c=3 d=6+ e=8+ f=4/
+a a b c
+a a b b
+d e b f
+d e e f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 94.
+a=8+ b=1- c=24x d=8x e=12x
+a a b b
+c a a d
+c c d d
+c e e d
+# 2 1 4 3
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+
+# 95.
+a=8+ b=6x c=8x d=24x e=6x f=4
+a a b b
+a c b d
+c c d d
+e e e f
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 96.
+a=9+ b=1- c=9x d=7+ e=2 f=1-
+a a a b
+a c c b
+c c d e
+f f d d
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 97.
+a=6+ b=12x c=10+ d=24x e=1 f=6+
+a b b b
+a a c c
+d d c e
+d f f f
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+# 4 1 3 2
+
+# 98.
+a=6x b=8+ c=24x d=24x e=8x f=1
+a a a b
+c c b b
+c d d e
+f d e e
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 99.
+a=11+ b=2x c=8x d=4 e=4+ f=72x
+a a a b
+c a d b
+c e f f
+e e f f
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+
+# 100.
+a=9x b=8+ c=12x d=32x e=1 f=6+
+a b b c
+a a b c
+d d e c
+d f f f
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 101.
+a=8x b=72x c=1- d=1- e=10+
+a a a b
+a c c b
+d d b b
+e e e e
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+
+# 102.
+a=5+ b=6+ c=4 d=6+ e=1- f=3- g=9+
+a a b b
+a c d d
+e e d f
+g g g f
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+
+# 103.
+a=9+ b=3/ c=9x d=64x e=8+
+a a a b
+c a d b
+c c d d
+e e e d
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 104.
+a=6x b=6x c=12x d=2- e=8+ f=7+
+a a b c
+d d b c
+e e b c
+e f f f
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 105.
+a=8x b=6+ c=12x d=24x e=4+ f=3+ g=4
+a a b b
+c c b d
+c e e d
+f f g d
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+
+# 106.
+a=48x b=4+ c=9+ d=5+ e=10+ f=1
+a a b c
+a b b c
+d d e c
+d e e f
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 107.
+a=9+ b=4x c=1- d=8+ e=2 f=5+ g=1-
+a a a b
+c d b b
+c d d e
+f f g g
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 108.
+a=6+ b=8x c=8+ d=24x e=12x f=2
+a b b c
+a a b c
+d e e c
+d d e f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 109.
+a=8x b=18x c=6+ d=12x e=2/ f=1-
+a b c c
+a b b c
+a d e f
+d d e f
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 110.
+a=8+ b=3- c=8x d=3- e=6x f=4 g=5+
+a b b c
+a a c c
+d e e e
+d f g g
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 111.
+a=11+ b=12+ c=8x d=1 e=18x
+a b b b
+a a b c
+a d e c
+e e e c
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 112.
+a=7+ b=6+ c=48x d=2 e=5+ f=9+
+a b c c
+a b c d
+a b e e
+f f f e
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 113.
+a=6+ b=7+ c=18x d=12x e=5+ f=2-
+a a b b
+a c b d
+e c c d
+e f f d
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 114.
+a=13+ b=8x c=6x d=1 e=24x f=4+
+a b b c
+a a c c
+a d e c
+f f e e
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+
+# 115.
+a=7+ b=9+ c=12x d=3x e=9+ f=2
+a a b b
+c a b d
+c e d d
+c e e f
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+
+# 116.
+a=9+ b=72x c=10+ d=7+ e=2
+a b b b
+a a b c
+a d c c
+e d d c
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 117.
+a=9+ b=12x c=6x d=3/ e=3+ f=8x g=4
+a a b c
+a b b c
+d e f c
+d e f g
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 118.
+a=8x b=3/ c=8+ d=1- e=2/ f=5+ g=2x
+a a b b
+a c d e
+f c d e
+f c g g
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+
+# 119.
+a=12x b=8x c=7+ d=6+ e=8+ f=3x
+a a a b
+c c d b
+c e d b
+e e f f
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 120.
+a=8+ b=8x c=6x d=8+ e=24x f=2
+a b b c
+a b c c
+a d d e
+f d e e
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 121.
+a=6x b=2- c=48x d=2 e=32x f=3+ g=3/
+a b c c
+a b c d
+a e f g
+e e f g
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 122.
+a=6x b=8+ c=9+ d=9+ e=2x f=4
+a b b c
+a a b c
+d d e c
+d f e e
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 123.
+a=4 b=7+ c=48x d=12+ e=6+
+a b c c
+b b b c
+d d e c
+d d e e
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+
+# 124.
+a=5+ b=6+ c=36x d=7+ e=2/ f=4 g=6x
+a a b b
+c c b d
+e c f d
+e g g d
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 125.
+a=72x b=10+ c=1 d=4x e=48x
+a b b c
+a a b b
+a d d e
+d d e e
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 126.
+a=8+ b=2x c=8+ d=8+ e=4 f=1- g=2-
+a a b b
+c a d e
+c c d f
+g g d f
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 127.
+a=10+ b=4+ c=24x d=2/ e=12x f=1-
+a a a a
+b b c c
+d c c e
+d f f e
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 128.
+a=3 b=7+ c=2- d=3x e=8+ f=1- g=2/
+a b c c
+b b d d
+e e d f
+e g g f
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+
+# 129.
+a=24x b=1- c=12+ d=1 e=6+ f=2/
+a a b b
+a c c c
+a d c e
+f f e e
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+
+# 130.
+a=2- b=6x c=48x d=36x e=2 f=2/
+a b b b
+a c c c
+d d c e
+d d f f
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 131.
+a=6x b=24x c=3 d=8x e=3- f=9+
+a b b c
+a b d d
+e b d d
+e f f f
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+
+# 132.
+a=18x b=32x c=6+ d=2 e=12+
+a a b b
+a a b c
+d e b c
+e e e c
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 133.
+a=9+ b=8+ c=12x d=8x e=6+ f=3
+a a b b
+a c b d
+e c c d
+e e f d
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 134.
+a=8+ b=7+ c=12x d=6+ e=2 f=6+ g=2-
+a b b c
+a d b c
+a d d e
+f f g g
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 135.
+a=9+ b=6+ c=1 d=24x e=3/ f=6+ g=3-
+a b b c
+a a b d
+e e f d
+g g f d
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 136.
+a=3 b=7+ c=6x d=12x e=8x f=9+
+a b c c
+b b c d
+e e d d
+e f f f
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 137.
+a=32x b=12x c=12x d=24x e=2-
+a b b b
+a b c d
+a a c d
+e e d d
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+
+# 138.
+a=6+ b=3 c=8+ d=7+ e=24x f=7+
+a b c c
+a a d c
+e e d d
+e f f f
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 139.
+a=4 b=9x c=8+ d=6+ e=10+ f=5+
+a b b c
+d b c c
+d e e f
+d e f f
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 140.
+a=4 b=4+ c=11+ d=6x e=12x f=2-
+a b b c
+d c c c
+d d d e
+f f e e
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+# 2 4 3 1
+
+# 141.
+a=6x b=4 c=9+ d=7+ e=5+ f=24x
+a a a b
+c c c d
+e e d d
+e f f f
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 142.
+a=6x b=10+ c=32x d=24x e=3
+a a a b
+a c b b
+c c d b
+e c d d
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+
+# 143.
+a=72x b=9+ c=2 d=1- e=9+ f=1-
+a a a b
+a c b b
+d e b f
+d e e f
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 144.
+a=10+ b=9+ c=6+ d=6+ e=3x f=4
+a a b c
+d a b c
+d e b c
+d e e f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 145.
+a=8+ b=12x c=4 d=4x e=1- f=1- g=4/
+a b b c
+a d b e
+a d d e
+f f g g
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 146.
+a=48x b=1 c=12x d=10+ e=16x
+a b c c
+a a c c
+a d d e
+d d e e
+# 4 1 2 3
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+
+# 147.
+a=9+ b=6x c=1- d=12x e=6x f=8x
+a a b b
+c a b d
+c e d d
+e e f f
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 148.
+a=8+ b=24x c=1- d=1- e=2x f=4 g=1-
+a b b b
+a a c c
+d e e f
+d e g g
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 149.
+a=5+ b=10+ c=8+ d=4 e=8+ f=4x
+a b b c
+a a b c
+d e f c
+e e f f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 150.
+a=7+ b=12x c=7+ d=8+ e=2- f=6+
+a a a b
+c c b b
+d c e e
+d d f f
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+
+# 151.
+a=24x b=8x c=3 d=12x e=7+ f=6x
+a a b b
+a c b d
+e e d d
+e f f f
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 152.
+a=8+ b=24x c=7+ d=7+ e=8+ f=1
+a a b c
+a b b c
+d d e c
+d f e e
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 153.
+a=2 b=12x c=12x d=8+ e=8x f=7+
+a b b b
+c c d d
+e c d f
+e e f f
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 154.
+a=7+ b=16x c=4/ d=8x e=8+ f=3-
+a a b c
+a b b c
+d d d e
+f f e e
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 155.
+a=24x b=12x c=9+ d=48x e=2
+a a b b
+c a a b
+c c d b
+e c d d
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 156.
+a=24x b=1- c=144x d=6+ e=2 f=3-
+a a b b
+a a c c
+d c c e
+d d f f
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+
+# 157.
+a=7+ b=9+ c=12x d=4x e=3 f=8x
+a a b c
+d a b c
+d d b c
+e f f f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 158.
+a=10+ b=1 c=4+ d=1- e=7+ f=16x g=3-
+a b c d
+a a c d
+e e f g
+e f f g
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 159.
+a=5+ b=2/ c=9+ d=2- e=8+ f=7+ g=1
+a a b c
+d d b c
+e f f c
+e e f g
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 160.
+a=12x b=8x c=8+ d=4 e=6x f=1-
+a b b c
+a a b c
+a d e c
+f f e e
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 161.
+a=7+ b=8+ c=6x d=24x e=8x f=3
+a b b c
+a b c c
+a d e e
+f d d e
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 162.
+a=9+ b=2x c=4 d=24x e=6+ f=12x
+a a b b
+c a b d
+e e d d
+e f f f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 163.
+a=32x b=3x c=9+ d=7+ e=2 f=8x
+a b b c
+a a b c
+d d e c
+d f f f
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 164.
+a=6x b=8x c=8+ d=2/ e=8+ f=1-
+a b b b
+a a c c
+d e e c
+d e f f
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+
+# 165.
+a=4+ b=9+ c=12x d=9+ e=4 f=6x
+a b b b
+a a c c
+d d c e
+d f f f
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 166.
+a=12+ b=8+ c=1 d=48x e=12x
+a a a b
+c a b b
+d d e b
+d d e e
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 167.
+a=9+ b=8x c=2- d=6x e=4 f=2- g=4+
+a a b c
+a b b c
+d d e f
+d g g f
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 168.
+a=10+ b=36x c=4x d=1- e=2-
+a b b b
+a b c c
+a c c d
+a e e d
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 169.
+a=8+ b=8x c=3- d=3- e=6x f=2 g=1-
+a b b b
+a a c c
+d e f g
+d e e g
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+
+# 170.
+a=48x b=4x c=6x d=12x e=6x f=4
+a a b c
+a b b c
+d d d c
+e e e f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 171.
+a=4x b=48x c=12x d=6x e=3 f=7+
+a a b b
+a c b d
+e c c d
+f f f d
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 172.
+a=8+ b=3- c=12+ d=2 e=2- f=24x
+a a b b
+a c c d
+a c c e
+f f f e
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+
+# 173.
+a=8x b=10+ c=6+ d=3/ e=6+ f=2/ g=4
+a a b b
+a c c b
+d c e f
+d g e f
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 174.
+a=12x b=9+ c=24x d=8x e=6x
+a b b b
+a a a c
+d c c c
+d d e e
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+
+# 175.
+a=24x b=3x c=16x d=7+ e=10+
+a b b c
+a a a c
+d e c c
+d e e e
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 176.
+a=24x b=8x c=5+ d=6+ e=7+ f=2-
+a a b b
+a c d b
+c c d e
+f f d e
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+
+# 177.
+a=8x b=9+ c=11+ d=2 e=10+
+a a a b
+c a b b
+c d e b
+c c e e
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+
+# 178.
+a=12x b=8+ c=10+ d=12x e=2 f=3-
+a a b b
+c c b b
+c c d d
+e f f d
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 179.
+a=2/ b=2- c=10+ d=2x e=7+ f=1- g=1-
+a a b b
+c d d e
+c c e e
+f f g g
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+
+# 180.
+a=10+ b=10+ c=2 d=3x e=1- f=8x
+a b b c
+a a b b
+a d d e
+f f d e
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 181.
+a=12x b=12+ c=3 d=5+ e=12x f=5+
+a a b c
+a a b b
+d e b f
+d e f f
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+
+# 182.
+a=8x b=8+ c=8+ d=12x e=6+ f=4
+a a b b
+c a b d
+c c d d
+e e e f
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+
+# 183.
+a=6+ b=1- c=12x d=6+ e=12x f=2 g=12x
+a b c c
+a b c d
+e e f d
+e g g d
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 184.
+a=12x b=2 c=7+ d=1- e=10+ f=2-
+a a a b
+c d d e
+c f f e
+c c e e
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 185.
+a=1- b=4+ c=2/ d=6x e=32x f=3 g=3x
+a a b c
+d b b c
+d e e f
+d e g g
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 186.
+a=32x b=7+ c=12x d=3 e=32x
+a a a b
+a c b b
+d c e e
+c c e e
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 187.
+a=2 b=12+ c=11+ d=8+ e=7+
+a b b b
+c c b d
+c c d d
+e e e d
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 188.
+a=12x b=7+ c=5+ d=3 e=12x f=24x
+a b c c
+a b c d
+a b e e
+f f f e
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 189.
+a=3/ b=7+ c=12x d=12x e=9+ f=1 g=4/
+a a b c
+d b b c
+d d e f
+g g e e
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+
+# 190.
+a=3 b=5+ c=8x d=12x e=1- f=5+ g=36x
+a b b c
+d d b c
+e f g c
+e f g g
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 191.
+a=6x b=1- c=7+ d=24x e=4x f=3+ g=3
+a a a b
+c c d b
+e c d f
+e g d f
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 192.
+a=10+ b=16x c=3 d=24x e=9+
+a a a a
+b b c d
+b e d d
+b e e e
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+
+# 193.
+a=12+ b=1- c=48x d=12x e=3- f=1
+a a b b
+a a c d
+e c c d
+e f c d
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 194.
+a=7+ b=9+ c=1 d=9+ e=6x f=8+
+a a b c
+a b b d
+e e d d
+e f f f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 195.
+a=9+ b=6x c=5+ d=2/ e=2- f=4x g=3
+a b c c
+a b c d
+a b e d
+f f e g
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 196.
+a=12x b=8x c=3 d=1- e=8x f=2/ g=3/
+a a b c
+d a b b
+d e e e
+f f g g
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+
+# 197.
+a=6x b=3 c=8x d=8+ e=2/ f=2- g=4+
+a a b c
+a d c c
+d d e e
+f f g g
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+
+# 198.
+a=24x b=6+ c=6+ d=24x e=2 f=8+
+a a b b
+c a b d
+c c d d
+e f f f
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+
+# 199.
+a=13+ b=4+ c=1 d=24x e=6+ f=8x
+a a a b
+c a d b
+e d d d
+e e f f
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 200.
+a=4/ b=48x c=10+ d=24x e=3/
+a a b b
+c b b d
+c c c d
+e e d d
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+
+# 201.
+a=6x b=2/ c=12x d=2- e=4 f=1- g=7+
+a b b c
+a a c c
+d d e f
+g g g f
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+
+# 202.
+a=7+ b=8+ c=7+ d=10+ e=1 f=7+
+a b b b
+a a c c
+d d c e
+d f f f
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+
+# 203.
+a=9+ b=6+ c=7+ d=2- e=9+ f=6x
+a a b c
+a b b c
+d e e c
+d e f f
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 204.
+a=18x b=12+ c=9+ d=8x e=2
+a a a b
+c a b b
+c d d b
+c d d e
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 205.
+a=48x b=3x c=10+ d=8x e=4+ f=4
+a a a b
+c a b b
+c c d d
+c e e f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 206.
+a=9+ b=72x c=8x d=9+ e=3
+a b b b
+a a b c
+a d d c
+e d d c
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 207.
+a=24x b=8x c=5+ d=1- e=2 f=1- g=1-
+a b b b
+a a c c
+d d c e
+f f g g
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+
+# 208.
+a=6x b=24x c=7+ d=12x e=6x f=4
+a b b b
+a a c c
+d d c e
+d f e e
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 209.
+a=24x b=3 c=4+ d=9+ e=2x f=11+
+a b c c
+a a c d
+e f f d
+e e f d
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 210.
+a=8+ b=6x c=4/ d=4/ e=4x f=9+ g=2
+a a b c
+d a b c
+d e b f
+g e f f
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 211.
+a=12x b=16x c=2- d=3 e=2/ f=24x
+a a b c
+a b b c
+a d e e
+f f f f
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+
+# 212.
+a=1- b=1- c=3+ d=5+ e=2x f=1- g=1- h=5+
+a a b c
+d d b c
+e f f g
+e h h g
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+
+# 213.
+a=16x b=8+ c=8x d=3 e=8+ f=8x
+a a a b
+c a d b
+c e e b
+e e f f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 214.
+a=8+ b=1- c=6x d=10+ e=6+ f=1-
+a b b c
+a a d c
+e d d c
+e e f f
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 215.
+a=12+ b=6x c=7+ d=1 e=6+ f=9+
+a b b c
+a d e c
+a a e e
+f f f e
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 216.
+a=1- b=7+ c=3 d=6+ e=1- f=10+ g=2-
+a b b c
+a b d d
+e e d f
+g g f f
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 217.
+a=16x b=7+ c=3x d=7+ e=3- f=8x g=2
+a b b c
+a a b c
+d d e f
+g d e f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 218.
+a=6x b=32x c=8x d=9x e=7+ f=2/
+a a b b
+c a b d
+c c d d
+e e f f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 219.
+a=7+ b=12x c=6+ d=6x e=3/ f=9+
+a a b b
+a c b d
+e c d d
+e f f f
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 220.
+a=8+ b=16x c=5+ d=9+ e=2 f=8+
+a b b c
+a b c c
+a d d d
+e f f f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 221.
+a=1- b=16x c=3 d=6x e=7+ f=12x g=6+
+a b c d
+a b b d
+e f f g
+e f g g
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+# 3 2 1 4
+
+# 222.
+a=12x b=9+ c=7+ d=6x e=2x f=1-
+a a b c
+a b b c
+d e e c
+d d f f
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 223.
+a=36x b=8x c=2x d=7+ e=1- f=3/ g=2
+a b b b
+a a c c
+d d e f
+d g e f
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 224.
+a=1- b=3- c=8x d=8+ e=3 f=24x g=1-
+a a b b
+c d d e
+c f d g
+c f f g
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 225.
+a=9x b=8x c=16x d=4 e=2- f=24x
+a a b b
+c a a d
+c c e e
+c f f f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 226.
+a=6x b=2- c=3x d=10+ e=3/ f=24x
+a a a b
+c c d b
+c d d e
+f f f e
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 227.
+a=24x b=8+ c=2x d=11+ e=6+ f=2
+a a a b
+c c b b
+d c e e
+d d e f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 228.
+a=8x b=18x c=7+ d=9x e=9+ f=2
+a a a b
+c c b b
+d c e e
+d d f e
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+
+# 229.
+a=3- b=7+ c=8+ d=5+ e=8x f=3- g=3
+a b c c
+a b b c
+d e f f
+d e e g
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 230.
+a=8x b=9x c=9+ d=6+ e=8x f=4
+a a a b
+c c b b
+c d d e
+f d e e
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 231.
+a=12x b=4x c=7+ d=6x e=9+ f=1-
+a b b c
+a d c c
+a d d e
+f f e e
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 232.
+a=3x b=2- c=24x d=24x e=2- f=3- g=2
+a b b c
+a a c c
+d d e f
+d g e f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 233.
+a=12x b=3+ c=9+ d=5+ e=3- f=24x g=1
+a b c c
+a b c d
+a e e d
+f f f g
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 234.
+a=7+ b=8+ c=6x d=8+ e=8x f=6x
+a a a b
+c d b b
+c d d e
+c f f e
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+
+# 235.
+a=6x b=4 c=11+ d=72x e=6x
+a a a b
+c a d d
+c c d d
+c e e e
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 236.
+a=2x b=12x c=10+ d=9x e=6+ f=3/ g=2
+a a b b
+c c d b
+c d d e
+f f g e
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+
+# 237.
+a=8+ b=6+ c=7+ d=6+ e=10+ f=3
+a a a b
+c c b b
+d c e e
+d d e f
+# 4 3 1 2
+# 2 4 3 1
+# 3 1 2 4
+# 1 2 4 3
+
+# 238.
+a=1- b=2 c=8x d=6x e=5+ f=1- g=2/
+a a b c
+d d c c
+d e e f
+g g e f
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 239.
+a=7+ b=12x c=16x d=8+ e=6x f=2
+a b b b
+a a c c
+d d e c
+d e e f
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 240.
+a=8x b=18x c=9+ d=6+ e=3 f=8x
+a a b b
+c a b d
+c c d d
+e f f f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 241.
+a=4+ b=24x c=6x d=9+ e=32x
+a b b b
+a b c d
+e e c d
+e c c d
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 242.
+a=11+ b=9+ c=4 d=3+ e=24x f=2-
+a a b c
+a a b b
+d e b f
+d e e f
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 243.
+a=7+ b=14+ c=2 d=32x e=6x
+a b b c
+a a b b
+a d e e
+d d d e
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 244.
+a=12x b=9+ c=2x d=4 e=5+ f=2/ g=8+
+a a b c
+a d b c
+e f b g
+e f g g
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 245.
+a=8x b=3 c=9+ d=7+ e=2x f=10+
+a a a b
+c c c d
+e e f d
+e f f d
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 246.
+a=3- b=1- c=6x d=10+ e=6x f=1 g=12x
+a a b b
+c c d d
+e c d f
+e g g g
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 247.
+a=96x b=10+ c=1 d=18x e=8x
+a a a b
+c a b b
+d d e b
+d d e e
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 248.
+a=6+ b=12x c=9+ d=12x e=1- f=5+
+a a b b
+a c b d
+e c c d
+e f f d
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 249.
+a=6+ b=3- c=8x d=24x e=3 f=2- g=2-
+a a a b
+c c d b
+c d d e
+f f g g
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 250.
+a=2/ b=1- c=4/ d=1- e=1- f=1- g=2x h=4x
+a b c c
+a b d d
+e f f g
+e h h g
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+
+# 251.
+a=4/ b=8x c=1- d=3x e=2/ f=5+ g=4x h=1-
+a b b c
+a d e c
+f d e g
+f h h g
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 252.
+a=10+ b=2/ c=4x d=12x e=7+ f=4x g=2
+a a b b
+c a d d
+c c d e
+f f g e
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 253.
+a=8+ b=2/ c=3 d=3+ e=8+ f=8+ g=2-
+a a b b
+c a d d
+e e f f
+e g g f
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 254.
+a=2- b=32x c=2 d=18x e=5+ f=3/ g=2/
+a a b b
+c d b b
+e d d f
+e g g f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 255.
+a=8+ b=1- c=8x d=2/ e=6x f=2 g=1-
+a b b c
+a a d c
+e f d c
+e e g g
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 256.
+a=9+ b=12x c=12x d=6+ e=4 f=1-
+a a a b
+c a b b
+c d d e
+c d f f
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 257.
+a=6x b=4 c=32x d=12+ e=6+
+a a a b
+c a d d
+c c d d
+c e e e
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 258.
+a=9+ b=6+ c=24x d=6x e=6+ f=3x
+a b b b
+a a c c
+d d c e
+d f f e
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 259.
+a=8x b=6+ c=9+ d=3 e=8x f=8+
+a a b b
+a c b d
+c c e e
+f f f e
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 260.
+a=9+ b=1- c=2x d=4x e=6x f=7+ g=2
+a b b c
+a a c c
+d e e f
+d d g f
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 261.
+a=1- b=4/ c=8x d=10+ e=1 f=9+ g=2x
+a a b b
+c c c d
+e f d d
+f f g g
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+
+# 262.
+a=6+ b=8x c=10+ d=3- e=1- f=3 g=2/
+a b b b
+a a c c
+d e e c
+d f g g
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 263.
+a=2- b=5+ c=2/ d=3- e=1- f=3- g=3- h=5+
+a b b c
+a d d c
+e e f f
+g g h h
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+
+# 264.
+a=24x b=12x c=1 d=7+ e=7+ f=8+
+a a b c
+d a b b
+d e e f
+d e f f
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+
+# 265.
+a=48x b=18x c=7+ d=4 e=2- f=3-
+a a a b
+a c d b
+e c b b
+e c f f
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+
+# 266.
+a=3/ b=2/ c=4/ d=2/ e=3/ f=2/ g=1- h=1-
+a a b b
+c d e e
+c d f g
+h h f g
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+
+# 267.
+a=7+ b=12x c=16x d=6x e=3 f=8+
+a a b b
+a c b d
+e c c d
+f f f d
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 268.
+a=12x b=7+ c=12x d=4x e=4 f=12x
+a a a b
+c c b b
+d c e f
+d d f f
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+
+# 269.
+a=2- b=6+ c=8+ d=8x e=1- f=3/ g=2
+a b b c
+a b d c
+e e d c
+f f d g
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 270.
+a=2/ b=24x c=3 d=4x e=11+ f=2x g=1-
+a b c d
+a b b d
+e f f g
+e e f g
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 271.
+a=3- b=18x c=7+ d=9+ e=4+ f=1-
+a a b c
+d b b c
+d e e c
+d e f f
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 272.
+a=7+ b=9+ c=11+ d=6x e=2- f=4
+a a b b
+c a b b
+c c c d
+e e f d
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 273.
+a=6+ b=2/ c=4+ d=12x e=24x f=4/ g=2
+a b b c
+a d d c
+a d e e
+f f e g
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+
+# 274.
+a=6+ b=1- c=9+ d=5+ e=6x f=4 g=2x
+a a b b
+c a d d
+c c e e
+f g g e
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 275.
+a=12x b=24x c=4x d=9+ e=3- f=3/
+a a a b
+c c b b
+c d d e
+f f d e
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+
+# 276.
+a=18x b=24x c=2- d=1- e=4 f=12x
+a a a b
+a c d b
+e c d b
+f f f b
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+
+# 277.
+a=6x b=12x c=9+ d=16x e=7+ f=1
+a a a b
+c c b b
+c d d e
+f d e e
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 278.
+a=9+ b=12x c=3 d=12x e=1- f=3- g=1-
+a a b b
+c a d b
+e d d f
+e g g f
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 279.
+a=12x b=8x c=6+ d=3/ e=7+ f=1- g=2
+a a b b
+a c d d
+e c c f
+e e g f
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+
+# 280.
+a=48x b=3+ c=3 d=24x e=8+ f=3/
+a a a b
+c a d b
+e d d d
+e e f f
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 281.
+a=48x b=9x c=11+ d=8+ e=3
+a b b c
+a a b c
+a d c c
+d d d e
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 282.
+a=24x b=8+ c=6x d=2 e=6+ f=24x
+a b b b
+a a c d
+e e c c
+e f f f
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 283.
+a=7+ b=3+ c=2/ d=3/ e=2- f=1- g=4+ h=1-
+a b b c
+a d d c
+e e f g
+h h f g
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 284.
+a=8+ b=1- c=4 d=2x e=6+ f=6+ g=12x
+a b b c
+a a d e
+f d d e
+f g g e
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+
+# 285.
+a=12x b=4x c=1- d=5+ e=9+ f=1 g=1-
+a a b c
+a b b c
+d e e f
+d e g g
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 286.
+a=1- b=6x c=1- d=48x e=1 f=3+ g=24x
+a a b c
+d b b c
+d d e f
+g g g f
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 287.
+a=10+ b=1 c=8+ d=64x e=1- f=3/
+a a a b
+c a d d
+c d d e
+c f f e
+# 2 4 3 1
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+
+# 288.
+a=16x b=1- c=36x d=2/ e=10+
+a b b c
+a a c c
+a d d c
+e e e e
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 289.
+a=24x b=6+ c=5+ d=6x e=7+ f=1 g=7+
+a a a b
+c c b b
+d e f g
+d e e g
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 290.
+a=6+ b=24x c=12x d=12x e=8x f=1-
+a a b c
+a b b c
+d e e c
+d e f f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 291.
+a=2 b=36x c=6x d=3- e=24x f=2/
+a b b c
+d b b c
+d e e c
+e e f f
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+
+# 292.
+a=9+ b=48x c=4 d=1- e=2- f=3x
+a a b c
+a a b b
+d e b f
+d e f f
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 293.
+a=2 b=36x c=32x d=12x e=8+
+a b b b
+c c b d
+c c d d
+e e e d
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 294.
+a=6+ b=24x c=8+ d=9+ e=4x f=2
+a a b b
+a c c b
+d c e e
+d d e f
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 295.
+a=8x b=24x c=6x d=1- e=3- f=1- g=3
+a b b c
+a b c c
+a d e f
+g d e f
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 296.
+a=12x b=96x c=6+ d=1- e=7+
+a a b b
+a a b c
+d e b c
+d e e c
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 297.
+a=3- b=2/ c=3/ d=1- e=1- f=3/ g=4/ h=6+
+a b b c
+a d d c
+e f g g
+e f h h
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 298.
+a=96x b=12x c=12x d=1 e=3+ f=1-
+a a a b
+c a d b
+c e b b
+c e f f
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 299.
+a=72x b=6x c=1 d=11+ e=4x f=5+
+a b b b
+a a c d
+a e e d
+f f d d
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 300.
+a=3x b=2- c=9+ d=8+ e=9x f=3-
+a b b c
+a a c c
+d e e f
+d d e f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 301.
+a=24x b=2- c=9+ d=8x e=1 f=1- g=3+
+a a b b
+a c c d
+e c f d
+g g f d
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 302.
+a=24x b=6x c=48x d=1- e=2- f=1
+a b b b
+a a a c
+d d c c
+e e f c
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 303.
+a=18x b=11+ c=1 d=13+ e=6x
+a a a b
+c a b b
+d d e b
+d d e e
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 304.
+a=6x b=7+ c=2 d=1- e=13+ f=4+
+a a a b
+a c d b
+e e d f
+e e f f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 305.
+a=7+ b=1- c=4x d=3 e=18x f=2/ g=4x
+a a a b
+c c d b
+c e f g
+e e f g
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 306.
+a=2- b=2x c=12x d=5+ e=4/ f=6+ g=1- h=1-
+a b b c
+a d e c
+f d e g
+f h h g
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 307.
+a=4 b=8+ c=2/ d=8x e=6x f=4x g=12x
+a b b c
+d d b c
+d e f g
+e e f g
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 308.
+a=6x b=7+ c=10+ d=8x e=2 f=8+
+a a b b
+a a c c
+d c c e
+d f f f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 309.
+a=1- b=6x c=6+ d=1 e=7+ f=12x g=1-
+a a b c
+d b b c
+e f f f
+e e g g
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+
+# 310.
+a=9+ b=5+ c=12x d=2 e=2- f=1- g=2/
+a a b b
+c a b d
+c c e f
+g g e f
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 311.
+a=12x b=6+ c=8+ d=7+ e=12x f=3
+a a b b
+c a b d
+c c e d
+f e e d
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+
+# 312.
+a=3+ b=14+ c=24x d=8+ e=4+ f=2
+a a b b
+c b b d
+c e d d
+c e f d
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+
+# 313.
+a=6x b=11+ c=5+ d=6x e=12x f=4
+a b b c
+a b c c
+a d d e
+f d e e
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 314.
+a=18x b=7+ c=8x d=24x e=4+ f=5+
+a a b b
+a c d b
+c c d e
+f f d e
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+
+# 315.
+a=11+ b=2x c=12x d=16x e=12x f=2/
+a a a b
+c a d b
+c d d e
+f f d e
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 316.
+a=10+ b=4/ c=12+ d=8x e=1 f=1-
+a a b b
+c a a d
+c c d d
+e c f f
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 317.
+a=11+ b=7+ c=8+ d=12+ e=2
+a a a b
+c a b b
+c d d d
+c c e d
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 318.
+a=2/ b=10+ c=8+ d=13+ e=5+ f=1
+a a b b
+c b b d
+c d d d
+c e e f
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+
+# 319.
+a=9+ b=11+ c=6x d=3/ e=3 f=7+
+a b b c
+a a b c
+a d d c
+e f f f
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 320.
+a=24x b=6+ c=6x d=3+ e=24x f=1-
+a a a b
+c c b b
+d c e e
+d f f e
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 321.
+a=24x b=9+ c=4x d=2/ e=24x f=1
+a a b b
+c a b b
+c a d d
+e e e f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 322.
+a=32x b=1- c=24x d=4+ e=1- f=3-
+a b b c
+a a c c
+a d d c
+e e f f
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+
+# 323.
+a=24x b=9+ c=10+ d=1 e=32x
+a a a b
+a c b b
+d c e b
+c c e e
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 324.
+a=72x b=7+ c=9+ d=5+ e=1-
+a a a b
+a c b b
+d c c b
+d c e e
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 325.
+a=16x b=11+ c=8+ d=12x e=4
+a b b b
+a a b c
+a d c c
+d d e c
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 326.
+a=10+ b=1 c=18x d=6x e=6x f=9+
+a b c c
+a a d c
+e d d f
+e e f f
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 327.
+a=12x b=5+ c=6+ d=4 e=6x f=2/ g=4/
+a b b c
+a d c c
+a e f f
+e e g g
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 328.
+a=24x b=3/ c=4/ d=2 e=7+ f=9+ g=3/
+a b b c
+a a d c
+e e e f
+g g f f
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+
+# 329.
+a=3x b=10+ c=9+ d=9x e=2- f=2/
+a a b b
+a c b d
+e c d d
+e c f f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 330.
+a=4/ b=24x c=8+ d=12x e=7+ f=4+
+a b b c
+a d b c
+d d e c
+f f e e
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 331.
+a=7+ b=6x c=1 d=36x e=9+ f=7+
+a a a b
+c d d b
+e d f b
+e e f f
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+
+# 332.
+a=8+ b=48x c=3 d=36x e=8+
+a a b c
+a a b b
+d d b e
+d e e e
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+
+# 333.
+a=12x b=6+ c=1- d=16x e=1- f=1- g=1
+a b b c
+a a b c
+d d e e
+d f f g
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+
+# 334.
+a=16x b=2- c=48x d=1- e=3 f=8x
+a a b b
+a a c d
+c c c d
+e f f f
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 335.
+a=6x b=11+ c=2x d=8+ e=2x f=4 g=5+
+a b b c
+a b d c
+e e d d
+f e g g
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 336.
+a=6x b=12x c=8x d=36x e=16x f=1
+a a a b
+c c c b
+d d e b
+f d e e
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 337.
+a=6+ b=24x c=24x d=7+ e=2- f=4x
+a a b b
+a c c b
+d c e e
+d d f f
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+
+# 338.
+a=8x b=1- c=7+ d=12x e=12x f=6x
+a a b b
+a c c d
+e c d d
+e f f f
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 339.
+a=32x b=18x c=24x d=8x e=3/
+a a a b
+a b b b
+c c d d
+c c e e
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 340.
+a=10+ b=10+ c=72x d=4+ e=4
+a a a b
+c c a b
+c c d b
+e d d b
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 341.
+a=12x b=11+ c=2 d=12x e=2- f=3/
+a a b c
+a a b d
+e b b d
+e f f d
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 342.
+a=3/ b=2 c=11+ d=2x e=2- f=6x g=12x
+a a b c
+d d c c
+e f f f
+e g g g
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 343.
+a=6+ b=12x c=2 d=8+ e=9+ f=7+
+a a b c
+a b b d
+e e d d
+e f f f
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 344.
+a=2 b=10+ c=6+ d=12x e=4x f=9+
+a b c c
+b b c d
+e e d d
+e f f f
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 345.
+a=1- b=6+ c=2/ d=8x e=1 f=7+ g=2-
+a b b c
+a b d c
+e d d f
+g g f f
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 346.
+a=18x b=10+ c=32x d=3/ e=8x
+a a a b
+c a b b
+c c b d
+c e e d
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 347.
+a=2 b=2- c=32x d=7+ e=8x f=3/ g=2/
+a b b c
+d d c c
+d e e f
+g g e f
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 348.
+a=6x b=12x c=8x d=6+ e=3- f=8+ g=1
+a b b b
+a c d d
+e c f g
+e c f f
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+
+# 349.
+a=3- b=6x c=36x d=3+ e=7+ f=1- g=2
+a a b b
+c c d b
+c e d f
+g e e f
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 350.
+a=8x b=24x c=96x d=18x
+a a a b
+c a b b
+c c d b
+c d d d
+# 1 2 4 3
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+
+# 351.
+a=12x b=24x c=9+ d=2x e=8x f=3
+a a b b
+a c d b
+c c d d
+e e e f
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+
+# 352.
+a=3/ b=9+ c=7+ d=7+ e=10+ f=2/
+a b b c
+a b c c
+d d d e
+f f e e
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+# 2 1 3 4
+
+# 353.
+a=10+ b=2 c=18x d=9+ e=2/ f=3/
+a a a b
+c a d d
+c c c d
+e e f f
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+
+# 354.
+a=12x b=9+ c=6+ d=32x e=4+ f=3
+a a a b
+c c b b
+c d e e
+d d e f
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 355.
+a=7+ b=64x c=6+ d=14+ e=1
+a a b b
+a b b c
+a d d c
+d d e c
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 356.
+a=9+ b=6+ c=10+ d=3/ e=3x f=8x
+a a b b
+a c b d
+e c c d
+e e f f
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 357.
+a=12x b=6+ c=2- d=7+ e=4/ f=2- g=4
+a b b c
+a a b c
+d e e f
+d d g f
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+
+# 358.
+a=9+ b=6x c=8x d=8+ e=1- f=3-
+a b b b
+a a c c
+d d c e
+d f f e
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+# 3 1 4 2
+
+# 359.
+a=2x b=12x c=2- d=3 e=1- f=12x g=7+
+a a b c
+d b b c
+e e f f
+g g g f
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+
+# 360.
+a=3- b=24x c=7+ d=6x e=18x f=3-
+a a b b
+c c b d
+c e d d
+e e f f
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+# 3 2 1 4
+
+# 361.
+a=24x b=4x c=6x d=2- e=1- f=8+
+a a a b
+c d b b
+c d e e
+c f f f
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 362.
+a=8+ b=8x c=6+ d=12x e=2 f=24x
+a b b b
+a a c d
+e c c d
+f f f d
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+
+# 363.
+a=9+ b=7+ c=6+ d=48x e=6+ f=1
+a a a b
+c c c b
+d d e b
+d f e e
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 364.
+a=48x b=4x c=8+ d=6+ e=8+ f=2
+a a b c
+a b b c
+d e e c
+d d e f
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 365.
+a=8+ b=7+ c=12+ d=3- e=12x
+a b b b
+a a c d
+a e c d
+e e c c
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+
+# 366.
+a=2/ b=12x c=9+ d=4 e=3- f=18x g=1-
+a a b b
+c c b d
+e c f g
+e f f g
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+
+# 367.
+a=1- b=4/ c=7+ d=1- e=2/ f=2/ g=3- h=1-
+a a b b
+c c d e
+f g d e
+f g h h
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 368.
+a=9+ b=8x c=8+ d=3/ e=24x f=2x
+a a a b
+c c b b
+c d d e
+f f e e
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+
+# 369.
+a=6x b=24x c=12x d=4 e=6x f=7+
+a a b b
+a c b d
+c c e e
+f f f e
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 370.
+a=24x b=7+ c=3 d=6x e=8x f=8+
+a a b b
+a c b d
+e e d d
+e f f f
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 371.
+a=7+ b=6x c=9x d=32x e=6x f=4
+a a a b
+c c d b
+c d d b
+e e e f
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 372.
+a=2x b=24x c=8+ d=1- e=6+ f=3/ g=2
+a b b b
+a a c c
+d e c f
+d e g f
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 373.
+a=18x b=2- c=32x d=2/ e=8x f=3
+a b b c
+a d d c
+a a c c
+e e e f
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+
+# 374.
+a=3x b=8+ c=2 d=8+ e=12x f=24x
+a a b c
+d a b e
+d d b e
+f f f e
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 375.
+a=3 b=9+ c=7+ d=7+ e=4x f=8+
+a b b c
+d b c c
+d e e f
+d e f f
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 376.
+a=12x b=6x c=7+ d=12x e=9+ f=2
+a a b b
+c a b d
+c e d d
+c e e f
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 377.
+a=8x b=8+ c=9+ d=6x e=2 f=8+
+a a b b
+a c b d
+c c e d
+f f f d
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 378.
+a=2- b=9+ c=7+ d=12x e=2/ f=2/ g=3
+a a b b
+c c d b
+e c d f
+e g d f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 379.
+a=7+ b=4x c=9+ d=9x e=1- f=1- g=4
+a b b c
+a d c c
+a d d e
+f f g e
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+
+# 380.
+a=6x b=12x c=24x d=7+ e=2 f=8+
+a a b b
+a c b d
+c c e d
+f f f d
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+
+# 381.
+a=18x b=4x c=7+ d=9+ e=8x f=3
+a b b c
+a a b c
+d d d c
+e e e f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 382.
+a=10+ b=11+ c=8+ d=12x e=3
+a a b b
+a c b b
+a c c d
+e c d d
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 383.
+a=9+ b=7+ c=8x d=7+ e=1- f=4/
+a a a b
+c d b b
+c d d e
+c f f e
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 384.
+a=32x b=9+ c=3- d=5+ e=8+ f=2
+a a b b
+a a b c
+d e b c
+d e e f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 385.
+a=4/ b=5+ c=1- d=1- e=4/ f=2/ g=1- h=1-
+a a b b
+c d d e
+c f f e
+g g h h
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 386.
+a=72x b=1 c=7+ d=6x e=6+ f=24x
+a a b c
+a d d c
+a e f c
+e e f f
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 387.
+a=12x b=3/ c=2 d=10+ e=1- f=5+ g=2-
+a b b c
+a a d d
+e e d f
+g g f f
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 388.
+a=9+ b=8x c=10+ d=3/ e=2 f=12x
+a a a b
+c d d b
+c c e b
+c f f f
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+
+# 389.
+a=5+ b=48x c=2- d=12+ e=1- f=1
+a a b b
+c a b b
+c d d d
+e e d f
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 390.
+a=1- b=10+ c=10+ d=1 e=2/ f=12x
+a b b b
+a b c c
+d c c e
+f f f e
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 391.
+a=1- b=48x c=12x d=4x e=6x f=4
+a b b b
+a b c c
+d e c c
+d e e f
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 392.
+a=1- b=144x c=1 d=8+ e=12x f=2-
+a b b c
+a d b b
+e d d d
+e e f f
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 393.
+a=6+ b=7+ c=8+ d=18x e=7+ f=4
+a a b c
+a b b c
+d d e c
+d f e e
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 394.
+a=8x b=72x c=4 d=6x e=6x f=4x
+a a b c
+a a b d
+e b b d
+e f f d
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+
+# 395.
+a=5+ b=9+ c=2 d=32x e=3/ f=1- g=4x
+a a b c
+a d b e
+d d b e
+f f g g
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 396.
+a=24x b=6+ c=8+ d=5+ e=9+ f=2/
+a b b b
+a a c c
+d d c e
+f f e e
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 397.
+a=24x b=6+ c=12x d=5+ e=1- f=2 g=4x
+a b b b
+a a c c
+d d c e
+f g g e
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 398.
+a=1 b=24x c=24x d=6x e=4x f=2/ g=1-
+a b b b
+c d d e
+c c e e
+f f g g
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 399.
+a=9+ b=5+ c=6+ d=4+ e=1- f=2- g=3
+a a b b
+a c c b
+d e e f
+d d g f
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 400.
+a=24x b=12x c=8x d=7+ e=7+
+a a a b
+a c b b
+d c c e
+d c e e
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 401.
+a=32x b=6+ c=9x d=8x e=12x f=2
+a a b b
+c a b d
+c c e d
+f e e d
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 402.
+a=7+ b=6+ c=8+ d=2 e=12x f=24x
+a a b c
+a d b c
+e e b c
+e f f f
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 403.
+a=1 b=72x c=32x d=7+ e=24x
+a b b b
+c c d b
+c c d d
+e e e d
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+
+# 404.
+a=72x b=10+ c=4x d=4x e=2 f=1-
+a a b b
+a a b c
+d e b c
+d d f f
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 405.
+a=2- b=3x c=1 d=5+ e=7+ f=1- g=8x h=3/
+a a b b
+c d e e
+f d d g
+f h h g
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+
+# 406.
+a=1- b=12x c=2- d=6x e=8x f=12x g=2/ h=4x
+a b c c
+a b d e
+f g d e
+f g h h
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+
+# 407.
+a=8+ b=8x c=3 d=9+ e=7+ f=6+
+a a b b
+a c b d
+e e d d
+e f f f
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 408.
+a=2x b=2- c=7+ d=2- e=2- f=3+ g=3/ h=1-
+a b c c
+a b d d
+e e f g
+h h f g
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 409.
+a=12x b=6+ c=9+ d=8x e=4/ f=2- g=2
+a a b b
+a c c b
+d d c e
+f f g e
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+
+# 410.
+a=12x b=9+ c=8x d=8x e=7+ f=2
+a b b c
+a a b c
+d d e c
+d f e e
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 411.
+a=8x b=4+ c=1- d=8x e=6+ f=2 g=1-
+a a b b
+c a d d
+c e d f
+e e g g
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+
+# 412.
+a=5+ b=2- c=24x d=3 e=2/ f=3+ g=12x
+a a b b
+a c c d
+e c f f
+e g g g
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 413.
+a=8+ b=3 c=5+ d=8+ e=7+ f=9+
+a b c c
+a a c d
+e e d d
+e f f f
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 414.
+a=9+ b=7+ c=6+ d=16x e=8+ f=1
+a b c c
+a b b c
+a d d e
+f d e e
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+
+# 415.
+a=5+ b=1- c=8x d=8+ e=1- f=2/ g=3
+a a b c
+a d b c
+e d d c
+e f f g
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 416.
+a=16x b=12x c=3 d=4x e=24x f=1-
+a a b b
+c a b b
+d a e e
+d f f e
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 417.
+a=8+ b=9+ c=6x d=4x e=9+ f=2
+a b b c
+a a b c
+d d e c
+d f e e
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+
+# 418.
+a=8x b=4/ c=6+ d=18x e=9+ f=4/
+a b b c
+a a d c
+e d d c
+e e f f
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+
+# 419.
+a=11+ b=16x c=10+ d=1- e=1-
+a b b b
+a c c b
+a a c c
+d d e e
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+
+# 420.
+a=3/ b=24x c=11+ d=8+ e=4 f=3x
+a a b b
+c c d b
+c c d d
+e f f d
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+
+# 421.
+a=4x b=10+ c=8+ d=4+ e=48x f=2
+a a b b
+c a d b
+c e d d
+c e e f
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 422.
+a=2x b=24x c=4 d=12x e=9+ f=6+
+a b b b
+a a c d
+e e f d
+e f f d
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 423.
+a=3+ b=9+ c=18x d=9+ e=3- f=3 g=1-
+a b c c
+a b b c
+d d e e
+d f g g
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 424.
+a=48x b=1 c=3+ d=12x e=3/ f=96x
+a a a b
+a c d d
+e c d f
+e f f f
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 425.
+a=8+ b=8x c=2/ d=1- e=6x f=5+ g=3
+a a a b
+c d b b
+c d e e
+f f e g
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 426.
+a=1 b=9+ c=10+ d=2x e=7+ f=9+
+a b b b
+c c d e
+c d d e
+f f f e
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 427.
+a=24x b=1 c=6+ d=6x e=6x f=1- g=2-
+a a a b
+c c d d
+c e e f
+g g e f
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+
+# 428.
+a=24x b=8x c=18x d=24x e=4
+a a b b
+a c b b
+a c c d
+e c d d
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 429.
+a=1- b=10+ c=12x d=8+ e=8x f=1
+a a b b
+c c b b
+c c d e
+f d d e
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 430.
+a=36x b=4x c=8x d=12x e=8x f=3
+a a b c
+a b b c
+d d d c
+e e e f
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 431.
+a=16x b=5+ c=24x d=8+ e=3 f=8x
+a a b c
+a b b c
+d d d c
+e f f f
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 432.
+a=8+ b=5+ c=12x d=1- e=48x f=2/
+a a a b
+c c b b
+d c e e
+d f f e
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+
+# 433.
+a=13+ b=10+ c=3x d=1 e=8x f=6x
+a a b b
+c a b d
+c a b e
+f f f e
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 434.
+a=1- b=8+ c=9+ d=24x e=4 f=2-
+a a b c
+d b b c
+d d b c
+e d f f
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 435.
+a=24x b=2/ c=3x d=7+ e=3/ f=10+ g=3
+a a b c
+d a b c
+d e e f
+d g f f
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 436.
+a=2x b=24x c=7+ d=4 e=7+ f=2/ g=4+
+a a b b
+c d b e
+c c e e
+f f g g
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+
+# 437.
+a=4 b=11+ c=3+ d=4x e=1- f=10+
+a b b c
+d b b c
+d d e e
+f f f f
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 438.
+a=7+ b=7+ c=3 d=6+ e=1- f=4/ g=1-
+a a b b
+a c d d
+e d d f
+e g g f
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 439.
+a=4+ b=24x c=6+ d=4 e=8+ f=1- g=6x
+a a b b
+c d b b
+c e e f
+g g e f
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+
+# 440.
+a=10+ b=2- c=9+ d=2/ e=10+ f=2
+a b b c
+a a c c
+d a e c
+d e e f
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 441.
+a=12+ b=24x c=1- d=8x e=6x
+a a a b
+c c a b
+d d b b
+d e e e
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 442.
+a=1- b=12x c=5+ d=16x e=8x f=9x
+a b c c
+a b d d
+e b d f
+e e f f
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 443.
+a=5+ b=3 c=12x d=7+ e=11+ f=6x
+a b c c
+a a c d
+e e d d
+e f f f
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 444.
+a=12x b=5+ c=6x d=48x e=9+ f=1
+a a b b
+c a b d
+c c d d
+e e e f
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 445.
+a=10+ b=7+ c=6x d=6x e=4 f=7+
+a a b c
+a b b c
+d d e c
+d f f f
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+
+# 446.
+a=4 b=8x c=6x d=7+ e=6+ f=3+ g=1-
+a b b c
+d b e c
+d d e c
+f f g g
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 447.
+a=16x b=8+ c=8x d=6x e=8+ f=2
+a a b c
+a b b c
+d d e c
+f d e e
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 448.
+a=6x b=7+ c=3 d=9+ e=2x f=4/ g=1-
+a a b c
+d a b b
+d e e f
+d g g f
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 449.
+a=1- b=12+ c=10+ d=3 e=8+ f=3/
+a b b b
+a c b d
+c c c e
+f f e e
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 450.
+a=10+ b=2x c=24x d=4x e=8+ f=4
+a a b c
+a b b c
+d d e c
+d f e e
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 451.
+a=8x b=3/ c=1- d=5+ e=9+ f=3/ g=4
+a a b b
+a c c d
+e e d d
+e f f g
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 452.
+a=6x b=24x c=8x d=12x e=1- f=3-
+a a a b
+c c b b
+c d d d
+e e f f
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 453.
+a=1 b=10+ c=24x d=16x e=36x
+a b b b
+c c c b
+d c e e
+d d e e
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 454.
+a=1 b=18x c=6+ d=48x e=12x f=4x
+a b b c
+d b b c
+d e e e
+d d f f
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 455.
+a=1 b=7+ c=1- d=7+ e=1- f=18x g=3-
+a b c c
+b b d e
+f d d e
+f f g g
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 456.
+a=3/ b=2/ c=10+ d=1 e=24x f=2/ g=1-
+a b b c
+a d c c
+e e c f
+e g g f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 457.
+a=6x b=24x c=1 d=9+ e=10+ f=3x
+a a b c
+a b b d
+e e f d
+e f f d
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 458.
+a=11+ b=3x c=6x d=2 e=3x f=12+
+a a b c
+d a b c
+e f f c
+e e f f
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 459.
+a=48x b=2/ c=12+ d=10+ e=3+
+a b b c
+a c c c
+a a d d
+e e d d
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 460.
+a=24x b=6+ c=4/ d=3x e=9+ f=8x
+a a b c
+a b b c
+d d e e
+d f f e
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 461.
+a=12x b=2/ c=6x d=3 e=6+ f=8x g=1-
+a b c c
+a b d c
+a e e f
+g g e f
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 462.
+a=12+ b=2 c=7+ d=24x e=24x
+a b c c
+a a c c
+a d d e
+d d e e
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 463.
+a=3x b=16x c=9+ d=9+ e=12x f=1
+a a b c
+a b b c
+d d e c
+d e e f
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 464.
+a=8x b=18x c=4x d=9+ e=4 f=6+
+a a b b
+a c c b
+d d c e
+d f f f
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 465.
+a=24x b=11+ c=1 d=5+ e=16x f=4/
+a a a a
+b c d d
+b b e f
+b e e f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 466.
+a=16x b=9x c=1 d=24x e=5+ f=32x
+a a b c
+a b b d
+e f f d
+e e f d
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+# 3 1 4 2
+
+# 467.
+a=4x b=7+ c=4 d=3- e=9+ f=1- g=1-
+a a b c
+d a b b
+d e e f
+g g e f
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 468.
+a=11+ b=2/ c=6x d=6x e=4 f=3x g=2-
+a b b c
+a a c c
+d d d e
+f f g g
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 469.
+a=18x b=8x c=12x d=2x e=9+ f=4
+a b b b
+a a c c
+d d c e
+f d e e
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 470.
+a=10+ b=36x c=8x d=16x e=3
+a a a b
+a c b b
+c c d b
+e c d d
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 471.
+a=8x b=3 c=6x d=9+ e=18x f=8x
+a a b c
+a d c c
+e d d f
+e e f f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 472.
+a=8x b=8+ c=8+ d=4x e=6+ f=2x g=3
+a a a b
+c c b b
+c d d e
+f f g e
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+
+# 473.
+a=12x b=3+ c=7+ d=8+ e=4 f=3- g=1-
+a a b b
+a c d e
+c c d d
+f f g g
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+
+# 474.
+a=7+ b=8+ c=6+ d=7+ e=6x f=2-
+a a a b
+c c d b
+e d d b
+e e f f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 475.
+a=7+ b=24x c=3/ d=2- e=7+ f=4/ g=2
+a a a b
+c c b b
+d e e f
+d g e f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 476.
+a=3/ b=2- c=9+ d=12x e=2 f=3/ g=7+
+a a b b
+c c d d
+c e d f
+g g g f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 477.
+a=9+ b=6+ c=8x d=3/ e=3/ f=4 g=2-
+a a b b
+a c b d
+e c f d
+e c g g
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 478.
+a=8+ b=3+ c=7+ d=16x e=7+ f=2/ g=1
+a a a b
+c d d b
+c c d e
+f f g e
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+
+# 479.
+a=8+ b=24x c=2 d=12x e=7+ f=6x
+a b b c
+a a b d
+e e f d
+e f f d
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 480.
+a=4+ b=11+ c=24x d=6x e=4 f=6+
+a a b c
+a b b c
+d d d c
+e f f f
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+
+# 481.
+a=12x b=1- c=24x d=8x e=4x f=2 g=2-
+a a a b
+c c d b
+c d d e
+f g g e
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+
+# 482.
+a=24x b=6+ c=7+ d=12x e=6+ f=4
+a a a b
+c c b b
+c d e e
+d d e f
+# 3 2 4 1
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+
+# 483.
+a=24x b=3 c=4x d=6+ e=9+ f=4/ g=1-
+a b c c
+a a d e
+f d d e
+f g g e
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 484.
+a=8+ b=4x c=4 d=24x e=7+ f=6x
+a a b b
+a c b d
+e e d d
+e f f f
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 485.
+a=12x b=7+ c=12x d=6x e=9+ f=2
+a a b b
+a c c b
+d d c e
+f d e e
+# 4 1 2 3
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+
+# 486.
+a=12x b=9+ c=6x d=2- e=4/ f=3 g=1-
+a b b b
+a a c c
+d d c e
+f g g e
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+# 3 1 2 4
+
+# 487.
+a=7+ b=8+ c=8x d=3x e=9+ f=4
+a b b b
+a a c c
+d d c e
+f d e e
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 488.
+a=10+ b=48x c=8x d=1 e=3/ f=12x
+a a a a
+b c c d
+b b e e
+b f f f
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 489.
+a=1- b=7+ c=2- d=24x e=2/ f=24x g=1
+a b b c
+a b d c
+e d d f
+e g f f
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 490.
+a=2 b=7+ c=1- d=7+ e=6x f=1- g=8+
+a b c c
+d b e e
+d b e f
+g g g f
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 491.
+a=10+ b=7+ c=9+ d=6x e=7+ f=1
+a b b b
+a a c d
+e e c d
+e f c d
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 492.
+a=2 b=8x c=12x d=6+ e=8+ f=9+
+a b c c
+b b c d
+e f f d
+e e f d
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 493.
+a=4x b=5+ c=6+ d=9+ e=24x f=3 g=3+
+a a b b
+c c d d
+c e e d
+f e g g
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+
+# 494.
+a=10+ b=7+ c=8x d=4x e=9x f=4
+a a b b
+a c c b
+d d c e
+d f e e
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 495.
+a=1- b=2x c=6+ d=8+ e=2 f=1- g=8x
+a a b b
+c c d d
+c e d f
+g g g f
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 496.
+a=1- b=2/ c=6+ d=1- e=1- f=3/ g=4+ h=2-
+a a b b
+c d d e
+c f f e
+g g h h
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 497.
+a=1- b=4x c=1- d=2 e=16x f=1- g=6x
+a a b c
+d b b c
+e e f f
+e g g g
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 498.
+a=12x b=24x c=2x d=12x e=1- f=4 g=2x
+a a b b
+c a b d
+c e d d
+f e g g
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+
+# 499.
+a=24x b=32x c=6+ d=12+ e=1
+a b b b
+a a b c
+a d d c
+e d d c
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 500.
+a=8+ b=24x c=6x d=8+ e=1 f=8+
+a b b b
+a a c c
+d e c f
+d d f f
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 501.
+a=8+ b=12+ c=3 d=12+ e=4x
+a a a b
+a c b b
+d d e b
+d d e e
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 502.
+a=2x b=9+ c=4 d=8+ e=8+ f=7+
+a a b b
+c a b d
+e e d d
+e f f f
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+
+# 503.
+a=24x b=8+ c=6+ d=4/ e=2 f=6x g=3-
+a b b b
+a a c c
+d d c e
+f f g g
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+
+# 504.
+a=3x b=10+ c=2/ d=6x e=2- f=2- g=3
+a a b b
+a c b d
+e c f d
+e g f d
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 505.
+a=4x b=7+ c=36x d=2/ e=12x f=4+ g=4
+a a b b
+a c c d
+e c f d
+e f f g
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+
+# 506.
+a=6x b=24x c=8x d=12x e=8x f=3
+a a b c
+a b b c
+d e e c
+d d e f
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 507.
+a=8+ b=1 c=8+ d=6+ e=12x f=24x
+a b c c
+a a c d
+e e f d
+e f f d
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 508.
+a=4/ b=2/ c=1- d=1- e=12x f=1- g=1- h=3-
+a b b c
+a d d c
+e e f f
+g g h h
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+
+# 509.
+a=32x b=5+ c=9x d=2 e=24x f=8x
+a a b b
+a c b d
+c c e e
+f f f e
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 510.
+a=12x b=8x c=7+ d=8+ e=1 f=9+
+a a a b
+c d d b
+c d e b
+c f f f
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+
+# 511.
+a=12x b=6x c=7+ d=9+ e=3- f=5+
+a a b b
+a c b d
+c c e d
+f f e d
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 512.
+a=8+ b=9+ c=4x d=6x e=9+ f=2
+a b b b
+a c c d
+a c e d
+f e e d
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+
+# 513.
+a=9+ b=4x c=2x d=6x e=9+ f=3/ g=4
+a a b b
+c a d d
+c c e f
+g e e f
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+
+# 514.
+a=1- b=4x c=4+ d=6+ e=3- f=1- g=3x h=2/
+a a b c
+d e b c
+d e f f
+g g h h
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+
+# 515.
+a=4x b=3x c=1- d=4 e=9x f=7+ g=2-
+a a b c
+d a b c
+e e f f
+e g g f
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 516.
+a=8+ b=9+ c=6+ d=4x e=7+ f=4
+a a b c
+a b b c
+d d e c
+d e e f
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 517.
+a=8x b=144x c=8+ d=24x e=1
+a a b b
+a b b c
+a d e c
+d d c c
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 518.
+a=8+ b=6+ c=8+ d=2 e=1- f=8x g=3/
+a a b b
+a c c d
+e c f g
+e f f g
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 519.
+a=12x b=8x c=5+ d=1- e=8+ f=3 g=4x
+a a b b
+a c c d
+e e c d
+f e g g
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 520.
+a=7+ b=9x c=9+ d=6+ e=9+ f=2
+a a b b
+a c c b
+d c e e
+d d e f
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 521.
+a=5+ b=12+ c=1- d=3- e=1- f=1 g=8x
+a b c c
+a b b d
+e b f d
+e g g g
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 522.
+a=48x b=1- c=1 d=12+ e=4x f=6x
+a b b c
+a a d d
+a e d d
+e e f f
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 523.
+a=9+ b=8+ c=12x d=2 e=1- f=4/ g=2x
+a a b b
+c a b d
+c c e f
+g g e f
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 524.
+a=7+ b=3- c=8+ d=9+ e=6x f=6x
+a b b c
+a a c c
+d e e e
+d d f f
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+
+# 525.
+a=24x b=8+ c=4 d=7+ e=1- f=2-
+a a a b
+c d a b
+e d d b
+e d f f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 526.
+a=7+ b=6+ c=7+ d=1 e=6x f=1- g=7+
+a a b c
+d a b c
+e f b g
+e f g g
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+
+# 527.
+a=8+ b=12x c=8x d=9x e=7+ f=3
+a a b c
+a d b c
+d d b c
+e e e f
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 528.
+a=12x b=6x c=9+ d=7+ e=2/ f=1- g=1
+a a b c
+d b b c
+d e e c
+d f f g
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+
+# 529.
+a=7+ b=24x c=12+ d=1- e=4+
+a a a b
+c c a b
+d c c b
+d e e b
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+
+# 530.
+a=9+ b=6+ c=8x d=7+ e=16x f=2
+a a a b
+c c b b
+c d e e
+d d e f
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 531.
+a=8+ b=8x c=8x d=4x e=24x f=3
+a a b b
+a c c b
+d c e e
+d d e f
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 532.
+a=6+ b=7+ c=8+ d=8x e=9+ f=3
+a b b b
+a a c c
+d d c e
+d f e e
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 533.
+a=12x b=24x c=1 d=7+ e=4+ f=8x g=1-
+a a b c
+d a b b
+d d e f
+g g e f
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+
+# 534.
+a=11+ b=2x c=6+ d=12x e=3+ f=1- g=2
+a a b b
+a c b d
+e c c d
+e f f g
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 535.
+a=8x b=2- c=8x d=9x e=6+ f=32x
+a a a b
+c c d b
+e d d f
+e e f f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 536.
+a=7+ b=24x c=9x d=2/ e=3- f=1- g=1
+a a a b
+c c b b
+d c e e
+d f f g
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 537.
+a=11+ b=24x c=18x d=2 e=8+
+a a a b
+c a d b
+c c e b
+c e e b
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 538.
+a=8x b=36x c=6+ d=12x e=8x f=2
+a a a b
+c c b b
+c d e e
+d d e f
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 539.
+a=3- b=12x c=6+ d=8+ e=4 f=6x g=4/
+a b b c
+a d b c
+d d e c
+f f g g
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 540.
+a=7+ b=2- c=8x d=6x e=2- f=12x g=1
+a a b b
+a c d d
+e c d f
+e c g f
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 541.
+a=32x b=24x c=3 d=6x e=2x f=12x
+a a b b
+c a b d
+e a b d
+e f f f
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+
+# 542.
+a=7+ b=1- c=96x d=1 e=5+ f=12x
+a a a b
+c c a b
+d c c e
+f f e e
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 543.
+a=8x b=12x c=6+ d=7+ e=12x f=4
+a a b b
+c a b d
+c e d d
+c e e f
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+
+# 544.
+a=10+ b=8x c=1- d=9+ e=9+
+a b b b
+a c c d
+a a e d
+e e e d
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 545.
+a=9+ b=8+ c=6+ d=7+ e=1- f=4x
+a a a b
+c d b b
+c d e e
+c d f f
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+
+# 546.
+a=8+ b=7+ c=8x d=9+ e=3x f=4
+a a a b
+c c b b
+d c e e
+d d e f
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 547.
+a=6+ b=3x c=10+ d=4/ e=9+ f=5+ g=1
+a b b c
+a a c c
+d e e e
+d f f g
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 548.
+a=48x b=7+ c=24x d=1- e=2 f=4/
+a a b b
+a a b c
+d d b c
+e f f c
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 549.
+a=2 b=8x c=12x d=8+ e=7+ f=16x
+a b b c
+d b c c
+d e e f
+d e f f
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 550.
+a=8+ b=6+ c=2 d=24x e=8+ f=12x
+a b b c
+a b d e
+a f d e
+f f d e
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 551.
+a=9+ b=8+ c=6x d=8x e=8x f=3
+a a b b
+c a d b
+c d d e
+c f e e
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 552.
+a=4x b=8+ c=7+ d=8x e=16x f=3
+a a b b
+a c b d
+c c e d
+f e e d
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 553.
+a=10+ b=9+ c=4/ d=8+ e=3/ f=4
+a a a b
+a c c b
+d d b b
+d e e f
+# 1 4 2 3
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+
+# 554.
+a=96x b=8+ c=7+ d=36x e=1
+a b b b
+a a b c
+a d d c
+e d d c
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 555.
+a=10+ b=10+ c=3 d=6x e=5+ f=1-
+a a b c
+a d b b
+d d b e
+d f f e
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+
+# 556.
+a=9+ b=8+ c=5+ d=7+ e=32x f=1
+a b b c
+a b c c
+a d d e
+f d e e
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 557.
+a=7+ b=7+ c=16x d=8+ e=8x f=3
+a a b b
+c a b d
+c c d d
+e e e f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 558.
+a=10+ b=2- c=24x d=2 e=7+ f=7+
+a a b b
+a a c c
+d c c e
+f f e e
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+
+# 559.
+a=24x b=4/ c=7+ d=8+ e=4x f=1-
+a a a b
+c c d b
+c e d f
+e e d f
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 560.
+a=12x b=2/ c=1- d=72x e=7+ f=1
+a b b c
+a a a c
+d d d e
+d f e e
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+# 3 1 2 4
+
+# 561.
+a=36x b=7+ c=2x d=2 e=10+ f=8x
+a a b b
+c a b d
+c c e e
+f f f e
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 562.
+a=6x b=16x c=12x d=16x e=7+ f=2
+a a a b
+c c b b
+c d e e
+d d e f
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 563.
+a=9+ b=1 c=8x d=8+ e=8+ f=8x
+a a b c
+a d c c
+d d e e
+f f f e
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 564.
+a=8x b=9+ c=12x d=2 e=8+ f=6+
+a a b b
+a c c b
+d c e e
+f f f e
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+# 3 1 2 4
+
+# 565.
+a=8+ b=16x c=1- d=1- e=1- f=12x g=2
+a b c c
+a b b d
+a e f d
+g e f f
+# 1 4 2 3
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+
+# 566.
+a=6+ b=9+ c=24x d=7+ e=3 f=6x
+a a b b
+c a b d
+c e d d
+c f f f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 567.
+a=6+ b=7+ c=48x d=6+ e=9+ f=1
+a b b b
+a a c d
+e c c d
+e e f d
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 568.
+a=3/ b=2/ c=8x d=24x e=9x f=1- g=4
+a a b b
+c d d d
+c c e f
+g e e f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 569.
+a=24x b=6x c=8x d=8x e=10+ f=1
+a b b c
+a b c c
+a d e f
+d d e e
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 570.
+a=9+ b=2/ c=1 d=24x e=1- f=4x g=12x
+a a a b
+c d d b
+e d f g
+e f f g
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 571.
+a=24x b=8+ c=9+ d=48x e=2
+a a a b
+a c b b
+c c d b
+e c d d
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 572.
+a=9+ b=7+ c=12x d=4x e=18x f=2
+a a b c
+a b b c
+d e e c
+d d e f
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 573.
+a=96x b=7+ c=7+ d=7+ e=2/ f=3
+a b b b
+a a b c
+a d d c
+e e f c
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 574.
+a=2/ b=3/ c=1- d=7+ e=1- f=2- g=6+ h=3-
+a b c c
+a b d d
+e e f g
+h h f g
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 575.
+a=6+ b=48x c=24x d=6+ e=2x f=4
+a a b b
+c a b d
+c c e d
+f e e d
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 576.
+a=9+ b=6x c=7+ d=9+ e=6x f=3
+a a b b
+c a b d
+c e d d
+c e e f
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+
+# 577.
+a=36x b=7+ c=8x d=4x e=9x f=4
+a b b b
+a a c c
+d d c e
+d f e e
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 578.
+a=48x b=6x c=6x d=24x e=4x f=2
+a a b b
+c a b d
+c e e d
+c f e d
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+
+# 579.
+a=24x b=8+ c=8+ d=8x e=3 f=4/
+a a b b
+a c c b
+a c c d
+e f f d
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+
+# 580.
+a=10+ b=7+ c=5+ d=16x e=9+ f=1
+a a b b
+a c b d
+c c d d
+e e e f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 581.
+a=2 b=6+ c=12x d=9+ e=16x f=6+
+a b c c
+b b c d
+e e d d
+e f f f
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+
+# 582.
+a=8x b=9+ c=12x d=7+ e=5+ f=4
+a b b c
+a b c c
+a d e e
+d d e f
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 583.
+a=4x b=11+ c=8+ d=7+ e=5+ f=4
+a a b c
+a b b c
+d d e c
+f d e e
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 584.
+a=24x b=9+ c=4 d=9x e=10+
+a b b c
+a b b d
+a a d d
+e e e e
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 585.
+a=7+ b=8+ c=12x d=7+ e=9+ f=1
+a a a b
+c c b b
+c d e e
+f d d e
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+
+# 586.
+a=11+ b=6x c=3 d=48x e=12x
+a b b b
+a c b d
+a a d d
+e e e d
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+# 3 1 4 2
+
+# 587.
+a=2/ b=12x c=12x d=7+ e=2/ f=3/ g=4
+a a b b
+c c b d
+e c d d
+e f f g
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+
+# 588.
+a=18x b=1 c=11+ d=24x e=24x
+a b c c
+a a c c
+a d d d
+e e e d
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+
+# 589.
+a=7+ b=6x c=1 d=8x e=9+ f=2x g=1-
+a a b c
+d d b e
+f f b e
+f g g e
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 590.
+a=8+ b=7+ c=5+ d=7+ e=6x f=1-
+a b b c
+a a c c
+d e e f
+d d e f
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 591.
+a=32x b=6+ c=1 d=9x e=9+ f=7+
+a a b c
+a d b e
+d d b e
+f f f e
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 592.
+a=12+ b=1- c=6x d=1 e=11+ f=8+
+a a b b
+a a c c
+d e f f
+e e e f
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 593.
+a=2 b=8+ c=3/ d=4/ e=12x f=9+ g=1-
+a b c c
+d b e e
+d b e f
+g g f f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 594.
+a=48x b=2x c=6x d=4+ e=7+ f=2/ g=3
+a b b c
+a a c c
+d e e f
+d d g f
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 595.
+a=12+ b=16x c=2/ d=10+ e=6x
+a a b b
+a b b c
+a d d c
+d d e e
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+
+# 596.
+a=8x b=8+ c=6x d=32x e=7+ f=2
+a a a b
+c c c b
+d d e b
+d e e f
+# 1 2 4 3
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+
+# 597.
+a=12x b=2/ c=24x d=2/ e=8x f=7+ g=3
+a a a b
+c c d b
+e c d f
+e e g f
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 598.
+a=1- b=3x c=2/ d=9+ e=4x f=1 g=1-
+a b b c
+a b d c
+e d d f
+e e g g
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 599.
+a=9+ b=4x c=3 d=24x e=8x f=6+
+a a b b
+c a b d
+e e f d
+e f f d
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 600.
+a=9+ b=4 c=3+ d=2- e=6x f=32x g=2-
+a b c d
+a a c d
+e e f f
+e g g f
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 601.
+a=1- b=9+ c=4x d=6+ e=6+ f=1- g=2
+a a b c
+d b b c
+d d e e
+f f e g
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 602.
+a=1- b=7+ c=9+ d=3/ e=4/ f=4 g=6x
+a a b c
+d b b c
+d e e c
+f g g g
+# 2 3 1 4
+# 1 4 2 3
+# 3 1 4 2
+# 4 2 3 1
+
+# 603.
+a=8+ b=8+ c=6x d=3/ e=4/ f=3 g=2/
+a b b b
+a a c c
+d e c f
+d e g g
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 604.
+a=8x b=3 c=5+ d=16x e=6+ f=3- g=1-
+a a b c
+a d d c
+e e d f
+e g g f
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 605.
+a=6x b=2x c=48x d=10+ e=5+ f=4
+a b b c
+a b c c
+a d d e
+f d e e
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 606.
+a=6x b=8x c=1- d=8x e=24x f=2-
+a b b b
+a a c c
+d d d e
+f f e e
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 607.
+a=8x b=8+ c=8+ d=24x e=4x f=2
+a a a b
+c d b b
+c d e e
+c d f e
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+
+# 608.
+a=3/ b=3 c=96x d=7+ e=1- f=24x
+a b c d
+a c c d
+e e c d
+f f f f
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 609.
+a=7+ b=12+ c=4 d=48x e=6+
+a a a b
+c a b b
+d d e b
+d d e e
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 610.
+a=4 b=4x c=7+ d=8x e=12x f=1- g=2/
+a b c c
+b b c d
+e f f d
+e e g g
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 611.
+a=8+ b=4 c=8x d=12x e=7+ f=6+
+a a b c
+a d d c
+e e d c
+e f f f
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 612.
+a=18x b=1 c=2- d=12x e=4/ f=16x g=4+
+a b c c
+a a d d
+e f d g
+e f f g
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 613.
+a=10+ b=6+ c=1- d=12x e=3x f=2-
+a a b b
+c a b d
+c e d d
+e e f f
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 614.
+a=1- b=8x c=8x d=10+ e=4+ f=7+
+a a b b
+c c b d
+e c d d
+e f f f
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+
+# 615.
+a=3 b=8x c=9+ d=1- e=9+ f=3x
+a b b b
+c b d d
+c c c e
+f f e e
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+
+# 616.
+a=2- b=8x c=12x d=2 e=2/ f=10+ g=2/
+a b b b
+a c c d
+e c f f
+e g g f
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 617.
+a=3 b=2/ c=6+ d=8+ e=9+ f=8+
+a b b c
+d d d c
+e e f c
+e e f f
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+# 2 1 3 4
+
+# 618.
+a=8+ b=6x c=4+ d=48x e=24x f=1-
+a a b b
+a c c d
+e c d d
+e e f f
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+
+# 619.
+a=16x b=9x c=144x d=8x e=1-
+a a a b
+a c b b
+c c b d
+c e e d
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+
+# 620.
+a=8x b=7+ c=1- d=1- e=6+ f=10+
+a a b b
+a c d b
+e c d f
+e e f f
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 621.
+a=8+ b=18x c=36x d=32x e=2
+a a a b
+c a b b
+c c d d
+c e d d
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 622.
+a=12+ b=8x c=24x d=9+ e=2
+a b b b
+a a c c
+a d d c
+e d d c
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 623.
+a=2/ b=6x c=3- d=9+ e=3/ f=2 g=8+
+a a b b
+c c b d
+e e d d
+f g g g
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 624.
+a=2 b=11+ c=10+ d=8x e=4+ f=8x
+a b b b
+c b d d
+c c c e
+f f f e
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 625.
+a=2/ b=3 c=48x d=8+ e=12+ f=3+
+a b c d
+a c c d
+e e c d
+e e f f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 626.
+a=2/ b=1- c=4/ d=2- e=4x f=4+ g=1- h=8x
+a b b c
+a d e c
+f d e g
+f h h g
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 627.
+a=6+ b=12x c=7+ d=10+ e=18x f=1
+a a b c
+a b b c
+d d e c
+f d e e
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 628.
+a=10+ b=3 c=16x d=1- e=2/ f=8+
+a a a b
+a c c c
+d d c e
+f f f e
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+
+# 629.
+a=3/ b=32x c=9+ d=8x e=3x f=1-
+a a b b
+c d b e
+c d e e
+c d f f
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 630.
+a=6x b=24x c=3- d=32x e=6+ f=3/
+a a b c
+a b b c
+d e e e
+d d f f
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 631.
+a=4+ b=24x c=8x d=3 e=1- f=2- g=2-
+a a b c
+a d b c
+e e b c
+f f g g
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 632.
+a=8x b=24x c=12x d=6+ e=24x f=1
+a a a b
+c c b b
+c d e e
+d d e f
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+
+# 633.
+a=7+ b=6+ c=8x d=4 e=8x f=24x
+a a b c
+d a b c
+e e b c
+e f f f
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 634.
+a=12x b=2 c=6x d=10+ e=96x
+a a a b
+c a d d
+c c e d
+e e e d
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 635.
+a=1- b=3x c=32x d=4/ e=6+ f=8x g=3
+a b c c
+a b b c
+d e e e
+d f f g
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 636.
+a=24x b=5+ c=6x d=2/ e=5+ f=2- g=3
+a a b b
+c a b d
+c e e d
+c f f g
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 637.
+a=24x b=1- c=72x d=12x e=2 f=3-
+a a a b
+c c a b
+c c d d
+e f f d
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 638.
+a=32x b=4+ c=2- d=8+ e=6+ f=1 g=1-
+a a b b
+a c c d
+e e d d
+f e g g
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 639.
+a=2/ b=10+ c=2- d=9+ e=8+ f=3
+a b b b
+a c d b
+e c d d
+e e d f
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 640.
+a=10+ b=8x c=24x d=9x e=4 f=2x
+a b b c
+a a a c
+d d c c
+e d f f
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 641.
+a=3 b=5+ c=7+ d=8+ e=8+ f=24x
+a b c d
+b b c d
+e e c d
+e f f f
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 642.
+a=48x b=2/ c=1- d=10+ e=2/ f=2 g=8+
+a a b b
+a c c d
+e f d d
+e g g g
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 643.
+a=8+ b=6x c=32x d=6+ e=3 f=8x
+a b b b
+a a c c
+d d e c
+d f f f
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+
+# 644.
+a=2x b=1- c=24x d=4 e=6x f=7+ g=2x
+a a b b
+a c d e
+f c c e
+f g g e
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 645.
+a=16x b=5+ c=6+ d=2/ e=12x f=1- g=4
+a a b b
+a c d d
+c c e e
+f f e g
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+
+# 646.
+a=9+ b=7+ c=5+ d=6+ e=4 f=9+
+a b b b
+a a c c
+d d c e
+d f f f
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+
+# 647.
+a=4x b=3 c=24x d=6x e=7+ f=9+
+a b c c
+a a c d
+e e f d
+e f f d
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 648.
+a=8x b=8+ c=1- d=10+ e=2 f=1- g=5+
+a b b b
+a a c c
+d e f g
+d d f g
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+
+# 649.
+a=8+ b=1 c=10+ d=8x e=3/ f=2/ g=1-
+a a b c
+a d c c
+e d d f
+e g g f
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 650.
+a=1- b=3+ c=1- d=9+ e=12x f=8+ g=1
+a b b c
+a d d c
+e e d f
+g e f f
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 651.
+a=9+ b=13+ c=8x d=1 e=6+ f=4+
+a a b b
+a c b b
+a c c d
+e e f f
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 652.
+a=18x b=4 c=7+ d=8+ e=4x f=7+
+a b c c
+a a c d
+e e f d
+e f f d
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+
+# 653.
+a=5+ b=2- c=9+ d=9+ e=3x f=5+ g=2
+a b b c
+a a c c
+d d e f
+d g e f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 654.
+a=12x b=8+ c=8x d=8+ e=3 f=6+
+a a b b
+c a b d
+c e f d
+c f f d
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+
+# 655.
+a=6+ b=7+ c=3/ d=24x e=24x f=4/
+a b b c
+a d b c
+a d d e
+f f e e
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+
+# 656.
+a=10+ b=11+ c=3/ d=2/ e=2 f=8x
+a b c c
+a b b d
+a b e d
+a f f f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 657.
+a=9+ b=1 c=12x d=8+ e=6+ f=12x
+a b c c
+a d c e
+a d d e
+f f f e
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+
+# 658.
+a=12+ b=1- c=8x d=1- e=18x f=4
+a a b b
+a a c c
+d e c c
+d e e f
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 659.
+a=3 b=9+ c=8x d=24x e=3/ f=7+
+a b b b
+c c d b
+c c d e
+f f d e
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+
+# 660.
+a=1- b=8+ c=1 d=3/ e=4+ f=9+ g=7+
+a b c d
+a b b d
+e e f f
+e g g f
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 661.
+a=1 b=144x c=6+ d=24x e=9+
+a b b c
+b b d c
+e e d c
+e e d d
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 662.
+a=7+ b=10+ c=6+ d=9+ e=3/ f=4
+a b b b
+a b c c
+d d c e
+d d f e
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 663.
+a=12+ b=8x c=18x d=4 e=7+
+a b b b
+a a b c
+a d c c
+e e e c
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 664.
+a=12x b=6+ c=2/ d=11+ e=8+ f=2-
+a b c c
+a b b d
+a e d d
+e e f f
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 665.
+a=10+ b=2- c=7+ d=2 e=11+ f=3/
+a b b c
+a d c c
+a a e e
+f f e e
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 666.
+a=7+ b=1- c=2x d=12x e=4x f=10+ g=2
+a a b b
+c a d e
+c f d e
+f f d g
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 667.
+a=2- b=9+ c=12x d=1- e=8x f=1- g=2
+a a b c
+d b b c
+d e e c
+f f e g
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+
+# 668.
+a=3x b=9+ c=6+ d=32x e=6+ f=4
+a a b c
+a d b c
+d d b c
+e e e f
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 669.
+a=24x b=13+ c=1 d=72x e=4+
+a a a b
+a c b b
+d d b e
+d d e e
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+
+# 670.
+a=8+ b=2/ c=9+ d=8+ e=2/ f=3 g=1-
+a b b c
+a a d c
+e d d c
+e f g g
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+
+# 671.
+a=8+ b=7+ c=6+ d=12x e=24x f=2
+a a b b
+c a b d
+c e d d
+c e e f
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 672.
+a=10+ b=9+ c=8x d=9+ e=4
+a b b b
+a a b c
+a d c c
+d d e c
+# 4 1 2 3
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+
+# 673.
+a=6x b=9+ c=6+ d=1 e=1- f=7+ g=3/
+a a b c
+a d b c
+e f b g
+e f f g
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+
+# 674.
+a=8x b=1- c=1- d=4+ e=2- f=2/ g=1- h=2x
+a b b c
+a d d c
+e e f f
+g g h h
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 675.
+a=5+ b=10+ c=2 d=3/ e=9+ f=1- g=4/
+a a b c
+a b b d
+e e e d
+f f g g
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 676.
+a=3 b=9+ c=2/ d=12x e=6+ f=1- g=1-
+a b b c
+d d b c
+e d f g
+e e f g
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 677.
+a=6x b=2/ c=6x d=8+ e=4x f=24x
+a a b b
+a c c d
+e c d d
+e f f f
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 678.
+a=12x b=1- c=32x d=3/ e=2 f=9+ g=3x
+a a b b
+a c c d
+e c f d
+g g f f
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+
+# 679.
+a=12x b=2- c=7+ d=12x e=3 f=3+ g=6x
+a a b b
+c a d e
+c c d f
+g g d f
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+
+# 680.
+a=24x b=8x c=3x d=8+ e=3x f=1-
+a a a b
+c c b b
+d e e f
+d d e f
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 681.
+a=8x b=8+ c=9+ d=2/ e=6x f=2- g=4
+a b b b
+a a c d
+e e c d
+f f c g
+# 2 4 1 3
+# 4 1 3 2
+# 3 2 4 1
+# 1 3 2 4
+
+# 682.
+a=96x b=9+ c=2 d=24x e=6x
+a a b b
+a c b b
+a d d d
+e e e d
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 683.
+a=6+ b=3/ c=6x d=3x e=3- f=2- g=3/ h=2/
+a a b b
+c d d e
+c f f e
+g g h h
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 684.
+a=11+ b=2/ c=12x d=2 e=1- f=24x
+a a b b
+a a c d
+e c c c
+e f f f
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 685.
+a=7+ b=8x c=4 d=24x e=2/ f=8x g=3/
+a a b b
+c a b d
+e e d d
+f f g g
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 686.
+a=3 b=6+ c=8+ d=8+ e=9+ f=6x
+a b c c
+b b c d
+e e d d
+e f f f
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+
+# 687.
+a=2x b=4 c=24x d=6+ e=10+ f=8x
+a b c c
+a a c d
+e e d d
+e f f f
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+# 3 2 1 4
+
+# 688.
+a=8+ b=7+ c=7+ d=6+ e=48x f=1
+a a a b
+c d b b
+c d e f
+c d e e
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+
+# 689.
+a=3x b=2- c=32x d=8+ e=3- f=6x
+a a b b
+a c d d
+c c d e
+f f f e
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 690.
+a=9+ b=2x c=6x d=48x e=1- f=1-
+a b b c
+a d b c
+a d d c
+e e f f
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 691.
+a=12x b=1- c=5+ d=9+ e=6x f=12x
+a a b b
+a c d d
+c c d e
+f f e e
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+
+# 692.
+a=3x b=9+ c=8x d=2- e=8+ f=1- g=3
+a a b b
+a c c b
+d e e f
+d e g f
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 693.
+a=6+ b=48x c=2 d=11+ e=3/ f=4/
+a a b c
+a b b b
+d d d e
+f f d e
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 694.
+a=8x b=12x c=18x d=2x e=2- f=4 g=2-
+a a a b
+c c b b
+c d e e
+f d g g
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+
+# 695.
+a=9+ b=6+ c=2- d=7+ e=9+ f=1-
+a a b b
+c a b d
+c e e d
+f f e d
+# 4 1 2 3
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+
+# 696.
+a=10+ b=4 c=24x d=10+ e=4+ f=2x
+a a a b
+c a d d
+c d d e
+c f f e
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+
+# 697.
+a=24x b=8x c=5+ d=6+ e=24x f=4
+a b b b
+a a c c
+d d c e
+d f e e
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+
+# 698.
+a=8x b=3x c=36x d=16x e=8+ f=2x
+a a b b
+a c d d
+c c d e
+f f e e
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 699.
+a=7+ b=3x c=10+ d=9+ e=3x f=5+ g=1
+a a b b
+a c c d
+e e c d
+f f g d
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 700.
+a=6x b=9+ c=7+ d=3- e=12x f=2 g=2-
+a a b c
+d b b c
+d e e c
+f e g g
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 701.
+a=24x b=6+ c=4x d=12x e=2 f=9+
+a b b b
+a a c c
+d d c e
+d f f f
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+
+# 702.
+a=2x b=36x c=3- d=2 e=7+ f=12x g=6+
+a a b b
+c c b d
+e f g g
+e f f g
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+
+# 703.
+a=6+ b=24x c=12x d=4 e=6x f=8x
+a a a b
+c d b b
+c c e e
+f f f e
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+
+# 704.
+a=12x b=2 c=10+ d=2x e=4x f=48x
+a a a b
+c c d d
+c e d f
+e e f f
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 705.
+a=6x b=24x c=9+ d=1 e=12x f=12x
+a b b b
+a a c d
+e c c f
+e e f f
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 706.
+a=24x b=4x c=8+ d=4x e=16x f=3
+a a a b
+c c b b
+c d e e
+d d e f
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 707.
+a=11+ b=8x c=7+ d=11+ e=3
+a a a b
+c a b b
+c d d b
+c d d e
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 708.
+a=3 b=3- c=1- d=4x e=12x f=9+ g=1-
+a b b c
+d d e c
+d e e f
+g g f f
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 709.
+a=24x b=3 c=11+ d=12x e=8+
+a a a b
+c a d d
+c c d e
+c e e e
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+
+# 710.
+a=9+ b=9+ c=10+ d=4 e=8x
+a b b c
+a a b c
+a d e c
+e e e c
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 711.
+a=9+ b=4+ c=24x d=8x e=3- f=1 g=1-
+a a b b
+a c c d
+e c d d
+e f g g
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 712.
+a=6x b=9+ c=8x d=3 e=9+ f=6x
+a a b c
+a b b c
+d e f c
+e e f f
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 713.
+a=4x b=24x c=6+ d=24x e=12x f=2
+a a b b
+a c c b
+d d c e
+d f e e
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+
+# 714.
+a=6x b=7+ c=24x d=32x e=7+ f=1
+a b b b
+a a c c
+d e e c
+d d e f
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 715.
+a=9+ b=8x c=3 d=5+ e=2/ f=6x g=1-
+a b b c
+a b d e
+a f d e
+f f g g
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 716.
+a=7+ b=24x c=8+ d=7+ e=1- f=1 g=1-
+a b b b
+a a c c
+d e c f
+d e g g
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+
+# 717.
+a=8x b=12+ c=2 d=36x e=7+
+a a a b
+c a b b
+d d e b
+d d e e
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 718.
+a=9+ b=12x c=6+ d=6+ e=12x f=4
+a a a b
+c c b b
+c d d e
+f d e e
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 719.
+a=12x b=8x c=24x d=16x e=7+ f=1
+a a b c
+a b b c
+d e e c
+d d e f
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+
+# 720.
+a=7+ b=24x c=12x d=7+ e=18x f=1
+a b b b
+a a c d
+e e c d
+e f c d
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 721.
+a=12x b=24x c=7+ d=6x e=1 f=9+
+a a b b
+a c b d
+c c e d
+f f f d
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 722.
+a=12+ b=12x c=32x d=6x e=3
+a b b b
+a a b c
+a d c c
+d d e c
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 723.
+a=1- b=48x c=1 d=12+ e=7+ f=1-
+a b b b
+a b c d
+e e e d
+f f d d
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 724.
+a=16x b=5+ c=12x d=8+ e=9+ f=2
+a a b c
+a b b c
+d d e c
+d e e f
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 725.
+a=7+ b=24x c=3/ d=6x e=8x f=1 g=1-
+a b b b
+a a c c
+d e e f
+d e g g
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+
+# 726.
+a=6x b=6+ c=8+ d=2/ e=4 f=7+ g=6+
+a a b b
+a c d e
+c c d f
+g g f f
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+
+# 727.
+a=10+ b=2x c=4x d=48x e=3- f=6x
+a a b b
+a c b d
+c c d d
+e e f f
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 728.
+a=1 b=9+ c=2/ d=9+ e=7+ f=3x g=12x
+a b b c
+d d b c
+e d f f
+e e g g
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 729.
+a=2- b=7+ c=2- d=4 e=8+ f=48x
+a b c c
+a b b d
+e b f f
+e e f f
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 730.
+a=6+ b=8+ c=24x d=16x e=12x f=1
+a a b b
+c a b d
+c e d d
+c e e f
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 731.
+a=4/ b=2- c=3/ d=6x e=3/ f=1- g=2- h=4x
+a b b c
+a d e c
+f d e g
+f h h g
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 732.
+a=96x b=1- c=3/ d=7+ e=2- f=1-
+a b b c
+a a a c
+d d e e
+d d f f
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 733.
+a=8x b=7+ c=2- d=6x e=12x f=2 g=1-
+a a b c
+d b b c
+d e e f
+d e g g
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 734.
+a=5+ b=9+ c=16x d=8+ e=3 f=7+
+a a b b
+c a b d
+c c d d
+e f f f
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 735.
+a=9+ b=6x c=10+ d=13+ e=2
+a b b b
+a a c c
+a d d c
+e d d c
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 736.
+a=2 b=9+ c=10+ d=9+ e=10+
+a b b c
+d b b c
+d e e c
+d d e c
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 737.
+a=7+ b=8x c=12+ d=6x e=2 f=7+
+a a b b
+a a c d
+c c c d
+e f f d
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+# 2 4 3 1
+
+# 738.
+a=6+ b=1- c=8x d=2- e=5+ f=3 g=8x
+a a b b
+c a d d
+c c e e
+f g g e
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 739.
+a=8+ b=9+ c=1- d=7+ e=3 f=1- g=3+
+a a b b
+a c c b
+d d d e
+f f g g
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+
+# 740.
+a=72x b=6+ c=4 d=16x e=8+
+a b b c
+a a b b
+a d d e
+d d e e
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+
+# 741.
+a=3 b=11+ c=4/ d=6+ e=24x f=4/
+a b c c
+b b b d
+e e e d
+e f f d
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 742.
+a=2/ b=4 c=9x d=2/ e=6x f=48x g=2/
+a b c d
+a c c d
+e e f f
+e g g f
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+
+# 743.
+a=9+ b=48x c=2- d=18x e=1 f=3-
+a a a b
+a b b b
+c d d e
+c d f f
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 744.
+a=10+ b=9x c=1- d=3/ e=32x f=2/ g=3
+a a b c
+a b b c
+d d e e
+f f e g
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 745.
+a=1- b=8+ c=18x d=3+ e=32x f=3
+a b b c
+a b c c
+d b c e
+d f e e
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 746.
+a=36x b=4x c=1 d=9+ e=7+ f=12x
+a a b c
+a b b d
+e e d d
+e f f f
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 747.
+a=36x b=2/ c=4 d=2x e=2x f=9+ g=7+
+a b b c
+a a d d
+e f f d
+e f g g
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 748.
+a=3- b=24x c=3 d=6+ e=8+ f=2- g=2x
+a a b c
+d b b e
+d f e e
+d f g g
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+
+# 749.
+a=10+ b=11+ c=16x d=9+ e=1
+a b b b
+a a b c
+a d c c
+d d c e
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+
+# 750.
+a=2- b=9+ c=4 d=6+ e=5+ f=1- g=8x
+a a b b
+c d b e
+f d d e
+f g g g
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 751.
+a=6+ b=24x c=8x d=5+ e=8+ f=1-
+a a b b
+c a b d
+c e e d
+c e f f
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+# 1 4 2 3
+
+# 752.
+a=9+ b=32x c=3/ d=2/ e=4 f=6x
+a a b b
+a a b c
+d d b c
+e f f f
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 753.
+a=36x b=6+ c=1 d=32x e=7+ f=2-
+a a a b
+c a d b
+e e d f
+e d d f
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 754.
+a=6+ b=10+ c=1- d=6+ e=6x f=4/
+a a a b
+c d b b
+c d d e
+f f e e
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+
+# 755.
+a=1- b=32x c=2- d=2x e=4x f=3 g=9+
+a b c c
+a b b d
+e e f d
+e g g g
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 756.
+a=12+ b=2/ c=8+ d=48x e=1 f=1-
+a a b b
+a c d d
+a c e d
+c c f f
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 757.
+a=12+ b=7+ c=8x d=6x e=5+ f=4
+a b b b
+a a b c
+a d d c
+e e f c
+# 4 1 2 3
+# 3 4 1 2
+# 1 2 3 4
+# 2 3 4 1
+
+# 758.
+a=6x b=8x c=9+ d=11+ e=3x f=2
+a a b c
+a b b c
+d d e c
+f d e e
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 759.
+a=24x b=48x c=1 d=12+ e=4x
+a a a b
+a c b b
+d d e b
+d d e e
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 760.
+a=12x b=5+ c=2/ d=6x e=2/ f=9+
+a b c c
+a b b d
+a e e d
+f f f d
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+# 2 4 3 1
+
+# 761.
+a=6x b=8+ c=8x d=24x e=8+ f=2
+a a b b
+a c b d
+c c d d
+e e e f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 762.
+a=12x b=9+ c=1- d=9+ e=7+ f=3x
+a b c c
+a b b d
+a e d d
+e e f f
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+# 2 4 3 1
+
+# 763.
+a=24x b=10+ c=2/ d=1- e=3 f=8+
+a a a b
+a c c b
+d e b b
+d f f f
+# 4 2 1 3
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+
+# 764.
+a=8x b=12x c=6+ d=8+ e=9+ f=2
+a a a b
+c c b b
+c d e e
+d d e f
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 765.
+a=8x b=6+ c=5+ d=24x e=1- f=4/ g=3
+a b b c
+a b d c
+a e d f
+g e d f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 766.
+a=32x b=18x c=1 d=9+ e=5+ f=8x
+a a b b
+a a c b
+d d d e
+d f f e
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 767.
+a=18x b=16x c=11+ d=4/ e=3+ f=3
+a a b b
+a b b c
+d e f c
+d e c c
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 768.
+a=5+ b=8+ c=7+ d=9+ e=1 f=2/ g=7+
+a b b c
+a a b c
+d d e f
+d g g f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 769.
+a=5+ b=8+ c=24x d=9+ e=12x f=1
+a b b c
+a a b c
+d d e c
+d e e f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 770.
+a=12x b=8+ c=1 d=7+ e=8+ f=12x
+a a b b
+c a b d
+e e d d
+e f f f
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 771.
+a=16x b=12x c=8+ d=18x e=1 f=7+
+a a b c
+a b b c
+d d e c
+d f f f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 772.
+a=6x b=2 c=4x d=12x e=9+ f=6+ g=6x
+a b c d
+a a c d
+e e f f
+e g g f
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 773.
+a=6x b=24x c=10+ d=48x e=3
+a a a b
+c b b b
+c c d d
+e c d d
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 774.
+a=16x b=8+ c=2 d=7+ e=6+ f=12x
+a a b b
+a c b d
+e e d d
+e f f f
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 775.
+a=72x b=7+ c=7+ d=4 e=2/ f=7+
+a a a b
+a c c b
+d c c b
+e e f f
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+# 1 2 4 3
+
+# 776.
+a=16x b=7+ c=3/ d=32x e=8+ f=2/
+a a b b
+a c b d
+e c d d
+e e f f
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 777.
+a=8+ b=8x c=24x d=2 e=3/ f=1- g=2/
+a a b b
+a c b d
+c c e f
+g g e f
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+# 2 1 3 4
+
+# 778.
+a=6+ b=3x c=4x d=1- e=5+ f=1- g=2- h=2/
+a b b c
+a d d c
+e e f f
+g g h h
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 779.
+a=11+ b=12x c=1 d=6+ e=8x f=8+
+a a b c
+d a b b
+d e f f
+d e e f
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+
+# 780.
+a=9+ b=2x c=6+ d=5+ e=4 f=8+ g=4/
+a a b b
+c a d e
+c c d f
+g g f f
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 781.
+a=4x b=6+ c=2- d=1- e=3x f=1- g=2/ h=4x
+a b b c
+a d e c
+f d e g
+f h h g
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 782.
+a=18x b=4 c=7+ d=8+ e=8x f=6x
+a b c c
+a a c d
+e e d d
+e f f f
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 783.
+a=24x b=6x c=11+ d=1 e=4/ f=1-
+a b b b
+a a c c
+a d c e
+f f c e
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+
+# 784.
+a=1 b=144x c=16x d=9+ e=9x
+a b b c
+b b c c
+d d e c
+d d e e
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 785.
+a=1- b=6+ c=3- d=8x e=16x f=1- g=3
+a a b c
+d b b c
+d e e f
+d e g f
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+
+# 786.
+a=1- b=48x c=7+ d=4x e=9+ f=2
+a b b b
+a b c c
+d e c c
+d e e f
+# 2 1 3 4
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+
+# 787.
+a=24x b=12x c=12x d=13+ e=1
+a a a b
+c c a b
+c c d b
+e d d d
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+
+# 788.
+a=2x b=24x c=10+ d=8x e=5+ f=1- g=3
+a a b b
+c c b d
+e c d d
+e f f g
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+
+# 789.
+a=8x b=5+ c=7+ d=8+ e=12x f=2 g=3+
+a a b b
+a c c d
+e f d d
+e e g g
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+
+# 790.
+a=9+ b=3/ c=6+ d=16x e=7+ f=6x
+a a b b
+c a d d
+c e d f
+c e e f
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 791.
+a=12x b=48x c=12x d=9+ e=3
+a a b b
+c a b b
+c a d e
+c d d d
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 792.
+a=6x b=9+ c=12x d=32x e=3x f=2
+a a a b
+c c b b
+c d d e
+f d e e
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 793.
+a=2x b=48x c=9+ d=5+ e=1- f=3/
+a a b b
+a c b d
+e c d d
+e c f f
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 794.
+a=4x b=24x c=9+ d=1- e=2- f=8x
+a a b b
+a c c b
+d c e e
+d f f f
+# 4 1 3 2
+# 1 3 2 4
+# 2 4 1 3
+# 3 2 4 1
+
+# 795.
+a=8+ b=4x c=3 d=8+ e=4x f=48x
+a a b b
+c a b d
+e e f d
+e f f d
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+
+# 796.
+a=1- b=6x c=16x d=6x e=7+ f=4
+a a b b
+c c c b
+c d e b
+d d e f
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+# 1 2 3 4
+
+# 797.
+a=6x b=8x c=7+ d=8+ e=3 f=1- g=4/
+a a a b
+c c d b
+c d d e
+f f g g
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 798.
+a=8+ b=5+ c=1- d=8+ e=4x f=12x
+a a b c
+a b b c
+d d e e
+d f f e
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 799.
+a=8x b=10+ c=9+ d=9+ e=2x f=3
+a a b b
+c c b b
+c c d e
+f d d e
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+
+# 800.
+a=24x b=2 c=11+ d=32x e=6x
+a a a b
+a c c c
+d d e c
+d d e e
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+
+# 801.
+a=48x b=1- c=18x d=24x e=4/ f=2
+a a b b
+a c c c
+a d c e
+f d d e
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 802.
+a=11+ b=1 c=11+ d=6+ e=2/ f=1-
+a a a b
+a c c c
+d c e e
+d d f f
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+
+# 803.
+a=7+ b=5+ c=4+ d=1- e=1- f=3 g=7+
+a a a b
+c d d b
+c c e e
+f g g g
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+# 3 4 2 1
+
+# 804.
+a=6x b=8x c=4 d=4+ e=1- f=8x g=1-
+a a b b
+c a b d
+e f f d
+e f g g
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+
+# 805.
+a=7+ b=3 c=5+ d=12x e=36x f=8x
+a a a b
+c c d d
+c e f d
+e e f f
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 806.
+a=24x b=8+ c=4+ d=48x e=6+ f=2
+a a a b
+c c b b
+d c e e
+d d e f
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 807.
+a=12x b=9+ c=8x d=4+ e=9+ f=3
+a a b b
+c a b d
+c e d d
+c e e f
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+
+# 808.
+a=4 b=12x c=24x d=5+ e=8+ f=1-
+a b b b
+c b d e
+c c d e
+c f f e
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+
+# 809.
+a=24x b=8+ c=12x d=6x e=8x f=1-
+a a b b
+a c d b
+c c d e
+f f d e
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+# 1 2 3 4
+
+# 810.
+a=10+ b=4+ c=8x d=8x e=36x f=2
+a a b c
+a b b c
+d d e c
+d f e e
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 811.
+a=11+ b=9+ c=72x d=4+ e=4
+a a a b
+c a b b
+c c d b
+c d d e
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+
+# 812.
+a=13+ b=12x c=24x d=2- e=4x
+a a b b
+a a b c
+d e b c
+d e e c
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+
+# 813.
+a=24x b=6x c=8+ d=14+ e=2
+a a b b
+c a b b
+c c d d
+c d d e
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 814.
+a=6+ b=8+ c=9+ d=7+ e=1- f=4x
+a a a b
+c c b b
+c d d e
+f f d e
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 815.
+a=10+ b=8x c=24x d=1 e=4+ f=9+
+a a b b
+a c d b
+e c c f
+e e f f
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 816.
+a=6x b=1 c=24x d=12x e=10+ f=6x
+a b c d
+a a c d
+e e c d
+e f f f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 817.
+a=18x b=8x c=8x d=6+ e=36x f=2
+a b b b
+a a c c
+d d c e
+d f e e
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+# 1 2 3 4
+
+# 818.
+a=8+ b=36x c=16x d=3 e=1- f=1-
+a a b b
+a b b c
+a d c c
+e e f f
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 819.
+a=72x b=24x c=8+ d=2x e=1-
+a a a b
+c a b b
+c d d b
+c c e e
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+# 2 1 3 4
+
+# 820.
+a=12x b=2 c=24x d=5+ e=6+ f=32x
+a a a b
+c c d d
+c e f d
+e e f f
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 821.
+a=12x b=10+ c=12+ d=7+ e=3+
+a a a b
+c a b b
+c d d b
+c c e e
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 822.
+a=8+ b=2 c=8x d=7+ e=8+ f=8+
+a a a b
+c c c d
+e e d d
+e f f f
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 823.
+a=6x b=24x c=12x d=10+ e=6x f=1
+a b b c
+a a b c
+d d e c
+d f e e
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 824.
+a=5+ b=16x c=24x d=4 e=9+ f=3x
+a b b c
+a a b c
+d e f c
+e e f f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 825.
+a=32x b=4+ c=6+ d=3/ e=32x f=5+ g=1
+a b b c
+a a c c
+d d e e
+f f e g
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 826.
+a=16x b=6x c=18x d=6x e=16x f=2
+a a b b
+a c c b
+d c e e
+d d e f
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+
+# 827.
+a=8+ b=24x c=4+ d=2 e=2/ f=3/ g=12x
+a b b b
+a a c d
+e c c f
+e g g f
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+# 2 3 4 1
+
+# 828.
+a=7+ b=1- c=9+ d=2x e=3x f=24x
+a b b c
+a d c c
+a d e e
+f f f e
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 829.
+a=12x b=8+ c=3 d=8+ e=7+ f=6x
+a a b b
+c a b d
+e e d d
+e f f f
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 830.
+a=24x b=1 c=6x d=48x e=11+
+a a a b
+c a d d
+c e d d
+c e e e
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 831.
+a=4x b=7+ c=7+ d=36x e=2x f=12x
+a a b c
+d a b c
+d d b e
+f f f e
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+
+# 832.
+a=8+ b=9x c=8x d=3x e=16x f=1-
+a b b c
+a a b c
+d e e c
+d e f f
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 833.
+a=5+ b=2 c=24x d=12x e=10+ f=6x
+a b c c
+a a c d
+e e d d
+e f f f
+# 1 2 4 3
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+
+# 834.
+a=36x b=1 c=48x d=1- e=6+ f=8+
+a a b c
+a a c c
+d e c f
+d e f f
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 835.
+a=4+ b=9+ c=7+ d=6+ e=2 f=7+ g=3-
+a b b c
+a b c c
+d e f g
+d f f g
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 836.
+a=2x b=10+ c=6+ d=8+ e=3+ f=8x g=3
+a a b c
+d b b c
+d d e e
+f f f g
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 837.
+a=6x b=24x c=1 d=24x e=8+ f=7+
+a a b c
+a b b d
+e f f d
+e e f d
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 838.
+a=6+ b=8+ c=4 d=6+ e=2/ f=1- g=1-
+a b b b
+a a c d
+e e d d
+f f g g
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 839.
+a=9+ b=4 c=24x d=3- e=8+ f=4/
+a a a b
+c a d d
+c e e e
+c f f e
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 840.
+a=8+ b=24x c=7+ d=8+ e=6x f=2
+a b b c
+a b c c
+a d d e
+f d e e
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 841.
+a=6+ b=6+ c=7+ d=36x e=12x f=1-
+a a a b
+c c d b
+c e d d
+e e f f
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+# 4 3 2 1
+
+# 842.
+a=24x b=8+ c=8x d=12x e=6x f=2
+a a a b
+c c b b
+d c e f
+d d e e
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 843.
+a=24x b=2- c=1- d=7+ e=2- f=24x g=4
+a a b c
+a d b c
+e d f f
+e d f g
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+
+# 844.
+a=10+ b=9x c=1- d=6+ e=11+ f=1-
+a a b c
+a b b c
+d d d e
+f f e e
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 845.
+a=4+ b=36x c=24x d=24x e=1 f=7+
+a b b c
+a a b c
+d d e c
+d f f f
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+# 3 4 2 1
+
+# 846.
+a=5+ b=10+ c=8x d=12x e=7+ f=3
+a a b c
+a b b c
+d d d c
+e e e f
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 847.
+a=7+ b=24x c=96x d=2 e=8+
+a a a b
+a c b b
+c c c b
+d e e e
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+
+# 848.
+a=12x b=1- c=12x d=1- e=8+ f=4x g=2
+a a b b
+c a d d
+c c e e
+f f e g
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 849.
+a=11+ b=4 c=8+ d=16x e=12x
+a a b c
+a d c c
+a d e c
+d d e e
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+
+# 850.
+a=9+ b=1- c=4x d=12x e=6+ f=1- g=2
+a a b b
+a c c d
+e e c d
+e f f g
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 851.
+a=7+ b=1- c=9x d=16x e=6x f=3-
+a a a b
+c c d b
+c d d e
+f f e e
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+# 4 1 3 2
+
+# 852.
+a=5+ b=7+ c=10+ d=1- e=4 f=7+
+a a b c
+d e b c
+d f b c
+f f f c
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 853.
+a=4x b=10+ c=5+ d=8+ e=2 f=4/ g=1-
+a b b c
+a a b c
+d d d e
+f f g g
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 854.
+a=6+ b=10+ c=12x d=8x e=6x f=3
+a a a b
+c c b b
+c d e e
+d d e f
+# 2 3 1 4
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+
+# 855.
+a=6x b=24x c=7+ d=8x e=12x f=3
+a b b c
+a b c c
+a d e e
+d d e f
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 856.
+a=3- b=6+ c=2- d=6x e=24x f=12x
+a b c c
+a b b d
+e e d d
+e f f f
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+
+# 857.
+a=24x b=3x c=4 d=8x e=7+ f=8+
+a a b c
+a d b b
+d d e e
+f f f e
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+
+# 858.
+a=9+ b=3 c=7+ d=8x e=8+ f=6x
+a a b c
+a d c c
+e d d f
+e e f f
+# 2 4 3 1
+# 3 1 2 4
+# 1 2 4 3
+# 4 3 1 2
+
+# 859.
+a=24x b=6x c=1- d=6+ e=8x f=1-
+a b c c
+a b b d
+a e d d
+e e f f
+# 2 1 4 3
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+
+# 860.
+a=6x b=9+ c=7+ d=4 e=8x f=7+
+a a b c
+a b b c
+d e f c
+e e f f
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 861.
+a=9x b=8x c=2 d=16x e=7+ f=8+
+a a b b
+a c d b
+e d d f
+e e f f
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 862.
+a=7+ b=8x c=7+ d=8x e=1- f=4 g=2-
+a b b b
+a a c c
+d d c e
+f g g e
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 863.
+a=10+ b=16x c=9x d=24x e=4
+a b b b
+a a b c
+d a c c
+d d c e
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+# 2 3 1 4
+
+# 864.
+a=6x b=16x c=2 d=6x e=8+ f=24x
+a a b b
+c a b d
+e f f d
+e e f d
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 865.
+a=6+ b=6+ c=1- d=6x e=8+ f=1- g=4
+a b c c
+a b b d
+e e d d
+e f f g
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+
+# 866.
+a=12x b=9+ c=2 d=4x e=2- f=3x g=1-
+a a b b
+a c d b
+e d d f
+e g g f
+# 1 4 3 2
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+
+# 867.
+a=7+ b=5+ c=1- d=12x e=36x f=3+
+a b b c
+a b d c
+a e d d
+e e f f
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 868.
+a=3x b=9+ c=24x d=7+ e=2 f=12x
+a a b b
+c a b d
+c c d d
+e f f f
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 869.
+a=8+ b=2- c=8x d=3x e=6x f=2 g=7+
+a a b b
+c a d d
+c e d f
+c e g g
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+
+# 870.
+a=48x b=1- c=7+ d=2 e=7+ f=7+
+a a a b
+c d a b
+c c e e
+c f f e
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+# 2 4 3 1
+
+# 871.
+a=7+ b=8+ c=8+ d=6x e=12x f=3
+a b b b
+a c c d
+a c e d
+f e e d
+# 2 3 1 4
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+
+# 872.
+a=10+ b=2 c=24x d=3- e=3/ f=9+
+a a a b
+c a d e
+c c d e
+c f f f
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+
+# 873.
+a=8x b=9x c=2 d=24x e=9+ f=6+
+a a b c
+a d b b
+d d e e
+f f f e
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 874.
+a=5+ b=24x c=1- d=6x e=2/ f=4/ g=2
+a a b b
+c a b d
+c e f d
+g e f d
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+
+# 875.
+a=9+ b=6x c=7+ d=4+ e=1- f=1-
+a b b c
+a a b c
+d e e c
+d d f f
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 876.
+a=32x b=6+ c=6+ d=9+ e=3 f=4x
+a a b b
+c a b d
+c e f d
+c f f d
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+# 3 1 4 2
+
+# 877.
+a=1- b=3- c=7+ d=8+ e=3 f=16x g=2-
+a a b b
+c d d e
+c c d f
+g g f f
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+
+# 878.
+a=6x b=32x c=18x d=4 e=24x
+a b b b
+a a b c
+a d c c
+e e e c
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 879.
+a=7+ b=3 c=4x d=1- e=9+ f=3- g=1-
+a a a b
+c c d d
+c e e f
+g g e f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 880.
+a=36x b=7+ c=6+ d=7+ e=24x f=1
+a a b b
+a c c b
+d d c e
+d f e e
+# 4 3 2 1
+# 3 2 1 4
+# 1 4 3 2
+# 2 1 4 3
+
+# 881.
+a=9x b=16x c=4/ d=32x e=3x f=1 g=1-
+a a b c
+a b b c
+d d e e
+d f g g
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 882.
+a=2/ b=32x c=24x d=3 e=7+ f=1-
+a b b c
+a b d c
+e e e c
+f f e c
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 883.
+a=1- b=32x c=11+ d=6+ e=4 f=1-
+a b b b
+a b c d
+e c c d
+f f c d
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+
+# 884.
+a=8+ b=5+ c=7+ d=16x e=3 f=2- g=4/
+a b b c
+a a c c
+d e f g
+d d f g
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+
+# 885.
+a=12x b=8x c=36x d=4x e=2 f=8+
+a b b b
+a c d d
+a c c d
+e f f f
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 886.
+a=2/ b=6+ c=3/ d=1- e=2- f=1- g=2- h=12x
+a b b c
+a d d c
+e e f g
+h h f g
+# 1 2 4 3
+# 2 4 3 1
+# 3 1 2 4
+# 4 3 1 2
+
+# 887.
+a=9x b=2/ c=8+ d=4x e=8+ f=4x
+a a b b
+a c d d
+c c d e
+f f e e
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 888.
+a=24x b=4 c=2x d=36x e=4+ f=9+
+a b c c
+a a c d
+e e d d
+e f f f
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 889.
+a=36x b=8x c=2x d=8x e=1- f=3x g=2
+a a b b
+a c c b
+d d e f
+d g e f
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 890.
+a=4 b=8+ c=10+ d=10+ e=8+
+a b b c
+d b c c
+d b e e
+d d e e
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 891.
+a=8+ b=4x c=7+ d=10+ e=2 f=8+
+a a b b
+c a b d
+c e d d
+c f f f
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 892.
+a=2 b=7+ c=1- d=12x e=6x f=6x g=3-
+a b b c
+d d b c
+d e e e
+f f g g
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+# 3 2 4 1
+
+# 893.
+a=12x b=1- c=10+ d=1 e=1- f=8x
+a a b b
+a a c d
+e c c c
+e f f f
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 894.
+a=24x b=6+ c=4/ d=3x e=24x f=6+
+a a b c
+a b b c
+d d e e
+d f f e
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 895.
+a=8x b=9+ c=6x d=4+ e=16x f=1-
+a b b b
+a a c c
+d d e c
+f f e e
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 896.
+a=12+ b=2/ c=12x d=24x e=2 f=4/
+a a b b
+c a a d
+c c d d
+e c f f
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+
+# 897.
+a=6+ b=9+ c=12x d=6x e=1- f=2 g=4/
+a a b b
+c a b d
+c e d d
+f e g g
+# 1 4 2 3
+# 3 1 4 2
+# 4 2 3 1
+# 2 3 1 4
+
+# 898.
+a=6x b=24x c=8+ d=10+ e=6+ f=1
+a a b c
+a b b c
+d d e c
+d f e e
+# 3 2 4 1
+# 1 3 2 4
+# 2 4 1 3
+# 4 1 3 2
+
+# 899.
+a=1- b=9+ c=48x d=9+ e=2-
+a b b c
+a b c c
+d b c e
+d d d e
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+# 1 2 4 3
+
+# 900.
+a=24x b=2x c=24x d=12x e=4x f=6x
+a a b b
+a c c d
+e c d d
+e f f f
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 901.
+a=6x b=11+ c=72x d=4 e=6x
+a a a b
+c c a b
+c c b b
+d e e e
+# 1 2 3 4
+# 3 4 1 2
+# 2 3 4 1
+# 4 1 2 3
+
+# 902.
+a=10+ b=9+ c=8x d=10+ e=2-
+a a a b
+a c b b
+c c b d
+e e d d
+# 4 2 1 3
+# 3 4 2 1
+# 2 1 3 4
+# 1 3 4 2
+
+# 903.
+a=12x b=9+ c=8+ d=6x e=8+ f=2
+a a b b
+a c b d
+e c c d
+e e f d
+# 3 2 1 4
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+
+# 904.
+a=1- b=9+ c=8+ d=48x e=2x f=1-
+a b b c
+a b c c
+d d e f
+d e e f
+# 2 3 4 1
+# 1 2 3 4
+# 3 4 1 2
+# 4 1 2 3
+
+# 905.
+a=7+ b=12x c=36x d=5+ e=2- f=8x
+a a b b
+a c d d
+e c c d
+e f f f
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+# 3 2 1 4
+
+# 906.
+a=24x b=3/ c=6+ d=8x e=24x f=5+
+a a a b
+c c d b
+c d d e
+f f e e
+# 4 3 2 1
+# 2 1 4 3
+# 3 2 1 4
+# 1 4 3 2
+
+# 907.
+a=12x b=7+ c=8x d=3/ e=48x f=2
+a a b b
+a a c d
+e c c d
+e e c f
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 908.
+a=1- b=16x c=6x d=36x e=4 f=1-
+a a b b
+c c b b
+c c d d
+e f f d
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 909.
+a=1- b=8x c=72x d=2- e=16x f=2
+a b b b
+a b c d
+e c c d
+e e c f
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 910.
+a=12x b=6+ c=24x d=6+ e=7+ f=4x
+a a b c
+d d b c
+d e b c
+e e f f
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+
+# 911.
+a=8x b=8+ c=24x d=9x e=16x f=1
+a a a b
+c c b b
+c d d e
+f d e e
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 912.
+a=5+ b=6+ c=8x d=8+ e=16x f=1-
+a a b b
+c d d b
+c e d f
+c e e f
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 913.
+a=13+ b=8x c=3 d=7+ e=9+
+a a b c
+a b b b
+a d e e
+d d d e
+# 2 4 1 3
+# 3 2 4 1
+# 4 1 3 2
+# 1 3 2 4
+
+# 914.
+a=24x b=12x c=12+ d=6x e=4/
+a a a b
+a c b b
+d c c b
+d c e e
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 915.
+a=9+ b=6+ c=7+ d=6+ e=1- f=6x
+a b b c
+a b c c
+a d e f
+d d e f
+# 3 2 1 4
+# 4 3 2 1
+# 2 1 4 3
+# 1 4 3 2
+
+# 916.
+a=9+ b=1- c=36x d=1- e=2 f=12x
+a a a b
+c c a b
+c c d d
+e f f f
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 917.
+a=8x b=12x c=7+ d=10+ e=6+ f=2
+a b b b
+a a c c
+d d c e
+d f e e
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+
+# 918.
+a=10+ b=12+ c=48x d=2x e=2
+a a b b
+c a a b
+c d d b
+c c d e
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 919.
+a=32x b=6+ c=5+ d=6+ e=2/ f=1-
+a a b b
+a c c b
+d c e f
+d d e f
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 920.
+a=4 b=8x c=6+ d=9+ e=6x f=8+
+a b c c
+b b c d
+e e d d
+e f f f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 921.
+a=6x b=4/ c=32x d=7+ e=9+ f=2x
+a a a b
+c c d b
+c d d e
+f f e e
+# 3 1 2 4
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+
+# 922.
+a=2- b=7+ c=9x d=4 e=9+ f=8x g=1-
+a b b b
+a c d e
+f c c e
+f g g e
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 923.
+a=4/ b=24x c=6+ d=3 e=3+ f=12x g=2/
+a a b c
+d b b c
+e f f c
+e f g g
+# 4 1 3 2
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+
+# 924.
+a=3x b=2/ c=24x d=6+ e=12x f=6x g=1
+a b b c
+a a c c
+d e f f
+d e f g
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 925.
+a=2x b=7+ c=6x d=5+ e=5+ f=2/ g=3- h=1-
+a b b c
+a d d c
+e e f g
+h h f g
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 926.
+a=12x b=3/ c=2- d=7+ e=9+ f=3/ g=2
+a b b c
+a a d c
+e e d f
+g e d f
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 927.
+a=12x b=16x c=12x d=24x e=6x
+a a b b
+c c b b
+c d d d
+e e e d
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+# 2 1 3 4
+
+# 928.
+a=3 b=2/ c=2- d=2/ e=10+ f=2x g=8+
+a b b c
+d d e c
+f e e e
+f g g g
+# 3 4 2 1
+# 4 2 1 3
+# 1 3 4 2
+# 2 1 3 4
+
+# 929.
+a=4 b=8x c=7+ d=8x e=8+ f=7+
+a b c c
+b b d c
+e d d f
+e e f f
+# 4 2 3 1
+# 1 4 2 3
+# 3 1 4 2
+# 2 3 1 4
+
+# 930.
+a=16x b=7+ c=6+ d=1 e=6+ f=48x
+a a b b
+a c b d
+e c c f
+e e f f
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+# 2 1 4 3
+
+# 931.
+a=10+ b=32x c=12x d=3 e=4+ f=5+
+a a a a
+b b c c
+b d c e
+b f f e
+# 3 2 1 4
+# 1 4 3 2
+# 4 3 2 1
+# 2 1 4 3
+
+# 932.
+a=9+ b=4x c=1- d=8x e=8+ f=1 g=1-
+a a b b
+a c c d
+e f d d
+e e g g
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+# 1 4 2 3
+
+# 933.
+a=9+ b=8x c=3 d=6+ e=7+ f=12x
+a b b b
+a a c d
+e e d d
+e f f f
+# 3 1 4 2
+# 4 2 3 1
+# 1 4 2 3
+# 2 3 1 4
+
+# 934.
+a=8x b=12x c=24x d=1 e=24x f=6+
+a a b c
+d a b c
+e e b c
+e f f f
+# 2 1 4 3
+# 1 4 3 2
+# 3 2 1 4
+# 4 3 2 1
+
+# 935.
+a=3x b=8x c=1- d=3x e=3- f=5+ g=2- h=1-
+a a b b
+c c d e
+f g d e
+f g h h
+# 3 1 4 2
+# 2 3 1 4
+# 4 2 3 1
+# 1 4 2 3
+
+# 936.
+a=7+ b=3/ c=9+ d=6x e=4 f=8x g=3x
+a a a b
+c c d b
+e c d f
+g g d f
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+
+# 937.
+a=12x b=9+ c=1 d=6+ e=8+ f=9+
+a a b b
+a c b d
+e e d d
+e f f f
+# 3 2 1 4
+# 2 1 4 3
+# 4 3 2 1
+# 1 4 3 2
+
+# 938.
+a=8x b=2/ c=9x d=1- e=8+ f=7+
+a b b c
+a a c c
+d e e f
+d e f f
+# 1 4 2 3
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+
+# 939.
+a=7+ b=8x c=10+ d=8x e=3 f=6x
+a b b b
+a a c c
+d d e c
+d f f f
+# 3 4 2 1
+# 1 3 4 2
+# 2 1 3 4
+# 4 2 1 3
+
+# 940.
+a=96x b=18x c=1 d=2x e=8x f=1-
+a a b c
+a a b b
+d d b e
+d f f e
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 941.
+a=6+ b=9+ c=7+ d=16x e=9x f=2
+a a a b
+c c b b
+c d e e
+d d e f
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+# 4 1 3 2
+
+# 942.
+a=6+ b=12x c=9+ d=7+ e=8+ f=2
+a a b b
+a c b d
+c c d d
+e e e f
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+
+# 943.
+a=32x b=1 c=6x d=24x e=2- f=1- g=3-
+a b c c
+a a c d
+e f d d
+e f g g
+# 4 1 3 2
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+
+# 944.
+a=10+ b=2- c=7+ d=96x e=3/ f=2
+a a a b
+c d a b
+c d d d
+c e e f
+# 3 2 4 1
+# 2 4 1 3
+# 1 3 2 4
+# 4 1 3 2
+
+# 945.
+a=8x b=3 c=5+ d=4x e=6x f=32x g=4+
+a a b c
+a d d c
+e e f f
+g g f f
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+# 946.
+a=6x b=24x c=8+ d=7+ e=3x f=2/
+a a b b
+a c b d
+c c e d
+f f e d
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+
+# 947.
+a=6x b=12+ c=11+ d=24x e=1
+a a b b
+a a c b
+d d c b
+d c c e
+# 2 1 3 4
+# 1 3 4 2
+# 4 2 1 3
+# 3 4 2 1
+
+# 948.
+a=9+ b=1- c=2/ d=7+ e=2- f=24x g=1
+a b b c
+a a d c
+e d d f
+e g f f
+# 2 4 3 1
+# 4 3 1 2
+# 1 2 4 3
+# 3 1 2 4
+
+# 949.
+a=2/ b=7+ c=10+ d=8x e=1 f=9+
+a b b b
+a b c d
+e c c d
+f f f d
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 950.
+a=8+ b=4/ c=24x d=8+ e=4x f=1-
+a b b c
+a a c c
+d a e e
+d d f f
+# 2 4 1 3
+# 1 3 2 4
+# 3 2 4 1
+# 4 1 3 2
+
+# 951.
+a=5+ b=48x c=8+ d=2/ e=1- f=1 g=1-
+a a b b
+a c b d
+e c c d
+e f g g
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 952.
+a=18x b=8+ c=48x d=7+ e=3-
+a a b b
+a c b b
+a c c d
+e e c d
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 953.
+a=12x b=3+ c=24x d=1- e=4 f=8x g=3/
+a b b c
+a a c c
+d e f f
+d g g f
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+
+# 954.
+a=9+ b=4 c=16x d=1- e=7+ f=5+
+a a a b
+c c a d
+e c c d
+e e f f
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+
+# 955.
+a=6x b=7+ c=9+ d=4 e=7+ f=8x
+a a a b
+c c b b
+c d e e
+f f f e
+# 3 1 2 4
+# 4 3 1 2
+# 2 4 3 1
+# 1 2 4 3
+
+# 956.
+a=7+ b=1- c=3- d=6x e=3 f=4/ g=24x
+a a a b
+c d d b
+c e d f
+g g g f
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 957.
+a=12x b=1- c=6x d=10+ e=4+ f=2 g=4x
+a a b b
+c a d d
+c c d e
+f g g e
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 958.
+a=6x b=48x c=24x d=12+ e=1
+a a a b
+c a b b
+c d d b
+c d d e
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+
+# 959.
+a=9+ b=3/ c=1 d=24x e=12x f=7+ g=2/
+a a a b
+c d d b
+e d f f
+e g g f
+# 2 4 3 1
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+
+# 960.
+a=9+ b=16x c=5+ d=9x e=10+ f=1
+a b b c
+a b c c
+a d d e
+f d e e
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 961.
+a=7+ b=1- c=7+ d=1- e=7+ f=4 g=1-
+a a b b
+a c c d
+e e c d
+e f g g
+# 2 1 3 4
+# 4 2 1 3
+# 1 3 4 2
+# 3 4 2 1
+
+# 962.
+a=2- b=2- c=8+ d=6+ e=8+ f=7+ g=1
+a a b b
+c d d d
+c c e f
+g e e f
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 963.
+a=12x b=2- c=1 d=12x e=6x f=4/ g=8+
+a a a b
+c d d b
+e d f f
+e g g g
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 964.
+a=12x b=8x c=24x d=9+ e=5+ f=2
+a b b b
+a a c c
+d d e c
+d f e e
+# 3 1 4 2
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+
+# 965.
+a=18x b=9+ c=6x d=7+ e=6x f=4
+a a b c
+a b b c
+d d d c
+e e e f
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+# 1 2 3 4
+
+# 966.
+a=8x b=10+ c=4 d=3/ e=9+ f=1-
+a a a b
+c a b b
+d d b e
+f f e e
+# 2 4 1 3
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+
+# 967.
+a=16x b=12x c=8+ d=9+ e=6x f=1
+a a b b
+c a b d
+c e e d
+c e f d
+# 2 4 3 1
+# 1 2 4 3
+# 3 1 2 4
+# 4 3 1 2
+
+# 968.
+a=1 b=8+ c=4x d=1- e=16x f=7+ g=5+
+a b b c
+d b e c
+d e e f
+g g f f
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+# 4 1 2 3
+
+# 969.
+a=2 b=48x c=9+ d=1- e=1- f=8x
+a b b b
+c b d d
+c c c e
+f f f e
+# 2 3 4 1
+# 3 4 1 2
+# 1 2 3 4
+# 4 1 2 3
+
+# 970.
+a=8x b=16x c=18x d=3 e=2x f=5+ g=3-
+a b b c
+a b c c
+a d e e
+f f g g
+# 2 1 4 3
+# 1 4 3 2
+# 4 3 2 1
+# 3 2 1 4
+
+# 971.
+a=4/ b=9+ c=3 d=4x e=6+ f=4/ g=12x
+a b b c
+a b d d
+e e d f
+e g g f
+# 1 2 4 3
+# 4 3 1 2
+# 3 1 2 4
+# 2 4 3 1
+
+# 972.
+a=11+ b=24x c=12x d=1- e=4x
+a a a b
+c a b b
+c c b d
+c e e d
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+# 3 4 1 2
+
+# 973.
+a=4+ b=3 c=7+ d=9+ e=2/ f=1- g=3x
+a a b c
+a d e c
+f d e c
+f d g g
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 974.
+a=24x b=6x c=6x d=8x e=1- f=3-
+a a b b
+a c d b
+c c d e
+f f d e
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+
+# 975.
+a=7+ b=10+ c=72x d=16x e=2
+a a a b
+c a b b
+c c d b
+c d d e
+# 1 2 3 4
+# 4 1 2 3
+# 2 3 4 1
+# 3 4 1 2
+
+# 976.
+a=4/ b=24x c=1- d=1 e=24x f=5+ g=4+
+a a b c
+d e b c
+f e b g
+f e g g
+# 4 1 2 3
+# 1 2 3 4
+# 2 3 4 1
+# 3 4 1 2
+
+# 977.
+a=7+ b=96x c=9+ d=9+ e=2
+a b b b
+a a b c
+a d c c
+d d e c
+# 1 4 3 2
+# 2 1 4 3
+# 3 2 1 4
+# 4 3 2 1
+
+# 978.
+a=12x b=6+ c=6+ d=1- e=8+ f=2 g=3-
+a a a b
+c d d b
+c c e e
+f g g e
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 979.
+a=6x b=72x c=4 d=2- e=12x f=3+
+a a b c
+a a b b
+d e b f
+d e e f
+# 3 1 2 4
+# 1 2 4 3
+# 2 4 3 1
+# 4 3 1 2
+
+# 980.
+a=6x b=24x c=4x d=11+ e=6+ f=2/
+a b b c
+a a b c
+d e e e
+d d f f
+# 1 2 3 4
+# 2 3 4 1
+# 4 1 2 3
+# 3 4 1 2
+
+# 981.
+a=6+ b=8x c=12x d=8+ e=2/ f=4/
+a b b c
+a b c c
+a d d e
+f f d e
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 982.
+a=11+ b=3x c=12x d=16x e=4x f=3
+a a b b
+a c c c
+a c d d
+e e d f
+# 4 2 3 1
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+
+# 983.
+a=1- b=2x c=8+ d=1- e=9x f=1 g=2-
+a a b b
+c c b d
+c e e d
+f e g g
+# 3 4 2 1
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+
+# 984.
+a=18x b=9+ c=7+ d=6+ e=8x f=3
+a b b c
+a a b c
+d d d c
+e e e f
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+# 4 1 2 3
+
+# 985.
+a=7+ b=1- c=2x d=4+ e=3- f=3+ g=1- h=8x
+a b b c
+a d e c
+f d e g
+f h h g
+# 4 2 3 1
+# 3 1 4 2
+# 2 3 1 4
+# 1 4 2 3
+
+# 986.
+a=12x b=18x c=8+ d=16x e=2- f=2
+a b b c
+a b c c
+a b d e
+f d d e
+# 4 1 3 2
+# 1 3 2 4
+# 3 2 4 1
+# 2 4 1 3
+
+# 987.
+a=3 b=8x c=12+ d=10+ e=7+
+a b b b
+c c d b
+c c d d
+e e e d
+# 3 2 1 4
+# 4 3 2 1
+# 1 4 3 2
+# 2 1 4 3
+
+# 988.
+a=12x b=24x c=3- d=6+ e=1- f=8x g=1
+a b b c
+a d b c
+a d d e
+f f g e
+# 1 3 2 4
+# 3 2 4 1
+# 4 1 3 2
+# 2 4 1 3
+
+# 989.
+a=18x b=9+ c=8x d=2 e=7+ f=9x
+a a b b
+a c b d
+e c c f
+e e f f
+# 2 3 1 4
+# 3 1 4 2
+# 1 4 2 3
+# 4 2 3 1
+
+# 990.
+a=24x b=3x c=8+ d=2- e=8x f=2/ g=3
+a a b b
+c a b d
+c c e d
+f f e g
+# 2 4 3 1
+# 4 3 1 2
+# 3 1 2 4
+# 1 2 4 3
+
+# 991.
+a=7+ b=16x c=4/ d=10+ e=5+ f=1-
+a b b c
+a a b c
+d e e f
+d d e f
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+# 2 4 1 3
+
+# 992.
+a=7+ b=6x c=1- d=2 e=8+ f=1- g=1-
+a a b c
+d a b c
+e e b f
+e g g f
+# 4 2 1 3
+# 2 1 3 4
+# 3 4 2 1
+# 1 3 4 2
+
+# 993.
+a=6x b=9+ c=3x d=4 e=16x f=12x
+a b c c
+a b d c
+a b e e
+f f f e
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+# 4 1 3 2
+
+# 994.
+a=8+ b=6x c=48x d=7+ e=2 f=6+
+a a b b
+a c b d
+e c c d
+f f f d
+# 4 1 2 3
+# 3 4 1 2
+# 2 3 4 1
+# 1 2 3 4
+
+# 995.
+a=6+ b=2/ c=10+ d=24x e=7+ f=1
+a a a b
+c c d b
+e c d d
+e c f d
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+# 4 2 1 3
+
+# 996.
+a=9x b=10+ c=6x d=16x e=5+ f=4
+a b b c
+a a b c
+d d e c
+d e e f
+# 3 4 2 1
+# 1 3 4 2
+# 4 2 1 3
+# 2 1 3 4
+
+# 997.
+a=8x b=2x c=10+ d=9+ e=7+ f=3
+a b b c
+a b c c
+a d e e
+f d d e
+# 4 2 1 3
+# 2 1 3 4
+# 1 3 4 2
+# 3 4 2 1
+
+# 998.
+a=8+ b=24x c=24x d=2/ e=1- f=3
+a a a b
+c d d b
+c c b b
+c e e f
+# 1 3 4 2
+# 3 4 2 1
+# 2 1 3 4
+# 4 2 1 3
+
+# 999.
+a=24x b=10+ c=8x d=1- e=4/
+a a a a
+b b c c
+d b b c
+d e e c
+# 1 4 2 3
+# 2 3 1 4
+# 4 2 3 1
+# 3 1 4 2
+
+# 1000.
+a=4 b=12x c=6x d=12x e=9+ f=6+
+a b b c
+d b c c
+d d e e
+f f f e
+# 4 1 3 2
+# 2 4 1 3
+# 3 2 4 1
+# 1 3 2 4
+
+
+# 1:0.130
+# 2:0.276
+# 3:0.477
+# 4:0.117
