@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 import util.parsing.combinator.RegexParsers
 import util.parsing.input.{PagedSeqReader, Reader}

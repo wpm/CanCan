@@ -1,9 +1,9 @@
-package kenken
+package cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.Solver]] object.
+ * Unit tests for the [[cancan.Solver]] object.
  */
 class SolverSpec extends FlatSpec {
 

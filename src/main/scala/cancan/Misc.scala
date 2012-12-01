@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 object Misc {
   val p1 = Puzzle( """a=4x b=12x c=15+ d=3/ e=11+ f=1- g=11+ h=1- i=9+ j=2- k=60x l=3- m=4x n=1- o=5-

@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 import annotation.tailrec
 import scala.util.Random._

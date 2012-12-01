@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 /**
  * A [[http://www.kenken.com KenKen]] puzzle.

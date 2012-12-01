@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 import scala.collection.GenTraversableOnce
 

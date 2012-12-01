@@ -1,9 +1,9 @@
-package kenken
+package cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.Generator]] object.
+ * Unit tests for the [[cancan.Generator]] object.
  */
 class GeneratorSpec extends FlatSpec {
   "The connected components of a->bc b->ac c->ab d->e e->d f" should "be abc, de, f" in {

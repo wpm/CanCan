@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 import collection.TraversableView
 import annotation.tailrec
@@ -139,7 +139,7 @@ case class MinimalSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends Solv
 }
 
 /**
- * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics and sorts
+ * Solver that uses the [[cancan.PermutationSetConstraint]] and [[cancan.UniquenessConstraint]] heuristics and sorts
  * guess cells by cage ambiguity.
  */
 case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint) {
@@ -162,7 +162,7 @@ case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends H
 }
 
 /**
- * Solver that uses the [[kenken.PermutationSetConstraint]] and [[kenken.UniquenessConstraint]] heuristics.
+ * Solver that uses the [[cancan.PermutationSetConstraint]] and [[cancan.UniquenessConstraint]] heuristics.
  */
 case class HeuristicSolver1(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint)
 

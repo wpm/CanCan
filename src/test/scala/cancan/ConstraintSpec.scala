@@ -1,9 +1,9 @@
-package kenken
+package cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.Constraint]] objects.
+ * Unit tests for the [[cancan.Constraint]] objects.
  */
 class ConstraintSpec extends FlatSpec {
   behavior of "A rank constraint"

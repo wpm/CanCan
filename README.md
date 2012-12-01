@@ -1,5 +1,5 @@
-KenKen Solver
-=============
+CanCan - a KenKen Solver
+========================
 
 This package implements a solver and generator of [KenKen](http://www.kenken.com) puzzles.
 
@@ -10,7 +10,7 @@ Additionally, cells in the grid are grouped into sets called _cages_, and the se
 
 To see the program solve a puzzle, run either its unit tests or `Solver` with a path to a puzzle file.
 
-    > scala -cp target/scala-2.9.2/classes kenken.CanCan solve puzzles/6x6.1
+    > scala -cp target/scala-2.9.2/classes cancan.CanCan solve puzzles/6x6.1
     1.
     a=60x b=4+ c=16+ d=45x e=40x f=72x g=4x h=11+ i=4- j=12+ k=12x l=5 m=8+ n=2
     a b b c c d
@@ -29,7 +29,7 @@ To see the program solve a puzzle, run either its unit tests or `Solver` with a 
 
 To generate a random set of puzzles, run `Generator` where the first argument is a number of puzzles and the second is the puzzle size.
 
-	> scala -cp target/scala-2.9.2/classes kenken.CanCan generate 2 5
+	> scala -cp target/scala-2.9.2/classes cancan.CanCan generate 2 5
 	# 1.
 	a=10+ b=8+ c=60x d=8+ e=7+ f=2 g=20x h=24x i=3 j=5x
 	a b b c c

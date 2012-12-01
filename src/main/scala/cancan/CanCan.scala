@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 object CanCan {
   private val usage =

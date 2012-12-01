@@ -1,9 +1,9 @@
-package kenken
+package cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.Grid]] object.
+ * Unit tests for the [[cancan.Grid]] object.
  */
 class GridSpec extends FlatSpec {
   val g2x2 = """12  2

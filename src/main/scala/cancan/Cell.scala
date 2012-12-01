@@ -1,7 +1,7 @@
-package kenken
+package cancan
 
 /**
- * A position in a [[kenken.Grid]].
+ * A position in a [[cancan.Grid]].
  *
  * Cells sort by row then column. Row and column values are 1-based.
  * @param row cell row

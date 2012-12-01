@@ -1,9 +1,9 @@
-package kenken
+package cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[kenken.Cell]] objects.
+ * Unit tests for the [[cancan.Cell]] objects.
  */
 class CellSpec extends FlatSpec {
   behavior of "Cell (3,4)"

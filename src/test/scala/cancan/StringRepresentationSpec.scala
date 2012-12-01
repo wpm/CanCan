@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 import org.scalatest.FlatSpec
 

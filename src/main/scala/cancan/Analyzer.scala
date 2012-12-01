@@ -1,4 +1,4 @@
-package kenken
+package cancan
 
 /**
  * Program that counts the number of explored partial solutions for a set of puzzles.
