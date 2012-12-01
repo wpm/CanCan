@@ -260,6 +260,7 @@ object Generator {
 
   def generate(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (Int, Int, Boolean) = {
+      @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {

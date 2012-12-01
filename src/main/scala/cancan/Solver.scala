@@ -173,6 +173,7 @@ object Solver {
    */
   def solve(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (String, Boolean, Boolean, Option[Int]) = {
+      @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {

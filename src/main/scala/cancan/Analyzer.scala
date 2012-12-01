@@ -1,5 +1,7 @@
 package cancan
 
+import annotation.tailrec
+
 /**
  * Program that counts the number of explored partial solutions for a set of puzzles.
  */
@@ -11,6 +13,7 @@ object Analyzer {
 
   def analyze(args: Array[String]) {
     def parseCommandLine(args: Array[String]): String = {
+      @tailrec
       def parseCommandLineRec(args: List[String], positional: List[String]): List[String] = {
         args match {
           case Nil => positional.reverse
@@ -25,7 +28,7 @@ object Analyzer {
     }
 
     val filename = parseCommandLine(args)
-    val puzzles = StringRepresentation.parsePuzzles(StringRepresentation.readFile(filename))
+    val puzzles = readPuzzlesFromFile(filename)
     var total = 0.0
     puzzles.zipWithIndex.foreach {
       case (puzzle, i) =>
