@@ -19,6 +19,16 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
     }
   }
 
+  lazy private val validator = LatinSquare(this)
+  /**
+   * Does the specified grid satisfy all the constraints in this puzzle?
+   *
+   * This function is provided as a debugging utility to check that the solver is returning the correct answers.
+   * @param grid the grid to check
+   * @return `true` if the grid satisfies the constrains, `false` if any constraints are violated
+   */
+  def isPossibleSolution(grid: Grid): Boolean = validator(grid) != None
+
   /**
    * This is the inverse of `KenKen(s)`
    */

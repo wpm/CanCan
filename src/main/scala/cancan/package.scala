@@ -2,8 +2,6 @@
  * CanCan is a solver and generator of [[http://www.kenken.com KenKen]] puzzles.
  */
 package object cancan {
-  val defaultAlgorithm = PermutationSetSolver
-
   /**
    * Read a set of puzzles from a file, treating # as a comment delimiter and skipping leading blank lines.
    *
@@ -18,10 +16,13 @@ package object cancan {
    * Solutions of a puzzle using the default solving algorithm
    * @param puzzle a puzzle
    * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
+   * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
    * @return the puzzle's solutions
    */
-  def solutions(puzzle: Puzzle, hint: Option[Grid] = None): Stream[Grid] =
-    defaultAlgorithm(puzzle, hint).solutions
+  def solutions(puzzle: Puzzle,
+                hint: Option[Grid] = None,
+                strategy: SearchStrategy = OrderByCellSize()): Stream[Grid] =
+    strategy(puzzle, hint).filter(_.isSolved).toStream
 
   /**
    * All the solutions of the puzzle up to `max` partial solution states.
@@ -29,10 +30,14 @@ package object cancan {
    * This is used to abandon difficult to solve puzzles after a finite amount of time.
    *
    * @param max the maximum number of partial solutions to search
-   * @return tuple (solutions, stream of partial solutions beyond the ones searched)
+   * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
+   * @return tuple (solutions, `true` if all solutions have been searched)
    */
-  def cappedSolutions(puzzle: Puzzle, max: Int, hint: Option[Grid] = None): (Stream[Grid], Stream[Grid]) = {
-    val partialSolutions = defaultAlgorithm(puzzle, hint).partialSolutions
-    (partialSolutions.take(max).filter(_.isSolved), partialSolutions.drop(max))
+  def cappedSolutions(puzzle: Puzzle,
+                      max: Int,
+                      hint: Option[Grid] = None,
+                      strategy: SearchStrategy = OrderByCellSize()): (Stream[Grid], Boolean) = {
+    val partialSolutions = strategy(puzzle, hint)
+    (partialSolutions.take(max).filter(_.isSolved).toStream, partialSolutions.drop(max).isEmpty)
   }
 }
