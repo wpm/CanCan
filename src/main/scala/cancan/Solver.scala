@@ -123,11 +123,24 @@ case class LatinSquareSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends 
       rowColumnConstraints(puzzle.n, (cells => Seq(LatinSquareConstraint(cells)))))
 }
 
+abstract class HeuristicSolver(puzzle: Puzzle, hint: Option[Grid]) extends Solver(puzzle, hint) {
+  override val constraintMap =
+    Constraint.constraintMap(puzzle.cageConstraints ++
+      rowColumnConstraints(puzzle.n,
+        (cells => Seq(PermutationSetConstraint(puzzle.n, cells), UniquenessConstraint(cells)))))
+}
+
+/**
+ * Solver that uses the [[cancan.PermutationSetConstraint]] and [[cancan.UniquenessConstraint]] heuristics.
+ */
+case class PermutationSetSolver(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint)
+
 /**
  * Solver that uses the [[cancan.PermutationSetConstraint]] and [[cancan.UniquenessConstraint]] heuristics and sorts
  * guess cells by cage ambiguity.
  */
-case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint) {
+case class PermutationSetByCageSizeSolver(puzzle: Puzzle,
+                                          hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint) {
   private def cageAmbiguity(grid: Grid): Map[Option[Constraint], Int] = {
     Map[Option[Constraint], Int]().withDefaultValue(0) ++
       puzzle.containingCages.values.map(cage => Some(cage) -> (1 /: cage.cells.map(grid(_).size))(_ * _))
@@ -144,18 +157,6 @@ case class HeuristicSolver2(puzzle: Puzzle, hint: Option[Grid] = None) extends H
       }.min._3)
     }
   }
-}
-
-/**
- * Solver that uses the [[cancan.PermutationSetConstraint]] and [[cancan.UniquenessConstraint]] heuristics.
- */
-case class HeuristicSolver1(puzzle: Puzzle, hint: Option[Grid] = None) extends HeuristicSolver(puzzle, hint)
-
-abstract class HeuristicSolver(puzzle: Puzzle, hint: Option[Grid]) extends Solver(puzzle, hint) {
-  override val constraintMap =
-    Constraint.constraintMap(puzzle.cageConstraints ++
-      rowColumnConstraints(puzzle.n,
-        (cells => Seq(PermutationSetConstraint(puzzle.n, cells), UniquenessConstraint(cells)))))
 }
 
 object Solver {

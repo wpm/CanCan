@@ -2,7 +2,7 @@
  * CanCan is a solver and generator of [[http://www.kenken.com KenKen]] puzzles.
  */
 package object cancan {
-  val defaultAlgorithm = HeuristicSolver1
+  val defaultAlgorithm = PermutationSetSolver
 
   /**
    * Read a set of puzzles from a file, treating # as a comment delimiter and skipping leading blank lines.
