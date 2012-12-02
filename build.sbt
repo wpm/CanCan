@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 name := "CanCan"
 
 version := "1.0"
@@ -9,3 +11,5 @@ scalacOptions ++= Seq("-unchecked", "-deprecation")
 initialCommands in console := "import cancan._"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.8" % "test"
+
+assemblySettings
