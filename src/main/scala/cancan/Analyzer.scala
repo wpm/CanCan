@@ -34,16 +34,19 @@ object Analyzer {
 
     val (filename, latinSquare) = parseCommandLine(args)
     val puzzles = readPuzzlesFromFile(filename)
-    var total = 0.0
+    var first = 0.0
+    var all = 0.0
     val searchStrategy = OrderByCellSize(if (latinSquare) LatinSquare(_) else PermutationSet(_))
     puzzles.zipWithIndex.foreach {
       case (puzzle, i) =>
         val partialSolutions = searchStrategy(puzzle).toSeq.zipWithIndex.filter(_._1.isSolved)
         val s = for ((partialSolutionIndex, solution) <- partialSolutions.map(_._2).zipWithIndex)
         yield (solution + 1, partialSolutionIndex + 1)
-        total += s.head._2
+        first += s.head._2
+        all += s.last._2
         println(((i + 1) :: s.map(t => t._1 + ":" + t._2).toList).mkString("\t"))
     }
-    println("Mean steps to first solution " + total / puzzles.size)
+    println("Mean steps to first solution " + first / puzzles.size)
+    println("Mean steps to all solutions " + all / puzzles.size)
   }
 }
