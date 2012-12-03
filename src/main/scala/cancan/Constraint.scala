@@ -76,7 +76,6 @@ case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(
   override def toString() = "Latin Square: " + super.toString
 }
 
-// TODO Permutation sets can apply inside cages as well as on ranks.
 case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     val cs = valueCounts(values).filter {
