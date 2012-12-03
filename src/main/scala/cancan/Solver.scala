@@ -47,7 +47,7 @@ object Solver {
         println((i + 1) + ".\n" + puzzle + "\n")
         val (ss, remaining) = max match {
           case Some(m) => cappedSolutions(puzzle, m)
-          case None => (solutions(puzzle), true)
+          case None => (solutions(puzzle), false)
         }
         for (solution <- (if (firstOnly) ss.headOption.toStream else ss)) {
           println(solution)
