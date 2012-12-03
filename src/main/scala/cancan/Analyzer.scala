@@ -11,10 +11,11 @@ object Analyzer {
       |
       |Count the number of partial solutions in a set of puzzles.
       |
-      |    -l - use the Latin Square constraints without heuristics""".stripMargin
+      |    -l - use the Latin Square constraints without heuristics
+      |    -c - use the order by cage strategy""".stripMargin
 
   def analyze(args: Array[String]) {
-    def parseCommandLine(args: Array[String]): (String, Boolean) = {
+    def parseCommandLine(args: Array[String]): (String, SearchStrategy) = {
       @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
@@ -23,20 +24,20 @@ object Analyzer {
           case Nil => (positional.reverse, option)
           case "-h" :: tail => CanCan.error(usage)
           case "-l" :: tail => parseCommandLineRec(tail, positional, option + ('latinSquare -> ""))
+          case "-c" :: tail => parseCommandLineRec(tail, positional, option + ('cageOrder -> ""))
           case s :: tail if (s(0) == '-') => CanCan.error("Invalid switch " + s)
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
       CanCan.errorIf(positional.size != 1, "Invalid number of arguments")
-      (positional.head, option.contains('latinSquare))
+      (positional.head, SearchStrategy.select(option.contains('cageOrder), option.contains('latinSquare)))
     }
 
-    val (filename, latinSquare) = parseCommandLine(args)
+    val (filename, searchStrategy) = parseCommandLine(args)
     val puzzles = readPuzzlesFromFile(filename)
     var first = 0.0
     var all = 0.0
-    val searchStrategy = OrderByCellSize(if (latinSquare) LatinSquare(_) else PermutationSet(_))
     puzzles.zipWithIndex.foreach {
       case (puzzle, i) =>
         val partialSolutions = searchStrategy(puzzle).toSeq.zipWithIndex.filter(_._1.isSolved)
