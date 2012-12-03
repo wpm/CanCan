@@ -46,7 +46,7 @@ class SearchStrategySpec extends FlatSpec {
 
   it should "have solution\n" + kenken1_4x4_solution in {
     expect(List(Grid(kenken1_4x4_solution))) {
-      solutions(Puzzle(kenken1_4x4_puzzle))
+      solutions(kenken1_4x4_puzzle)
     }
   }
 
@@ -73,7 +73,7 @@ class SearchStrategySpec extends FlatSpec {
 
   it should "have solution\n" + kenken2_4x4_solution in {
     expect(List(Grid(kenken2_4x4_solution))) {
-      solutions(Puzzle(kenken2_24x4_puzzle))
+      solutions(kenken2_24x4_puzzle)
     }
   }
 
@@ -100,7 +100,7 @@ class SearchStrategySpec extends FlatSpec {
 
   it should "have solution\n" + kenken3_4x4_solution in {
     expect(List(Grid(kenken3_4x4_solution))) {
-      solutions(Puzzle(kenken3_4x4_puzzle))
+      solutions(kenken3_4x4_puzzle)
     }
   }
 
@@ -131,7 +131,7 @@ class SearchStrategySpec extends FlatSpec {
 
   it should "have solution\n" + kenken_6x6_solution in {
     expect(List(Grid(kenken_6x6_solution))) {
-      solutions(Puzzle(kenken_6x6_puzzle))
+      solutions(kenken_6x6_puzzle)
     }
   }
 
@@ -158,7 +158,7 @@ class SearchStrategySpec extends FlatSpec {
                      |c d""".stripMargin
   "An unsolvable puzzle" should "have no solutions" in {
     expect(Stream.empty) {
-      solutions(Puzzle(unsolvable))
+      solutions(unsolvable)
     }
   }
 }

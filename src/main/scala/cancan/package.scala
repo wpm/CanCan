@@ -19,7 +19,7 @@ package object cancan {
    * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
    * @return the puzzle's solutions
    */
-  def solutions(puzzle: Puzzle,
+  def solutions(implicit puzzle: Puzzle,
                 hint: Option[Grid] = None,
                 strategy: SearchStrategy = OrderByCellSize()): Stream[Grid] =
     strategy(puzzle, hint).filter(_.isSolved).toStream
@@ -33,11 +33,13 @@ package object cancan {
    * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
    * @return tuple (solutions, `true` if all solutions have been searched)
    */
-  def cappedSolutions(puzzle: Puzzle,
+  def cappedSolutions(implicit puzzle: Puzzle,
                       max: Int,
                       hint: Option[Grid] = None,
                       strategy: SearchStrategy = OrderByCellSize()): (Stream[Grid], Boolean) = {
     val partialSolutions = strategy(puzzle, hint)
     (partialSolutions.take(max).filter(_.isSolved).toStream, partialSolutions.drop(max).isEmpty)
   }
+
+  implicit def stringToPuzzle(s: String): Puzzle = Puzzle(s)
 }
