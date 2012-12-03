@@ -91,7 +91,8 @@ case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends RowColumn
     }
   }
 
-  // TODO Calculate this as you go inside Grid.
+  // Could keep a running tally of these counts in the Grid object so that they are only calculated as needed. However,
+  // profiling shows <5% of time spent inside this function, so it's probably not worth complicating the code.
   def valueCounts(values: Seq[Set[Int]]): Map[Set[Int], Int] =
     (Map[Set[Int], Int]().withDefaultValue(0) /: values) {
       case (m, s) => m + (s -> (m(s) + 1))
