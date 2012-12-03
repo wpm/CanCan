@@ -235,7 +235,8 @@ object Generator {
   }
 
   /**
-   * Cage size distribution in puzzles.
+   * Macro average of the cage size distribution in puzzles.
+   *
    * @param puzzles set of puzzles
    * @return table of cage size distribution across the puzzles
    */
