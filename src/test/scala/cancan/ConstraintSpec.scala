@@ -101,14 +101,45 @@ class ConstraintSpec extends FlatSpec {
   }
 
 
-  "A x12 constraint on three cells" should "Stringify as '12x' and '*\t12\tA1 A2 B1'" in {
-    val times12 = TimesConstraint(12, List(Cell(1, 1), Cell(1, 2), Cell(2, 1)))
-    expect("12x") {
-      times12.toString()
+  behavior of "A x6 constraint on three cells"
+  val times6 = TimesConstraint(6, List(Cell(1, 1), Cell(1, 2), Cell(2, 1)))
+  it should "Constrain 1234 1234 1234 to 123 123 123" in {
+    expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
+      times6(Grid(4))
+    }
+  }
+
+  it should "Stringify as '6x' and '*\t6\tA1 A2 B1'" in {
+    expect("6x") {
+      times6.toString()
     }
 
-    expect("*\t12\tA1 A2 B1") {
-      times12.toNekNekString
+    expect("*\t6\tA1 A2 B1") {
+      times6.toNekNekString
+    }
+  }
+
+  behavior of "A +5 constraint on three cells"
+  val plus5 = PlusConstraint(5, List(Cell(1, 1), Cell(1, 2), Cell(2, 1)))
+  it should "Constrain 1234 1234 1234 to 123 123 123" in {
+    expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
+      plus5(Grid(4))
+    }
+  }
+
+  it should "Constrain 1 23 123 to 1 23 123" in {
+    expect(Some(Nil)) {
+      plus5(Grid(4) ++ List((Cell(1, 1), Set(1)), (Cell(1, 2), Set(2, 3)), (Cell(2, 1), Set(1, 2))))
+    }
+  }
+
+  it should "Stringify as '5+' and '*\t5\tA1 A2 B1'" in {
+    expect("5+") {
+      plus5.toString()
+    }
+
+    expect("+\t5\tA1 A2 B1") {
+      plus5.toNekNekString
     }
   }
 }

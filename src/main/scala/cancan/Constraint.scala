@@ -1,5 +1,7 @@
 package cancan
 
+import annotation.tailrec
+
 
 /**
  * Constraint on a region of cells in a grid
@@ -219,13 +221,22 @@ case class DivideConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAss
  * A set of cells whose values combine with an associative operator
  */
 abstract class AssociativeConstraint(value: Int, region: Seq[Cell]) extends ArithmeticConstraint(value, region) {
-  def fills(values: Seq[Set[Int]]) = {
-    def cartesianProduct[A](zs: Traversable[Traversable[A]]): Seq[Seq[A]] =
-      zs.foldLeft(Seq(Seq.empty[A])) {
-        (x, y) => for (a <- x.view; b <- y) yield a :+ b
-      }
-    // Skip values larger than the target value.
-    cartesianProduct(values.map(_.filterNot(_ > value))).filter(_.reduceLeft(combine) == value)
+  def fills(values: Seq[Set[Int]]) = cartesianMonoid(values)
+
+  /**
+   * Take the Cartesian product of a set of integers and select the elements whose combination on a monoid is equal
+   * to a specified value.
+   *
+   * @param ys sets of integers to combine
+   * @return list of lists of integers combining to the target value
+   */
+  private def cartesianMonoid(ys: Seq[Traversable[Int]]): List[List[Int]] = {
+    @tailrec
+    def cmRec(ys: Seq[Traversable[Int]], acc: List[(List[Int], Int)]): List[List[Int]] = ys match {
+      case Nil => acc.filter(_._2 == value).map(_._1.reverse)
+      case z :: zs => cmRec(zs, for (a <- acc; b <- z; c = combine(a._2, b); if (c <= value)) yield (b :: a._1, c))
+    }
+    cmRec(ys, List((Nil, identity)))
   }
 
   /**
@@ -234,14 +245,21 @@ abstract class AssociativeConstraint(value: Int, region: Seq[Cell]) extends Arit
    * @param y a value
    * @return either x+y or x*y
    */
-  def combine(x: Int, y: Int): Int
+  protected def combine(x: Int, y: Int): Int
+
+  /**
+   * The identity element of the constraint's operator
+   */
+  protected val identity: Int
 }
 
 /**
  * The sum of the values in a set of cells must equal a specified value.
  */
 case class PlusConstraint(value: Int, region: Seq[Cell]) extends AssociativeConstraint(value, region) {
-  def combine(x: Int, y: Int) = x + y
+  override protected def combine(x: Int, y: Int) = x + y
+
+  override protected val identity = 0
 
   override protected val symbol = "+"
 }
@@ -250,7 +268,9 @@ case class PlusConstraint(value: Int, region: Seq[Cell]) extends AssociativeCons
  * The sum of the values in a set of cells must equal a specified value.
  */
 case class TimesConstraint(m: Int, cs: Seq[Cell]) extends AssociativeConstraint(m, cs) {
-  def combine(x: Int, y: Int) = x * y
+  override protected def combine(x: Int, y: Int) = x * y
+
+  override protected val identity = 1
 
   override protected val symbol = "x"
   lazy override protected val nekNekSymbol = "*"
