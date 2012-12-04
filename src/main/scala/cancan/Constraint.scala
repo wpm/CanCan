@@ -66,8 +66,8 @@ abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region)
  * This constraint does not change any values in the grid but can be violated.
  *
  *  - `[123 123 123] -> [123 123 123]`
- *  - `[1   23  123] -> [1   23  123]`
- *  - `[1   23  1]   -> None`
+ *  - `[1 23 123] -> [1 23 123]`
+ *  - `[1 23 1]   -> None`
  */
 case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
   private def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
@@ -78,6 +78,15 @@ case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(
   override def toString() = "Latin Square: " + super.toString
 }
 
+/**
+ * A heuristic that implements the Latin Square rules by eliminating ''permutation sets'' from rows and columns.
+ *
+ * A permutation set is a set of ''m'' values that appears in exactly ''m'' cells in a row or column.
+ *
+ *  - `[12 1234 12] -> [12 34 12]`
+ *  - `[1 23 123] -> [1 23 23]`
+ *  - `[1 1 123] -> None`
+ */
 case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends RowColumnConstraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     val cs = valueCounts(values).filter {
@@ -114,7 +123,7 @@ case class UniquenessConstraint(region: Seq[Cell]) extends RowColumnConstraint(r
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
       value =>
-      // Values only appearing in this cell.
+        // Values only appearing in this cell.
         val u = value -- (values.filter(y => !(y eq value)).reduceLeft(_ | _))
         u.size match {
           case 1 => u
@@ -265,7 +274,7 @@ case class PlusConstraint(value: Int, region: Seq[Cell]) extends AssociativeCons
 }
 
 /**
- * The sum of the values in a set of cells must equal a specified value.
+ * The product of the values in a set of cells must equal a specified value.
  */
 case class TimesConstraint(m: Int, cs: Seq[Cell]) extends AssociativeConstraint(m, cs) {
   override protected def combine(x: Int, y: Int) = x * y

@@ -55,12 +55,24 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
   }
 }
 
+/**
+ * A set of Latin Square constraints and the cage constraints.
+ *
+ * This is the minimal set of constraints and employs no heuristics.
+ * @param puzzle puzzle to which to apply the strategy
+ */
 case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(LatinSquareConstraint(cells)))))
 }
 
+/**
+ * Implementation of the row and column constraints with the [[cancan.PermutationSet]] heuristic.
+ *
+ * This is faster than the [[cancan.LatinSquare]] strategy.
+ * @param puzzle puzzle to which to apply the strategy
+ */
 case class PermutationSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++

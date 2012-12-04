@@ -5,9 +5,9 @@ import scala.collection.GenTraversableOnce
 /**
  * An ''n'' x ''n'' grid containing a puzzle solution
  *
- * A grid is a square array of ''cells''. Each cell contains a set of numbers from 1 to ''n'' which may possibly occupy
- * that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1) is in the upper left hand
- * corner.
+ * A grid is a square array of [[cancan.Cell]]s. Each cell contains a set of numbers from 1 to ''n'' which may possibly
+ * occupy that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1) is in the upper
+ * left hand corner.
  */
 case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
   /**

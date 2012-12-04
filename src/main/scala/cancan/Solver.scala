@@ -2,6 +2,9 @@ package cancan
 
 import annotation.tailrec
 
+/**
+ * Program for solving KenKen puzzles.
+ */
 object Solver {
   private val usage =
     """solve [-a|-m|-v] file
