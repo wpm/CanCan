@@ -48,11 +48,11 @@ object Generator {
           }
           // Generate a new layout for the cells in the unequal cages. Skew the distribution of cage sizes towards the
           // largest allowed size.
-          val unequalCells = unequal.flatMap(_.cells).toSeq
+          val unequalCells = unequal.flatMap(_.cells).toList
           val cages = randomCageLayout(unequalCells, Multinomial((1.0 :: List.fill(cageSize.max)(0.0)).reverse: _*))
-          val constraints = cages.map(cage => randomCageConstraint(solution, cage.toSeq))
+          val constraints = cages.map(cage => randomCageConstraint(solution, cage.toList))
           // Use the values in the equal cells as the solution hint.
-          val equalCells = equal.flatMap(_.cells).toSeq
+          val equalCells = equal.flatMap(_.cells).toList
           val hint = Grid(n) ++ equalCells.map(cell => (cell -> Set(solution(cell.row - 1)(cell.col - 1))))
           // Create a puzzle with the equal cages and the new cages.
           //          println("Cages " + unequal + ", Cells " + unequalCells.size + "\n" + hint + "\n")
@@ -85,7 +85,8 @@ object Generator {
    */
   def randomPuzzle(n: Int, cageSize: Multinomial): (Puzzle, Seq[Seq[Int]]) = {
     def puzzleFromLayout(solution: Seq[Seq[Int]], cages: Set[Set[Cell]]) =
-      Puzzle(n, cages.map(cage => randomCageConstraint(solution, cage.toSeq)))
+    // Note that cage.toSeq returns an ArrayBuffer, which is a mutable object.
+      Puzzle(n, cages.map(cage => randomCageConstraint(solution, cage.toList)))
 
     require(n > 1, "Invalid puzzle size " + n)
     // Generate a random Latin Square then keep generating cage layouts for it until we have one that meets our
