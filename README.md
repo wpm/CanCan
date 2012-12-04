@@ -1,16 +1,20 @@
 CanCan - a KenKen Solver
 ========================
 
-This package implements a solver and generator of [KenKen](http://www.kenken.com) puzzles.
+CanCan is a solver and generator of [KenKen](http://www.kenken.com) puzzles.
 
 The objective of KenKen puzzles is to completely fill an _n_ x _n_ grid with the numbers 1 to _n_.
 Each row and column must contain a unique set of numbers.
 (Thus a solved KenKen puzzle is a [Latin Square](http://en.wikipedia.org/wiki/Latin_square).)
 Additionally, cells in the grid are grouped into sets called _cages_, and the sets of numbers in these cages must have certain arithmetic properties.
 
-To see the program solve a puzzle, run either its unit tests or `Solver` with a path to a puzzle file.
+CanCan is built with the [Simple Build Tool](http://www.scala-sbt.org).
+The `sbt assembly` command builds an executable .JAR file.
+Run the default executable without any arguments to see help.
 
-    > sbt "run solve puzzles/6x6.1"
+The `solve` command solves a set of puzzles.
+
+    > java -jar target/CanCan-assembly-1.0.jar solve puzzles/6x6.1
     1.
     a=60x b=4+ c=16+ d=45x e=40x f=72x g=4x h=11+ i=4- j=12+ k=12x l=5 m=8+ n=2
     a b b c c d
@@ -27,9 +31,9 @@ To see the program solve a puzzle, run either its unit tests or `Solver` with a 
     3 5 2 1 4 6
     1 4 6 3 5 2
 
-To generate a random set of puzzles, run `Generator` where the first argument is a number of puzzles and the second is the puzzle size.
+The `generate` command generates a set of puzzles of a specified size.
 
-	> sbt "run generate 2 5"
+	> java -jar target/CanCan-assembly-1.0.jar generate 2 5
 	# 1.
 	a=10+ b=8+ c=60x d=8+ e=7+ f=2 g=20x h=24x i=3 j=5x
 	a b b c c
@@ -61,56 +65,11 @@ To generate a random set of puzzles, run `Generator` where the first argument is
 	# 2:0.100
 	# 3:0.700
 
+The `analyze` command is used to analyze the difficulty of a set of puzzles.
+
+In the build directory the `sbt run` command can also be used to run the program.
+
 The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
-
-Data Structures
----------------
-
-The strategy is to use the constraints to eliminate possible values from the cells in the grid.
-
-A _partial solution grid_ is an _n_ x _n_ grid of sets of numbers that are consistent with a puzzle's constraints.
-In a completely unsolved grid, all the cells contain the numbers 1 to _n_.
-A cell is _solved_ if it contains exactly one number.
-A grid is solved if all its cells are solved.
-
-A _constraint_ constrains the possible values that can appear in a grid.
-There are two kinds of constraints: _cage constraints_ and _Latin Square_ constraints.
-Cage constraints come in the following varieties:
-
-* _Addition_
-
- The sum of the cells in a cage must equal a specified value.
-* _Multiplication_
-
- The product of the cells in a cage must equal a specified value.
-* _Subtraction_
-
- The difference of the cells in a cage must equal a specified value.
-* _Division_
-
- The quotient of the cells in a cage must equal a specified value.
-* _Specified_
-
- A single cell must contain a specified value.
-
-Note that the cages for the non-associative operations must contain exactly two cells.
-Either ordering of the cells will satisfy the constraint.
-
-The Latin Square constraints require that numbers in rows and columns be unique.
-For each row and column, this has two consequences which are analyzed as separate constraints:
-
-* _Solved Cells_
-
- The values from all solved cells are removed from unsolved cells.
- For example, given the row {123} {1} {13}, this contraint returns {23} {1} {3}.
- The constraint is violated if all solved cells do not have distinct values.
-
-* _Uniqueness_
-
- If a value only appears in a single cell in a row or column, it must be the solution for that cell.
- For example, given the column {23} {123} {23}, uniqueness returns {23} {1} {23}.
-
-Given a partial solution grid, the constraints may serve to eliminate possible values from cells or reveal that partial solution as inconsistent with the puzzle.
 
 Puzzle Solving
 --------------
@@ -118,22 +77,13 @@ Puzzle Solving
 A brute force solution would simply try all possible solutions for a grid.
 This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing where a candidate number has been removed from one of the cells.
 Vertices with no outgoing edges are possible solutions.
-Note that different sequences of guesses may lead to the same possible solution, so this search space is a directed acyclic graph.
 
 A depth-first search of the graph starting from a completely unsolved grid will find all solutions.
 Since there are _n_<sup>_n_<sup>2</sup></sup> possible solutions, a completely exhaustive search is infeasible.
-However, at each guessed solution vertex we can apply all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
+However, at each guessed solution vertex CanCan applies all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
 This process is called _constraint propagation_, and eliminates possible values from some grids while revealing others as inconsistent with the constraints.
 At each node it reduces the size of the search space to the point where an exhaustive search of the constrained graph is tractable.
 Each search iteration makes a guess about the _least ambiguous cell_, i.e. the one with the fewest candidate numbers.
-
-In this program, a partial solution is represented by the `Grid` object, which is a map of cell coordinates to sets of possible values.
-The constraints are implemented as a hierarchy of `Constraint` objects which associate sets of cells coordinates with functions from possible values of those cells to constrained possible values.
-The `Puzzle` object represents a puzzle.
-It associates a set of cage constraints with a grid of a particular size.
-A puzzle is passed to a `Solver` algorithm which finds to solutions.
-The core algorithm is is implemented in the private recursive `search` function, which in turn calls a private recursive `applyConstraints` function.
-The `solutions` value of a solver is a stream of all the its puzzle's solutions.
 
 Puzzle Generation
 -----------------
@@ -143,10 +93,11 @@ Puzzles are generated in the following way:
 1. A random Latin Square is generated.
 2. Contiguous cells in the grid are randomly grouped into cells.
 3. An operation is randomly assigned to each cell and the value is calculated.
+4. If the puzzle has multiple solutions, it is modified until it has only one.
 
 To generate the cells in step (2), find the connected components of a random sub-graph of a graph where every cell is adjacent to the ones with which it shares an edge.
 The sizes of the connected components range between one and four and no more than 10% of the cells will be specified constraints.
-There is no guarantee that the puzzle will have a unique solution.
+In step (4) the cages that do not contain the same values across all solutions are randomly redrawn until a unique solution exists.
 
 References
 ----------
