@@ -1,6 +1,9 @@
 package cancan
 
-object CanCan {
+/**
+ * Top level dispatcher for commands that can be run from a prompt.
+ */
+object Dispatcher {
   private val usage =
     """CanCan solve|generate|analyze
       |
@@ -10,13 +13,28 @@ object CanCan {
       |
       |Follow the command with '-h' for more information.""".stripMargin
 
-  def error(msg: String, status: Int = 0): Nothing = {
-    println(msg)
+  /**
+   * Print message and exit.
+   *
+   * @param message the message
+   * @param status program exit code
+   * @return this function does not return
+   */
+  def error(message: String, status: Int = 0): Nothing = {
+    println(message)
     sys.exit(status)
   }
 
-  def errorIf(condition: Boolean, msg: String, status: Int = 0): Null = {
-    if (condition) error(msg, status) else null
+  /**
+   * Conditionally print message and exit.
+   *
+   * @param condition condition on which to exit
+   * @param message the message
+   * @param status program exit code
+   * @return `null`
+   */
+  def errorIf(condition: Boolean, message: String, status: Int = 0): Null = {
+    if (condition) error(message, status) else null
   }
 
   def main(args: Array[String]) {

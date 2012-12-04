@@ -22,15 +22,15 @@ object Analyzer {
                               option: Map[Symbol, String]): (List[String], Map[Symbol, String]) = {
         args match {
           case Nil => (positional.reverse, option)
-          case "-h" :: tail => CanCan.error(usage)
+          case "-h" :: tail => Dispatcher.error(usage)
           case "-l" :: tail => parseCommandLineRec(tail, positional, option + ('latinSquare -> ""))
           case "-c" :: tail => parseCommandLineRec(tail, positional, option + ('cageOrder -> ""))
-          case s :: tail if (s(0) == '-') => CanCan.error("Invalid switch " + s)
+          case s :: tail if (s(0) == '-') => Dispatcher.error("Invalid switch " + s)
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      CanCan.errorIf(positional.size != 1, "Invalid number of arguments")
+      Dispatcher.errorIf(positional.size != 1, "Invalid number of arguments")
       (positional.head, SearchStrategy.select(option.contains('cageOrder), option.contains('latinSquare)))
     }
 

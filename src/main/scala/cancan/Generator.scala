@@ -269,14 +269,14 @@ object Generator {
         args match {
           case Nil => (positional.reverse, option)
           case "-n" :: tail => parseCommandLineRec(tail, positional, option + ('nonUnique -> ""))
-          case "-h" :: tail => CanCan.error(usage)
-          case s :: tail if (s(0) == '-') => CanCan.error("Invalid switch " + s)
+          case "-h" :: tail => Dispatcher.error(usage)
+          case s :: tail if (s(0) == '-') => Dispatcher.error("Invalid switch " + s)
           case arg :: tail if (arg.matches( """\d+""")) => parseCommandLineRec(tail, arg :: positional, option)
-          case arg :: tail => CanCan.error("Invalid argument " + arg)
+          case arg :: tail => Dispatcher.error("Invalid argument " + arg)
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      CanCan.errorIf(positional.size != 2, "Invalid number of arguments")
+      Dispatcher.errorIf(positional.size != 2, "Invalid number of arguments")
       (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique))
     }
 

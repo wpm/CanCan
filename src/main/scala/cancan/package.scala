@@ -13,7 +13,10 @@ package object cancan {
     StringRepresentation.parsePuzzles(StringRepresentation.readFile(filename))
 
   /**
-   * Solutions of a puzzle using the default solving algorithm
+   * All solutions of a puzzle.
+   *
+   * If a puzzle has multiple solutions, the order in which they are returned is undefined.
+   *
    * @param puzzle a puzzle
    * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
    * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]

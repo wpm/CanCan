@@ -30,13 +30,13 @@ object Solver {
           case "-m" :: m :: tail if (m.matches( """\d+""")) =>
             parseCommandLineRec(tail, positional, option + ('max -> m))
           case "-v" :: tail => parseCommandLineRec(tail, positional, option + ('validate -> ""))
-          case "-h" :: tail => CanCan.error(usage)
-          case s :: tail if (s(0) == '-') => CanCan.error("Invalid switch " + s)
+          case "-h" :: tail => Dispatcher.error(usage)
+          case s :: tail if (s(0) == '-') => Dispatcher.error("Invalid switch " + s)
           case arg :: tail => parseCommandLineRec(tail, arg :: positional, option)
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      CanCan.errorIf(positional.size != 1, "Incorrect number of arguments")
+      Dispatcher.errorIf(positional.size != 1, "Incorrect number of arguments")
       val max = option.get('max) match {
         case Some(s) => Some(s.toInt)
         case None => None
