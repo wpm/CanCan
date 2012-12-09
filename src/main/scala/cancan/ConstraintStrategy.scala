@@ -29,11 +29,10 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
       val constraint = constraints.head
       constraint(grid) match {
         case Some(changes) => {
-          val newGrid: Grid = grid ++ changes
           val triggeredConstraints = changes.flatMap {
             case (cell, _) => constraintMap(cell)
           }
-          apply(newGrid, constraints ++ triggeredConstraints - constraint)
+          apply(grid ++ changes, constraints ++ triggeredConstraints - constraint)
         }
         case None => None
       }
@@ -77,4 +76,20 @@ case class PermutationSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(PermutationSetConstraint(puzzle.n, cells), UniquenessConstraint(cells)))))
+}
+
+/**
+ * Implementation of the row and column constraints with the [[cancan.PreemptiveSet]] heuristic.
+ *
+ * This is faster than the [[cancan.LatinSquare]] strategy.
+ * @param puzzle puzzle to which to apply the strategy
+ */
+case class PreemptiveSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
+  override val constraintMap =
+    Constraint.constraintMap(puzzle.cageConstraints ++
+      rowColumnConstraints((cells => Seq(
+        LatinSquareConstraint(cells),
+        PreemptiveSetConstraint(cells),
+        UniquenessConstraint(cells)
+      ))))
 }

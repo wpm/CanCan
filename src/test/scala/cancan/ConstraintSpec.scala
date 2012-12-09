@@ -86,7 +86,7 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  "A permustation set constraint on a row (23 5 6 4 3 2)" should "be inconsistent" in {
+  "A permutation set constraint on a row (23 5 6 4 3 2)" should "be inconsistent" in {
     expect(None) {
       val g = Grid(
         """23 5 6 4 3 2
@@ -140,6 +140,38 @@ class ConstraintSpec extends FlatSpec {
 
     expect("+\t5\tA1 A2 B1") {
       plus5.toNekNekString
+    }
+  }
+
+  behavior of "Preemptive set constraints"
+
+  def preemptiveFixture = PreemptiveSetConstraint(Grid.row(6)(1))
+
+  it should "remove invalid candidates" in {
+    expect(Some(List(
+      (Cell(1, 2), Set(4)),
+      (Cell(1, 5), Set(5, 6)),
+      (Cell(1, 6), Set(5, 6))
+    ))) {
+      preemptiveFixture(Grid(
+        """123 1234 12 23 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456""".stripMargin))
+    }
+  }
+
+  it should "do nothing to an invalid grid" in {
+    expect(Some(Nil)) {
+      preemptiveFixture(Grid(
+        """1 1 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456""".stripMargin))
     }
   }
 }

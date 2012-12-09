@@ -34,13 +34,38 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
   protected def values(grid: Grid): Seq[Set[Int]] = cells.map(grid(_))
 
   /**
-   * Changes this constraint makes to a set of cell values
+   * Changes this constraint makes to a sequence of cell values
+   *
    * @param values original values in the grid
    * @return constrained values or `None` if the constraint cannot be satisfied
    */
   protected def constrainedValues(values: Seq[Set[Int]]): Option[Seq[Set[Int]]] = None
 
   override def toString() = cells.mkString(" ")
+}
+
+/**
+ * The preemptive set constraint as described in J.F. Cook, "A Pencil-and-Paper Algorithm for Solving Sudoku Puzzles",
+ * Notices of the American Mathematical Society, April 2009, Volume 56, Number 4, pp. 460-468
+ *
+ * @param region region of cells in the grid
+ */
+case class PreemptiveSetConstraint(region: Seq[Cell]) extends Constraint(region) {
+  override protected def constrainedValues(values: Seq[Set[Int]]) = {
+    // e.g. values = List(Set(1, 2, 3), Set(1, 2, 3, 4), Set(1, 2), Set(2, 3), Set(1, 2, 3, 4, 5, 6), Set(1, 2, 3, 4, 5, 6))
+    // preemptiveSets = List((Set(1, 2, 3), Set(0, 2, 3)), (Set(1, 2, 3, 4), Set(0, 1, 2, 3)))
+    val preemptiveSets = values.filter(_.size < values.size).map {
+      v => (v, values.zipWithIndex.filter(_._1.subsetOf(v)))
+    }.filter(t => t._1.size == t._2.size).map(t => (t._1, Set() ++ t._2.map(_._2)))
+    // removeSets = List((Set(1, 2, 3), Set(5, 1, 4)), (Set(1, 2, 3, 4), Set(5, 4)))
+    val removeSets = preemptiveSets.map(p => (p._1, Set() ++ (0 to values.size - 1) -- p._2))
+    // remove = Map(5 -> Set(1, 2, 3, 4), 1 -> Set(1, 2, 3), 4 -> Set(1, 2, 3, 4))
+    val remove = (Map[Int, Set[Int]]().withDefaultValue(Set()) /: removeSets) {
+      case (m, p) => m ++ p._2.map(r => r -> (m(r) ++ p._1))
+    }
+    // List(Set(1, 2, 3), Set(4), Set(1, 2), Set(2, 3), Set(5, 6), Set(5, 6))
+    Some(values.zipWithIndex.map(v => v._1 -- remove.getOrElse(v._2, Set())))
+  }
 }
 
 /**

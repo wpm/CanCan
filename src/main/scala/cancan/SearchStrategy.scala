@@ -43,7 +43,7 @@ abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
 /**
  * Make a guess in a cell that has the fewest possible values.
  */
-case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintStrategy) = PermutationSet(_))
+case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
   extends SearchStrategy(constraintStrategy) {
 
   override protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell] = {
@@ -58,7 +58,7 @@ case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintStrategy) = 
 /**
  * Make a guess in a cell that has the fewest possible values, then by cage ambiguity.
  */
-case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy) = PermutationSet(_))
+case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
   extends SearchStrategy(constraintStrategy) {
   override protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell] = {
     val u = grid.unsolved
