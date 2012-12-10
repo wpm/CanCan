@@ -28,7 +28,18 @@ case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
    * @param cell a cell in the grid
    * @return values in the cell
    */
-  def apply(cell: Cell) = g(cell)
+  def apply(implicit cell: Cell) = g(cell)
+
+  /**
+   * Assign a value to a cell
+   *
+   * This is called by the inline assignment operator.
+   *
+   * @param cell a cell in the grid
+   * @param values values in the cell
+   * @return updated grid
+   */
+  def update(implicit cell: Cell, values: Set[Int]) = Grid(n, g.updated(cell, values))
 
   /**
    * Specify the values for a cell

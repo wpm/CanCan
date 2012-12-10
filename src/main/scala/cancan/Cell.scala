@@ -23,3 +23,7 @@ case class Cell(row: Int, col: Int) extends Ordered[Cell] {
     case c => c
   }
 }
+
+object Cell {
+  implicit def tupleToCell(tuple: (Int, Int)) = Cell(tuple._1, tuple._2)
+}

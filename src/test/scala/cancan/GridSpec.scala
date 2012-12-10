@@ -27,6 +27,31 @@ class GridSpec extends FlatSpec {
     }
   }
 
+  it should "support lookup by integer tuple" in {
+    val g = Grid(g2x2)
+    expect(Set(1, 2)) {
+      g(1, 1)
+    }
+
+    expect(Set(2)) {
+      g(1, 2)
+    }
+    expect(Set(1)) {
+      g(2, 1)
+    }
+    expect(Set(1, 2)) {
+      g(2, 2)
+    }
+  }
+
+  it should "support the assignment operator" in {
+    val g = Grid(g2x2)
+    expect(Grid( """12  2
+                   |12 12""".stripMargin)) {
+      g((2,1)) = Set(1,2)
+    }
+  }
+
   it should "be printed as\n" + g2x2 in {
     expect(Grid(g2x2).toString) {
       g2x2
