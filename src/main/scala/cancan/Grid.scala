@@ -1,6 +1,8 @@
 package cancan
 
 import scala.collection.GenTraversableOnce
+import java.lang.IllegalArgumentException
+import scala.util.parsing.input.Reader
 
 /**
  * An ''n'' x ''n'' grid containing a puzzle solution
@@ -61,7 +63,7 @@ case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
    */
   override def toString = {
     val delimiter = if (n < 10) "" else ","
-    StringRepresentation.tableToString(for (row <- (1 to n)) yield {
+    tableToString(for (row <- (1 to n)) yield {
       for (col <- 1 to n; values = g(row, col)) yield {
         if (values.isEmpty) "." else values.toSeq.sorted.mkString(delimiter)
       }
@@ -70,6 +72,37 @@ case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
 }
 
 object Grid {
+
+  /**
+   * Parser of a string representation of a [[cancan.Grid]].
+   */
+  private object GridParser extends MultilineParser {
+    // 12
+    def cell: Parser[Set[Int]] = """\d+|\.""".r ^^ (ss => Set() ++ (ss match {
+      case "." => Set.empty[Int]
+      case s => s.toList.map(_.toString.toInt)
+    }))
+
+    // 12 12
+    def row: Parser[List[Set[Int]]] = opt(inLineWhitespace) ~> rep1sep(cell, inLineWhitespace) <~ lineDelimiter
+
+    // 12 12
+    // 12 12
+    def grid: Parser[Grid] = rep(row) ^^ (Grid(_))
+
+    // 12 12
+    // 12 12
+    //
+    // 123 123 123
+    // 123 123 123
+    // 123 123 123
+    def grids: Parser[List[Grid]] = repsep(grid, rep1(eol)) <~ opt(rep(eol))
+
+    implicit def parseGridsString(s: String) = parseAll(grids, s)
+
+    implicit def parseGridsFile(r: Reader[Char]) = parseAll(grids, r)
+  }
+
   /**
    * Create a maximally ambiguous grid
    * @param n grid dimension
@@ -87,7 +120,7 @@ object Grid {
    */
   implicit def apply(matrix: Seq[Seq[Set[Int]]]): Grid = {
     val n = matrix.length
-    require(matrix.tail.forall(_.length == n), StringRepresentation.tableToString(matrix) + "\nis not square.")
+    require(matrix.tail.forall(_.length == n), tableToString(matrix) + "\nis not square.")
     val init = for ((row, r) <- matrix.zipWithIndex; (item, c) <- row.zipWithIndex) yield (Cell(r + 1, c + 1) -> item)
     new Grid(n, Map() ++ init)
   }
@@ -97,7 +130,18 @@ object Grid {
    * @param s array of numbers
    * @return corresponding grid
    */
-  implicit def apply(s: String): Grid = StringRepresentation.parseGrid(s: String)
+  implicit def apply(s: String): Grid = GridParser.parseAll(GridParser.grid, s) match {
+    case GridParser.Success(a, _) => a
+    case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
+
+  /**
+   * Read a set of grids from a file or string
+   */
+  def parseGrids(implicit r: GridParser.ParseResult[List[Grid]]) = r match {
+    case GridParser.Success(a, _) => a
+    case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
 
   /**
    * Create a grid from a square matrix of integers
@@ -122,3 +166,4 @@ object Grid {
    */
   def col(n: Int)(c: Int) = Seq((1 to n).map(Cell(_, c)): _*)
 }
+

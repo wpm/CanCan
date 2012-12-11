@@ -1,3 +1,8 @@
+import collection.immutable.PagedSeq
+import io.Source
+import util.parsing.combinator.RegexParsers
+import util.parsing.input.PagedSeqReader
+
 /**
  * CanCan is a solver and generator of [[http://www.kenken.com KenKen]] puzzles.
  */
@@ -10,7 +15,7 @@ package object cancan {
    * @return puzzles
    */
   def readPuzzlesFromFile(filename: String): List[Puzzle] =
-    StringRepresentation.parsePuzzles(StringRepresentation.readFile(filename))
+    Puzzle.parsePuzzles(readFile(filename))
 
   /**
    * All solutions of a puzzle.
@@ -45,4 +50,38 @@ package object cancan {
   }
 
   implicit def stringToPuzzle(s: String): Puzzle = Puzzle(s)
+
+  /**
+   * Read in a file, treating # as a comment delimiter and skipping leading blank lines.
+   * @param filename name of the file
+   * @return file reader
+   */
+  def readFile(filename: String): PagedSeqReader = {
+    val lines = Source.fromFile(filename).getLines().map(_.replaceAll("#.*", "").trim).dropWhile(_.isEmpty)
+    new PagedSeqReader(PagedSeq.fromLines(lines))
+  }
+
+  /**
+   * Print a 2-dimensional array of objects as a grid, centering each element.
+   * @param table 2-dimensional array of objects
+   * @tparam T object in the array
+   * @return string representation
+   */
+  def tableToString[T](table: Traversable[Traversable[T]]) = {
+    def centered(s: String, width: Int) = {
+      val pad = (width - s.length) / 2
+      ("%" + width + "s").format(" " * pad + s)
+    }
+    val widest = (for (row <- table; col <- row) yield col.toString.size).max
+    table.map(row => row.map(col => centered(col.toString, widest)).mkString(" ")).mkString("\n")
+  }
+
+  trait MultilineParser extends RegexParsers {
+    override val skipWhitespace = false
+    val inLineWhitespace = """[ \t]+""".r
+    val eol = sys.props("line.separator")
+    val eoi = """\z""".r
+    val lineDelimiter = (eol | eoi)
+  }
+
 }

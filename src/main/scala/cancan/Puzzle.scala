@@ -1,5 +1,8 @@
 package cancan
 
+import util.parsing.input.Reader
+import scala.IllegalArgumentException
+
 /**
  * A [[http://www.kenken.com KenKen]] puzzle.
  *
@@ -20,6 +23,7 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
   }
 
   lazy private val validator = LatinSquare(this)
+
   /**
    * Does the specified grid satisfy all the constraints in this puzzle?
    *
@@ -57,7 +61,7 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
     val cageKey = cageToName.map {
       case (cage, name) => name + "=" + cage
     }.toSeq.sorted.mkString(" ")
-    (if (!cageKey.isEmpty) cageKey + "\n" else "") + StringRepresentation.tableToString(table)
+    (if (!cageKey.isEmpty) cageKey + "\n" else "") + tableToString(table)
   }
 
   /**
@@ -70,6 +74,77 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
 }
 
 object Puzzle {
+
+  /**
+   * Parser of a string representation of a [[cancan.Puzzle]].
+   */
+  object PuzzleParser extends MultilineParser {
+    val cellLabel = """\w+""".r
+    val opRegex = """(\d+)([+-x/])?""".r
+
+    // 7+
+    def op: Parser[(Int, String)] = opRegex ^^ {
+      s: String =>
+        val opRegex(value, operation) = s
+        (value.toInt, operation)
+    }
+
+    // b=7+
+    def cage: Parser[(String, (Int, String))] = cellLabel ~ "=" ~ op ^^ {
+      case a ~ "=" ~ b => (a, b)
+    }
+
+    // a=5 b=7+ c=3x d=2-
+    def cages: Parser[Map[String, (Int, String)]] = rep1sep(cage, inLineWhitespace) <~ lineDelimiter ^^ (Map() ++ _)
+
+    // a a b
+    def row: Parser[List[String]] = rep1sep(cellLabel, inLineWhitespace) <~ lineDelimiter
+
+    // a a b
+    // a b b
+    // c c d
+    def table: Parser[Map[String, Seq[Cell]]] = rep(row) ^^ {
+      labels: List[List[String]] =>
+        val n = labels.length
+        require(labels.forall(_.length == n), "The table is not square:\n" + labels)
+        val labeledCells = for ((row, r) <- labels.zipWithIndex;
+                                (label, c) <- row.zipWithIndex)
+        yield (label, Cell(r + 1, c + 1))
+        (Map[String, Seq[Cell]]() /: labeledCells) {
+          case (m, (label, cell)) => m + (label -> (cell +: m.getOrElse(label, Nil)))
+        }
+    }
+
+    // a=5x b=7+ c=3x d=2
+    // a a b
+    // a b b
+    // c c d
+    def puzzle: Parser[Puzzle] = cages ~ table ^^ {
+      case (c ~ t) =>
+        // The dimension of the grid is equal to the largest cell coordinate.
+        val n = t.values.flatten.flatMap(cell => List(cell.row, cell.col)).max
+        val cageConstraints = c.map {
+          case (label, (value, op)) =>
+            require(t.contains(label), "Table missing cage for " + label + " " + value + "" + op)
+            (op, t(label)) match {
+              case ("+", cells) => PlusConstraint(value, cells)
+              case ("-", Seq(cell1, cell2)) => MinusConstraint(value, cell1, cell2)
+              case ("x", cells) => TimesConstraint(value, cells)
+              case ("/", Seq(cell1, cell2)) => DivideConstraint(value, cell1, cell2)
+              case (null, Seq(cell)) => SpecifiedConstraint(value, cell)
+              case _ => throw new IllegalArgumentException("Invalid cage " + label + "=" + value + "" + op)
+            }
+        }
+        Puzzle(n, Set() ++ cageConstraints)
+    }
+
+    def puzzles: Parser[List[Puzzle]] = repsep(puzzle, rep1(eol)) <~ opt(rep(eol))
+
+    implicit def parsePuzzlesString(s: String) = parseAll(puzzles, s)
+
+    implicit def parsePuzzlesFile(r: Reader[Char]) = parseAll(puzzles, r)
+  }
+
   /**
    * Create a puzzle from a string representation.
    *
@@ -77,5 +152,16 @@ object Puzzle {
    * @param s string representation
    * @return KenKen puzzle
    */
-  def apply(s: String): Puzzle = StringRepresentation.parsePuzzle(s)
+  def apply(s: String): Puzzle = PuzzleParser.parseAll(PuzzleParser.puzzle, s) match {
+    case PuzzleParser.Success(a, _) => a
+    case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
+
+  /**
+   * Read a set of KenKen puzzles from a file or string
+   */
+  def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[Puzzle]]) = r match {
+    case PuzzleParser.Success(a, _) => a
+    case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
 }
