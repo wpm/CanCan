@@ -62,7 +62,9 @@ case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
   override def toString = {
     val delimiter = if (n < 10) "" else ","
     StringRepresentation.tableToString(for (row <- (1 to n)) yield {
-      for (col <- 1 to n) yield g(Cell(row, col)).toSeq.sorted.mkString(delimiter)
+      for (col <- 1 to n; values = g(row, col)) yield {
+        if (values.isEmpty) "." else values.toSeq.sorted.mkString(delimiter)
+      }
     })
   }
 }

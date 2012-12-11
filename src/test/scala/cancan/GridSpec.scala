@@ -48,7 +48,7 @@ class GridSpec extends FlatSpec {
     val g = Grid(g2x2)
     expect(Grid( """12  2
                    |12 12""".stripMargin)) {
-      g((2,1)) = Set(1,2)
+      g((2, 1)) = Set(1, 2)
     }
   }
 
@@ -61,6 +61,13 @@ class GridSpec extends FlatSpec {
   it should "have unsolved cells (1,1) and (2,2)" in {
     expect(Map(Cell(1, 1) -> Set(1, 2), Cell(2, 2) -> Set(1, 2))) {
       Grid(g2x2).unsolved
+    }
+  }
+
+  "A period" should "represent an empty cell" in {
+    expect(Set.empty) {
+      Grid( """1 2
+              |. 1""".stripMargin)(2, 1)
     }
   }
 

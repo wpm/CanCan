@@ -20,7 +20,10 @@ object StringRepresentation {
 
   object GridParser extends BaseParser {
     // 12
-    def cell: Parser[Set[Int]] = """\d+""".r ^^ (s => Set() ++ (s.toList.map(_.toString.toInt)))
+    def cell: Parser[Set[Int]] = """\d+|\.""".r ^^ (ss => Set() ++ (ss match {
+      case "." => Set.empty[Int]
+      case s => s.toList.map(_.toString.toInt)
+    }))
 
     // 12 12
     def row: Parser[List[Set[Int]]] = opt(inLineWhitespace) ~> rep1sep(cell, inLineWhitespace) <~ lineDelimiter
