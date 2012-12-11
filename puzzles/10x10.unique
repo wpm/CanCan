@@ -1,0 +1,11 @@
+a=28x b=16+ ba=2 bb=42x bc=19+ bd=5 be=20x bf=7x bg=5- bh=540x bi=72x bj=13+ bk=300x bl=4 c=42x d=180x e=19+ f=5- g=8 h=18+ i=450x j=13+ k=54x l=15+ m=300x n=14+ o=112x p=15+ q=150x r=16x s=64x t=7 u=18+ v=72x w=20+ x=16+ y=5- z=18+
+ a  b  b  c  c  d  d  e  e  f
+ a  b  g  c  h  d  i  j  e  f
+ a  k  k  h  h  i  i  j  l  l
+ m  k  n  n  o  o  o  j  p  l
+ m  q  n  r  r  s  t  p  p  u
+ m  q  q  v  r  s  s  w  x  u
+ y  y  v  v  z  z  w  w  x  u
+ba bb bc bc bd  z be be  x bf
+bg bb bb bc bh bh be bi bj bf
+bg bk bk bk bh bl bi bi bj bj
