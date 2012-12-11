@@ -39,6 +39,10 @@ object StringRepresentation {
     // 123 123 123
     // 123 123 123
     def grids: Parser[List[Grid]] = repsep(grid, rep1(eol)) <~ opt(rep(eol))
+
+    implicit def parseGridsString(s: String) = parseAll(grids, s)
+
+    implicit def parseGridsFile(r: Reader[Char]) = parseAll(grids, r)
   }
 
   object PuzzleParser extends BaseParser {
@@ -128,6 +132,14 @@ object StringRepresentation {
   def parsePuzzles(implicit r: PuzzleParser.ParseResult[List[Puzzle]]) = r match {
     case PuzzleParser.Success(a, _) => a
     case e: PuzzleParser.Failure => throw new IllegalArgumentException(e.toString())
+  }
+
+  /**
+   * Read a set of grids from a file or string
+   */
+  def parseGrids(implicit r: GridParser.ParseResult[List[Grid]]) = r match {
+    case GridParser.Success(a, _) => a
+    case e: GridParser.Failure => throw new IllegalArgumentException(e.toString())
   }
 
   /**
