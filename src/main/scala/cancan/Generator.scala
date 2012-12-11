@@ -288,7 +288,7 @@ object Generator {
     var puzzles = for (_ <- (1 to numPuzzles).toStream)
     yield if (unique) uniqueRandomPuzzle(n, cageSize) else randomPuzzle(n, cageSize)
     for (((puzzle, solution), i) <- puzzles.zipWithIndex)
-      println("# " + (i + 1) + ".\n" + puzzle + "\n" + tableToString(solution), "# ") + "\n"
+      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend(tableToString(solution), "# ") + "\n")
     println("\n" + prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
   }
 }
