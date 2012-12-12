@@ -27,65 +27,22 @@ object Generator {
   /**
    * Generate a random puzzle and its unique solution.
    *
-   * Ensure uniqueness by finding all solutions of the generated puzzle. If there is more than one, randomly change the
-   * cage layout for all the cells that are not in cages that have the same values in all the solutions. Keep doing
-   * this until we have a puzzle with a unique solution.
+   * Continually generate puzzles until we find one with a unique solution.
    *
    * @param n puzzle size
    * @param cageSize distribution from which to sample cage sizes
+   * @param maxSearch maximum number of partial solutions to explore before trying another puzzle
    * @return (solution, puzzle) tuple
    */
   def uniqueRandomPuzzle(n: Int,
                          cageSize: Multinomial = defaultCageSizeDistribution,
                          maxSearch: Int = defaultMaxSearch): (Puzzle, Seq[Seq[Int]]) = {
-
-    // Here are two algorithms to ensure that a puzzle has a unique solution. quickMakeUnique simply abandons puzzles
-    // that have more than one solution. makeUnique recursively calls itself with an ambiguous puzzle, retaining the
-    // cages that contained the same values across the solutions.
-    def quickMakeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
-      val (ss, complete) = cappedSolutions(puzzle, maxSearch)
-      if (complete && ss.take(2).size == 1) Some(puzzle) else None
-    }
-
-    @tailrec
-    def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
-      val (ss, complete) = cappedSolutions(puzzle, maxSearch)
-      val firstTwo = ss.take(2)
-      (firstTwo, complete) match {
-        // Unable to find this puzzle's solutions: abandon it.
-        case (Stream.Empty, _) => None
-        // This puzzle has a unique solution.
-        case (grids, true) if (grids.size == 1) => Some(puzzle)
-        // This puzzle has multiple solutions.
-        case (grids, _) => {
-          // Partition cages into those whose values are equal across all the solutions and those who are not.
-          val (equal, unequal) = puzzle.cageConstraints.partition {
-            _.cells.forall(cell => grids.forall(grid => grid(cell) == grids.head(cell)))
-          }
-          // Generate a new layout for the cells in the unequal cages. Skew the distribution of cage sizes towards the
-          // largest allowed size.
-          val unequalCells = unequal.flatMap(_.cells).toList
-          val cages = randomCageLayout(unequalCells, Multinomial((1.0 :: List.fill(cageSize.max)(0.0)).reverse: _*))
-          val constraints = cages.map(cage => randomCageConstraint(solution, cage.toList))
-          // Create a puzzle with the equal cages and the new cages.
-          //                    println("Cages " + unequal + ", Cells " + unequalCells.size + "\n")
-          makeUnique(Puzzle(puzzle.n, equal ++ constraints), solution)
-        }
-      }
-    }
-    require(n > 1, "Invalid puzzle size " + n)
-    val (puzzle, solution) = Iterator.continually {
+    val (puzzle, solution, _) = Iterator.continually {
       val (puzzle, solution) = randomPuzzle(n, cageSize)
-      (makeUnique(puzzle, solution), solution)
-    }.find {
-      // Generate another puzzle if...
-      _ match {
-        case (None, _) => false // ...we can't find all the solutions for this one.
-        case (Some(p), s) if (specifiedCells(n, p.cageConstraints.map(_.cells))) => true
-        case _ => false // ...this one has too many specified constraints.
-      }
-    }.get
-    (puzzle.get, solution)
+      val (ss, complete) = cappedSolutions(puzzle, maxSearch)
+      (puzzle, solution, complete && ss.take(2).size == 1)
+    }.find(_._3).get
+    (puzzle, solution)
   }
 
   /**
