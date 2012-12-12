@@ -1,0 +1,196 @@
+# 1.
+a=2- b=3- ba=2/ bb=2- bc=2- bd=2- be=3/ bf=15+ bg=3- bh=5 c=5- d=2- e=10+ f=8/ g=2- h=5- i=2- j=14x k=3- l=8x m=3- n=4 o=3- p=3- q=7- r=3 s=11+ t=5- u=1- v=3- w=4- x=3 y=3- z=2-
+ a  b  b  c  d  d  e  e
+ a  f  f  c  g  g  h  h
+ i  j  j  k  l  l  m  m
+ i  n  o  k  p  q  q  r
+ s  t  o  u  p  v  v  w
+ s  t  x  u  y  y  z  w
+ba bb bc bd bd be  z bf
+ba bb bc bg bg be bh bf
+# 7 2 5 8 1 3 6 4
+# 5 8 1 3 6 4 7 2
+# 4 7 2 5 8 1 3 6
+# 6 4 7 2 5 8 1 3
+# 3 6 4 7 2 5 8 1
+# 8 1 3 6 4 7 2 5
+# 2 5 8 1 3 6 4 7
+# 1 3 6 4 7 2 5 8
+
+# 2.
+a=48x b=210x c=48x d=16+ e=10+ f=15x g=16+ h=64x i=2/ j=28x k=7+ l=30x m=11+ n=6 o=40x p=168x q=42x r=48x s=28x t=14+ u=2/ v=13+ w=28x x=2
+a a b b c d d e
+a f b g c c d e
+f f h g g i i e
+j h h k l m m n
+j o k k l l m p
+o o q q r s s p
+t t q u r s v p
+t w w u r v v x
+# 3 2 6 7 4 8 1 5
+# 8 1 5 3 2 6 7 4
+# 5 3 2 6 7 4 8 1
+# 7 4 8 1 5 3 2 6
+# 4 8 1 5 3 2 6 7
+# 1 5 3 2 6 7 4 8
+# 2 6 7 4 8 1 5 3
+# 6 7 4 8 1 5 3 2
+
+# 3.
+a=3- b=21x ba=3- bb=1- bc=11+ bd=4- be=6/ bf=9+ bg=1- bh=1- c=1- d=3/ e=6 f=9+ g=8 h=4- i=1 j=5+ k=5- l=8x m=1- n=2/ o=10+ p=1- q=3- r=56x s=4+ t=12x u=24x v=20x w=7 x=9+ y=2/ z=1-
+ a  a  b  b  c  d  e  f
+ g  h  h  i  c  d  j  f
+ k  l  m  n  o  o  j  p
+ k  l  m  n  q  q  r  p
+ s  s  t  t  u  v  r  w
+ x  y  z  z  u  v ba ba
+ x  y bb bb bc bd bd be
+bf bf bg bg bc bh bh be
+# 5 8 7 3 1 2 6 4
+# 8 7 3 1 2 6 4 5
+# 6 4 5 8 7 3 1 2
+# 1 2 6 4 5 8 7 3
+# 3 1 2 6 4 5 8 7
+# 7 3 1 2 6 4 5 8
+# 2 6 4 5 8 7 3 1
+# 4 5 8 7 3 1 2 6
+
+# 4.
+a=3- b=16+ c=17+ d=9+ e=17+ f=84x g=14+ h=17+ i=9+ j=7+ k=7 l=48x m=2x n=2 o=19+ p=18+ q=14+ r=4+ s=240x t=90x u=4 v=10+ w=12x x=112x y=30x
+a b b c d e e e
+a b c c d f f g
+h h i j d f g g
+k h i j l l m n
+o o o p l m m q
+r r p p s s t q
+u r v v s t t q
+w w v x x x y y
+# 5 6 3 4 1 2 7 8
+# 2 7 8 5 6 3 4 1
+# 6 3 4 1 2 7 8 5
+# 7 8 5 6 3 4 1 2
+# 8 5 6 3 4 1 2 7
+# 1 2 7 8 5 6 3 4
+# 4 1 2 7 8 5 6 3
+# 3 4 1 2 7 8 5 6
+
+# 5.
+a=5- b=4 ba=10x bb=2- bc=7/ bd=6/ be=24x bf=3- bg=8 bh=4 c=5- d=4- e=1- f=5- g=2- h=5 i=5- j=18x k=14+ l=8x m=2- n=5/ o=7/ p=24x q=2/ r=6+ s=9+ t=9+ u=1- v=2- w=6+ x=2- y=2- z=5+
+ a  a  b  c  d  e  f  f
+ g  g  h  c  d  e  i  i
+ j  j  k  l  l  m  m  n
+ o  o  k  p  q  r  r  n
+ s  t  t  p  q  u  v  v
+ s  w  w  x  x  u  y  z
+ba bb bc bd be be  y  z
+ba bb bc bd bf bf bg bh
+# 3 8 4 2 5 7 1 6
+# 4 2 5 7 1 6 3 8
+# 6 3 8 4 2 5 7 1
+# 7 1 6 3 8 4 2 5
+# 1 6 3 8 4 2 5 7
+# 8 4 2 5 7 1 6 3
+# 5 7 1 6 3 8 4 2
+# 2 5 7 1 6 3 8 4
+
+# 6.
+a=1 b=9+ c=96x d=5040x e=4 f=12+ g=7+ h=13+ i=29+ j=14+ k=5+ l=630x m=72x n=23+ o=300x p=8+ q=196x r=1- s=8 t=19+ u=4/ v=2
+a b b c c d d e
+f g g c c d d d
+f f h h i i i j
+k k h l i m j j
+n n h l l m m j
+n n o l p m q q
+r o o o p q q s
+r t t t p u u v
+# 1 2 7 8 6 5 3 4
+# 5 3 4 1 2 7 8 6
+# 3 4 1 2 7 8 6 5
+# 4 1 2 7 8 6 5 3
+# 2 7 8 6 5 3 4 1
+# 8 6 5 3 4 1 2 7
+# 6 5 3 4 1 2 7 8
+# 7 8 6 5 3 4 1 2
+
+# 7.
+a=12+ b=21+ c=1 d=168x e=3- f=9+ g=48x h=48x i=16+ j=75x k=12+ l=56x m=11+ n=3- o=56x p=12+ q=21+ r=21x s=15x t=10+ u=8 v=96x w=3- x=4 y=7
+a b b b c d e e
+a a f f g d d h
+i i f j g g k h
+i l m j j k k h
+n l m m o o o p
+n l q q r s s p
+t u q r r s v p
+t t w w x v v y
+# 4 6 8 7 1 3 5 2
+# 3 5 2 4 6 8 7 1
+# 7 1 3 5 2 4 6 8
+# 8 7 1 3 5 2 4 6
+# 5 2 4 6 8 7 1 3
+# 2 4 6 8 7 1 3 5
+# 6 8 7 1 3 5 2 4
+# 1 3 5 2 4 6 8 7
+
+# 8.
+a=35x b=8+ c=24x d=96x e=6 f=8 g=17+ h=336x i=20x j=6x k=192x l=210x m=7/ n=5+ o=10+ p=6x q=13+ r=18x s=96x t=20+ u=19+ v=14+ w=2- x=5+ y=3
+a a b c c d d e
+a b b c f d g g
+h i i j j k k g
+h l i m m k n n
+h l l o o p p q
+r r s t o u p q
+v r s t t u u q
+v v s w w x x y
+# 5 7 1 4 3 2 8 6
+# 1 4 3 2 8 6 5 7
+# 7 1 4 3 2 8 6 5
+# 8 6 5 7 1 4 3 2
+# 6 5 7 1 4 3 2 8
+# 3 2 8 6 5 7 1 4
+# 4 3 2 8 6 5 7 1
+# 2 8 6 5 7 1 4 3
+
+# 9.
+a=14+ b=24x c=12+ d=280x e=12+ f=48x g=30x h=6 i=5 j=6+ k=19+ l=36x m=12x n=16+ o=19+ p=14x q=12x r=12+ s=280x t=6 u=11+ v=8 w=8+ x=5+ y=4/ z=13+
+a a b b c c d d
+e e b f c g d h
+e i f f g g j j
+k k l l m n j o
+k p l m m n n o
+q p r s t u u o
+q p r s v u w x
+q y y s z z w x
+# 8 6 2 3 4 1 7 5
+# 2 3 4 1 7 5 8 6
+# 7 5 8 6 2 3 4 1
+# 5 8 6 2 3 4 1 7
+# 6 2 3 4 1 7 5 8
+# 1 7 5 8 6 2 3 4
+# 4 1 7 5 8 6 2 3
+# 3 4 1 7 5 8 6 2
+
+# 10.
+a=9+ b=192x ba=12+ c=210x d=1- e=3+ f=7+ g=23+ h=12+ i=15+ j=24x k=8 l=30x m=10+ n=2- o=96x p=12+ q=3 r=5- s=96x t=3 u=140x v=3 w=8+ x=8+ y=8/ z=2-
+ a  b  b  b  c  c  d  d
+ a  e  e  f  c  g  g  h
+ a  i  f  f  j  j  g  h
+ k  i  i  l  l  j  m  n
+ o  o  p  l  q  r  m  n
+ o  p  p  s  s  r  m  t
+ u  u  v  s  w  w  x  y
+ u  z  z ba ba  w  x  y
+# 1 4 6 8 7 5 3 2
+# 3 2 1 4 6 8 7 5
+# 5 3 2 1 4 6 8 7
+# 8 7 5 3 2 1 4 6
+# 6 8 7 5 3 2 1 4
+# 2 1 4 6 8 7 5 3
+# 7 5 3 2 1 4 6 8
+# 4 6 8 7 5 3 2 1
+
+
+# 1:0.130
+# 2:0.460
+# 3:0.373
+# 4:0.033
+# 5:0.004
