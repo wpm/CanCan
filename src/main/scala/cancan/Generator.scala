@@ -22,7 +22,7 @@ object Generator {
   /**
    * Maximum number of partial solutions before abandoning a generated grid
    */
-  private val maxSearch = 1000
+  private val defaultMaxSearch = 1000
   /**
    * Number of non-unique solutions to generate before redrawing the cages
    */
@@ -39,7 +39,9 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
    */
-  def uniqueRandomPuzzle(n: Int, cageSize: Multinomial = defaultCageSizeDistribution): (Puzzle, Seq[Seq[Int]]) = {
+  def uniqueRandomPuzzle(n: Int,
+                         cageSize: Multinomial = defaultCageSizeDistribution,
+                         maxSearch: Int = defaultMaxSearch): (Puzzle, Seq[Seq[Int]]) = {
     @tailrec
     def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]], hint: Option[Grid] = None): Option[Puzzle] = {
       cappedSolutions(puzzle, maxSearch, hint) match {
@@ -261,11 +263,12 @@ object Generator {
       |    size - the size of the puzzle
       |
       |    -n - generate puzzles that may have non-unique solutions
+      |    -m - maximum partial solutions to search when looking for unique solutions
       |
       |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
 
   def generate(args: Array[String]) {
-    def parseCommandLine(args: Array[String]): (Int, Int, Boolean) = {
+    def parseCommandLine(args: Array[String]): (Int, Int, Boolean, Int) = {
       @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
@@ -273,6 +276,8 @@ object Generator {
         args match {
           case Nil => (positional.reverse, option)
           case "-n" :: tail => parseCommandLineRec(tail, positional, option + ('nonUnique -> ""))
+          case "-m" :: m :: tail if (m.matches( """\d+""")) =>
+            parseCommandLineRec(tail, positional, option + ('maxSearch -> m))
           case "-h" :: tail => Dispatcher.error(usage)
           case s :: tail if (s(0) == '-') => Dispatcher.error("Invalid switch " + s)
           case arg :: tail if (arg.matches( """\d+""")) => parseCommandLineRec(tail, arg :: positional, option)
@@ -281,16 +286,20 @@ object Generator {
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
       Dispatcher.errorIf(positional.size != 2, "Invalid number of arguments")
-      (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique))
+      val maxSearch = option.get('maxSearch) match {
+        case Some(s) => s.toInt
+        case None => defaultMaxSearch
+      }
+      (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique), maxSearch)
     }
 
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
-    val (numPuzzles, n, unique) = parseCommandLine(args)
+    val (numPuzzles, n, unique, maxSearch) = parseCommandLine(args)
     val cageSize = defaultCageSizeDistribution
 
     var puzzles = for (_ <- (1 to numPuzzles).toStream)
-    yield if (unique) uniqueRandomPuzzle(n, cageSize) else randomPuzzle(n, cageSize)
+    yield if (unique) uniqueRandomPuzzle(n, cageSize, maxSearch) else randomPuzzle(n, cageSize)
     for (((puzzle, solution), i) <- puzzles.zipWithIndex)
       println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend(tableToString(solution), "# ") + "\n")
     println("\n" + prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
