@@ -43,8 +43,8 @@ object Generator {
                          cageSize: Multinomial = defaultCageSizeDistribution,
                          maxSearch: Int = defaultMaxSearch): (Puzzle, Seq[Seq[Int]]) = {
     @tailrec
-    def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]], hint: Option[Grid] = None): Option[Puzzle] = {
-      cappedSolutions(puzzle, maxSearch, hint) match {
+    def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
+      cappedSolutions(puzzle, maxSearch) match {
         case (Stream.Empty, _) => None // Unable to find this puzzle's solutions: abandon it.
         case (grids, true) if (grids.size == 1) => Some(puzzle) // This puzzle has a unique solution.
         case (grids, _) => {
@@ -57,12 +57,9 @@ object Generator {
           val unequalCells = unequal.flatMap(_.cells).toList
           val cages = randomCageLayout(unequalCells, Multinomial((1.0 :: List.fill(cageSize.max)(0.0)).reverse: _*))
           val constraints = cages.map(cage => randomCageConstraint(solution, cage.toList))
-          // Use the values in the equal cells as the solution hint.
-          val equalCells = equal.flatMap(_.cells).toList
-          val hint = Grid(n) ++ equalCells.map(cell => (cell -> Set(solution(cell.row - 1)(cell.col - 1))))
           // Create a puzzle with the equal cages and the new cages.
-          //          println("Cages " + unequal + ", Cells " + unequalCells.size + "\n" + hint + "\n")
-          makeUnique(Puzzle(puzzle.n, equal ++ constraints), solution, Some(hint))
+          //                    println("Cages " + unequal + ", Cells " + unequalCells.size + "\n")
+          makeUnique(Puzzle(puzzle.n, equal ++ constraints), solution)
         }
       }
     }
