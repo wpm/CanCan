@@ -21,7 +21,7 @@ abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
     def search(grid: Grid, strategy: ConstraintStrategy): TraversableView[Grid, Traversable[_]] = {
       def nextGrids(grid: Grid): TraversableView[Grid, Traversable[_]] = {
         for {cell <- guessCell(grid, puzzle).toTraversable.view
-             value <- grid(cell).par
+             value <- grid(cell).toSeq.sorted.par
              next <- strategy(grid + (cell -> Set(value)), strategy.constraintMap(cell))}
         yield next
       }
