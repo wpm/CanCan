@@ -8,16 +8,15 @@ import collection.TraversableView
  * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
  */
 abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
-  extends ((Puzzle, Option[Grid]) => TraversableView[Grid, Traversable[_]]) {
+  extends (Puzzle => TraversableView[Grid, Traversable[_]]) {
 
   /**
    * Lazily enumerate all possible solutions to a puzzle.
    *
    * @param puzzle the puzzle to solve
-   * @param hint a grid to start from, or a maximally ambiguous grid if `None` is specified
    * @return view of all possible solutions to a puzzle
    */
-  def apply(puzzle: Puzzle, hint: Option[Grid] = None): TraversableView[Grid, Traversable[_]] = {
+  def apply(puzzle: Puzzle): TraversableView[Grid, Traversable[_]] = {
     def search(grid: Grid, strategy: ConstraintStrategy): TraversableView[Grid, Traversable[_]] = {
       def nextGrids(grid: Grid): TraversableView[Grid, Traversable[_]] = {
         for {cell <- guessCell(grid, puzzle).toTraversable.view
@@ -29,9 +28,8 @@ abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
       Traversable(grid).view ++ nextGrids(grid).flatMap(g => search(g, strategy))
     }
 
-    var init = if (hint == None) Grid(puzzle.n) else hint.get
     var strategy = strategyFactory(puzzle)
-    strategy(init, puzzle.cageConstraints) match {
+    strategy(Grid(puzzle.n), puzzle.cageConstraints) match {
       case Some(grid) => search(grid, strategy)
       case None => Traversable[Grid]().view
     }

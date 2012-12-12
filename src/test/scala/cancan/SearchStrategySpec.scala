@@ -135,18 +135,6 @@ class SearchStrategySpec extends FlatSpec {
     }
   }
 
-  it should "have solution\n" + kenken_6x6_solution + "\n when starting from a hint" in {
-    expect(List(Grid(kenken_6x6_solution))) {
-      val hint = Grid( """6 4 2 123456 3 1
-                         |3 1 123456 4 2 5
-                         |5 123456 1 6 4 2
-                         |1 6 4 2 5 123456
-                         |4 2 123456 3 1 6
-                         |2 123456 3 1 6 4""".stripMargin)
-      solutions(Puzzle(kenken_6x6_puzzle), Some(hint))
-    }
-  }
-
   it should "print as\n" + kenken_6x6_puzzle in {
     expect(kenken_6x6_puzzle) {
       Puzzle(kenken_6x6_puzzle).toString
