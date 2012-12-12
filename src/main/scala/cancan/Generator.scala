@@ -23,10 +23,6 @@ object Generator {
    * Maximum number of partial solutions before abandoning a generated grid
    */
   private val defaultMaxSearch = 1000
-  /**
-   * Number of non-unique solutions to generate before redrawing the cages
-   */
-  private val nonuniqueLookahead = 5
 
   /**
    * Generate a random puzzle and its unique solution.
@@ -44,13 +40,18 @@ object Generator {
                          maxSearch: Int = defaultMaxSearch): (Puzzle, Seq[Seq[Int]]) = {
     @tailrec
     def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
-      cappedSolutions(puzzle, maxSearch) match {
-        case (Stream.Empty, _) => None // Unable to find this puzzle's solutions: abandon it.
-        case (grids, true) if (grids.size == 1) => Some(puzzle) // This puzzle has a unique solution.
+      val (ss, complete) = cappedSolutions(puzzle, maxSearch)
+      val firstTwo = ss.take(2)
+      (firstTwo, complete) match {
+        // Unable to find this puzzle's solutions: abandon it.
+        case (Stream.Empty, _) => None
+        // This puzzle has a unique solution.
+        case (grids, true) if (grids.size == 1) => Some(puzzle)
+        // This puzzle has multiple solutions.
         case (grids, _) => {
           // Partition cages into those whose values are equal across all the solutions and those who are not.
           val (equal, unequal) = puzzle.cageConstraints.partition {
-            _.cells.forall(cell => grids.take(nonuniqueLookahead).tail.forall(grid => grid(cell) == grids.head(cell)))
+            _.cells.forall(cell => grids.forall(grid => grid(cell) == grids.head(cell)))
           }
           // Generate a new layout for the cells in the unequal cages. Skew the distribution of cage sizes towards the
           // largest allowed size.
