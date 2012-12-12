@@ -38,6 +38,15 @@ object Generator {
   def uniqueRandomPuzzle(n: Int,
                          cageSize: Multinomial = defaultCageSizeDistribution,
                          maxSearch: Int = defaultMaxSearch): (Puzzle, Seq[Seq[Int]]) = {
+
+    // Here are two algorithms to ensure that a puzzle has a unique solution. quickMakeUnique simply abandons puzzles
+    // that have more than one solution. makeUnique recursively calls itself with an ambiguous puzzle, retaining the
+    // cages that contained the same values across the solutions.
+    def quickMakeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
+      val (ss, complete) = cappedSolutions(puzzle, maxSearch)
+      if (complete && ss.take(2).size == 1) Some(puzzle) else None
+    }
+
     @tailrec
     def makeUnique(puzzle: Puzzle, solution: Seq[Seq[Int]]): Option[Puzzle] = {
       val (ss, complete) = cappedSolutions(puzzle, maxSearch)
