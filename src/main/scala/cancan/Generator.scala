@@ -337,7 +337,7 @@ object Generator {
         randomPuzzle(n, cageSize, specifiedProportion, associativeProbability)
     for (((puzzle, solution), i) <- puzzles.zipWithIndex)
       println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend(tableToString(solution), "# ") + "\n")
-    println("\n# Emperical cage size distribiution\n" +
+    println("\n# Empirical cage size distribiution\n" +
       prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
     println("\n# Cage size, Specified proportion, Associative probability")
     println("# %s, %.3f, %.3f".format(cageSize, specifiedProportion, associativeProbability))
