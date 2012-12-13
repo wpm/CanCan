@@ -64,7 +64,7 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
 case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
-      rowColumnConstraints((cells => Seq(LatinSquareConstraint(cells)))))
+      rowColumnConstraints((cells => Seq(AllDifferentConstraint(cells)))))
 }
 
 /**
@@ -89,7 +89,7 @@ case class PreemptiveSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(
-        LatinSquareConstraint(cells),
+        AllDifferentConstraint(cells),
         PreemptiveSetConstraint(cells),
         UniquenessConstraint(cells)
       ))))

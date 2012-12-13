@@ -5,6 +5,7 @@ import annotation.tailrec
 
 /**
  * Constraint on a region of cells in a grid
+ *
  * @param region region of cells in the grid
  */
 abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell, Set[Int])]]) {
@@ -12,6 +13,7 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
 
   /**
    * Apply the constraint to the grid
+   *
    * @return sequence of (cell, values) tuples for all changed cells or `None` if the constraint cannot be satisfied
    */
   override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = {
@@ -28,10 +30,13 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
 
   /**
    * Values in the cells
+   *
    * @param grid a grid
    * @return the values in the grid for this constraint's cells
    */
   protected def values(grid: Grid): Seq[Set[Int]] = cells.map(grid(_))
+
+  protected def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
 
   /**
    * Changes this constraint makes to a sequence of cell values
@@ -41,7 +46,15 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
    */
   protected def constrainedValues(values: Seq[Set[Int]]): Option[Seq[Set[Int]]] = None
 
-  override def toString() = cells.mkString(" ")
+  override def toString() = {
+    val (r, c) = (cells.head.row, cells.head.col)
+    if (cells.forall(_.row == r))
+      "Row " + r
+    else if (cells.forall(_.col == c)) {
+      "Col " + c
+    }
+    else cells.mkString(" ")
+  }
 }
 
 /**
@@ -69,23 +82,6 @@ case class PreemptiveSetConstraint(region: Seq[Cell]) extends Constraint(region)
 }
 
 /**
- * Constraint that applies to a row or column of a grid
- */
-abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region) {
-  protected def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
-
-  override def toString() = {
-    val (r, c) = (cells.head.row, cells.head.col)
-    if (cells.forall(_.row == r))
-      "Row " + r
-    else {
-      require(cells.forall(_.col == c), "Not a row or column constraint")
-      "Col " + c
-    }
-  }
-}
-
-/**
  * All solved cells in the region must be unique.
  *
  * This constraint does not change any values in the grid but can be violated.
@@ -94,7 +90,7 @@ abstract class RowColumnConstraint(region: Seq[Cell]) extends Constraint(region)
  *  - `[1 23 123] -> [1 23 123]`
  *  - `[1 23 1]   -> None`
  */
-case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
+case class AllDifferentConstraint(region: Seq[Cell]) extends Constraint(region) {
   private def isDistinct[T](s: Seq[T]) = s.size == s.distinct.size
 
   override protected def constrainedValues(values: Seq[Set[Int]]) =
@@ -112,7 +108,7 @@ case class LatinSquareConstraint(region: Seq[Cell]) extends RowColumnConstraint(
  *  - `[1 23 123] -> [1 23 23]`
  *  - `[1 1 123] -> None`
  */
-case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends RowColumnConstraint(region) {
+case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends Constraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     val cs = valueCounts(values).filter {
       case (s, c) => s.size <= c && c != n
@@ -143,7 +139,7 @@ case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends RowColumn
  *
  *  - `[12 23 23] -> [1 23 23]`
  */
-case class UniquenessConstraint(region: Seq[Cell]) extends RowColumnConstraint(region) {
+case class UniquenessConstraint(region: Seq[Cell]) extends Constraint(region) {
 
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
