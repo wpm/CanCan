@@ -218,20 +218,23 @@ object Generator {
     f.toList.map(t => (t._1, t._2 / d)).sorted.map(t => "%d:%.3f".format(t._1, t._2)).mkString("\n")
   }
 
-  private val usage =
-    """generate [-n] puzzles size
-      |
-      |Generate puzzles. By default generate puzzles with unique solutions.
-      |
-      |    puzzles - the number of puzzles to generate
-      |    size - the size of the puzzle
-      |
-      |    -n - generate puzzles that may have non-unique solutions
-      |    -m - maximum partial solutions to search when looking for unique solutions
-      |
-      |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
-
+  /**
+   * Generate a set of puzzles.
+   */
   def generate(args: Array[String]) {
+    val usage =
+      """generate [-n] puzzles size
+        |
+        |Generate puzzles. By default generate puzzles with unique solutions.
+        |
+        |    puzzles - the number of puzzles to generate
+        |    size - the size of the puzzle
+        |
+        |    -n - generate puzzles that may have non-unique solutions
+        |    -m - maximum partial solutions to search when looking for unique solutions
+        |
+        |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
+
     def parseCommandLine(args: Array[String]): (Int, Int, Boolean, Int) = {
       @tailrec
       def parseCommandLineRec(args: List[String],

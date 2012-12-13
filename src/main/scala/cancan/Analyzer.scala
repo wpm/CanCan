@@ -6,15 +6,18 @@ import annotation.tailrec
  * Program that counts the number of explored partial solutions for a set of puzzles.
  */
 object Analyzer {
-  private val usage =
-    """analyze [-l] file
-      |
-      |Count the number of partial solutions in a set of puzzles.
-      |
-      |    -l - use the Latin Square constraints without heuristics
-      |    -c - use the order by cage strategy""".stripMargin
-
+  /**
+   * Analyze a set of puzzles
+   */
   def analyze(args: Array[String]) {
+    val usage =
+      """analyze [-l] file
+        |
+        |Count the number of partial solutions in a set of puzzles.
+        |
+        |    -l - use the Latin Square constraints without heuristics
+        |    -c - use the order by cage strategy""".stripMargin
+
     def parseCommandLine(args: Array[String]): (String, SearchStrategy) = {
       def select(cageOrder: Boolean, latinSquare: Boolean): SearchStrategy = (cageOrder, latinSquare) match {
         case (true, true) => OrderByCellThenCage(LatinSquare(_))
