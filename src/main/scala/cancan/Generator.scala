@@ -341,5 +341,6 @@ object Generator {
       prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
     println("\n# Cage size, Specified proportion, Associative probability")
     println("# %s, %.3f, %.3f".format(cageSize, specifiedProportion, associativeProbability))
+    println(if (unique) "# Unique solutions, maximum search " + maxSearch else "# Non-unique solutions")
   }
 }
