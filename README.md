@@ -69,42 +69,14 @@ The `analyze` command is used to analyze the difficulty of a set of puzzles.
 
 In the build directory the `sbt run` command can also be used to run the program.
 
-The KenKen program is written in [Scala](http://www.scala-lang.org) and illustrates functional programming idioms.
-
-Puzzle Solving
---------------
-
-A brute force solution would simply try all possible solutions for a grid.
-This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial solutions to partial solutions containing where a candidate number has been removed from one of the cells.
-Vertices with no outgoing edges are possible solutions.
-
-A depth-first search of the graph starting from a completely unsolved grid will find all solutions.
-Since there are _n_<sup>_n_<sup>2</sup></sup> possible solutions, a completely exhaustive search is infeasible.
-However, at each guessed solution vertex CanCan applies all the constraints, then all the constraints that apply to any modified cells, and so on recursively.
-This process is called _constraint propagation_, and eliminates possible values from some grids while revealing others as inconsistent with the constraints.
-At each node it reduces the size of the search space to the point where an exhaustive search of the constrained graph is tractable.
-Each search iteration makes a guess about the _least ambiguous cell_, i.e. the one with the fewest candidate numbers.
-
-Puzzle Generation
------------------
-
-Puzzles are generated in the following way:
-
-1. A random Latin Square is generated.
-2. Contiguous cells in the grid are randomly grouped into cells.
-3. An operation is randomly assigned to each cell and the value is calculated.
-4. If the puzzle has multiple solutions, it is modified until it has only one.
-
-To generate the cells in step (2), find the connected components of a random sub-graph of a graph where every cell is adjacent to the ones with which it shares an edge.
-The sizes of the connected components range between one and four and no more than 10% of the cells will be specified constraints.
-In step (4) the cages that do not contain the same values across all solutions are randomly redrawn until a unique solution exists.
-
 References
 ----------
 
 KenKen is a cousin of [Sudoku](http://en.wikipedia.org/wiki/Sudoku), and the algorithm implemented here is based on Peter Norvig's [Sudoku solver](http://norvig.com/sudoku.html).
 
 Michael Heyeck has written a KenKen solver in Python called [neknek](http://www.mlsite.net/neknek).
-This package can write puzzles in the format recognized by neknek.
+CanCan can write puzzles in the format recognized by neknek.
 
-"The complexity of completing partial Latin squares" Charles Colbourn, Discrete Applied Mathematics, Volume 8, Issue 1, April 1984, Pages 25-30
+Charles Colbourn, "The complexity of completing partial Latin squares", *Discrete Applied Mathematics*, April 1984, Volume 8, Issue 1, pp. 25-30
+
+J.F. Cook, "A Pencil-and-Paper Algorithm for Solving Sudoku Puzzles", *Notices of the American Mathematical Society*, April 2009, Volume 56, Number 4, pp. 460-468

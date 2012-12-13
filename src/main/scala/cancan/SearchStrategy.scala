@@ -5,6 +5,22 @@ import collection.TraversableView
 /**
  * A strategy for enumerating all the possible solutions of a puzzle.
  *
+ * A brute force solution would simply try all possible solutions for a grid.
+ * This can be implemented as a search of a directed graph of partial solution grids where the edges point from partial
+ * solutions to partial solutions containing where a candidate number has been removed from one of the cells.
+ * Vertices with no outgoing edges are possible solutions.
+ *
+ * A depth-first search of the graph starting from a completely unsolved grid is infeasible.
+ * However, at each guessed solution vertex, CanCan applies all the constraints, then all the constraints that apply to
+ * any modified cells, and so on recursively.  This process is called ''constraint propagation'', and eliminates
+ * possible values from some grids while revealing others as inconsistent with the constraints.
+ * At each node it reduces the size of the search space to the point where an exhaustive search of the constrained
+ * graph is tractable.
+ *
+ * The basic algorithm may be customized by specifying a [[cancan.ConstraintStrategy]] and a search strategy. The former
+ * specifies a set of constraints to propagate. The latter specifies the rule by which to choose a cell to guess a value
+ * for.
+ *
  * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
  */
 abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
