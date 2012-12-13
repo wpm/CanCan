@@ -2,38 +2,40 @@ package cancan
 
 import annotation.tailrec
 import scala.util.Random._
+import util.parsing.combinator.RegexParsers
+import cancan.Generator.Multinomial.NumberListParser
 
 /**
  * Generator of random KenKen puzzles
  *
  * Puzzles are generated in the following way:
  *
- *     1. A random Latin Square is generated.
- *     2. Contiguous cells in the grid are randomly grouped into cells.
- *     3. An operation is randomly assigned to each cell and the value is calculated.
+ * 1. A random Latin Square is generated.
+ * 2. Contiguous cells in the grid are randomly grouped into cages.
+ * 3. An operation is randomly assigned to each cell and the value is calculated.
  *
- * To generate the cells in step (2), find the connected components of a random sub-graph of a graph where every cell
+ * To generate the cages in step (2), find the connected components of a random sub-graph of a graph where every cell
  * is adjacent to the ones with which it shares an edge. The sizes of the connected components range between one and
  * four and no more than 5% of the cells will be specified constraints. If necessary this procedure is repeated until
  * a unique solution is found.
  */
 object Generator {
   /**
-   * Probability of assigning an associative operator to a 2-cell cage
+   * Maximum number of partial solutions before abandoning a generated grid
    */
-  private val beta = 1 / 3.0
-  /**
-   * Percentage of cells that may be specified constraints
-   */
-  private val gamma = 0.05
+  private val defaultMaxSearch = 1000
   /**
    * Default distribution of cage sizes
    */
   private val defaultCageSizeDistribution = Multinomial(0, 0.07, 0.47, 0.46)
   /**
-   * Maximum number of partial solutions before abandoning a generated grid
+   * Portion of cells that may be specified constraints
    */
-  private val defaultMaxSearch = 1000
+  private val defaultSpecifiedProportion = 0.05
+  /**
+   * Probability of assigning an associative operator to a 2-cell cage
+   */
+  private val defaultAssociativeProbability = 1 / 3.0
 
   /**
    * Generate a random puzzle and its unique solution.
@@ -47,9 +49,11 @@ object Generator {
    */
   def uniqueRandomPuzzle(n: Int,
                          cageSize: Multinomial = defaultCageSizeDistribution,
-                         maxSearch: Int = defaultMaxSearch): (Puzzle, Seq[Seq[Int]]) = {
+                         maxSearch: Int = defaultMaxSearch,
+                         specifiedProportion: Double = defaultSpecifiedProportion,
+                         associativeProbability: Double = defaultAssociativeProbability): (Puzzle, Seq[Seq[Int]]) = {
     val (puzzle, solution, _) = Iterator.continually {
-      val (puzzle, solution) = randomPuzzle(n, cageSize)
+      val (puzzle, solution) = randomPuzzle(n, cageSize, associativeProbability)
       val (ss, complete) = cappedSolutions(puzzle, maxSearch)
       (puzzle, solution, complete && ss.take(2).size == 1)
     }.find(_._3).get
@@ -64,28 +68,34 @@ object Generator {
    * @param cageSize distribution from which to sample cage sizes
    * @return (solution, puzzle) tuple
    */
-  def randomPuzzle(n: Int, cageSize: Multinomial): (Puzzle, Seq[Seq[Int]]) = {
+  def randomPuzzle(n: Int,
+                   cageSize: Multinomial = defaultCageSizeDistribution,
+                   specifiedProportion: Double = defaultSpecifiedProportion,
+                   associativeProbability: Double = defaultAssociativeProbability): (Puzzle, Seq[Seq[Int]]) = {
     def puzzleFromLayout(solution: Seq[Seq[Int]], cages: Set[Set[Cell]]) =
     // Note that cage.toSeq returns an ArrayBuffer, which is a mutable object.
-      Puzzle(n, cages.map(cage => randomCageConstraint(solution, cage.toList)))
+      Puzzle(n, cages.map(cage => randomCageConstraint(solution, cage.toList, associativeProbability)))
 
     require(n > 1, "Invalid puzzle size " + n)
     // Generate a random Latin Square then keep generating cage layouts for it until we have one that meets our
     // criteria.
     val solution = randomLatinSquare(n)
     val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
-    val cages = Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(n, _)).get
+    val cages =
+      Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(n, _, specifiedProportion)).get
     (puzzleFromLayout(solution, cages), solution)
   }
 
   // Does the puzzle have less than the maximum number of specified cells?
-  private def specifiedCells(n: Int, cages: Set[_ <: Traversable[Cell]]): Boolean =
-    cages.filter(cage => cage.size == 1).size <= scala.math.ceil(n * n * gamma)
+  private def specifiedCells(n: Int, cages: Set[_ <: Traversable[Cell]], specifiedProportion: Double): Boolean =
+    cages.filter(cage => cage.size == 1).size <= scala.math.ceil(n * n * specifiedProportion)
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
    */
-  private def randomCageConstraint(solution: Seq[Seq[Int]], cage: Seq[Cell]): CageConstraint = {
+  private def randomCageConstraint(solution: Seq[Seq[Int]],
+                                   cage: Seq[Cell],
+                                   associativeProbability: Double): CageConstraint = {
     def randomAssociativeConstraint(values: Seq[Int]) = {
       nextInt(2) match {
         case 0 => PlusConstraint(values.sum, cage)
@@ -106,7 +116,9 @@ object Generator {
     }
     cage.size match {
       case 1 => SpecifiedConstraint(values.head, cage.head)
-      case 2 => if (nextDouble <= beta) randomAssociativeConstraint(values) else randomNonAssociativeConstraint(values)
+      case 2 => if (nextDouble <= associativeProbability)
+        randomAssociativeConstraint(values)
+      else randomNonAssociativeConstraint(values)
       case _ => randomAssociativeConstraint(values)
     }
   }
@@ -207,13 +219,31 @@ object Generator {
    * Discrete multinomial probability distribution over the support of the integers greater than zero.
    */
   case class Multinomial(ps: Double*) {
-    private val cdf = (1 to ps.size).map(ps.map(_ / ps.sum).slice(0, _).sum)
+    private val psNorm = ps.map(_ / ps.sum)
+    private val cdf = (1 to ps.size).map(psNorm.slice(0, _).sum)
 
     def sample() = cdf.indexWhere(_ > nextDouble) + 1
 
     def max: Int = cdf.size
 
-    override def toString = cdf.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString(" ")
+    override def toString =
+      psNorm.map("%.3f".format(_)).zipWithIndex.map(t => t._2 + ":" + t._1).mkString("[", ", ", "]")
+  }
+
+  object Multinomial {
+    def apply(s: String): Multinomial = Multinomial(s.split(",").map(_.toDouble): _*)
+
+    object NumberListParser extends RegexParsers {
+      def number: Parser[Double] = """\d+(\.\d*)?""".r ^^ (_.toDouble)
+
+      def numbers: Parser[List[Double]] = rep1sep(number, ",")
+
+      def matches(s: String): Boolean = parseAll(numbers, s) match {
+        case _: Success[_] => true
+        case _ => false
+      }
+    }
+
   }
 
   /**
@@ -243,10 +273,13 @@ object Generator {
         |
         |    -n - generate puzzles that may have non-unique solutions
         |    -m - maximum partial solutions to search when looking for unique solutions
+        |    -c ##[,##...] - cage size distribution default (0, 0.07, 0.47, 0.46)
+        |    -s ## - proportion of cells that may be specified (default 0.05)
+        |    -a ## - probability a 2-cell cage with be associative (default 1/3)
         |
         |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
 
-    def parseCommandLine(args: Array[String]): (Int, Int, Boolean, Int) = {
+    def parseCommandLine(args: Array[String]): (Int, Int, Boolean, Int, Multinomial, Double, Double) = {
       @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
@@ -256,6 +289,12 @@ object Generator {
           case "-n" :: tail => parseCommandLineRec(tail, positional, option + ('nonUnique -> ""))
           case "-m" :: m :: tail if (m.matches( """\d+""")) =>
             parseCommandLineRec(tail, positional, option + ('maxSearch -> m))
+          case "-c" :: m :: tail if (NumberListParser.matches(m)) =>
+            parseCommandLineRec(tail, positional, option + ('cageDistribution -> m))
+          case "-s" :: m :: tail if (m.matches( """0(\.\d*)?""")) =>
+            parseCommandLineRec(tail, positional, option + ('specified -> m))
+          case "-a" :: m :: tail if (m.matches( """0(\.\d*)?""")) =>
+            parseCommandLineRec(tail, positional, option + ('associative -> m))
           case "-h" :: tail => Dispatcher.error(usage)
           case s :: tail if (s(0) == '-') => Dispatcher.error("Invalid switch " + s)
           case arg :: tail if (arg.matches( """\d+""")) => parseCommandLineRec(tail, arg :: positional, option)
@@ -268,18 +307,39 @@ object Generator {
         case Some(s) => s.toInt
         case None => defaultMaxSearch
       }
-      (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique), maxSearch)
+      val cageSize = option.get('cageDistribution) match {
+        case Some(s) => Multinomial(s)
+        case None => defaultCageSizeDistribution
+      }
+      val associativeProbability = option.get('associative) match {
+        case Some(s) => s.toDouble
+        case None => defaultAssociativeProbability
+      }
+      val specifiedProportion = option.get('specified) match {
+        case Some(s) => s.toDouble
+        case None => defaultSpecifiedProportion
+      }
+      Dispatcher.errorIf(associativeProbability < 0 || associativeProbability > 1,
+        "Invalid associative probability " + associativeProbability)
+      (positional(0).toInt, positional(1).toInt, !option.contains('nonUnique), maxSearch,
+        cageSize, specifiedProportion, associativeProbability)
     }
 
     def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
 
-    val (numPuzzles, n, unique, maxSearch) = parseCommandLine(args)
-    val cageSize = defaultCageSizeDistribution
+    val (numPuzzles, n, unique, maxSearch, cageSize, specifiedProportion, associativeProbability) =
+      parseCommandLine(args)
 
     var puzzles = for (_ <- (1 to numPuzzles).toStream)
-    yield if (unique) uniqueRandomPuzzle(n, cageSize, maxSearch) else randomPuzzle(n, cageSize)
+    yield if (unique)
+        uniqueRandomPuzzle(n, cageSize, maxSearch, specifiedProportion, associativeProbability)
+      else
+        randomPuzzle(n, cageSize, specifiedProportion, associativeProbability)
     for (((puzzle, solution), i) <- puzzles.zipWithIndex)
       println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend(tableToString(solution), "# ") + "\n")
-    println("\n" + prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
+    println("\n# Emperical cage size distribiution\n" +
+      prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
+    println("\n# Cage size, Specified proportion, Associative probability")
+    println("# %s, %.3f, %.3f".format(cageSize, specifiedProportion, associativeProbability))
   }
 }
