@@ -59,7 +59,7 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
 
 /**
  * The preemptive set constraint as described in J.F. Cook, "A Pencil-and-Paper Algorithm for Solving Sudoku Puzzles",
- * Notices of the American Mathematical Society, April 2009, Volume 56, Number 4, pp. 460-468
+ * ''Notices of the American Mathematical Society'', April 2009, Volume 56, Number 4, pp. 460-468
  *
  * @param region region of cells in the grid
  */
