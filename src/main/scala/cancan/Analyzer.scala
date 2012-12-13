@@ -16,6 +16,13 @@ object Analyzer {
 
   def analyze(args: Array[String]) {
     def parseCommandLine(args: Array[String]): (String, SearchStrategy) = {
+      def select(cageOrder: Boolean, latinSquare: Boolean): SearchStrategy = (cageOrder, latinSquare) match {
+        case (true, true) => OrderByCellThenCage(LatinSquare(_))
+        case (true, false) => OrderByCellThenCage(PreemptiveSet(_))
+        case (false, true) => OrderByCellSize(LatinSquare(_))
+        case (false, false) => OrderByCellSize(PreemptiveSet(_))
+      }
+
       @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
@@ -31,7 +38,7 @@ object Analyzer {
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
       Dispatcher.errorIf(positional.size != 1, "Invalid number of arguments")
-      (positional.head, SearchStrategy.select(option.contains('cageOrder), option.contains('latinSquare)))
+      (positional.head, select(option.contains('cageOrder), option.contains('latinSquare)))
     }
 
     val (filename, searchStrategy) = parseCommandLine(args)

@@ -75,12 +75,3 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
       puzzle.containingCages.values.map(cage => Some(cage) -> (1 /: cage.cells.map(grid(_).size))(_ * _))
   }
 }
-
-object SearchStrategy {
-  def select(cageOrder: Boolean, latinSquare: Boolean): SearchStrategy = (cageOrder, latinSquare) match {
-    case (true, true) => OrderByCellThenCage(LatinSquare(_))
-    case (true, false) => OrderByCellThenCage(PreemptiveSet(_))
-    case (false, true) => OrderByCellSize(LatinSquare(_))
-    case (false, false) => OrderByCellSize(PreemptiveSet(_))
-  }
-}
