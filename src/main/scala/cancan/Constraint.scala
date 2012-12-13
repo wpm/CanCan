@@ -9,6 +9,9 @@ import annotation.tailrec
  * @param region region of cells in the grid
  */
 abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell, Set[Int])]]) {
+  /**
+   * The cells to which this constraint applies
+   */
   val cells = region.sorted
 
   /**
@@ -170,7 +173,7 @@ abstract class ArithmeticConstraint(value: Int, region: Seq[Cell]) extends CageC
    * @param values current cell values
    * @return lists of possible values to fill the cells
    */
-  def fills(values: Seq[Set[Int]]): Seq[Seq[Int]]
+  protected def fills(values: Seq[Set[Int]]): Seq[Seq[Int]]
 }
 
 /**
@@ -182,23 +185,24 @@ abstract class ArithmeticConstraint(value: Int, region: Seq[Cell]) extends CageC
 abstract class NonAssociativeConstraint(value: Int, cell1: Cell, cell2: Cell)
   extends ArithmeticConstraint(value, Seq(cell1, cell2)) {
 
-  def fills(values: Seq[Set[Int]]) =
+  override protected def fills(values: Seq[Set[Int]]) =
     (for (a <- values.head; b <- values.last; if satisfied(a, b) || satisfied(b, a)) yield Seq(a, b)).toSeq
 
   /**
    * Does this pair of numbers satisfy the constraint?
+   *
    * @param x a number in a cell
    * @param y a number in a cell
    * @return `true` if the combination satisfies the constraint
    */
-  def satisfied(x: Int, y: Int): Boolean
+  protected def satisfied(x: Int, y: Int): Boolean
 }
 
 /**
  * The difference of a pair of cells must equal a specified value.
  */
 case class MinusConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAssociativeConstraint(value, cell1, cell2) {
-  def satisfied(x: Int, y: Int) = x - y == value
+  override protected def satisfied(x: Int, y: Int) = x - y == value
 
   override protected val symbol = "-"
 }
@@ -207,7 +211,7 @@ case class MinusConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAsso
  * The quotient of a pair of cells must equal a specified value.
  */
 case class DivideConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAssociativeConstraint(value, cell1, cell2) {
-  def satisfied(x: Int, y: Int) = x % y == 0 && x / y == value
+  override protected def satisfied(x: Int, y: Int) = x % y == 0 && x / y == value
 
   override protected val symbol = "/"
 }
@@ -216,7 +220,7 @@ case class DivideConstraint(value: Int, cell1: Cell, cell2: Cell) extends NonAss
  * A set of cells whose values combine with an associative operator
  */
 abstract class AssociativeConstraint(value: Int, region: Seq[Cell]) extends ArithmeticConstraint(value, region) {
-  def fills(values: Seq[Set[Int]]) = cartesianMonoid(values)
+  override protected def fills(values: Seq[Set[Int]]) = cartesianMonoid(values)
 
   /**
    * Take the Cartesian product of a set of integers and select the elements whose combination on a monoid is equal
@@ -262,7 +266,7 @@ case class PlusConstraint(value: Int, region: Seq[Cell]) extends AssociativeCons
 /**
  * The product of the values in a set of cells must equal a specified value.
  */
-case class TimesConstraint(m: Int, cs: Seq[Cell]) extends AssociativeConstraint(m, cs) {
+case class TimesConstraint(value: Int, region: Seq[Cell]) extends AssociativeConstraint(value, region) {
   override protected def combine(x: Int, y: Int) = x * y
 
   override protected val identity = 1
