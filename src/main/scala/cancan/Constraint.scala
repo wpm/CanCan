@@ -148,7 +148,7 @@ case class UniquenessConstraint(region: Seq[Cell]) extends RowColumnConstraint(r
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
     Some(values.map {
       value =>
-        // Values only appearing in this cell.
+      // Values only appearing in this cell.
         val u = value -- (values.filter(y => !(y eq value)).reduceLeft(_ | _))
         u.size match {
           case 1 => u

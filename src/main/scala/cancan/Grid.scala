@@ -11,26 +11,27 @@ import scala.util.parsing.input.Reader
  * occupy that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1) is in the upper
  * left hand corner.
  */
-case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
+case class Grid private(n: Int, g: Vector[Vector[Set[Int]]]) {
   /**
    * Is this grid solved?
    *
    * A grid is solved if all its cells contain a single value.
    */
-  def isSolved: Boolean = g.values.forall(_.size == 1)
+  def isSolved: Boolean = g.flatten.forall(_.size == 1)
 
   /**
    * The unsolved cells in the grid
    * @return (cell, values) tuples where the number of values is greater than 1
    */
-  def unsolved = g.filter(_._2.size > 1)
+  def unsolved =
+    for (r <- (1 to n); c <- (1 to n); values = g(r - 1)(c - 1); if (values.size > 1)) yield (Cell(r, c), values)
 
   /**
    * Get the values in a cell
    * @param cell a cell in the grid
    * @return values in the cell
    */
-  def apply(implicit cell: Cell) = g(cell)
+  def apply(implicit cell: Cell) = g(cell.row - 1)(cell.col - 1)
 
   /**
    * Assign a value to a cell
@@ -41,30 +42,38 @@ case class Grid private(n: Int, g: Map[Cell, Set[Int]]) {
    * @param values values in the cell
    * @return updated grid
    */
-  def update(implicit cell: Cell, values: Set[Int]) = Grid(n, g.updated(cell, values))
+  def update(implicit cell: Cell, values: Set[Int]) =
+    Grid(n, setCellValues(g, cell, values))
 
   /**
    * Specify the values for a cell
    * @param kv cell/values pair
    * @return new grid with the cell values set
    */
-  def +(kv: (Cell, Set[Int])) = Grid(n, g + kv)
+  def +(kv: (Cell, Set[Int])) = this(kv._1) = kv._2
 
   /**
    * Specify the values for a set of cells
    * @param xs cell/values pairs
    * @return new grid with the cell values set
    */
-  def ++(xs: GenTraversableOnce[(Cell, Set[Int])]) = Grid(n, g ++ xs)
+  def ++(xs: GenTraversableOnce[(Cell, Set[Int])]) = {
+    Grid(n, (g /: xs) {
+      case (m, (cell, values)) => setCellValues(m, cell, values)
+    })
+  }
 
+  private def setCellValues(v: Vector[Vector[Set[Int]]], cell: Cell, values: Set[Int]): Vector[Vector[Set[Int]]] = {
+    v.updated(cell.row - 1, v(cell.row - 1).updated(cell.col - 1, values))
+  }
 
   /**
    * Grid of numbers, delimited with commas if some of the cells could contain numbers with multiple digits
    */
   override def toString = {
     val delimiter = if (n < 10) "" else ","
-    tableToString(for (row <- (1 to n)) yield {
-      for (col <- 1 to n; values = g(row, col)) yield {
+    tableToString(for (row <- (0 to n - 1)) yield {
+      for (col <- 0 to n - 1; values = g(row)(col)) yield {
         if (values.isEmpty) "." else values.toSeq.sorted.mkString(delimiter)
       }
     })
@@ -108,10 +117,7 @@ object Grid {
    * @param n grid dimension
    * @return maximally ambiguous grid
    */
-  def apply(n: Int) = {
-    val init = for (r <- (1 to n); c <- (1 to n)) yield Cell(r, c) -> Set((1 to n): _*)
-    new Grid(n, Map() ++ init)
-  }
+  def apply(n: Int) = new Grid(n, Vector.tabulate(n, n)((_, _) => Set[Int]((1 to n): _*)))
 
   /**
    * Create a grid from a square matrix of integer sets
@@ -121,8 +127,7 @@ object Grid {
   implicit def apply(matrix: Seq[Seq[Set[Int]]]): Grid = {
     val n = matrix.length
     require(matrix.tail.forall(_.length == n), tableToString(matrix) + "\nis not square.")
-    val init = for ((row, r) <- matrix.zipWithIndex; (item, c) <- row.zipWithIndex) yield (Cell(r + 1, c + 1) -> item)
-    new Grid(n, Map() ++ init)
+    new Grid(n, Vector() ++ matrix.map(Vector() ++ _))
   }
 
   /**
@@ -145,6 +150,7 @@ object Grid {
 
   /**
    * Create a grid from a square matrix of integers
+   *
    * @param matrix table of integers
    * @return corresponding grid
    */

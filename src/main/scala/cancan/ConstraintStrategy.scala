@@ -18,6 +18,7 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
 
   /**
    * Apply the specified constraints to a grid
+   *
    * @param grid the grid to constrain
    * @param constraints the constraints to apply
    * @return a constrained grid or `None` if the grid is inconsistent with the constraints

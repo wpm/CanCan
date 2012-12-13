@@ -9,7 +9,7 @@ class GridSpec extends FlatSpec {
   val g2x2 = """12  2
                | 1 12""".stripMargin
 
-  behavior of g2x2
+  behavior of "A Grid"
 
   it can "be created from string" in {
     val g = Grid(g2x2)
@@ -52,6 +52,29 @@ class GridSpec extends FlatSpec {
     }
   }
 
+  it should "support the + operator" in {
+    val g = Grid(g2x2)
+    expect(Grid( """12  2
+                   |12 12""".stripMargin)) {
+      g + (Cell(2, 1) -> Set(1, 2))
+    }
+  }
+
+  it should "support the ++ operator" in {
+    val g = Grid(g2x2)
+    expect(Grid( """12  2
+                   |12 2""".stripMargin)) {
+      g ++ List(Cell(2, 1) -> Set(1, 2), Cell(2, 2) -> Set(2))
+    }
+
+    expect(Grid( """1 23 1234 1234
+                   |12 1234 1234 1234
+                   |1234 1234 1234 1234
+                   |1234 1234 1234 1234""".stripMargin)) {
+      Grid(4) ++ List(Cell(1, 1) -> Set(1), Cell(1, 2) -> Set(2, 3), Cell(2, 1) -> Set(1, 2))
+    }
+  }
+
   it should "be printed as\n" + g2x2 in {
     expect(Grid(g2x2).toString) {
       g2x2
@@ -59,7 +82,7 @@ class GridSpec extends FlatSpec {
   }
 
   it should "have unsolved cells (1,1) and (2,2)" in {
-    expect(Map(Cell(1, 1) -> Set(1, 2), Cell(2, 2) -> Set(1, 2))) {
+    expect(Vector((Cell(1, 1), Set(1, 2)), (Cell(2, 2), Set(1, 2)))) {
       Grid(g2x2).unsolved
     }
   }
