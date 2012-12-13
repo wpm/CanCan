@@ -8,7 +8,7 @@ import org.scalatest.FlatSpec
 class ConstraintSpec extends FlatSpec {
   behavior of "A rank constraint"
 
-  def r5Fixture = PermutationSetConstraint(5, Grid.row(5)(1))
+  def r5Fixture = PreemptiveSetConstraint(Grid.row(5)(1))
 
   it should "handle a single solved cell" in {
     expect(Some(List(
@@ -50,17 +50,7 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  it should "detect an invalid configuration with multiple permutation sets" in {
-    expect(None) {
-      val g = Grid(
-        """12 12 34 34 1234
-          |12345 12345 12345 12345 12345
-          |12345 12345 12345 12345 12345
-          |12345 12345 12345 12345 12345
-          |12345 12345 12345 12345 12345""".stripMargin)
-      r5Fixture(g)
-    }
-  }
+  behavior of "An all-different constraint"
 
   it should "detect an invalid configuration with multiple solved cells" in {
     expect(None) {
@@ -70,7 +60,20 @@ class ConstraintSpec extends FlatSpec {
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345""".stripMargin)
-      r5Fixture(g)
+      AllDifferentConstraint(Grid.row(5)(1))(g)
+    }
+  }
+
+  it should "leave the row (23 5 6 4 3 2) unchanged" in {
+    expect(Some(Nil)) {
+      val g = Grid(
+        """23 5 6 4 3 2
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456""".stripMargin)
+      AllDifferentConstraint(Grid.row(6)(1))(g)
     }
   }
 
@@ -85,21 +88,6 @@ class ConstraintSpec extends FlatSpec {
       UniquenessConstraint(Seq(Cell(1, 2), Cell(2, 2), Cell(3, 2))).toString()
     }
   }
-
-  "A permutation set constraint on a row (23 5 6 4 3 2)" should "be inconsistent" in {
-    expect(None) {
-      val g = Grid(
-        """23 5 6 4 3 2
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456""".stripMargin)
-      val c = PermutationSetConstraint(6, Grid.row(6)(1))
-      c(g)
-    }
-  }
-
 
   behavior of "A x6 constraint on three cells"
   val times6 = TimesConstraint(6, List(Cell(1, 1), Cell(1, 2), Cell(2, 1)))

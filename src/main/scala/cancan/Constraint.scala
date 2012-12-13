@@ -100,41 +100,6 @@ case class AllDifferentConstraint(region: Seq[Cell]) extends Constraint(region) 
 }
 
 /**
- * A heuristic that implements the Latin Square rules by eliminating ''permutation sets'' from rows and columns.
- *
- * A permutation set is a set of ''m'' values that appears in exactly ''m'' cells in a row or column.
- *
- *  - `[12 1234 12] -> [12 34 12]`
- *  - `[1 23 123] -> [1 23 23]`
- *  - `[1 1 123] -> None`
- */
-case class PermutationSetConstraint(n: Int, region: Seq[Cell]) extends Constraint(region) {
-  override protected def constrainedValues(values: Seq[Set[Int]]) = {
-    val cs = valueCounts(values).filter {
-      case (s, c) => s.size <= c && c != n
-    }
-    if (cs.exists {
-      case (s, c) => s.size < c // e.g. 1 1 123
-    }) None
-    else {
-      val ps = cs.map(_._1)
-      val constrained = values.map(v => (v /: ps.filterNot(v == _))(_ -- _))
-      if (constrained.exists(_.isEmpty)) None else Some(constrained)
-    }
-  }
-
-  // Could keep a running tally of these counts in the Grid object so that they are only calculated as needed. However,
-  // profiling shows <5% of time spent inside this function, so it's probably not worth complicating the code.
-  def valueCounts(values: Seq[Set[Int]]): Map[Set[Int], Int] =
-    (Map[Set[Int], Int]().withDefaultValue(0) /: values) {
-      case (m, s) => m + (s -> (m(s) + 1))
-    }
-
-  override def toString() = "Permutation Set: " + super.toString
-}
-
-
-/**
  * If a value only appears in a single cell in the region, that cell is solved.
  *
  *  - `[12 23 23] -> [1 23 23]`

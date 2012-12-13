@@ -79,8 +79,8 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
 object SearchStrategy {
   def select(cageOrder: Boolean, latinSquare: Boolean): SearchStrategy = (cageOrder, latinSquare) match {
     case (true, true) => OrderByCellThenCage(LatinSquare(_))
-    case (true, false) => OrderByCellThenCage(PermutationSet(_))
+    case (true, false) => OrderByCellThenCage(PreemptiveSet(_))
     case (false, true) => OrderByCellSize(LatinSquare(_))
-    case (false, false) => OrderByCellSize(PermutationSet(_))
+    case (false, false) => OrderByCellSize(PreemptiveSet(_))
   }
 }
