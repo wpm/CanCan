@@ -3,9 +3,9 @@ package cancan
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[cancan.SearchStrategy]] object.
+ * Unit tests for the [[cancan.Puzzle]] object.
  */
-class SearchStrategySpec extends FlatSpec {
+class PuzzleSpec extends FlatSpec {
 
   val (ls_2x2_puzzle, ls_2x2_sol1, ls_2x2_sol2) = (
     """. .
