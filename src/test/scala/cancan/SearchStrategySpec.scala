@@ -30,6 +30,12 @@ class SearchStrategySpec extends FlatSpec {
     }
   }
 
+  it should "have an empty cage size distribution" in {
+    expect(Map[Int, Int]()) {
+      Puzzle(2).cageSizes
+    }
+  }
+
   val (kenken1_4x4_puzzle, kenken1_4x4_solution) = (
     """a=1- b=6+ c=5+ d=9+ e=5+ f=8+
       |a b b b
@@ -53,6 +59,12 @@ class SearchStrategySpec extends FlatSpec {
   it should "print as\n" + kenken1_4x4_puzzle in {
     expect(kenken1_4x4_puzzle) {
       Puzzle(kenken1_4x4_puzzle).toString
+    }
+  }
+
+  it should "have the size distribution 2->2 3->4" in {
+    expect(Map[Int, Int](2 -> 2, 3 -> 4)) {
+      Puzzle(kenken1_4x4_puzzle).cageSizes
     }
   }
 

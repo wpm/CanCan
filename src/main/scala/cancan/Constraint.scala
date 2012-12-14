@@ -14,6 +14,8 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
    */
   val cells = region.sorted
 
+  lazy val size = cells.size
+
   /**
    * Apply the constraint to the grid
    *

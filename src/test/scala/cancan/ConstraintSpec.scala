@@ -10,6 +10,12 @@ class ConstraintSpec extends FlatSpec {
 
   def r5Fixture = PreemptiveSetConstraint(Grid.row(5)(1))
 
+  it should "have a size equal to the puzzle dimension" in {
+    expect(5) {
+      r5Fixture.size
+    }
+  }
+
   it should "handle a single solved cell" in {
     expect(Some(List(
       (Cell(1, 2), Set(2, 3, 4, 5)),
@@ -91,6 +97,13 @@ class ConstraintSpec extends FlatSpec {
 
   behavior of "A x6 constraint on three cells"
   val times6 = TimesConstraint(6, List(Cell(1, 1), Cell(1, 2), Cell(2, 1)))
+
+  it should "have a size 3" in {
+    expect(3) {
+      times6.size
+    }
+  }
+
   it should "Constrain 1234 1234 1234 to 123 123 123" in {
     expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
       times6(Grid(4))
@@ -109,6 +122,13 @@ class ConstraintSpec extends FlatSpec {
 
   behavior of "A +5 constraint on three cells"
   val plus5 = PlusConstraint(5, List(Cell(1, 1), Cell(1, 2), Cell(2, 1)))
+
+  it should "have a size 3" in {
+    expect(3) {
+      times6.size
+    }
+  }
+
   it should "Constrain 1234 1234 1234 to 123 123 123" in {
     expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
       plus5(Grid(4))

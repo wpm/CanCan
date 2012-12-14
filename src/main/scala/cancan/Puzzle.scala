@@ -34,6 +34,17 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
   def isPossibleSolution(grid: Grid): Boolean = validator(grid) != None
 
   /**
+   * Distribution of cage sizes in the puzzle
+   *
+   * @return Map of cage size to the number of cages of that size
+   */
+  def cageSizes: Map[Int, Int] = (Map[Int, Int]().withDefaultValue(0) /: cageConstraints) {
+    case (m, c) =>
+      val s = c.size
+      m + (s -> (m(s) + 1))
+  }
+
+  /**
    * This is the inverse of `KenKen(s)`
    */
   override def toString = {
