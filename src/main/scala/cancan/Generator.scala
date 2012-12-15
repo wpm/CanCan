@@ -323,7 +323,7 @@ object Generator {
       Map() ++ (m1.keys ++ m2.keys).map(k => (k -> (m1.getOrElse(k, 0) + m2.getOrElse(k, 0))))
 
     def averagesTable(averages: Map[Int, Double]) =
-      (1 to averages.keys.max).map(i => "%d: %.3f".format(i, averages.getOrElse(i, 0.0))).mkString("\n")
+      (1 to averages.keys.max).map(i => "%d: %.5f".format(i, averages.getOrElse(i, 0.0))).mkString("\n")
 
     val (numPuzzles, n, unique, maxSearch, cageSize, specifiedProportion, associativeProbability) =
       parseCommandLine(args)
@@ -348,7 +348,7 @@ object Generator {
     println(prepend("# ", "Cage size, Single cell cage proportion, Associative probability\n%s, %.3f, %.3f".format(
       cageSize, specifiedProportion, associativeProbability)))
     println(prepend("# ", if (unique) "Unique solutions, maximum search " + maxSearch else "Non-unique solutions"))
-    println("# Average difficulty: %.3f".format(totalDifficulty / numPuzzles.toDouble))
+    println("# Average difficulty: %.1f".format(totalDifficulty / numPuzzles.toDouble))
     println(prepend("# ", "Cage Size Macro Average:\n" +
       averagesTable(Map() ++ macroCageSize.map(kv => (kv._1 -> kv._2 / totalCages.toDouble)))))
   }
