@@ -29,13 +29,13 @@ object Generator {
    */
   private val defaultCageSizeDistribution = Multinomial(0, 0.07, 0.47, 0.46)
   /**
-   * Portion of cells that may be specified constraints
+   * Portion of cages that may consist of a single cell
    */
-  private val defaultSpecifiedProportion = 0.05
+  private val defaultSpecifiedProportion = 0.1
   /**
    * Probability of assigning an associative operator to a 2-cell cage
    */
-  private val defaultAssociativeProbability = 1 / 3.0
+  private val defaultAssociativeProbability = 0.1
 
   /**
    * Generate a random puzzle and its unique solution.
@@ -53,7 +53,7 @@ object Generator {
                          specifiedProportion: Double = defaultSpecifiedProportion,
                          associativeProbability: Double = defaultAssociativeProbability): (Puzzle, Seq[Seq[Int]]) = {
     val (puzzle, solution, _) = Iterator.continually {
-      val (puzzle, solution) = randomPuzzle(n, cageSize, associativeProbability)
+      val (puzzle, solution) = randomPuzzle(n, cageSize, specifiedProportion, associativeProbability)
       val (ss, complete) = cappedSolutions(puzzle, maxSearch)
       (puzzle, solution, complete && ss.take(2).size == 1)
     }.find(_._3).get
@@ -82,13 +82,15 @@ object Generator {
     val solution = randomLatinSquare(n)
     val cells = for (x <- (1 to n); y <- (1 to n)) yield Cell(x, y)
     val cages =
-      Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(n, _, specifiedProportion)).get
+      Iterator.continually(randomCageLayout(cells, cageSize)).find(specifiedCells(_, specifiedProportion)).get
     (puzzleFromLayout(solution, cages), solution)
   }
 
-  // Does the puzzle have less than the maximum number of specified cells?
-  private def specifiedCells(n: Int, cages: Set[_ <: Traversable[Cell]], specifiedProportion: Double): Boolean =
-    cages.filter(cage => cage.size == 1).size <= scala.math.ceil(n * n * specifiedProportion)
+  // Does the puzzle have an acceptable number of single-cell constraints?
+  private def specifiedCells(cages: Set[_ <: Traversable[Cell]], specifiedProportion: Double): Boolean = {
+    val size1Cages = cages.filter(cage => cage.size == 1).size
+    size1Cages / cages.size.toDouble <= specifiedProportion
+  }
 
   /**
    * Generate a random cage constraint from a cage and a solution grid
@@ -247,19 +249,6 @@ object Generator {
   }
 
   /**
-   * Macro average of the cage size distribution in puzzles.
-   *
-   * @param puzzles set of puzzles
-   * @return table of cage size distribution across the puzzles
-   */
-  def empiricalCageSizeDistribution(puzzles: Traversable[Puzzle]) = {
-    val f = (Map[Int, Int]() /: puzzles.flatMap(_.cageConstraints).
-      map(_.cells.size))((m, v) => m + (v -> (m.getOrElse(v, 0) + 1)))
-    val d = f.values.sum.toDouble
-    f.toList.map(t => (t._1, t._2 / d)).sorted.map(t => "%d:%.3f".format(t._1, t._2)).mkString("\n")
-  }
-
-  /**
    * Generate a set of puzzles.
    */
   def generate(args: Array[String]) {
@@ -274,7 +263,7 @@ object Generator {
         |    -n - generate puzzles that may have non-unique solutions
         |    -m - maximum partial solutions to search when looking for unique solutions
         |    -c ##[,##...] - cage size distribution default (0, 0.07, 0.47, 0.46)
-        |    -s ## - proportion of cells that may be specified (default 0.05)
+        |    -s ## - proportion of cages that may be a single cell (default 0.1)
         |    -a ## - probability a 2-cell cage with be associative (default 1/3)
         |
         |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
@@ -325,22 +314,34 @@ object Generator {
         cageSize, specifiedProportion, associativeProbability)
     }
 
-    def prepend(s: String, prefix: String) = s.split("\n").map(prefix + _).mkString("\n")
+    def prepend(prefix: String, s: String) = s.split("\n").map(prefix + _).mkString("\n")
+
+    def mapSum(m1: Map[Int, Int], m2: Map[Int, Int]) =
+      Map() ++ (m1.keys ++ m2.keys).map(k => (k -> (m1.getOrElse(k, 0) + m2.getOrElse(k, 0))))
+
+    def averagesTable(averages: Map[Int, Double]) =
+      (1 to averages.keys.max).map(i => "%d: %.3f".format(i, averages.getOrElse(i, 0.0))).mkString("\n")
 
     val (numPuzzles, n, unique, maxSearch, cageSize, specifiedProportion, associativeProbability) =
       parseCommandLine(args)
 
-    var puzzles = for (_ <- (1 to numPuzzles).toStream)
+    val puzzles = for (_ <- (1 to numPuzzles).toStream)
     yield if (unique)
         uniqueRandomPuzzle(n, cageSize, maxSearch, specifiedProportion, associativeProbability)
       else
         randomPuzzle(n, cageSize, specifiedProportion, associativeProbability)
-    for (((puzzle, solution), i) <- puzzles.zipWithIndex)
-      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend(tableToString(solution), "# ") + "\n")
-    println("\n# Empirical cage size distribution\n" +
-      prepend(empiricalCageSizeDistribution(puzzles.map(_._1)), "# "))
-    println("\n# Cage size, Specified proportion, Associative probability")
-    println("# %s, %.3f, %.3f".format(cageSize, specifiedProportion, associativeProbability))
-    println(if (unique) "# Unique solutions, maximum search " + maxSearch else "# Non-unique solutions")
+
+    var macroCageSize = Map[Int, Int]()
+    var totalCages = 0
+    for (((puzzle, solution), i) <- puzzles.zipWithIndex) {
+      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend("# ", tableToString(solution)) + "\n")
+      macroCageSize = mapSum(macroCageSize, puzzle.cageSizes)
+      totalCages += puzzle.cageConstraints.size
+    }
+    println(prepend("# ", "Cage size, Specified proportion, Associative probability\n%s, %.3f, %.3f".format(
+      cageSize, specifiedProportion, associativeProbability)))
+    println(prepend("# ", if (unique) "Unique solutions, maximum search " + maxSearch else "Non-unique solutions"))
+    println(prepend("# ", "Cage Size Macro Average:\n" +
+      averagesTable(Map() ++ macroCageSize.map(kv => (kv._1 -> kv._2 / totalCages.toDouble)))))
   }
 }
