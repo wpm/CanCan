@@ -27,15 +27,15 @@ object Generator {
   /**
    * Default distribution of cage sizes
    */
-  private val defaultCageSizeDistribution = Multinomial(0, 0.07, 0.47, 0.46)
+  private val defaultCageSizeDistribution = Multinomial(0, 0.05, 0.35, 0.35, 0.2, 0.05)
   /**
    * Portion of cages that may consist of a single cell
    */
-  private val defaultSpecifiedProportion = 0.1
+  private val defaultSingleCellProportion = 0.1
   /**
    * Probability of assigning an associative operator to a 2-cell cage
    */
-  private val defaultAssociativeProbability = 0.1
+  private val defaultAssociativeProbability = 1 / 3.0
 
   /**
    * Generate a random puzzle and its unique solution.
@@ -50,7 +50,7 @@ object Generator {
   def uniqueRandomPuzzle(n: Int,
                          cageSize: Multinomial = defaultCageSizeDistribution,
                          maxSearch: Int = defaultMaxSearch,
-                         specifiedProportion: Double = defaultSpecifiedProportion,
+                         specifiedProportion: Double = defaultSingleCellProportion,
                          associativeProbability: Double = defaultAssociativeProbability): (Puzzle, Seq[Seq[Int]]) = {
     val (puzzle, solution, _) = Iterator.continually {
       val (puzzle, solution) = randomPuzzle(n, cageSize, specifiedProportion, associativeProbability)
@@ -70,7 +70,7 @@ object Generator {
    */
   def randomPuzzle(n: Int,
                    cageSize: Multinomial = defaultCageSizeDistribution,
-                   specifiedProportion: Double = defaultSpecifiedProportion,
+                   specifiedProportion: Double = defaultSingleCellProportion,
                    associativeProbability: Double = defaultAssociativeProbability): (Puzzle, Seq[Seq[Int]]) = {
     def puzzleFromLayout(solution: Seq[Seq[Int]], cages: Set[Set[Cell]]) =
     // Note that cage.toSeq returns an ArrayBuffer, which is a mutable object.
@@ -261,12 +261,16 @@ object Generator {
         |    size - the size of the puzzle
         |
         |    -n - generate puzzles that may have non-unique solutions
-        |    -m - maximum partial solutions to search when looking for unique solutions
-        |    -c ##[,##...] - cage size distribution default (0, 0.07, 0.47, 0.46)
-        |    -s ## - proportion of cages that may be a single cell (default 0.1)
-        |    -a ## - probability a 2-cell cage with be associative (default 1/3)
+        |    -m - maximum partial solutions to search when looking for unique solutions (default %d)
+        |    -c ##[,##...] - cage size distribution default %s
+        |    -s ## - maximum proportion of cages that may be a single cell (default %.2f)
+        |    -a ## - probability a 2-cell cage with be associative (default %.2f)
         |
-        |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin
+        |At the end this prints the distribution of cage sizes in the puzzles.""".stripMargin.format(
+        defaultMaxSearch,
+        defaultCageSizeDistribution,
+        defaultSingleCellProportion,
+        defaultAssociativeProbability)
 
     def parseCommandLine(args: Array[String]): (Int, Int, Boolean, Int, Multinomial, Double, Double) = {
       @tailrec
@@ -306,7 +310,7 @@ object Generator {
       }
       val specifiedProportion = option.get('specified) match {
         case Some(s) => s.toDouble
-        case None => defaultSpecifiedProportion
+        case None => defaultSingleCellProportion
       }
       Dispatcher.errorIf(associativeProbability < 0 || associativeProbability > 1,
         "Invalid associative probability " + associativeProbability)
