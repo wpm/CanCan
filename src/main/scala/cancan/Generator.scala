@@ -33,7 +33,7 @@ object Generator {
   /**
    * Portion of cages that may consist of a single cell
    */
-  private val defaultSingleCellProportion = 0.1
+  private val defaultSingleCellProportion = 0.2
   /**
    * Probability of assigning an associative operator to a 2-cell cage
    */
@@ -345,7 +345,7 @@ object Generator {
       macroCageSize = mapSum(macroCageSize, puzzle.cageSizes)
       totalCages += puzzle.cageConstraints.size
     }
-    println(prepend("# ", "Cage size, Specified proportion, Associative probability\n%s, %.3f, %.3f".format(
+    println(prepend("# ", "Cage size, Single cell cage proportion, Associative probability\n%s, %.3f, %.3f".format(
       cageSize, specifiedProportion, associativeProbability)))
     println(prepend("# ", if (unique) "Unique solutions, maximum search " + maxSearch else "Non-unique solutions"))
     println("# Average difficulty: %.3f".format(totalDifficulty / numPuzzles.toDouble))
