@@ -16,10 +16,10 @@ object Analyzer {
         |Count the number of partial solutions in a set of puzzles.
         |
         |    -l - use the Latin Square constraints without heuristics
-        |    -c - use the order by cage strategy""".stripMargin
+        |    -c - use the order-by-cage search strategy""".stripMargin
 
-    def parseCommandLine(args: Array[String]): (String, SearchStrategy) = {
-      def select(cageOrder: Boolean, latinSquare: Boolean): SearchStrategy = (cageOrder, latinSquare) match {
+    def parseCommandLine(args: Array[String]): (String, Solver) = {
+      def select(cageOrder: Boolean, latinSquare: Boolean): Solver = (cageOrder, latinSquare) match {
         case (true, true) => OrderByCellThenCage(LatinSquare(_))
         case (true, false) => OrderByCellThenCage(PreemptiveSet(_))
         case (false, true) => OrderByCellSize(LatinSquare(_))

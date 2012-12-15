@@ -23,12 +23,11 @@ package object cancan {
    * If a puzzle has multiple solutions, the order in which they are returned is undefined.
    *
    * @param puzzle a puzzle
-   * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
+   * @param solver a puzzle solver, by default [[cancan.OrderByCellSize]]
    * @return the puzzle's solutions
    */
-  def solutions(implicit puzzle: Puzzle,
-                strategy: SearchStrategy = OrderByCellSize()): Stream[Grid] =
-    strategy(puzzle).filter(_.isSolved).toStream
+  def solutions(implicit puzzle: Puzzle, solver: Solver = OrderByCellSize()): Stream[Grid] =
+    solver(puzzle).filter(_.isSolved).toStream
 
   /**
    * All the solutions of the puzzle up to `max` partial solution states.
@@ -36,13 +35,13 @@ package object cancan {
    * This is used to abandon difficult puzzles after a finite amount of time.
    *
    * @param max the maximum number of partial solutions to search
-   * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
+   * @param solver a search strategy, by default [[cancan.OrderByCellSize]]
    * @return tuple (solutions, `true` if all solutions have been searched)
    */
   def cappedSolutions(implicit puzzle: Puzzle,
                       max: Int,
-                      strategy: SearchStrategy = OrderByCellSize()): (Stream[Grid], Boolean) = {
-    val partialSolutions = strategy(puzzle)
+                      solver: Solver = OrderByCellSize()): (Stream[Grid], Boolean) = {
+    val partialSolutions = solver(puzzle)
     (partialSolutions.take(max).filter(_.isSolved).toStream, partialSolutions.drop(max).isEmpty)
   }
 

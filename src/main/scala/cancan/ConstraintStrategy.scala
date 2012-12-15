@@ -60,7 +60,7 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
  *
  * This is the minimal set of constraints and employs no heuristics.
  *
- * @param puzzle puzzle to which to apply the strategy
+ * @param puzzle puzzle to which to apply the constraints
  */
 case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
@@ -71,8 +71,8 @@ case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
 /**
  * Implementation of the row and column constraints with the [[cancan.PreemptiveSet]] heuristic.
  *
- * This is faster than the [[cancan.LatinSquare]] strategy.
- * @param puzzle puzzle to which to apply the strategy
+ * This is faster than the [[cancan.LatinSquare]] constraint strategy.
+ * @param puzzle puzzle to which to apply the constraints
  */
 case class PreemptiveSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
   override val constraintMap =
