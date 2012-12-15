@@ -62,9 +62,10 @@ The `generate` command generates a set of puzzles of a specified size.
     # 4 3 2 5 1
     # Difficulty: 1
 
-    # Cage size, Specified proportion, Associative probability
-    # [0:0.000, 1:0.050, 2:0.350, 3:0.350, 4:0.200, 5:0.050], 0.100, 0.333
+    # Cage size, Single cell cage proportion, Associative probability
+    # [0:0.000, 1:0.050, 2:0.350, 3:0.350, 4:0.200, 5:0.050], 0.200, 0.333
     # Unique solutions, maximum search 1000
+    # Average difficulty: 1.000
     # Cage Size Macro Average:
     # 1: 0.100
     # 2: 0.300
@@ -79,9 +80,11 @@ References
 
 KenKen is a cousin of [Sudoku](http://en.wikipedia.org/wiki/Sudoku), and the algorithm implemented here is based on Peter Norvig's [Sudoku solver](http://norvig.com/sudoku.html).
 
+A.M. Herzberg and M.R. Murty, "Sudoku squares and chromatic polynomials", *Notices of the American Mathematical Society*, June/July 2007, pp. 708-717
+
 Michael Heyeck has written a KenKen solver in Python called [neknek](http://www.mlsite.net/neknek).
 CanCan can write puzzles in the format recognized by neknek.
 
 Charles Colbourn, "The complexity of completing partial Latin squares", *Discrete Applied Mathematics*, April 1984, Volume 8, Issue 1, pp. 25-30
 
-J.F. Cook, "A Pencil-and-Paper Algorithm for Solving Sudoku Puzzles", *Notices of the American Mathematical Society*, April 2009, Volume 56, Number 4, pp. 460-468
+J.F. Cook, "A pencil-and-paper algorithm for solving Sudoku puzzles", *Notices of the American Mathematical Society*, April 2009, Volume 56, Number 4, pp. 460-468

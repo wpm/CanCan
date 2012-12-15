@@ -1,1509 +1,1610 @@
 # 1.
-a=4 b=144x c=4- d=14+ e=30x f=6x g=17+ h=16+ i=6/ j=4- k=10+ l=144x
-a b b c c d
-b b e d d d
-f e e e g g
-f h i i g g
-j h h k k k
-j h l l l l
-# 4 3 2 5 1 6
-# 6 4 3 2 5 1
-# 3 2 5 1 6 4
-# 2 5 1 6 4 3
-# 1 6 4 3 2 5
-# 5 1 6 4 3 2
+a=11+ b=96x c=6 d=14+ e=10x f=14+ g=11+ h=3 i=144x j=14+ k=1- l=3-
+a a a b b c
+d a b b e e
+d d f g g h
+i d f f g g
+i i f j j k
+i l l j j k
+# 5 2 3 1 4 6
+# 3 1 4 6 5 2
+# 1 4 6 5 2 3
+# 4 6 5 2 3 1
+# 2 3 1 4 6 5
+# 6 5 2 3 1 4
+# Difficulty: 9
 
 # 2.
-a=12+ b=9+ c=13+ d=2x e=48x f=24x g=9+ h=7+ i=48x j=90x k=3 l=6+ m=120x
-a a a b b b
-c c d d e e
-f c g g e h
-f i g j h h
-f i i j j k
-l l l m m m
-# 2 4 6 5 3 1
-# 5 3 1 2 4 6
-# 6 5 3 1 2 4
-# 4 6 5 3 1 2
-# 1 2 4 6 5 3
-# 3 1 2 4 6 5
+a=3/ b=4 c=2- d=1- e=3/ f=3/ g=3/ h=4/ i=5 j=8x k=3/ l=5- m=3- n=1- o=3- p=7+ q=3/ r=3/ s=4 t=6
+a b c c d e
+a f g h d e
+i f g h j j
+k l l m n n
+k o p m q r
+s o p t q r
+# 2 4 5 3 6 1
+# 6 1 2 4 5 3
+# 5 3 6 1 2 4
+# 3 6 1 2 4 5
+# 1 2 4 5 3 6
+# 4 5 3 6 1 2
+# Difficulty: 1
 
 # 3.
-a=15x b=2- c=12+ d=6/ e=16+ f=288x g=30x h=30x i=3- j=288x k=5+ l=3
-a a a b b c
-d e e e c c
-d f e g g c
-f f h h g g
-i f h h j j
-i k k j j l
+a=36x b=24x c=5 d=10x e=6x f=3 g=13+ h=24x i=10x j=12+ k=15+ l=12+ m=1- n=2 o=1-
+a a b b b c
+d a e e f g
+d d e h i g
+j j k h i g
+j k k h l m
+n o o l l m
+# 6 1 2 3 4 5
+# 5 6 1 2 3 4
+# 1 2 3 4 5 6
+# 4 5 6 1 2 3
+# 3 4 5 6 1 2
+# 2 3 4 5 6 1
+# Difficulty: 1
+
+# 4.
+a=60x b=16+ c=45x d=48x e=90x f=12+ g=60x h=2- i=8+ j=144x
+a b b c c c
+a b b c d d
+a e e f f d
+a e e g f d
+h h g g g i
+j j j j i i
+# 2 4 6 1 5 3
+# 6 1 5 3 2 4
+# 1 5 3 2 4 6
+# 5 3 2 4 6 1
+# 4 6 1 5 3 2
+# 3 2 4 6 1 5
+# Difficulty: 4
+
+# 5.
+a=2- b=24x c=24x d=12+ e=2 f=11+ g=13+ h=3 i=30x j=11+ k=9x l=11+ m=2 n=6x o=1-
+a b b b c c
+a d d d c e
+f g h i i i
+f g j j k k
+f g j l m k
+n n l l o o
+# 5 4 2 3 1 6
+# 3 1 6 5 4 2
+# 4 2 3 1 6 5
+# 6 5 4 2 3 1
+# 1 6 5 4 2 3
+# 2 3 1 6 5 4
+# Difficulty: 1
+
+# 6.
+a=60x b=8+ c=18x d=4 e=13+ f=24x g=8+ h=14+ i=2 j=20x k=13+ l=10+ m=3/ n=4+
+a a a b b b
+c c d e e e
+c f g g g h
+i f j j k h
+l f j k k h
+l l m m n n
+# 5 6 2 3 1 4
+# 3 1 4 5 6 2
+# 6 2 3 1 4 5
+# 2 3 1 4 5 6
+# 1 4 5 6 2 3
+# 4 5 6 2 3 1
+# Difficulty: 1
+
+# 7.
+a=12+ b=15x c=90x d=1 e=4 f=4- g=8x h=15x i=60x j=48x k=1- l=9+ m=12+ n=2 o=24x
+a a a b b b
+c c d e f f
+c g h h h i
+g g j j k i
+l l j m k i
+n l m m o o
+# 4 6 2 3 5 1
 # 3 5 1 4 6 2
 # 6 2 3 5 1 4
 # 1 4 6 2 3 5
-# 4 6 2 3 5 1
-# 2 3 5 1 4 6
 # 5 1 4 6 2 3
-
-# 4.
-a=11+ b=4x c=12+ d=10+ e=150x f=3 g=10x h=6+ i=1- j=11+ k=3/ l=14+ m=7+ n=2-
-a b b c c d
-a a e f c d
-g g e e h d
-g i i j h k
-l l l j h k
-m m m j n n
-# 3 4 1 2 6 5
-# 2 6 5 3 4 1
-# 1 2 6 5 3 4
-# 5 3 4 1 2 6
-# 6 5 3 4 1 2
-# 4 1 2 6 5 3
-
-# 5.
-a=16+ b=8+ c=75x d=8x e=19+ f=540x g=2x h=14+ i=5 j=2- k=14+
-a a a b c c
-d a b b c e
-d f b e e e
-d f f f g h
-i f j j g h
-k k k h h h
-# 6 2 4 1 3 5
-# 2 4 1 3 5 6
-# 4 1 3 5 6 2
-# 1 3 5 6 2 4
-# 5 6 2 4 1 3
-# 3 5 6 2 4 1
-
-# 6.
-a=3 b=17+ c=11+ d=15+ e=30x f=15+ g=10+ h=36x i=1- j=12+ k=10+
-a b b c c c
-d b b c e e
-d f f f e e
-d g f h h i
-j g g g h i
-j j j k k k
-# 3 6 5 1 4 2
-# 6 5 1 4 2 3
-# 4 2 3 6 5 1
-# 5 1 4 2 3 6
-# 1 4 2 3 6 5
-# 2 3 6 5 1 4
-
-# 7.
-a=8+ b=3- c=450x d=6x e=20+ f=240x g=3 h=16+ i=32x j=24x k=10+
-a b b c c d
-a a e c c d
-a e e e f f
-g h i i f f
-h h h i j j
-k k k i j j
-# 2 4 1 6 5 3
-# 4 1 6 5 3 2
-# 1 6 5 3 2 4
-# 3 2 4 1 6 5
-# 6 5 3 2 4 1
-# 5 3 2 4 1 6
+# 2 3 5 1 4 6
+# Difficulty: 1
 
 # 8.
-a=30x b=12x c=11+ d=12+ e=50x f=6 g=13+ h=6+ i=10+ j=6+ k=4x l=7+ m=48x n=2-
-a a b b c d
-a e b c c d
-f e e g h d
-i i g g h j
-k i l l h j
-k m m m n n
-# 5 3 1 4 6 2
-# 2 5 3 1 4 6
-# 6 2 5 3 1 4
-# 3 1 4 6 2 5
-# 4 6 2 5 3 1
-# 1 4 6 2 5 3
-
-# 9.
-a=240x b=18x c=1- d=150x e=36x f=2/ g=54x h=2400x i=2/ j=240x
-a a a b b c
-a a d e e c
-f d d d e e
-f g d h h h
-g g h h i i
-g g j j j j
+a=3 b=2- c=10x d=3- e=11+ f=2- g=6+ h=18x i=2 j=1 k=5+ l=3/ m=3- n=2- o=1- p=1- q=5 r=1- s=1- t=9+
+a b b c c d
+e f g h h d
+e f g i j k
+l l m n o k
+p p m n o q
+r r s s t t
+# 3 6 4 5 2 1
 # 5 2 1 3 6 4
 # 6 4 5 2 1 3
-# 4 5 2 1 3 6
-# 2 1 3 6 4 5
-# 3 6 4 5 2 1
 # 1 3 6 4 5 2
+# 2 1 3 6 4 5
+# 4 5 2 1 3 6
+# Difficulty: 1
 
-# 10.
-a=10+ b=6x c=12+ d=6/ e=60x f=20x g=9+ h=60x i=30x j=5+ k=2 l=13+ m=10+ n=5+
-a b b c d d
-a b c c e e
-f f g g h e
-f i i g h j
-k i l l h j
-m m m l n n
-# 4 3 2 5 6 1
-# 6 1 4 3 2 5
-# 1 4 3 2 5 6
-# 5 6 1 4 3 2
-# 2 5 6 1 4 3
-# 3 2 5 6 1 4
-
-# 11.
-a=36x b=17+ c=16+ d=9+ e=60x f=30x g=15+ h=12x i=8+ j=4- k=10+
-a a a b b b
-a c d d e b
-c c c d e e
-f f g g e h
-f f g i i h
-j j g k k h
-# 6 2 1 5 3 4
-# 3 4 6 2 1 5
-# 4 6 2 1 5 3
-# 2 1 5 3 4 6
-# 5 3 4 6 2 1
-# 1 5 3 4 6 2
-
-# 12.
-a=50x b=18x c=9+ d=54x e=6x f=3- g=12+ h=3- i=11+ j=45x k=6x l=8x m=6 n=10+
-a a b b c c
-a d e b c f
-d d e g g f
-h i i j g k
-h i l j j k
-m l l n n n
-# 2 5 3 6 1 4
-# 5 3 6 1 4 2
-# 3 6 1 4 2 5
-# 4 2 5 3 6 1
-# 1 4 2 5 3 6
-# 6 1 4 2 5 3
-
-# 13.
-a=144x b=9+ c=12+ d=360x e=216x f=3 g=6/ h=12+ i=17+ j=13+ k=1-
-a a a b b c
-a d d e b c
-d d f e b c
-g h h e e c
-g h h i j j
-k k i i i j
-# 3 6 2 1 5 4
-# 4 3 6 2 1 5
-# 5 4 3 6 2 1
-# 1 5 4 3 6 2
-# 6 2 1 5 4 3
-# 2 1 5 4 3 6
-
-# 14.
-a=432x b=10x c=14+ d=1- e=10x f=18+ g=432x h=9+ i=48x j=1- k=5/
-a a a b b c
-a d d b b c
-e e f g h c
-e f f g h c
-e f g g i i
-j j k k i i
-# 4 6 3 2 1 5
-# 6 3 2 1 5 4
-# 2 1 5 4 6 3
-# 1 5 4 6 3 2
-# 5 4 6 3 2 1
-# 3 2 1 5 4 6
-
-# 15.
-a=40x b=12x c=18x d=12+ e=30x f=2x g=60x h=48x i=72x j=10+ k=7+ l=2x m=12+
-a a b b c d
-a e b c c d
-f e e g g d
-f h h g i i
-j h k k i l
-j j m m m l
-# 5 2 6 1 3 4
-# 4 5 2 6 1 3
-# 2 6 1 3 4 5
-# 1 3 4 5 2 6
-# 3 4 5 2 6 1
-# 6 1 3 4 5 2
-
-# 16.
-a=9+ b=3x c=120x d=6x e=1- f=17+ g=10+ h=1- i=30x j=1- k=8+ l=9+ m=4 n=2-
-a a b c c c
-a d b b e e
-d d f f g h
-i i f g g h
-j i k k l l
-j m k n n l
-# 2 3 1 5 6 4
-# 4 2 3 1 5 6
-# 3 1 5 6 4 2
-# 1 5 6 4 2 3
-# 5 6 4 2 3 1
-# 6 4 2 3 1 5
-
-# 17.
-a=6+ b=14+ c=120x d=12x e=12+ f=3/ g=8+ h=8+ i=14+ j=10+ k=6x l=4- m=20x
-a a a b b c
-d d e b c c
-f d e g h h
-f i e g g h
-i i j j k l
-m m j k k l
-# 1 2 3 6 5 4
-# 4 1 2 3 6 5
-# 2 3 6 5 4 1
-# 6 5 4 1 2 3
-# 3 6 5 4 1 2
-# 5 4 1 2 3 6
-
-# 18.
-a=12x b=48x c=3- d=2/ e=60x f=9+ g=12+ h=15x i=3- j=2- k=24x l=2 m=36x n=9+
+# 9.
+a=30x b=8x c=1- d=12x e=13+ f=4 g=12+ h=30x i=3- j=11+ k=3 l=6x m=24x n=3 o=13+
 a a b b c c
 a d b e e f
-g d h e f f
-g g h i i j
-k l h m n j
-k k m m n n
-# 3 1 4 6 2 5
-# 4 6 2 5 3 1
-# 5 3 1 4 6 2
-# 2 5 3 1 4 6
-# 6 2 5 3 1 4
-# 1 4 6 2 5 3
+d d g e h h
+i j g g h k
+i j j l l m
+n o o o m m
+# 6 5 4 1 3 2
+# 1 3 2 6 5 4
+# 4 1 3 2 6 5
+# 2 6 5 4 1 3
+# 5 4 1 3 2 6
+# 3 2 6 5 4 1
+# Difficulty: 4
 
-# 19.
-a=15x b=3/ c=12x d=9+ e=13+ f=48x g=8+ h=5/ i=60x j=30x k=48x l=15x m=4 n=4+
-a b c c c d
-a b e e f d
-a g e h f d
-i g g h f j
-i i k k l j
-m n n k l j
-# 5 6 4 3 1 2
-# 1 2 5 6 4 3
-# 3 1 2 5 6 4
-# 6 4 3 1 2 5
-# 2 5 6 4 3 1
-# 4 3 1 2 5 6
-
-# 20.
-a=8+ b=8x c=14+ d=14+ e=3/ f=3/ g=2- h=72x i=9+ j=8+ k=48x l=6 m=15x n=2-
-a b c c d d
-a b e c d f
-a b e g g f
-h h i i j k
-h l i j j k
-m m m n n k
-# 1 2 4 6 3 5
-# 5 1 2 4 6 3
-# 2 4 6 3 5 1
-# 6 3 5 1 2 4
-# 4 6 3 5 1 2
-# 3 5 1 2 4 6
-
-# 21.
-a=10+ b=11+ c=10x d=72x e=10x f=10x g=108x h=100x i=9+ j=5+ k=48x l=9+ m=5
+# 10.
+a=13+ b=9+ c=7+ d=13+ e=13+ f=8x g=2/ h=90x i=12x j=1- k=13+ l=4 m=8+ n=5
 a a b c c c
-a d b b e e
-d d f f e g
-h h i f g g
-h j i i k k
-j j l l k m
-# 6 3 4 5 2 1
+a b b d d d
+e e f f g g
+e h f i i i
+j h h k k l
+j m m m k n
+# 3 6 5 2 4 1
+# 4 1 3 6 5 2
+# 5 2 4 1 3 6
+# 6 5 2 4 1 3
+# 1 3 6 5 2 4
+# 2 4 1 3 6 5
+# Difficulty: 3
+
+# 11.
+a=2- b=5/ c=3- d=2 e=5+ f=3- g=5 h=1- i=4x j=1- k=5- l=30x m=6x n=5x o=6 p=1- q=1- r=2- s=4- t=6
+a b b c c d
+a e e f f g
+h h i i j k
+l l m m j k
+n n o p p q
+r r s s t q
+# 4 1 5 6 3 2
+# 6 3 2 4 1 5
+# 3 2 4 1 5 6
+# 5 6 3 2 4 1
+# 1 5 6 3 2 4
+# 2 4 1 5 6 3
+# Difficulty: 1
+
+# 12.
+a=12x b=13+ c=1- d=11+ e=10x f=11+ g=10+ h=3/ i=60x j=108x k=8x l=6 m=3 n=5 o=2/
+a a b b c d
+a e b f c d
+e e g f h d
+i g g f h j
+i i k k j j
+l m k n o o
 # 1 6 3 4 5 2
+# 2 1 6 3 4 5
+# 5 2 1 6 3 4
 # 3 4 5 2 1 6
 # 4 5 2 1 6 3
-# 5 2 1 6 3 4
-# 2 1 6 3 4 5
+# 6 3 4 5 2 1
+# Difficulty: 1
 
-# 22.
-a=6x b=15x c=2- d=180x e=8+ f=12+ g=9+ h=14+ i=12+ j=5/ k=1- l=8+ m=6+
-a b b b c c
-a a d d e e
-f f d g e h
-f i g g j h
-k i l l j h
-k i l m m m
-# 2 3 1 5 6 4
-# 3 1 5 6 4 2
-# 1 5 6 4 2 3
-# 6 4 2 3 1 5
-# 4 2 3 1 5 6
-# 5 6 4 2 3 1
+# 13.
+a=2- b=7+ c=7+ d=6+ e=3/ f=8+ g=5 h=3/ i=6 j=2 k=1- l=2- m=4- n=1- o=6/ p=1- q=3- r=30x s=2- t=5
+a b c d e e
+a b c d f f
+g h h i j k
+l m m n n k
+l o o p q r
+s s t p q r
+# 6 2 4 5 3 1
+# 4 5 3 1 6 2
+# 5 3 1 6 2 4
+# 1 6 2 4 5 3
+# 3 1 6 2 4 5
+# 2 4 5 3 1 6
+# Difficulty: 1
 
-# 23.
-a=11+ b=13+ c=15x d=36x e=30x f=7+ g=18x h=12x i=13+ j=10x k=2/ l=72x m=5
-a a b b c c
-a d b e c f
-d d g e f f
-h g g e i i
-h j j k i l
-h j m k l l
-# 2 4 6 3 1 5
-# 5 2 4 6 3 1
-# 6 3 1 5 2 4
-# 4 6 3 1 5 2
-# 1 5 2 4 6 3
-# 3 1 5 2 4 6
-
-# 24.
-a=13+ b=7+ c=14+ d=14+ e=16+ f=24x g=6 h=13+ i=10x j=13+ k=24x
-a a b b c c
-a a d d c c
-e e d d f f
-g e e h f f
-i i h h h j
-k k k j j j
-# 2 4 1 6 3 5
-# 1 6 3 5 2 4
-# 3 5 2 4 1 6
-# 6 3 5 2 4 1
-# 5 2 4 1 6 3
-# 4 1 6 3 5 2
-
-# 25.
-a=11+ b=11+ c=10+ d=7+ e=90x f=10x g=12x h=10+ i=11+ j=14+ k=3- l=9+ m=4x
-a b b c c c
-a b d e e e
-a d d f f g
-h h h i f g
-j k k i i l
-j j m m l l
-# 4 2 5 3 6 1
-# 1 4 2 5 3 6
-# 6 1 4 2 5 3
-# 2 5 3 6 1 4
-# 5 3 6 1 4 2
-# 3 6 1 4 2 5
-
-# 26.
-a=12x b=9+ c=5 d=13+ e=90x f=10+ g=9+ h=12x i=120x j=8+ k=5+ l=24x m=2- n=3/
+# 14.
+a=36x b=10+ c=12x d=30x e=4 f=8+ g=1- h=120x i=13+ j=60x k=10+ l=2 m=6+ n=2/
 a a a b b c
-d e e e b f
-d g g g f f
-d h h i j j
-k h l i m n
-k l l i m n
-# 3 1 4 2 6 5
-# 2 6 5 3 1 4
-# 6 5 3 1 4 2
-# 5 3 1 4 2 6
-# 1 4 2 6 5 3
-# 4 2 6 5 3 1
+d d e b f c
+d g g h f c
+i i h h f j
+i k l m j j
+k k m m n n
+# 2 3 6 5 4 1
+# 6 5 4 1 2 3
+# 1 2 3 6 5 4
+# 3 6 5 4 1 2
+# 4 1 2 3 6 5
+# 5 4 1 2 3 6
+# Difficulty: 2
 
-# 27.
-a=60x b=90x c=11+ d=2- e=1- f=6x g=16x h=90x i=10+ j=30x k=120x l=4+ m=2- n=3
+# 15.
+a=17+ b=1- c=1- d=12+ e=432x f=1 g=120x h=16+ i=12x j=96x k=5
+a a a b b c
+a a d d d c
+e f d d g g
+e e h h g i
+e e h j g i
+k j j j j i
+# 1 2 3 6 5 4
+# 6 5 4 1 2 3
+# 4 1 2 3 6 5
+# 2 3 6 5 4 1
+# 3 6 5 4 1 2
+# 5 4 1 2 3 6
+# Difficulty: 6
+
+# 16.
+a=8+ b=120x c=1 d=36x e=2 f=40x g=9+ h=60x i=144x j=36x k=5/ l=3- m=4+ n=2x o=2-
 a a b c d d
-a b b c e e
-f f g c h h
-f g g i i h
-j j j i k l
-m m n k k l
-# 3 5 6 1 2 4
-# 4 3 5 6 1 2
-# 6 1 2 4 3 5
-# 1 2 4 3 5 6
-# 5 6 1 2 4 3
-# 2 4 3 5 6 1
+a e b b d f
+g g g h h f
+i i j h k f
+l i j j k m
+l n n o o m
+# 4 3 5 1 2 6
+# 1 2 6 4 3 5
+# 3 5 1 2 6 4
+# 6 4 3 5 1 2
+# 2 6 4 3 5 1
+# 5 1 2 6 4 3
+# Difficulty: 1
 
-# 28.
-a=15+ b=30x c=48x d=300x e=15+ f=16+ g=8+ h=180x i=2/ j=1 k=4-
-a a b b c c
-a a b d c c
-e e b d d d
-e e f g g h
-i f f f g h
-i j k k h h
-# 6 2 5 3 4 1
-# 1 6 2 5 3 4
-# 3 4 1 6 2 5
-# 5 3 4 1 6 2
-# 2 5 3 4 1 6
-# 4 1 6 2 5 3
-
-# 29.
-a=12+ b=18x c=3- d=3 e=12+ f=2/ g=16+ h=14+ i=60x j=16+ k=4/ l=40x
-a a b b c c
-d a a e e f
-g g h e e f
-g g h h i i
-j j h i i k
-j j l l l k
-# 4 1 6 3 2 5
-# 3 2 5 4 1 6
-# 2 5 4 1 6 3
-# 5 4 1 6 3 2
-# 1 6 3 2 5 4
-# 6 3 2 5 4 1
-
-# 30.
-a=200x b=4 c=3/ d=108x e=2160x f=216x g=12+ h=1- i=10+ j=10+
-a a a b c d
-a a e e c d
-f e e d d d
-f e g g g h
-f f i g g h
-f i i i j j
-# 2 1 5 4 6 3
-# 5 4 6 3 2 1
-# 1 5 4 6 3 2
-# 4 6 3 2 1 5
-# 6 3 2 1 5 4
-# 3 2 1 5 4 6
-
-# 31.
-a=24x b=18+ c=18+ d=10+ e=60x f=13+ g=16+ h=72x i=12+ j=3
-a a a a b b
-c d d d d b
-c e e e f b
-c c g e f f
-h g g g i f
-h h h i i j
-# 2 3 4 1 6 5
-# 5 2 3 4 1 6
-# 6 5 2 3 4 1
-# 1 6 5 2 3 4
-# 3 4 1 6 5 2
-# 4 1 6 5 2 3
-
-# 32.
-a=2/ b=120x c=13+ d=10+ e=15+ f=6 g=16+ h=120x i=17+ j=2x k=20x
-a b b b b c
-a d d e c c
-d d f e e c
-g h h e i i
-g g h h i j
-g k k k i j
-# 2 6 1 5 4 3
-# 4 3 2 6 1 5
-# 3 2 6 1 5 4
-# 1 5 4 3 2 6
-# 5 4 3 2 6 1
-# 6 1 5 4 3 2
-
-# 33.
-a=13+ b=10+ c=72x d=7+ e=8+ f=13+ g=75x h=1- i=12+ j=9+ k=4/ l=3/ m=12+
-a a a b c c
-d e e b f c
-d e g b f h
-d i g g f h
-i i j j k k
-l l j m m m
-# 5 6 2 1 4 3
-# 2 1 4 3 5 6
-# 4 3 5 6 2 1
-# 1 4 3 5 6 2
-# 3 5 6 2 1 4
-# 6 2 1 4 3 5
-
-# 34.
-a=7+ b=18+ c=17+ d=120x e=1080x f=3- g=48x h=16+ i=11+
-a a b b c c
-d b b b c c
-d d e f f c
-d d e e g g
-h h e e g g
-h h i i i g
-# 1 6 2 5 3 4
-# 3 4 1 6 2 5
-# 4 1 6 2 5 3
-# 2 5 3 4 1 6
-# 6 2 5 3 4 1
-# 5 3 4 1 6 2
-
-# 35.
-a=60x b=14+ c=16+ d=10+ e=240x f=11+ g=11+ h=7+ i=19+ j=4x k=5
-a a b b b b
-c a d d d e
-c c c d e e
-f f g h h e
-f f g g i i
-j j g k i i
-# 4 3 5 6 2 1
-# 3 5 6 2 1 4
-# 5 6 2 1 4 3
-# 6 2 1 4 3 5
-# 2 1 4 3 5 6
-# 1 4 3 5 6 2
-
-# 36.
-a=192x b=17+ c=13+ d=13+ e=270x f=11+ g=16x h=5x i=9+ j=90x
-a a b c c d
-a a b b c d
-e e b f c d
-e e g f f d
-h h g f i i
-h g g j j j
-# 4 6 3 5 1 2
-# 2 4 6 3 5 1
-# 6 3 5 1 2 4
-# 3 5 1 2 4 6
-# 5 1 2 4 6 3
-# 1 2 4 6 3 5
-
-# 37.
-a=8+ b=9+ c=108x d=32x e=11+ f=12+ g=3- h=13+ i=4/ j=10x k=18x l=8x m=9+ n=2
-a b b c c d
-a a b c d d
-e e f f g g
-e h f i j j
-k h l i j m
-k h l n m m
-# 2 1 5 3 6 4
-# 1 5 3 6 4 2
-# 4 2 1 5 3 6
-# 5 3 6 4 2 1
-# 6 4 2 1 5 3
-# 3 6 4 2 1 5
-
-# 38.
-a=16+ b=8x c=30x d=18+ e=64x f=720x g=225x h=4- i=16x j=6
+# 17.
+a=360x b=12+ c=8x d=21+ e=20+ f=24x g=18x h=8x i=15+ j=5
 a b c c d d
-a b e d d d
-a a e e e f
-a g e f f f
-h g g i i f
-h j g g i i
-# 4 2 6 5 3 1
-# 1 4 2 6 5 3
-# 5 3 1 4 2 6
-# 3 1 4 2 6 5
-# 6 5 3 1 4 2
-# 2 6 5 3 1 4
-
-# 39.
-a=360x b=10+ c=1 d=13+ e=14+ f=90x g=4x h=432x i=13+ j=2- k=3-
-a a b b c d
-a a b d d d
-e e e f f f
-e g g f h h
-g g i i h h
-j j i i k k
-# 5 4 6 3 1 2
-# 6 3 1 2 5 4
-# 2 5 4 6 3 1
-# 3 1 2 5 4 6
-# 1 2 5 4 6 3
-# 4 6 3 1 2 5
-
-# 40.
-a=24x b=24x c=12+ d=10x e=10+ f=10+ g=13+ h=1 i=72x j=2- k=30x l=8+ m=9+
-a a b c c d
-e a b b c d
-e e f g g d
-h f f g i i
-j k k l i m
-j k l l m m
-# 2 3 4 6 1 5
-# 3 4 6 1 5 2
-# 5 2 3 4 6 1
-# 1 5 2 3 4 6
-# 6 1 5 2 3 4
-# 4 6 1 5 2 3
-
-# 41.
-a=90x b=120x c=11+ d=6/ e=4- f=14+ g=5 h=80x i=90x j=12x k=30x l=5+
-a b b b c c
-a a b d d c
-a e e f g c
-h h f f f i
-h h j j j i
-k k k l l i
-# 6 2 3 5 4 1
-# 3 5 4 1 6 2
-# 1 6 2 3 5 4
-# 4 1 6 2 3 5
-# 5 4 1 6 2 3
-# 2 3 5 4 1 6
-
-# 42.
-a=17+ b=50x c=24x d=3- e=11+ f=360x g=2x h=3 i=240x j=120x k=12x
-a a a b b b
-a c c b d d
-e c f f g g
-e c f f h i
-e j j i i i
-e j j k k k
-# 6 3 4 1 2 5
-# 4 1 2 5 6 3
-# 5 6 3 4 1 2
-# 1 2 5 6 3 4
-# 3 4 1 2 5 6
-# 2 5 6 3 4 1
-
-# 43.
-a=15+ b=18x c=2/ d=14+ e=14+ f=6 g=13+ h=80x i=4- j=1- k=40x l=18x
-a b b b c c
-a a b d d d
-a e e e d f
-g g e h h i
-g j j h h i
-k k k l l l
-# 5 1 6 3 4 2
-# 2 5 1 6 3 4
-# 3 4 2 5 1 6
-# 1 6 3 4 2 5
-# 6 3 4 2 5 1
-# 4 2 5 1 6 3
-
-# 44.
-a=13+ b=4x c=600x d=8+ e=6 f=14+ g=12+ h=14+ i=12x j=24x k=30x l=4x
-a b c c c d
-a b e c d d
-a a f f f g
-h i i f g g
-h i i j j j
-h k k k l l
-# 2 1 4 6 5 3
-# 1 4 6 5 3 2
-# 4 6 5 3 2 1
+a b b c d d
+a b e c f f
+a e e f f g
+h h e i g g
+h h i i j g
 # 3 2 1 4 6 5
 # 5 3 2 1 4 6
 # 6 5 3 2 1 4
+# 4 6 5 3 2 1
+# 1 4 6 5 3 2
+# 2 1 4 6 5 3
+# Difficulty: 4
 
-# 45.
-a=72x b=30x c=2- d=4 e=8x f=9+ g=2/ h=2- i=12+ j=24x k=9+ l=3/ m=1- n=30x o=4-
-a a b c c d
-a e b f g g
-e e b f f h
-i i i j k h
-l m j j k n
-l m o o k n
-# 2 6 1 5 3 4
-# 6 1 5 3 4 2
-# 4 2 6 1 5 3
-# 5 3 4 2 6 1
-# 1 5 3 4 2 6
-# 3 4 2 6 1 5
-
-# 46.
-a=5 b=10x c=18x d=72x e=7+ f=48x g=9+ h=14+ i=10x j=1- k=10+ l=60x m=18x
-a b c c d e
-b b c d d e
-f g g g h e
-f f i i h h
-j j i k k l
-m m m k l l
-# 5 1 6 3 4 2
-# 2 5 1 6 3 4
-# 6 3 4 2 5 1
-# 4 2 5 1 6 3
-# 3 4 2 5 1 6
-# 1 6 3 4 2 5
-
-# 47.
-a=15+ b=3- c=15+ d=6 e=180x f=120x g=96x h=2- i=18+ j=4-
-a a b b c c
-a a a d c c
-e f f f f c
-e e e f g g
-h e i i g g
-h i i i j j
-# 1 4 6 3 2 5
-# 5 1 4 6 3 2
-# 2 5 1 4 6 3
-# 3 2 5 1 4 6
-# 6 3 2 5 1 4
-# 4 6 3 2 5 1
-
-# 48.
-a=30x b=24x c=48x d=24x e=9+ f=10x g=10+ h=9+ i=5- j=2/ k=5 l=3- m=90x n=4/
-a a b b b c
-d a e e c c
-d d e f g g
-h i j f g k
-h i j f l l
-h m m m n n
-# 5 3 6 4 1 2
-# 1 2 5 3 6 4
-# 6 4 1 2 5 3
-# 3 6 4 1 2 5
-# 4 1 2 5 3 6
-# 2 5 3 6 4 1
-
-# 49.
-a=72x b=5 c=15+ d=8x e=15+ f=17+ g=10+ h=60x i=120x j=16+
-a b c c c d
-a a c e e d
-a f f e e d
-g f f h h h
-g i i i h j
-g g i j j j
-# 3 5 2 4 6 1
-# 6 1 3 5 2 4
-# 4 6 1 3 5 2
-# 2 4 6 1 3 5
-# 1 3 5 2 4 6
-# 5 2 4 6 1 3
-
-# 50.
-a=15+ b=10+ c=16x d=12x e=11+ f=7+ g=14+ h=6+ i=14+ j=6+ k=40x l=11+ m=3
+# 18.
+a=8x b=2/ c=9+ d=30x e=5 f=13+ g=1 h=90x i=120x j=6x k=4 l=18x m=1- n=1- o=15+
 a b b c c d
-a b e e c d
-a f e g g d
-f f h g i i
-j j h h i k
-j l l m k k
-# 5 3 2 4 1 6
-# 6 5 3 2 4 1
-# 4 1 6 5 3 2
-# 2 4 1 6 5 3
-# 3 2 4 1 6 5
-# 1 6 5 3 2 4
+a e f c d d
+a g f f h h
+i j j j h k
+i i l l m m
+n n l o o o
+# 4 6 3 2 1 5
+# 1 5 4 6 3 2
+# 2 1 5 4 6 3
+# 6 3 2 1 5 4
+# 5 4 6 3 2 1
+# 3 2 1 5 4 6
+# Difficulty: 1
 
-# 51.
-a=2- b=5/ c=5+ d=6+ e=1- f=12x g=3- h=11+ i=1- j=1- k=2- l=2- m=12x n=4/ o=15x p=6+ q=6x r=2-
-a a b b c c
-d d e f g h
-i i e f g h
-j k l l m n
-j k o o m n
-p p q q r r
-# 4 6 1 5 3 2
-# 1 5 3 2 4 6
-# 3 2 4 6 1 5
-# 5 3 2 4 6 1
-# 6 1 5 3 2 4
-# 2 4 6 1 5 3
+# 19.
+a=6+ b=2- c=12x d=9+ e=6/ f=4- g=3- h=2- i=3/ j=6+ k=1- l=5- m=8x n=7+ o=3- p=5/ q=5- r=3-
+a a b b c d
+e e f g c d
+h i f g j j
+h i k k l l
+m n o o p p
+m n q q r r
+# 1 5 2 4 3 6
+# 6 1 5 2 4 3
+# 3 6 1 5 2 4
+# 5 2 4 3 6 1
+# 2 4 3 6 1 5
+# 4 3 6 1 5 2
+# Difficulty: 1
 
-# 52.
-a=6+ b=4- c=12+ d=1- e=72x f=36x g=5 h=8+ i=9+ j=12+ k=24x l=3- m=2- n=12x
-a a b c c d
-a e b c f d
-e e g f f h
-i j j j h h
-i i k k l l
-m m k n n n
-# 4 1 6 2 5 3
-# 1 6 2 5 3 4
-# 6 2 5 3 4 1
-# 2 5 3 4 1 6
-# 3 4 1 6 2 5
-# 5 3 4 1 6 2
-
-# 53.
-a=60x b=3 c=24x d=25x e=18x f=14+ g=8+ h=12x i=5/ j=10+ k=6x l=24x m=2- n=7+
-a a b c c c
-a d d e e f
-g d h e f f
-g g h h i j
-k k l l i j
-m m l n n j
-# 5 2 3 4 6 1
-# 6 1 5 2 3 4
-# 1 5 2 3 4 6
-# 3 4 6 1 5 2
-# 2 3 4 6 1 5
-# 4 6 1 5 2 3
-
-# 54.
-a=240x b=12+ c=16+ d=2- e=2- f=48x g=8+ h=5- i=19+ j=1- k=7+ l=5
-a a a b c c
-d a b b b c
-d e f f g c
-h e f f g g
-h i i i g j
-k k k i l j
-# 2 6 5 3 4 1
-# 3 4 1 2 6 5
-# 5 3 4 1 2 6
-# 6 5 3 4 1 2
-# 1 2 6 5 3 4
-# 4 1 2 6 5 3
-
-# 55.
-a=11+ b=150x c=216x d=10+ e=16+ f=11+ g=1- h=40x i=18+ j=1 k=2/
-a a b c c c
-a a b b d c
-e e b f d d
-e e g f f h
-i i g f h h
-j i i k k h
-# 2 1 5 4 3 6
-# 6 2 1 5 4 3
-# 4 3 6 2 1 5
-# 5 4 3 6 2 1
-# 3 6 2 1 5 4
-# 1 5 4 3 6 2
-
-# 56.
-a=240x b=15+ c=7+ d=30x e=12+ f=6 g=60x h=14+ i=3/ j=90x k=8x l=7+
-a a a b b c
-d d a b b c
-e d d f g g
-e h h h g g
-e i i h j k
-l l j j j k
-# 3 4 5 2 6 1
-# 1 3 4 5 2 6
-# 4 5 2 6 1 3
-# 2 6 1 3 4 5
-# 6 1 3 4 5 2
-# 5 2 6 1 3 4
-
-# 57.
-a=180x b=120x c=13+ d=2- e=1- f=180x g=48x h=11+ i=5/ j=6 k=2- l=15x
-a b b b c c
-a b d e c c
-a a d e f g
-h h i f f g
-h h i j f g
-k k l l l g
-# 1 5 6 2 4 3
-# 6 2 4 3 1 5
-# 5 6 2 4 3 1
-# 4 3 1 5 6 2
-# 3 1 5 6 2 4
-# 2 4 3 1 5 6
-
-# 58.
-a=90x b=7+ c=9+ d=6x e=16+ f=9+ g=15+ h=32x i=10+ j=10+ k=20x l=3 m=6x
-a a b c c c
-d a b b e f
-d d g e e f
-h g g i i f
-h h j i k l
-m m j j k k
-# 5 6 1 3 2 4
-# 1 3 2 4 5 6
-# 3 2 4 5 6 1
-# 4 5 6 1 3 2
-# 2 4 5 6 1 3
-# 6 1 3 2 4 5
-
-# 59.
-a=9+ b=14+ c=360x d=120x e=72x f=20x g=180x h=24x i=4 j=1- k=3x
-a a b b b c
-a a b c c c
-d e e f f f
-d e e g f h
-d d g g h h
-i j j g k k
-# 2 3 1 4 5 6
-# 3 1 4 5 6 2
-# 6 2 3 1 4 5
-# 5 6 2 3 1 4
-# 1 4 5 6 2 3
-# 4 5 6 2 3 1
-
-# 60.
-a=14+ b=45x c=90x d=48x e=5 f=16+ g=10+ h=60x i=5- j=96x k=2-
-a a a b c c
-a d b b b c
-e d d d f c
-g g g f f f
-h h g i j j
-h k k i j j
-# 6 2 4 3 5 1
-# 2 4 3 5 1 6
-# 5 1 6 2 4 3
-# 1 6 2 4 3 5
-# 3 5 1 6 2 4
-# 4 3 5 1 6 2
-
-# 61.
-a=300x b=20+ c=2- d=3 e=16+ f=21+ g=3/ h=3x i=14+ j=10+ k=40x
-a a a b b c
-a d e b b c
-f f e b g g
-h f e e e i
-h f f j j i
-k k k j j i
-# 4 5 3 1 6 2
-# 5 3 1 6 2 4
-# 6 2 4 5 3 1
-# 1 6 2 4 5 3
-# 3 1 6 2 4 5
-# 2 4 5 3 1 6
-
-# 62.
-a=17+ b=12+ c=150x d=96x e=1 f=12+ g=60x h=15+ i=144x j=4+ k=3-
-a a b c d d
-a a b c c d
-e b b c f d
-g h h h f f
-g g h i i j
-g k k i i j
-# 6 1 3 5 2 4
-# 4 6 1 3 5 2
-# 1 3 5 2 4 6
-# 2 4 6 1 3 5
-# 5 2 4 6 1 3
-# 3 5 2 4 6 1
-
-# 63.
-a=3/ b=54x c=13+ d=5/ e=8x f=10x g=11+ h=5 i=12x j=72x k=5x l=11+ m=1- n=3/
-a b b c d d
-a b c c e e
-f f g g e h
-f i g j j j
-i i k k l l
-m m k n n l
-# 2 6 3 4 5 1
-# 6 3 4 5 1 2
-# 1 2 6 3 4 5
-# 5 1 2 6 3 4
-# 3 4 5 1 2 6
-# 4 5 1 2 6 3
-
-# 64.
-a=80x b=45x c=17+ d=2/ e=5 f=60x g=5- h=18x i=10+ j=45x k=15+ l=2/
-a b b c d d
+# 20.
+a=40x b=11+ c=10+ d=13+ e=10x f=10+ g=2- h=40x i=72x j=10+ k=8+ l=3- m=18x n=1
 a b b c c c
-a a e f g g
-h i i f f j
-h h k k f j
-h l l k j j
-# 5 3 1 6 4 2
-# 2 5 3 1 6 4
-# 4 2 5 3 1 6
-# 1 6 4 2 5 3
-# 3 1 6 4 2 5
-# 6 4 2 5 3 1
+a a b d d e
+f g g d e e
+f f h h h i
+j j j k k i
+l l m m n i
+# 2 6 3 1 4 5
+# 4 5 2 6 3 1
+# 6 3 1 4 5 2
+# 3 1 4 5 2 6
+# 1 4 5 2 6 3
+# 5 2 6 3 1 4
+# Difficulty: 3
 
-# 65.
-a=48x b=22+ c=12+ d=17+ e=6 f=14+ g=24x h=600x i=6+ j=2-
-a b b b b c
-a a a b c c
-d d a e f f
-d d g g g f
-d h g g i j
-h h h i i j
-# 2 4 6 5 3 1
-# 3 1 2 4 6 5
-# 1 2 4 6 5 3
-# 5 3 1 2 4 6
-# 6 5 3 1 2 4
-# 4 6 5 3 1 2
-
-# 66.
-a=14+ b=12x c=36x d=14+ e=12x f=12x g=15x h=100x i=9+ j=8+ k=10+ l=1- m=5
-a a b b b c
-a d d e c c
-f d g e h h
-f f g e h i
-j j g k k i
-j l l m k i
-# 4 5 2 6 1 3
-# 5 2 6 1 3 4
-# 2 6 1 3 4 5
-# 6 1 3 4 5 2
-# 3 4 5 2 6 1
-# 1 3 4 5 2 6
-
-# 67.
-a=10+ b=16+ c=36x d=16+ e=5x f=15+ g=11+ h=2- i=144x j=12+ k=5
-a a a b c c
-d a b b b c
-d d d e f f
-g h h e f f
-g i i j j j
-g g i i j k
-# 3 5 1 4 6 2
-# 5 1 4 6 2 3
-# 6 2 3 5 1 4
-# 2 3 5 1 4 6
-# 4 6 2 3 5 1
-# 1 4 6 2 3 5
-
-# 68.
-a=13+ b=12x c=40x d=9+ e=12+ f=8+ g=60x h=11+ i=4/ j=4 k=9+ l=11+ m=24x
-a b b c c d
-a a b c d d
-e e f g g h
-e f f g i h
-j k l l i h
-k k l m m m
-# 3 1 6 4 2 5
-# 6 4 2 5 3 1
-# 1 6 4 2 5 3
-# 5 3 1 6 4 2
-# 4 2 5 3 1 6
-# 2 5 3 1 6 4
-
-# 69.
-a=180x b=2 c=8x d=8+ e=9x f=16+ g=24x h=11+ i=18x j=60x k=7+ l=8+ m=30x
+# 21.
+a=13+ b=6x c=1- d=10x e=1 f=15+ g=14+ h=36x i=12x j=13+ k=1 l=11+ m=8+ n=1-
 a a b c c d
-e a f c d d
-e e f f g g
-h h h i g j
-k k i i j j
-k l l l m m
-# 6 5 2 4 1 3
-# 3 6 5 2 4 1
-# 1 3 6 5 2 4
-# 5 2 4 1 3 6
-# 4 1 3 6 5 2
-# 2 4 1 3 6 5
+a e b f d d
+g g b f f h
+i g j k h h
+i l j j m n
+i l l m m n
+# 3 6 2 5 4 1
+# 4 1 3 6 2 5
+# 5 4 1 3 6 2
+# 2 5 4 1 3 6
+# 6 2 5 4 1 3
+# 1 3 6 2 5 4
+# Difficulty: 4
 
-# 70.
-a=40x b=1- c=11+ d=12x e=36x f=900x g=13+ h=14+ i=7+ j=1 k=120x l=6x
-a a b b c c
-a d d d e e
-a f f d g e
-f f h g g g
-i h h h j k
-i l l k k k
-# 1 4 3 2 6 5
-# 5 1 4 3 2 6
-# 2 6 5 1 4 3
-# 6 5 1 4 3 2
-# 3 2 6 5 1 4
-# 4 3 2 6 5 1
-
-# 71.
-a=13+ b=10+ c=13+ d=6+ e=12+ f=2- g=18x h=15x i=60x j=6x k=20x l=2- m=24x
-a a b b c d
-a e b c c d
-f e g h h d
-f e g h i i
-j j g k k i
-j l l k m m
-# 3 5 2 4 6 1
-# 5 2 4 6 1 3
-# 4 6 1 3 5 2
-# 2 4 6 1 3 5
-# 6 1 3 5 2 4
-# 1 3 5 2 4 6
-
-# 72.
-a=15+ b=9+ c=144x d=6 e=600x f=1- g=7+ h=20+ i=13+ j=12+ k=3-
-a a b b c d
-a e b b c c
-a e e f f c
-g e h h i i
-g j h h i k
-g j j j i k
-# 5 1 2 4 3 6
-# 6 5 1 2 4 3
-# 3 6 5 1 2 4
-# 2 4 3 6 5 1
-# 4 3 6 5 1 2
-# 1 2 4 3 6 5
-
-# 73.
-a=216x b=16+ c=4x d=960x e=5 f=96x g=150x h=2- i=18+ j=15x
-a a a b b b
-c a d b b e
-c a d f f f
-g d d f f h
-g g d i i h
-g g j j i i
-# 6 2 1 3 5 4
-# 4 6 2 1 3 5
-# 1 3 5 4 6 2
-# 5 4 6 2 1 3
-# 3 5 4 6 2 1
-# 2 1 3 5 4 6
-
-# 74.
-a=6+ b=17+ c=3x d=72x e=3- f=3x g=7+ h=12+ i=15+ j=9+ k=10+ l=10+ m=4 n=7+
-a a b b c d
-e e b c c d
-f f g g h d
-i i g h h j
-k i l l j j
-k k l m n n
-# 4 2 5 6 1 3
-# 2 5 6 1 3 4
-# 1 3 4 2 5 6
-# 5 6 1 3 4 2
-# 3 4 2 5 6 1
-# 6 1 3 4 2 5
-
-# 75.
-a=2- b=9+ c=19+ d=2 e=288x f=12+ g=40x h=13+ i=450x j=12+ k=3/
-a b b c c d
-a b b c c e
-f f g e e e
-f f g g h h
-i i i g h h
-i j j j k k
-# 4 1 3 5 6 2
-# 2 4 1 3 5 6
-# 1 3 5 6 2 4
-# 6 2 4 1 3 5
-# 3 5 6 2 4 1
-# 5 6 2 4 1 3
-
-# 76.
-a=48x b=12+ c=24x d=4+ e=60x f=10+ g=30x h=7+ i=5+ j=10+ k=1 l=8+ m=3/ n=15+
-a b b c d d
-a a b c e e
-f g g c e h
-f g i i j h
-f k i l j m
-n n n l j m
-# 2 5 4 6 3 1
-# 4 6 3 1 2 5
-# 1 2 5 4 6 3
-# 6 3 1 2 5 4
-# 3 1 2 5 4 6
-# 5 4 6 3 1 2
-
-# 77.
-a=60x b=60x c=48x d=12x e=8x f=15x g=30x h=6 i=72x j=10+ k=7+ l=10+ m=5-
-a b b b c d
-a a e c c d
-f f e g g d
-f h e i g j
-k k i i j j
-k l l l m m
-# 6 4 3 5 2 1
-# 5 2 1 6 4 3
-# 3 5 2 1 6 4
-# 1 6 4 3 5 2
-# 2 1 6 4 3 5
-# 4 3 5 2 1 6
-
-# 78.
-a=120x b=18x c=9+ d=5x e=30x f=5 g=48x h=7+ i=36x j=12+ k=24x l=10+ m=2/
-a a b b c c
-d a b e c f
-d d g e h h
-i g g e h j
-i k k l j j
-i k l l m m
-# 4 5 1 6 3 2
-# 1 6 3 2 4 5
-# 5 1 6 3 2 4
-# 3 2 4 5 1 6
-# 6 3 2 4 5 1
-# 2 4 5 1 6 3
-
-# 79.
-a=180x b=720x c=90x d=2/ e=19+ f=16+ g=450x h=6x i=8x
-a a b b b b
-a a c b d d
-a c c c e e
-f f c e e e
-f f g g g h
-i i g g h h
-# 1 6 4 2 3 5
-# 3 5 1 6 4 2
-# 2 3 5 1 6 4
-# 5 1 6 4 2 3
-# 6 4 2 3 5 1
-# 4 2 3 5 1 6
-
-# 80.
-a=240x b=12+ c=15+ d=10x e=120x f=16+ g=9+ h=18x i=3- j=2/ k=1- l=1
-a b b b b c
-a a d d c c
-a e d d f c
-g e h h f i
-g e e f f i
-g j j k k l
-# 5 1 2 6 3 4
-# 3 4 5 1 2 6
-# 4 5 1 2 6 3
-# 1 2 6 3 4 5
-# 6 3 4 5 1 2
-# 2 6 3 4 5 1
-
-# 81.
-a=18x b=16+ c=360x d=2 e=19+ f=13+ g=15+ h=10+ i=5+ j=2- k=15+
-a a b b b b
-a a c c c d
-e e c f f f
-e e g f h h
-i g g g h j
-i k k k h j
-# 2 3 1 4 5 6
-# 3 1 4 5 6 2
-# 6 2 3 1 4 5
-# 5 6 2 3 1 4
-# 4 5 6 2 3 1
-# 1 4 5 6 2 3
-
-# 82.
-a=7+ b=6+ c=2x d=6x e=11+ f=2- g=5- h=1- i=12x j=1- k=2- l=2/ m=3+ n=30x o=15x p=1- q=2/ r=6/
+# 22.
+a=5+ b=3+ c=4/ d=20x e=1- f=3- g=1- h=1- i=1- j=3 k=1 l=1- m=9+ n=2 o=9+ p=3- q=2/ r=18x s=2x t=4
 a a b c d e
 f f b c d e
-g h i i j j
-g h k k l l
-m m n n o p
-q q r r o p
-# 3 4 2 1 6 5
-# 5 3 4 2 1 6
-# 6 5 3 4 2 1
-# 1 6 5 3 4 2
-# 2 1 6 5 3 4
-# 4 2 1 6 5 3
+g g h i i j
+k l h m m n
+o l p p q q
+o r r s s t
+# 3 2 1 4 5 6
+# 6 3 2 1 4 5
+# 2 1 4 5 6 3
+# 1 4 5 6 3 2
+# 4 5 6 3 2 1
+# 5 6 3 2 1 4
+# Difficulty: 1
 
-# 83.
-a=30x b=10+ c=18x d=13+ e=6+ f=72x g=9+ h=10+ i=40x j=5/ k=24x l=2 m=36x n=3/
-a a b b b c
-a d d e c c
-f f d e g g
-h f i e j j
-h h i k l m
-n n i k m m
-# 2 3 1 5 4 6
-# 5 4 6 2 3 1
-# 6 2 3 1 5 4
-# 4 6 2 3 1 5
-# 1 5 4 6 2 3
-# 3 1 5 4 6 2
-
-# 84.
-a=48x b=50x c=7+ d=12+ e=8+ f=48x g=15x h=1- i=48x j=13+ k=60x l=6+ m=7+
-a a b b c c
-d a b e c f
-d d g e f f
-h g g e i i
-h j j k i l
-m m j k k l
-# 4 6 2 5 1 3
-# 6 2 5 1 3 4
-# 5 1 3 4 6 2
-# 2 5 1 3 4 6
-# 1 3 4 6 2 5
-# 3 4 6 2 5 1
-
-# 85.
-a=10x b=12+ c=18x d=10+ e=8x f=12+ g=72x h=10x i=18x j=10x k=6x l=9+ m=15+
-a a b b c c
-a d d b e f
-g h h h e f
-g g i j e f
-k i i j j l
-k m m m l l
-# 2 1 5 4 6 3
-# 5 4 6 3 2 1
-# 3 2 1 5 4 6
-# 4 6 3 2 1 5
-# 6 3 2 1 5 4
-# 1 5 4 6 3 2
-
-# 86.
-a=360x b=17+ c=1- d=16+ e=288x f=2/ g=30x h=12x i=6 j=2/ k=30x
-a a a b c c
-a a b b b d
-e e e b d d
-e e f f d d
-g g h i j j
-g h h k k k
-# 5 1 6 2 4 3
-# 4 3 5 1 6 2
-# 6 2 4 3 5 1
-# 1 6 2 4 3 5
-# 3 5 1 6 2 4
-# 2 4 3 5 1 6
-
-# 87.
-a=300x b=36x c=720x d=6+ e=360x f=12+ g=10+ h=18+ i=6 j=6+
-a a a b b c
-a d d b b c
-d d e e c c
-f f e e g g
-f h h i g g
-f h h j j j
-# 6 5 2 1 3 4
-# 5 2 1 3 4 6
-# 2 1 3 4 6 5
-# 3 4 6 5 2 1
-# 1 3 4 6 5 2
-# 4 6 5 2 1 3
-
-# 88.
-a=24x b=90x c=8+ d=2- e=72x f=30x g=12x h=60x i=8x j=5x k=90x l=9+ m=6
-a b b c c d
-a b e c f d
-a e e f f g
-h h i i g g
-j h i k k k
-j j l l l m
-# 3 6 5 1 2 4
-# 4 3 6 5 1 2
-# 2 4 3 6 5 1
-# 6 5 1 2 4 3
-# 1 2 4 3 6 5
-# 5 1 2 4 3 6
-
-# 89.
-a=25x b=13+ c=2/ d=8x e=9+ f=13+ g=12+ h=10+ i=6/ j=14+ k=6+ l=3- m=6x n=5
-a a b c c d
-a e b b f d
-g e e h f d
-g i h h f j
-g i k k l j
-m m k n l j
-# 1 5 4 6 3 2
-# 5 4 6 3 2 1
-# 6 3 2 1 5 4
-# 2 1 5 4 6 3
-# 4 6 3 2 1 5
-# 3 2 1 5 4 6
-
-# 90.
-a=17+ b=432x c=17+ d=160x e=720x f=3/ g=12+ h=15x i=1- j=2
-a a a b b b
-a a c b b d
-e e c c c d
-e f f c d d
-e e g g d h
-i i j g h h
-# 1 5 4 3 2 6
-# 6 1 5 4 3 2
-# 5 4 3 2 6 1
-# 3 2 6 1 5 4
-# 2 6 1 5 4 3
-# 4 3 2 6 1 5
-
-# 91.
-a=54x b=2 c=160x d=16+ e=9+ f=360x g=10+ h=300x i=9x j=12x k=1-
-a a a b c c
-d a e e c c
-d d e f f f
-g d h i i f
-g g h h i j
-k k h j j j
-# 3 1 6 2 4 5
-# 5 3 1 6 2 4
-# 1 6 2 4 5 3
-# 2 4 5 3 1 6
-# 6 2 4 5 3 1
-# 4 5 3 1 6 2
-
-# 92.
-a=19+ b=12+ c=12+ d=4x e=40x f=17+ g=16+ h=12+ i=19+ j=1
-a a b b b c
-a a b d c c
-e f f d d c
-e f f g g g
-e e h g i i
-j h h h i i
-# 6 4 1 2 5 3
-# 3 6 4 1 2 5
-# 5 3 6 4 1 2
-# 2 5 3 6 4 1
-# 4 1 2 5 3 6
-# 1 2 5 3 6 4
-
-# 93.
-a=120x b=8+ c=2- d=6 e=4- f=13+ g=15x h=90x i=16+ j=12+ k=2- l=6+ m=5-
-a a a b b c
-a d e e b c
-f f f g g g
-f h h i i j
-k h h i i j
-k l l m m j
-# 6 1 5 3 2 4
-# 4 6 1 5 3 2
-# 2 4 6 1 5 3
-# 1 5 3 2 4 6
-# 5 3 2 4 6 1
-# 3 2 4 6 1 5
-
-# 94.
-a=11+ b=1- c=150x d=12+ e=12+ f=14+ g=72x h=16+ i=13+ j=1 k=1-
-a b b c d d
-a a c c d d
-a e e c f f
+# 23.
+a=9+ b=90x c=3- d=270x e=48x f=19+ g=240x h=8+ i=16x j=6x k=6 l=2
+a b b b b c
+a a d d d c
+a e e d f f
 e e g g f f
-h h g g i i
-h h j k k i
-# 2 5 6 1 4 3
-# 3 2 5 6 1 4
-# 4 3 2 5 6 1
-# 6 1 4 3 2 5
-# 1 4 3 2 5 6
-# 5 6 1 4 3 2
+h g g i i j
+h k i i l j
+# 2 3 5 6 1 4
+# 4 2 3 5 6 1
+# 1 4 2 3 5 6
+# 6 1 4 2 3 5
+# 3 5 6 1 4 2
+# 5 6 1 4 2 3
+# Difficulty: 1
 
-# 95.
-a=9+ b=540x c=16x d=17+ e=17+ f=8+ g=12x h=120x i=30x j=6/ k=6
+# 24.
+a=13+ b=120x c=7+ d=2 e=11+ f=3 g=7+ h=15x i=11+ j=30x k=2 l=2/ m=24x n=4- o=2-
+a b b c c d
+a a b c e f
+g g h i e e
+g h h i i j
+k l l m j j
+n n m m o o
+# 3 6 4 5 1 2
+# 6 4 5 1 2 3
+# 1 2 3 6 4 5
+# 4 5 1 2 3 6
+# 2 3 6 4 5 1
+# 5 1 2 3 6 4
+# Difficulty: 1
+
+# 25.
+a=12+ b=3/ c=8+ d=12+ e=30x f=6+ g=4 h=60x i=2 j=24x k=6x l=8+ m=4 n=1- o=1-
+a a a b c c
+d d e b c f
+g d e e h f
+i j j h h f
+k j l m n o
+k k l l n o
+# 5 6 1 2 3 4
+# 3 4 5 6 1 2
+# 4 5 6 1 2 3
+# 2 3 4 5 6 1
+# 1 2 3 4 5 6
+# 6 1 2 3 4 5
+# Difficulty: 3
+
+# 26.
+a=6x b=10+ c=10+ d=4- e=4 f=3 g=36x h=24x i=10+ j=30x k=12+ l=8+ m=2 n=12+ o=8+
+a b b c c d
+a e b f c d
+g g h i i i
+j g h h k l
+j j m k k l
+n n n o o l
+# 6 1 4 5 3 2
+# 1 4 5 3 2 6
+# 3 2 6 1 4 5
+# 2 6 1 4 5 3
+# 5 3 2 6 1 4
+# 4 5 3 2 6 1
+# Difficulty: 2
+
+# 27.
+a=2- b=15+ c=24x d=2 e=12x f=2- g=1- h=7+ i=15+ j=4+ k=45x l=6 m=16x n=1- o=1-
+a b b b c d
+a e f g c c
+e e f g h h
+i i i j h k
+l m j j k k
+m m n n o o
+# 3 5 6 4 1 2
+# 1 2 3 5 6 4
+# 2 3 5 6 4 1
+# 5 6 4 1 2 3
+# 6 4 1 2 3 5
+# 4 1 2 3 5 6
+# Difficulty: 2
+
+# 28.
+a=8+ b=30x c=2 d=12+ e=11+ f=5 g=3x h=13+ i=24x j=10+ k=48x l=5+ m=8+ n=5 o=10+
+a a a b c d
+e e e b f d
+g g h b i d
+j j h h i i
+j k k l l m
+n k o o l m
+# 4 1 3 5 2 6
+# 6 4 1 3 5 2
+# 1 3 5 2 6 4
+# 3 5 2 6 4 1
+# 2 6 4 1 3 5
+# 5 2 6 4 1 3
+# Difficulty: 1
+
+# 29.
+a=11+ b=11+ c=6 d=144x e=180x f=6+ g=80x h=10+ i=10+ j=5- k=12+ l=3-
 a a b b b c
-a a d b c c
-e d d d c f
-e e g g h f
-i e g g h j
-i i k h h j
-# 4 1 3 5 6 2
-# 1 3 5 6 2 4
-# 5 6 2 4 1 3
-# 6 2 4 1 3 5
-# 2 4 1 3 5 6
-# 3 5 6 2 4 1
+d a b e e e
+d d f e g g
+h d f g g i
+h j j k i i
+h l l k k i
+# 5 2 4 3 1 6
+# 2 4 3 1 6 5
+# 4 3 1 6 5 2
+# 1 6 5 2 4 3
+# 3 1 6 5 2 4
+# 6 5 2 4 3 1
+# Difficulty: 5
 
-# 96.
-a=17+ b=11+ c=2- d=30x e=72x f=1 g=200x h=16+ i=9x j=80x k=2-
-a a b b c c
+# 30.
+a=13+ b=12+ c=2x d=18x e=4 f=12x g=14+ h=13+ i=8+ j=11+ k=16x l=3 m=3- n=1 o=3-
+a a a b c c
+d d b b c e
+d f f g g h
+i f j g h h
+i j j k k l
+m m n k o o
+# 4 3 6 5 2 1
+# 3 6 5 2 1 4
+# 1 4 3 6 5 2
+# 2 1 4 3 6 5
+# 6 5 2 1 4 3
+# 5 2 1 4 3 6
+# Difficulty: 1
+
+# 31.
+a=22+ b=13+ c=1- d=16+ e=24x f=2 g=1- h=2- i=5/ j=30x k=10+ l=240x
+a a a b c c
 a a b b d d
-e e e d d f
+e f b b g d
+e h i j g d
+e h i j k k
+l l l l k k
+# 1 5 6 4 2 3
+# 6 4 2 3 1 5
+# 4 2 3 1 5 6
+# 2 3 1 5 6 4
+# 3 1 5 6 4 2
+# 5 6 4 2 3 1
+# Difficulty: 8
+
+# 32.
+a=12+ b=6 c=75x d=4+ e=6x f=7+ g=12+ h=120x i=14+ j=9+ k=4 l=30x m=5+ n=2 o=2-
+a a b c d e
+f a c c d e
+f f g g h e
+i j g k h l
+i j m n h l
+i j m m o o
+# 2 4 6 5 3 1
+# 4 6 5 3 1 2
+# 1 2 4 6 5 3
+# 3 1 2 4 6 5
+# 5 3 1 2 4 6
+# 6 5 3 1 2 4
+# Difficulty: 1
+
+# 33.
+a=6x b=6x c=9+ d=5- e=9+ f=2- g=2- h=11+ i=1- j=20x k=2 l=3/ m=1- n=2/ o=3 p=6+ q=6 r=3/ s=6 t=2/
+a a b b c c
+d e e f g g
+d h h f i i
+j j k l l m
+n n o p q m
+r r s p t t
+# 2 3 1 6 5 4
+# 6 5 4 2 3 1
+# 1 6 5 4 2 3
+# 5 4 2 3 1 6
+# 4 2 3 1 6 5
+# 3 1 6 5 4 2
+# Difficulty: 1
+
+# 34.
+a=11+ b=11+ c=4 d=60x e=6 f=6+ g=12+ h=9+ i=12x j=40x k=10+ l=9+ m=6/ n=9+
+a a a b b c
+d e f b g g
+d d f f g h
+i i j j j h
+k i l m m h
+k k l l n n
+# 2 3 6 1 5 4
+# 3 6 1 5 4 2
+# 5 4 2 3 6 1
+# 6 1 5 4 2 3
+# 4 2 3 6 1 5
+# 1 5 4 2 3 6
+# Difficulty: 4
+
+# 35.
+a=6/ b=16+ c=22+ d=5 e=11+ f=3 g=18+ h=360x i=2- j=120x
+a b c c c d
+a b c e e f
+b b c e e e
+g b g h i i
 g g g h h h
-g i i h j j
-i i k k j j
+j j j j j h
+# 1 2 3 6 4 5
+# 6 4 5 1 2 3
+# 3 6 4 5 1 2
+# 5 1 2 3 6 4
+# 2 3 6 4 5 1
+# 4 5 1 2 3 6
+# Difficulty: 8
+
+# 36.
+a=4- b=4 c=2- d=4- e=1- f=2- g=12x h=1- i=2x j=2- k=1- l=8+ m=5+ n=2 o=2x p=4- q=2- r=15x s=1 t=3
+a a b c d d
+e f f c g g
+e h i i j j
+k h l l m n
+k o p q m r
+s o p q t r
+# 2 6 4 3 5 1
+# 4 3 5 1 2 6
+# 3 5 1 2 6 4
+# 6 4 3 5 1 2
+# 5 1 2 6 4 3
+# 1 2 6 4 3 5
+# Difficulty: 1
+
+# 37.
+a=6 b=8+ c=12x d=12+ e=10x f=4 g=8+ h=1- i=1- j=2- k=9+ l=6+ m=12+ n=12+ o=4
+a b c c d d
+e b b c d f
+e g g h i i
+e g j h k l
+m m j n k l
+m o n n k l
+# 6 1 2 3 4 5
+# 5 6 1 2 3 4
+# 1 2 3 4 5 6
+# 2 3 4 5 6 1
+# 4 5 6 1 2 3
+# 3 4 5 6 1 2
+# Difficulty: 3
+
+# 38.
+a=11+ b=8+ c=12+ d=11+ e=8x f=60x g=12x h=20x i=10+ j=4 k=8+ l=11+ m=2 n=6 o=3/
+a b b b c d
+a e e c c d
+a e f g g g
+h f f i i j
+h k l l i m
+h k n l o o
+# 2 1 3 4 5 6
+# 6 2 1 3 4 5
+# 3 4 5 6 2 1
+# 5 6 2 1 3 4
+# 1 3 4 5 6 2
+# 4 5 6 2 1 3
+# Difficulty: 4
+
+# 39.
+a=8+ b=24x c=2- d=1 e=15+ f=25x g=9+ h=8x i=5 j=72x k=15x l=30x m=1- n=6 o=6+
+a a a b c c
+d e e b b f
+g e h h f f
+g g i h j j
+k k k l j m
+n o o l l m
 # 2 5 1 3 6 4
-# 6 4 2 5 1 3
+# 1 3 6 4 2 5
 # 3 6 4 2 5 1
 # 4 2 5 1 3 6
 # 5 1 3 6 4 2
-# 1 3 6 4 2 5
+# 6 4 2 5 1 3
+# Difficulty: 1
 
-# 97.
-a=300x b=6x c=6 d=288x e=240x f=8+ g=48x h=30x i=144x j=14+
-a a b b b c
-a a b d d e
-f f g d e e
-f g g d e h
-f i g j h h
-i i j j j h
-# 4 5 3 1 2 6
-# 5 3 1 2 6 4
-# 1 2 6 4 5 3
-# 3 1 2 6 4 5
-# 2 6 4 5 3 1
-# 6 4 5 3 1 2
+# 40.
+a=120x b=12+ c=4+ d=11+ e=2 f=8x g=3 h=150x i=2- j=9+ k=7+ l=14+ m=5+ n=1-
+a b b c c d
+a a b c d d
+e f g h h i
+f f j j h i
+k k j l l m
+k n n l m m
+# 5 6 4 2 1 3
+# 6 4 2 1 3 5
+# 2 1 3 5 6 4
+# 4 2 1 3 5 6
+# 1 3 5 6 4 2
+# 3 5 6 4 2 1
+# Difficulty: 1
 
-# 98.
-a=15x b=36x c=12+ d=1- e=12+ f=9+ g=24x h=14+ i=75x j=10x k=12x l=12+ m=3
+# 41.
+a=36x b=10+ c=9+ d=72x e=90x f=7+ g=10+ h=2 i=36x j=20x k=25x l=36x m=7+
+a b b b c c
+a a d d c e
+f f g d h e
+f i g g j e
+k i i l j j
+k k l l m m
+# 3 4 1 5 6 2
+# 6 2 3 4 1 5
+# 4 1 5 6 2 3
+# 2 3 4 1 5 6
+# 5 6 2 3 4 1
+# 1 5 6 2 3 4
+# Difficulty: 1
+
+# 42.
+a=1- b=3/ c=4x d=9+ e=4+ f=6+ g=2 h=2- i=3- j=2- k=6x l=5- m=4 n=1- o=6+ p=2- q=5 r=7+ s=18x t=4
+a a b c d d
+e e b c f g
+h h i i f j
+k l m n o j
+k l p n o q
+r r p s s t
+# 4 5 2 1 3 6
+# 1 3 6 4 5 2
+# 6 4 5 2 1 3
+# 3 6 4 5 2 1
+# 2 1 3 6 4 5
+# 5 2 1 3 6 4
+# Difficulty: 1
+
+# 43.
+a=90x b=24x c=1 d=12+ e=10+ f=6+ g=12x h=9+ i=32x j=17+ k=2- l=2- m=8x n=6
+a a a b b c
+d d d b e e
+f f g h h e
+f i g h j k
+i i g j j k
+l l m m m n
+# 6 5 3 4 2 1
+# 1 6 5 3 4 2
+# 2 1 6 5 3 4
+# 3 4 2 1 6 5
+# 4 2 1 6 5 3
+# 5 3 4 2 1 6
+# Difficulty: 1
+
+# 44.
+a=240x b=17+ c=17+ d=240x e=6x f=1440x g=12+ h=13+ i=2
+a a b b b b
+a a c c b d
+a c c d d d
+e c f g d h
+e f f g h h
+i f f g h h
+# 5 4 3 1 2 6
+# 3 1 2 6 5 4
+# 4 3 1 2 6 5
+# 6 5 4 3 1 2
+# 1 2 6 5 4 3
+# 2 6 5 4 3 1
+# Difficulty: 8
+
+# 45.
+a=7+ b=4/ c=3- d=4- e=1- f=3- g=3/ h=3- i=7+ j=20x k=3x l=6 m=3- n=3 o=3/ p=4/ q=2- r=3/ s=1-
+a a b b c d
+e f g g c d
+e f h h i j
+k k l m i j
+n o o m p q
+r r s s p q
+# 2 5 4 1 3 6
+# 5 4 1 3 6 2
+# 4 1 3 6 2 5
+# 1 3 6 2 5 4
+# 3 6 2 5 4 1
+# 6 2 5 4 1 3
+# Difficulty: 1
+
+# 46.
+a=2 b=3- c=4x d=2/ e=3 f=1- g=4 h=6/ i=4/ j=8+ k=2- l=4- m=5- n=2/ o=1- p=3- q=2- r=1- s=1 t=2/
+a b c c d d
+e b f g h h
+i i f j k l
+m n o j k l
+m n o p p q
+r r s t t q
+# 2 5 4 1 6 3
+# 3 2 5 4 1 6
+# 4 1 6 3 2 5
+# 6 3 2 5 4 1
+# 1 6 3 2 5 4
+# 5 4 1 6 3 2
+# Difficulty: 1
+
+# 47.
+a=6 b=360x c=9+ d=2 e=120x f=15+ g=12+ h=17+ i=8x j=18+ k=1-
+a b b b c c
+d b e e e c
+f f g e h c
+f f g g h h
+i i g j h k
+i i j j j k
+# 6 5 3 4 1 2
+# 2 6 5 3 4 1
+# 3 4 1 2 6 5
+# 5 3 4 1 2 6
+# 1 2 6 5 3 4
+# 4 1 2 6 5 3
+# Difficulty: 4
+
+# 48.
+a=6 b=60x c=18+ d=12x e=120x f=20+ g=48x h=1 i=16x j=8+ k=270x
+a b b c d d
+e b f c c g
+e b f c h g
+e f f i i g
+e j i i k g
+j j j k k k
+# 6 5 1 2 4 3
+# 2 4 3 6 5 1
+# 4 3 6 5 1 2
+# 3 6 5 1 2 4
+# 5 1 2 4 3 6
+# 1 2 4 3 6 5
+# Difficulty: 3
+
+# 49.
+a=11+ b=6x c=10+ d=45x e=40x f=36x g=120x h=2 i=6+ j=11+ k=8x l=3 m=10+ n=1-
 a a a b b c
 d d e e b c
-f f e g g c
-h f i g j k
-h h i i j k
-l l l m j k
-# 3 5 1 2 6 4
-# 1 2 6 4 3 5
-# 5 1 2 6 4 3
-# 4 3 5 1 2 6
-# 6 4 3 5 1 2
-# 2 6 4 3 5 1
+f d e g h c
+f f i g j j
+k i i g l j
+k m m m n n
+# 5 4 2 1 6 3
+# 3 5 4 2 1 6
+# 6 3 5 4 2 1
+# 1 6 3 5 4 2
+# 4 2 1 6 3 5
+# 2 1 6 3 5 4
+# Difficulty: 1
+
+# 50.
+a=6x b=5x c=15+ d=11+ e=8+ f=4 g=144x h=18x i=1- j=9+ k=1 l=10+ m=2- n=3 o=10x
+a b b c c d
+a e b c f d
+e e g g h d
+i j g h h k
+i j j l l l
+m m n o o o
+# 2 1 5 4 6 3
+# 3 2 1 5 4 6
+# 1 5 4 6 3 2
+# 5 4 6 3 2 1
+# 6 3 2 1 5 4
+# 4 6 3 2 1 5
+# Difficulty: 1
+
+# 51.
+a=24x b=8+ c=3 d=13+ e=12x f=150x g=6+ h=8+ i=48x j=8x k=3 l=13+ m=4 n=1- o=3x
+a a b b c d
+a e e b f d
+g g e f f d
+g h h i j j
+k l l i m j
+n n l i o o
+# 6 2 4 1 3 5
+# 2 4 1 3 5 6
+# 4 1 3 5 6 2
+# 1 3 5 6 2 4
+# 3 5 6 2 4 1
+# 5 6 2 4 1 3
+# Difficulty: 1
+
+# 52.
+a=100x b=288x c=3 d=22+ e=13+ f=18+ g=3- h=120x i=2 j=1-
+a a a b b c
+a d d b b b
+a d d e e e
+f f d e e g
+f f h h h g
+i f h h j j
+# 4 1 5 6 2 3
+# 1 5 6 2 3 4
+# 5 6 2 3 4 1
+# 6 2 3 4 1 5
+# 3 4 1 5 6 2
+# 2 3 4 1 5 6
+# Difficulty: 6
+
+# 53.
+a=17+ b=80x c=8+ d=1 e=12+ f=3/ g=14+ h=12+ i=18x j=36x k=4- l=2/ m=4
+a b b b c c
+a a d b e e
+a f f g e e
+h g g g i i
+h h j j j k
+h l l j m k
+# 3 1 4 5 2 6
+# 6 3 1 4 5 2
+# 5 2 6 3 1 4
+# 1 4 5 2 6 3
+# 4 5 2 6 3 1
+# 2 6 3 1 4 5
+# Difficulty: 4
+
+# 54.
+a=8+ b=120x c=2x d=12+ e=30x f=5 g=2x h=72x i=1- j=12+ k=120x l=8+ m=6+ n=6
+a b b b c c
+a a d d e e
+f g d h h e
+g g i i h j
+k k l l m j
+k n l m m j
+# 3 4 6 5 1 2
+# 2 3 4 6 5 1
+# 5 1 2 3 4 6
+# 1 2 3 4 6 5
+# 6 5 1 2 3 4
+# 4 6 5 1 2 3
+# Difficulty: 1
+
+# 55.
+a=12+ b=5 c=2 d=60x e=90x f=24x g=60x h=324x i=32x j=60x k=12x l=5/
+a a b c d e
+a a f d d e
+g g f f e e
+g g f h h i
+j j h h i i
+j k k l l i
+# 4 1 5 2 6 3
+# 3 4 1 5 2 6
+# 2 6 3 4 1 5
+# 1 5 2 6 3 4
+# 5 2 6 3 4 1
+# 6 3 4 1 5 2
+# Difficulty: 2
+
+# 56.
+a=12+ b=12x c=4- d=5 e=36x f=20x g=2 h=7+ i=12x j=14+ k=15x l=2/ m=12x n=60x o=5
+a b b b c c
+a d e f f g
+a e e f h h
+i i i j j k
+l m m j n k
+l m o n n k
+# 5 3 4 1 2 6
+# 6 5 3 4 1 2
+# 1 2 6 5 3 4
+# 3 4 1 2 6 5
+# 4 1 2 6 5 3
+# 2 6 5 3 4 1
+# Difficulty: 1
+
+# 57.
+a=5 b=10+ c=24x d=1- e=17+ f=8+ g=10x h=10x i=11+ j=72x k=6 l=4x m=1- n=12x o=5
+a b c c d d
+b b c e e f
+g h h e i f
+g g j i i f
+k j j l l m
+n n n l o m
+# 5 6 4 3 1 2
+# 3 1 2 5 6 4
+# 1 2 5 6 4 3
+# 2 5 6 4 3 1
+# 6 4 3 1 2 5
+# 4 3 1 2 5 6
+# Difficulty: 1
+
+# 58.
+a=6x b=2/ c=6+ d=12x e=2- f=4- g=2- h=3+ i=11+ j=3- k=3/ l=3- m=4 n=1- o=5+ p=2x q=5 r=2- s=4 t=6
+a a b c d d
+e e b c f f
+g h i j j k
+g h i l m k
+n o o l p q
+n r r s p t
+# 1 6 2 5 3 4
+# 5 3 4 1 6 2
+# 4 1 6 2 5 3
+# 6 2 5 3 4 1
+# 3 4 1 6 2 5
+# 2 5 3 4 1 6
+# Difficulty: 1
+
+# 59.
+a=8x b=36x c=20x d=15+ e=9+ f=2- g=5 h=54x i=20x j=1 k=2/ l=25x m=72x n=6+ o=3
+a a b b b c
+a d d e e c
+f f d e g c
+h h i j k k
+h l i i m m
+l l n n m o
+# 1 4 2 6 3 5
+# 2 6 3 5 1 4
+# 4 2 6 3 5 1
+# 6 3 5 1 4 2
+# 3 5 1 4 2 6
+# 5 1 4 2 6 3
+# Difficulty: 1
+
+# 60.
+a=9+ b=11+ c=9+ d=2- e=3x f=30x g=40x h=6 i=10+ j=14+ k=18x l=30x m=4 n=1 o=3-
+a b b b c c
+a a d d c e
+f f f g h e
+i i g g j j
+i k k l l j
+m k n l o o
+# 2 4 6 1 3 5
+# 5 2 4 6 1 3
+# 3 5 2 4 6 1
+# 1 3 5 2 4 6
+# 6 1 3 5 2 4
+# 4 6 1 3 5 2
+# Difficulty: 1
+
+# 61.
+a=36x b=40x c=15+ d=7+ e=5+ f=14+ g=9+ h=4 i=30x j=6+ k=60x l=10+ m=4 n=3/
+a b b b c d
+a e e c c d
+a f e g g d
+h f f g i i
+j k k k i l
+j m n n l l
+# 3 5 4 2 6 1
+# 6 1 3 5 4 2
+# 2 6 1 3 5 4
+# 4 2 6 1 3 5
+# 1 3 5 4 2 6
+# 5 4 2 6 1 3
+# Difficulty: 6
+
+# 62.
+a=12+ b=90x c=9+ d=4/ e=8+ f=15x g=30x h=20x i=2x j=32x k=108x l=6x m=6 n=3 o=5
+a a b c c d
+a b b c e d
+f f f e e g
+h i j k k g
+h i j j k l
+h m n o l l
+# 2 4 6 3 5 1
+# 6 3 5 1 2 4
+# 3 5 1 2 4 6
+# 1 2 4 6 3 5
+# 5 1 2 4 6 3
+# 4 6 3 5 1 2
+# Difficulty: 1
+
+# 63.
+a=2x b=1- c=12x d=1- e=5x f=1- g=2/ h=5- i=7+ j=1- k=1- l=2 m=1 n=1- o=2- p=3 q=6x r=9+ s=6x t=1
+a a b b c c
+d d e f f g
+h h e i i g
+j j k l m n
+o p k q q n
+o r r s s t
+# 2 1 6 5 4 3
+# 3 2 1 6 5 4
+# 1 6 5 4 3 2
+# 5 4 3 2 1 6
+# 4 3 2 1 6 5
+# 6 5 4 3 2 1
+# Difficulty: 1
+
+# 64.
+a=8+ b=10+ c=3- d=14+ e=8+ f=4 g=6+ h=13+ i=8x j=60x k=6 l=3 m=20x n=18x o=3/
+a a a b c c
+d e e b b f
+d d e g h h
+i j k g h l
+i j j m m n
+i o o m n n
+# 3 1 4 6 2 5
+# 6 2 5 3 1 4
+# 5 3 1 4 6 2
+# 1 4 6 2 5 3
+# 2 5 3 1 4 6
+# 4 6 2 5 3 1
+# Difficulty: 1
+
+# 65.
+a=14+ b=14+ c=1- d=144x e=5 f=18+ g=7+ h=11+ i=72x j=1 k=1- l=60x
+a a a b c c
+d a b b b e
+d d f f g g
+d h f f g i
+h h h i i i
+j k k l l l
+# 6 5 2 1 4 3
+# 2 1 4 3 6 5
+# 3 6 5 2 1 4
+# 4 3 6 5 2 1
+# 5 2 1 4 3 6
+# 1 4 3 6 5 2
+# Difficulty: 9
+
+# 66.
+a=48x b=300x c=6/ d=12+ e=12+ f=10+ g=2 h=15+ i=6 j=48x k=60x l=7+
+a a a b b c
+d a e b b c
+d e e e f f
+d g h h f f
+i h h j j k
+l l j j k k
+# 1 3 4 2 5 6
+# 3 4 2 5 6 1
+# 5 6 1 3 4 2
+# 4 2 5 6 1 3
+# 6 1 3 4 2 5
+# 2 5 6 1 3 4
+# Difficulty: 4
+
+# 67.
+a=96x b=75x c=14+ d=3 e=36x f=13+ g=60x h=24x i=15+ j=48x k=5/
+a a b b b c
+a d b e e c
+a f f e c c
+g f f h i i
+g g g h i i
+j j j h k k
+# 2 4 3 5 1 6
+# 4 3 5 1 6 2
+# 3 5 1 6 2 4
+# 5 1 6 2 4 3
+# 1 6 2 4 3 5
+# 6 2 4 3 5 1
+# Difficulty: 6
+
+# 68.
+a=12x b=20x c=24x d=30x e=7+ f=14+ g=5 h=48x i=3- j=12+ k=30x l=8x m=4 n=1 o=3/
+a a a b c c
+d d b b c e
+d f g h h e
+i f f h j k
+i l l l j k
+m n o o j k
+# 1 2 6 5 3 4
+# 5 3 4 1 2 6
+# 2 6 5 3 4 1
+# 6 5 3 4 1 2
+# 3 4 1 2 6 5
+# 4 1 2 6 5 3
+# Difficulty: 1
+
+# 69.
+a=24x b=2x c=2- d=4- e=2 f=1- g=2- h=1- i=9+ j=1- k=4x l=10x m=4- n=1 o=2- p=8+ q=5+ r=3 s=1 t=20x
+a a b c d d
+e f b c g g
+h f i j j k
+h l i m m k
+n l o o p q
+r s t t p q
+# 4 6 2 3 1 5
+# 2 3 1 5 4 6
+# 5 4 6 2 3 1
+# 6 2 3 1 5 4
+# 1 5 4 6 2 3
+# 3 1 5 4 6 2
+# Difficulty: 1
+
+# 70.
+a=3x b=8+ c=12+ d=72x e=4- f=96x g=3 h=12+ i=10+ j=11+ k=2/ l=10x m=6x n=9+
+a b b b c c
+a d d d c e
+f f g h h e
+f i i h j k
+l i m j j k
+l m m n n n
+# 3 2 5 1 6 4
+# 1 6 4 3 2 5
+# 6 4 3 2 5 1
+# 4 3 2 5 1 6
+# 2 5 1 6 4 3
+# 5 1 6 4 3 2
+# Difficulty: 4
+
+# 71.
+a=108x b=10+ c=11+ d=2 e=8x f=12+ g=6+ h=10x i=108x j=9+ k=9+ l=1 m=5/ n=30x o=6
+a a b c c d
+a e b b c f
+g e h h f f
+g e i i j j
+k k i l j m
+k n n n o m
+# 3 6 1 4 5 2
+# 6 1 4 5 2 3
+# 1 4 5 2 3 6
+# 5 2 3 6 1 4
+# 2 3 6 1 4 5
+# 4 5 2 3 6 1
+# Difficulty: 1
+
+# 72.
+a=3- b=20x c=2- d=5/ e=1- f=3/ g=3/ h=1- i=3- j=2- k=1- l=4- m=6/ n=8+ o=2- p=1- q=1 r=4 s=3-
+a a b b c d
+e e f g c d
+h h f g i i
+j k k l m m
+j n o l p p
+q n o r s s
+# 6 3 4 5 2 1
+# 2 1 6 3 4 5
+# 4 5 2 1 6 3
+# 3 4 5 2 1 6
+# 5 2 1 6 3 4
+# 1 6 3 4 5 2
+# Difficulty: 1
+
+# 73.
+a=1- b=12+ c=6 d=60x e=1- f=15+ g=48x h=6 i=14+ j=2- k=11+ l=7+ m=24x
+a b b c d d
+a b b d d e
+f f f g g e
+h f i g g j
+k i i l l j
+k k i m m m
+# 3 4 1 6 5 2
+# 2 3 4 1 6 5
+# 5 2 3 4 1 6
+# 6 5 2 3 4 1
+# 4 1 6 5 2 3
+# 1 6 5 2 3 4
+# Difficulty: 8
+
+# 74.
+a=11+ b=2 c=12x d=90x e=8x f=1- g=9+ h=7+ i=150x j=10+ k=3/ l=6+ m=30x n=4
+a b c c d d
+a a c e d f
+g g e e h f
+g i i j h h
+k i j j l l
+k m m m l n
+# 4 2 1 6 5 3
+# 3 4 2 1 6 5
+# 5 3 4 2 1 6
+# 1 6 5 3 4 2
+# 6 5 3 4 2 1
+# 2 1 6 5 3 4
+# Difficulty: 3
+
+# 75.
+a=9+ b=5- c=2- d=5 e=1- f=3/ g=2/ h=12x i=3- j=7+ k=30x l=6+ m=1- n=1- o=1- p=1- q=2- r=2/ s=6
+a a b c c d
+e f b g g h
+e f i j k h
+l l i j k m
+n n o p q m
+r r o p q s
+# 3 6 1 2 4 5
+# 5 3 6 1 2 4
+# 6 1 2 4 5 3
+# 2 4 5 3 6 1
+# 4 5 3 6 1 2
+# 1 2 4 5 3 6
+# Difficulty: 1
+
+# 76.
+a=7+ b=1- c=4+ d=3- e=1- f=3+ g=6 h=1- i=11+ j=2- k=7+ l=4 m=3/ n=2- o=6+ p=3- q=5/ r=4 s=12x t=1
+a a b b c d
+e e f g c d
+h i f j k k
+h i l j m m
+n o p q q r
+n o p s s t
+# 6 1 5 4 3 2
+# 4 3 2 6 1 5
+# 2 6 1 5 4 3
+# 1 5 4 3 2 6
+# 3 2 6 1 5 4
+# 5 4 3 2 6 1
+# Difficulty: 1
+
+# 77.
+a=3- b=2x c=96x d=3 e=13+ f=60x g=3 h=30x i=72x j=2x k=8+ l=3- m=60x n=2- o=3
+a b b c c d
+a b e c f f
+g e e h h f
+i i i h j j
+k k l l j m
+k n n o m m
+# 5 2 1 6 4 3
+# 2 1 6 4 3 5
+# 3 5 2 1 6 4
+# 6 4 3 5 2 1
+# 4 3 5 2 1 6
+# 1 6 4 3 5 2
+# Difficulty: 1
+
+# 78.
+a=15x b=10x c=48x d=2- e=30x f=10+ g=3x h=36x i=14+ j=40x k=32x l=6 m=1 n=5 o=3/
+a b b c d d
+a a b c c e
+f f g g e e
+h h g i j j
+h k l i m j
+n k k i o o
+# 3 1 5 2 4 6
+# 1 5 2 4 6 3
+# 4 6 3 1 5 2
+# 6 3 1 5 2 4
+# 2 4 6 3 1 5
+# 5 2 4 6 3 1
+# Difficulty: 1
+
+# 79.
+a=2/ b=3- c=2- d=4+ e=1 f=2/ g=10x h=6 i=9+ j=2- k=2- l=30x m=6+ n=9+ o=1- p=1- q=1 r=6/ s=2 t=20x
+a a b c d d
+e f b c g h
+i f j j g k
+i l l m n k
+o o p m n q
+r r p s t t
+# 2 4 5 6 1 3
+# 1 3 2 4 5 6
+# 5 6 1 3 2 4
+# 4 5 6 1 3 2
+# 3 2 4 5 6 1
+# 6 1 3 2 4 5
+# Difficulty: 1
+
+# 80.
+a=14+ b=20x c=7+ d=36x e=7+ f=11+ g=5/ h=20x i=14+ j=3 k=2- l=2- m=3- n=4 o=3/
+a a a b b c
+d d d b c c
+e e f f g g
+e h f i j k
+l h m i i k
+l h m n o o
+# 6 3 5 1 4 2
+# 2 6 3 5 1 4
+# 4 2 6 3 5 1
+# 1 4 2 6 3 5
+# 5 1 4 2 6 3
+# 3 5 1 4 2 6
+# Difficulty: 2
+
+# 81.
+a=2- b=6x c=1- d=7+ e=6 f=20x g=1- h=4+ i=2- j=18x k=4/ l=1- m=30x n=1- o=4- p=1 q=3- r=5/ s=8x
+a a b c d e
+f g b c d h
+f g i i j h
+k k l m j n
+o o l m p n
+q q r r s s
+# 3 5 1 4 2 6
+# 4 2 6 3 5 1
+# 5 1 4 2 6 3
+# 1 4 2 6 3 5
+# 2 6 3 5 1 4
+# 6 3 5 1 4 2
+# Difficulty: 1
+
+# 82.
+a=1- b=3- c=2/ d=6x e=3 f=1- g=4- h=3- i=1- j=1 k=1- l=2/ m=20x n=5+ o=2 p=9+ q=1- r=1 s=3+ t=20x
+a b c d e f
+a b c d g f
+h i i j g k
+h l m m n k
+o l p q n r
+s s p q t t
+# 5 4 1 2 3 6
+# 4 1 2 3 6 5
+# 6 5 4 1 2 3
+# 3 6 5 4 1 2
+# 2 3 6 5 4 1
+# 1 2 3 6 5 4
+# Difficulty: 1
+
+# 83.
+a=4 b=180x c=15x d=75x e=48x f=14+ g=24x h=18+ i=3- j=17+ k=2 l=5+
+a b b c c c
+b b d e e e
+f g d d e h
+f g d i i h
+f g j k h h
+f j j j l l
+# 4 6 2 3 5 1
+# 3 5 1 4 6 2
+# 6 2 3 5 1 4
+# 2 3 5 1 4 6
+# 1 4 6 2 3 5
+# 5 1 4 6 2 3
+# Difficulty: 4
+
+# 84.
+a=14+ b=8x c=180x d=30x e=1- f=5 g=144x h=180x i=9+ j=360x k=4+ l=4
+a b b c c d
+a b e c c d
+a b e f g g
+a h h i g g
+j h h i k k
+j j j i k l
+# 6 2 1 4 3 5
+# 2 1 4 3 5 6
+# 1 4 3 5 6 2
+# 5 6 2 1 4 3
+# 4 3 5 6 2 1
+# 3 5 6 2 1 4
+# Difficulty: 2
+
+# 85.
+a=2- b=2x c=1- d=5 e=2- f=5- g=2 h=15x i=6/ j=8x k=2x l=1- m=1- n=1- o=1- p=1- q=2/ r=3 s=1- t=1
+a b b c c d
+a e e f f g
+h h i i j j
+k k l l m m
+n n o o p p
+q q r s s t
+# 6 1 2 4 3 5
+# 4 3 5 6 1 2
+# 3 5 6 1 2 4
+# 1 2 4 3 5 6
+# 5 6 1 2 4 3
+# 2 4 3 5 6 1
+# Difficulty: 1
+
+# 86.
+a=1 b=180x c=14+ d=16x e=1- f=48x g=2- h=90x i=15+ j=9+ k=180x
+a b b c c c
+d b b c e e
+d d d f g g
+h h h f f f
+i i j k k k
+i i j j j k
+# 1 6 5 3 4 2
+# 2 1 6 5 3 4
+# 4 2 1 6 5 3
+# 6 5 3 4 2 1
+# 3 4 2 1 6 5
+# 5 3 4 2 1 6
+# Difficulty: 7
+
+# 87.
+a=3/ b=4/ c=5 d=1- e=5x f=1- g=8+ h=1- i=1- j=6 k=2/ l=2/ m=1- n=4/ o=3 p=1- q=1- r=6x s=5- t=5
+a a b c d d
+e e b f g g
+h i i f j k
+h l m n o k
+p l m n q q
+p r r s s t
+# 2 6 1 5 4 3
+# 1 5 4 3 2 6
+# 5 4 3 2 6 1
+# 6 1 5 4 3 2
+# 3 2 6 1 5 4
+# 4 3 2 6 1 5
+# Difficulty: 1
+
+# 88.
+a=8+ b=13+ c=2- d=8+ e=2x f=14+ g=13+ h=5 i=9+ j=14+ k=12x l=8x m=1 n=2/ o=5
+a b b b c d
+a a e f c d
+g h e f f d
+g i j k k k
+g i j j l l
+m i n n l o
+# 2 6 3 4 5 1
+# 5 1 2 6 3 4
+# 4 5 1 2 6 3
+# 3 4 5 1 2 6
+# 6 3 4 5 1 2
+# 1 2 6 3 4 5
+# Difficulty: 3
+
+# 89.
+a=12x b=10+ c=60x d=50x e=48x f=11+ g=2/ h=2- i=11+ j=12+ k=18x l=4 m=8+ n=3
+a a a b c c
+d d b b e c
+f d g g e e
+f h h i i j
+f k k i j j
+l k m m m n
+# 1 3 4 6 5 2
+# 5 2 1 3 4 6
+# 6 5 2 1 3 4
+# 3 4 6 5 2 1
+# 2 1 3 4 6 5
+# 4 6 5 2 1 3
+# Difficulty: 2
+
+# 90.
+a=3 b=120x c=6+ d=1- e=2/ f=8+ g=15+ h=24x i=6+ j=5 k=72x l=12x m=3- n=60x o=5
+a b b b c c
+d d e e c f
+g g g h f f
+i i h h j k
+l i m n k k
+l l m n n o
+# 3 4 5 6 2 1
+# 5 6 2 1 3 4
+# 4 5 6 2 1 3
+# 2 1 3 4 5 6
+# 1 3 4 5 6 2
+# 6 2 1 3 4 5
+# Difficulty: 4
+
+# 91.
+a=3x b=3- c=2/ d=6/ e=15x f=1- g=1- h=2/ i=5- j=7+ k=3- l=6/ m=1- n=6 o=2- p=1- q=7+ r=4 s=6x
+a a b c c d
+e e b f g d
+h i i f g j
+h k l l m j
+n k o o m p
+q q r s s p
+# 1 3 5 2 4 6
+# 3 5 2 4 6 1
+# 4 6 1 3 5 2
+# 2 4 6 1 3 5
+# 6 1 3 5 2 4
+# 5 2 4 6 1 3
+# Difficulty: 1
+
+# 92.
+a=6x b=13+ c=80x d=45x e=40x f=30x g=9+ h=9+ i=11+ j=120x k=2- l=4 m=6+
+a b b c d d
+a b c c d e
+a f g g e e
+f f g h h i
+j j k h i i
+j l k m m m
+# 2 1 6 4 5 3
+# 1 6 4 5 3 2
+# 3 2 1 6 4 5
+# 5 3 2 1 6 4
+# 4 5 3 2 1 6
+# 6 4 5 3 2 1
+# Difficulty: 1
+
+# 93.
+a=360x b=14+ c=4- d=14+ e=720x f=450x g=10+ h=2- i=2- j=6
+a a b b c c
+a a b b d d
+a e b f d d
+e e e f f d
+g g e f f h
+g g i i j h
+# 5 1 3 4 2 6
+# 2 6 5 1 3 4
+# 6 5 1 3 4 2
+# 3 4 2 6 5 1
+# 4 2 6 5 1 3
+# 1 3 4 2 6 5
+# Difficulty: 8
+
+# 94.
+a=150x b=3/ c=12+ d=15+ e=15+ f=5 g=72x h=11+ i=2 j=2- k=10x l=3/ m=4x
+a a b b c c
+a a d d c c
+e e d f g g
+e h d i g g
+e h h h j k
+l l m m j k
+# 3 5 2 6 1 4
+# 5 2 6 1 4 3
+# 1 4 3 5 2 6
+# 4 3 5 2 6 1
+# 6 1 4 3 5 2
+# 2 6 1 4 3 5
+# Difficulty: 6
+
+# 95.
+a=14+ b=8+ c=40x d=12+ e=10+ f=1 g=15+ h=6+ i=2 j=5 k=9+ l=3/ m=12+ n=1- o=8x
+a a b b c c
+a d b e c f
+d d g e e h
+i g g j h h
+k l l m m n
+k k o o m n
+# 6 5 1 3 2 4
+# 3 2 4 6 5 1
+# 4 6 5 1 3 2
+# 2 4 6 5 1 3
+# 5 1 3 2 4 6
+# 1 3 2 4 6 5
+# Difficulty: 2
+
+# 96.
+a=48x b=10+ c=10x d=3 e=3- f=72x g=10+ h=60x i=6+ j=6x k=6 l=10x m=2- n=20x o=3
+a b b b c d
+a a e e c c
+f f g g g h
+i f j j h h
+i i k l l m
+n n n l o m
+# 6 5 1 4 2 3
+# 4 2 3 6 5 1
+# 3 6 5 1 4 2
+# 1 4 2 3 6 5
+# 2 3 6 5 1 4
+# 5 1 4 2 3 6
+# Difficulty: 1
+
+# 97.
+a=9+ b=15+ c=5 d=120x e=3/ f=15+ g=14+ h=10+ i=180x j=1- k=6 l=3-
+a a a b b c
+d a e b f f
+d d e b f f
+d g g h h h
+g g i j h k
+i i i j l l
+# 3 4 1 6 2 5
+# 4 1 6 2 5 3
+# 1 6 2 5 3 4
+# 5 3 4 1 6 2
+# 2 5 3 4 1 6
+# 6 2 5 3 4 1
+# Difficulty: 8
+
+# 98.
+a=30x b=9+ c=24x d=20x e=30x f=13+ g=48x h=5 i=18x j=11+ k=11+ l=4/ m=3 n=3-
+a a b c c d
+a b b c e d
+f g g h e d
+f f g i e j
+k k i i l j
+k m n n l j
+# 3 5 2 1 6 4
+# 2 1 6 4 3 5
+# 6 4 3 5 2 1
+# 1 6 4 3 5 2
+# 5 2 1 6 4 3
+# 4 3 5 2 1 6
+# Difficulty: 6
 
 # 99.
-a=288x b=15+ c=1 d=72x e=1- f=9+ g=3/ h=13+ i=144x j=13+ k=72x
-a a b c d e
-a a b b d e
-f f b d d g
-f h h i i g
-f h h i j j
-k k k i j j
-# 6 2 5 1 3 4
-# 4 6 2 5 1 3
-# 5 1 3 4 6 2
-# 2 5 1 3 4 6
-# 1 3 4 6 2 5
-# 3 4 6 2 5 1
+a=5x b=144x c=8+ d=10+ e=20x f=2 g=12+ h=9+ i=3- j=20x k=30x l=5x m=2- n=6
+a a b b c d
+a e b c c d
+f e e g g d
+h i i g j j
+h h k l j m
+n k k l l m
+# 5 1 4 6 3 2
+# 1 4 6 3 2 5
+# 2 5 1 4 6 3
+# 4 6 3 2 5 1
+# 3 2 5 1 4 6
+# 6 3 2 5 1 4
+# Difficulty: 1
 
 # 100.
-a=10+ b=40x c=8+ d=12x e=15+ f=13+ g=20x h=9x i=6 j=40x k=12+ l=48x m=3x
-a a a b b b
-c c d d e e
-c f d g e h
-i f g g h h
-j f k k l l
-j j k m m l
-# 3 1 6 4 2 5
-# 2 5 3 1 6 4
-# 1 6 4 2 5 3
-# 6 4 2 5 3 1
-# 5 3 1 6 4 2
-# 4 2 5 3 1 6
+a=160x b=432x c=10+ d=10x e=10+ f=18+ g=3 h=2 i=48x j=19+ k=10x
+a a a b c c
+d a b b c c
+d d e b f f
+g d e h f i
+j j e k f i
+j j k k k i
+# 5 2 4 6 3 1
+# 2 4 6 3 1 5
+# 1 5 2 4 6 3
+# 3 1 5 2 4 6
+# 4 6 3 1 5 2
+# 6 3 1 5 2 4
+# Difficulty: 5
 
-# Cage size, Specified proportion, Associative probability
-# [0:0.000, 1:0.050, 2:0.350, 3:0.350, 4:0.200, 5:0.050], 0.100, 0.333
+# Cage size, Single cell cage proportion, Associative probability
+# [0:0.000, 1:0.050, 2:0.350, 3:0.350, 4:0.200, 5:0.050], 0.200, 0.333
 # Unique solutions, maximum search 1000
+# Average difficulty: 2.600
 # Cage Size Macro Average:
-# 1: 0.069
-# 2: 0.236
-# 3: 0.407
-# 4: 0.245
-# 5: 0.043
+# 1: 0.167
+# 2: 0.386
+# 3: 0.341
+# 4: 0.086
+# 5: 0.019
