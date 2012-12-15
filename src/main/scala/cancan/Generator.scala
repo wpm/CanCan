@@ -252,7 +252,7 @@ object Generator {
    */
   def generate(args: Array[String]) {
     val usage =
-      """generate [-n] puzzles size
+      """generate [-n|-m|-c|-s|-a] puzzles size
         |
         |Generate puzzles. By default generate puzzles with unique solutions.
         |

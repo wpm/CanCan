@@ -11,7 +11,7 @@ object Analyzer {
    */
   def analyze(args: Array[String]) {
     val usage =
-      """analyze [-l] file
+      """analyze [-l|-c] file
         |
         |Count the number of partial solutions in a set of puzzles.
         |
