@@ -36,7 +36,7 @@ abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
     def search(grid: Grid, strategy: ConstraintStrategy): TraversableView[Grid, Traversable[_]] = {
       def nextGrids(grid: Grid): TraversableView[Grid, Traversable[_]] = {
         for {cell <- guessCell(grid, puzzle).toTraversable.view
-             value <- grid(cell).toSeq.sorted.par
+             value <- guessValue(grid, cell).par
              next <- strategy(grid + (cell -> Set(value)), strategy.constraintMap(cell))}
         yield next
       }
@@ -51,7 +51,15 @@ abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
     }
   }
 
-  protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell]
+  protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell] = {
+    val u = grid.unsolved
+    if (u.isEmpty) None
+    else Some(u.toSeq.map {
+      case (cell, values) => (values.size, cell)
+    }.min._2)
+  }
+
+  protected def guessValue(grid: Grid, cell: Cell): Seq[Int] = grid(cell).toSeq.sorted
 }
 
 /**
@@ -59,14 +67,6 @@ abstract class SearchStrategy(strategyFactory: (Puzzle => ConstraintStrategy))
  */
 case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
   extends SearchStrategy(constraintStrategy) {
-
-  override protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell] = {
-    val u = grid.unsolved
-    if (u.isEmpty) None
-    else Some(u.toSeq.map {
-      case (cell, values) => (values.size, cell)
-    }.min._2)
-  }
 }
 
 /**
@@ -90,4 +90,29 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
     Map[Option[Constraint], Int]().withDefaultValue(0) ++
       puzzle.containingCages.values.map(cage => Some(cage) -> (1 /: cage.cells.map(grid(_).size))(_ * _))
   }
+}
+
+/**
+ * An oracle solver uses the puzzle answer to always guess the correct value when searching.
+ *
+ * The solution specified to the constructor must be a solution for any puzzle this solver attempts.
+ *
+ * @param solution solution to the puzzle that will be solved
+ * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
+ */
+case class OracleSolver(solution: Grid, strategyFactory: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
+  extends SearchStrategy(strategyFactory) {
+  require(solution.isSolved, "Oracle solution is ambiguous\n" + solution)
+
+  override protected def guessValue(grid: Grid, cell: Cell): Seq[Int] = solution(cell).toSeq
+
+  /**
+   * The difficulty of this puzzle
+   *
+   * This is defined to be the number of search steps required by an oracle solver
+   *
+   * @param puzzle puzzle to evaluate
+   * @return puzzle difficulty
+   */
+  def difficulty(puzzle: Puzzle): Int = this(puzzle).size
 }

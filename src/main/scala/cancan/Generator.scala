@@ -18,6 +18,8 @@ import cancan.Generator.Multinomial.NumberListParser
  * is adjacent to the ones with which it shares an edge. The sizes of the connected components range between one and
  * four and no more than 5% of the cells will be specified constraints. If necessary this procedure is repeated until
  * a unique solution is found.
+ *
+ * The difficulty of a generated puzzle is the number of steps it takes the [[cancan.OracleSolver]] to solve it.
  */
 object Generator {
   /**
@@ -338,7 +340,8 @@ object Generator {
     var macroCageSize = Map[Int, Int]()
     var totalCages = 0
     for (((puzzle, solution), i) <- puzzles.zipWithIndex) {
-      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend("# ", tableToString(solution)) + "\n")
+      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend("# ", tableToString(solution)))
+      println("# Difficulty: " + OracleSolver(solution).difficulty(puzzle) + "\n")
       macroCageSize = mapSum(macroCageSize, puzzle.cageSizes)
       totalCages += puzzle.cageConstraints.size
     }

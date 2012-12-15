@@ -34,38 +34,43 @@ The `solve` command solves a set of puzzles.
 The `generate` command generates a set of puzzles of a specified size.
 
 	> java -jar target/CanCan-assembly-1.0.jar generate 2 5
-	# 1.
-	a=10+ b=8+ c=60x d=8+ e=7+ f=2 g=20x h=24x i=3 j=5x
-	a b b c c
-	a b d c e
-	a d d f e
-	g g h h e
-	g i h j j
-	# 2 1 5 4 3
-	# 3 2 1 5 4
-	# 5 4 3 2 1
-	# 1 5 4 3 2
-	# 4 3 2 1 5
+    # 1.
+    a=9+ b=48x c=5 d=8x e=10x f=8+ g=8+ h=8x i=6x j=2-
+    a b b c d
+    a b e e d
+    a f f g d
+    h f i g j
+    h h i g j
+    # 1 3 4 5 2
+    # 3 4 5 2 1
+    # 5 2 1 3 4
+    # 4 5 2 1 3
+    # 2 1 3 4 5
+    # Difficulty: 1
 
-	# 2.
-	a=8+ b=11+ c=24x d=25x e=6x f=2 g=9+ h=12x i=5x j=5
-	a b b b c
-	a a d d c
-	e e d f c
-	e g g h i
-	j g h h i
-	# 1 5 2 4 3
-	# 4 3 1 5 2
-	# 3 1 5 2 4
-	# 2 4 3 1 5
-	# 5 2 4 3 1
+    # 2.
+    a=10+ b=4- c=8+ d=8+ e=24x f=11+ g=5+ h=10x i=3 j=3-
+    a b b c c
+    a d d c e
+    a d f e e
+    g f f h h
+    g i j j h
+    # 2 5 1 4 3
+    # 3 2 5 1 4
+    # 5 1 4 3 2
+    # 1 4 3 2 5
+    # 4 3 2 5 1
+    # Difficulty: 1
 
+    # Cage size, Specified proportion, Associative probability
+    # [0:0.000, 1:0.050, 2:0.350, 3:0.350, 4:0.200, 5:0.050], 0.100, 0.333
+    # Unique solutions, maximum search 1000
+    # Cage Size Macro Average:
+    # 1: 0.100
+    # 2: 0.300
+    # 3: 0.600
 
-	# 1:0.200
-	# 2:0.100
-	# 3:0.700
-
-The `analyze` command is used to analyze the difficulty of a set of puzzles.
+The `analyze` command inspects the details of the search procedure used to solve a set of puzzles.
 
 In the build directory the `sbt run` command can also be used to run the program.
 
