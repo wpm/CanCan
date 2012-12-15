@@ -1,7 +1,7 @@
 CanCan - a KenKen Solver and Generator
 ======================================
 
-CanCan is a solver and generator of [KenKen](http://www.kenken.com) puzzles.
+[CanCan](http://wpm.github.com/CanCan) is a solver and generator of [KenKen](http://www.kenken.com) puzzles.
 
 The objective of KenKen puzzles is to completely fill an _n_ x _n_ grid with the numbers 1 to _n_.
 Each row and column must contain a unique set of numbers.
