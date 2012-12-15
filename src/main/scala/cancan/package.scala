@@ -33,7 +33,7 @@ package object cancan {
   /**
    * All the solutions of the puzzle up to `max` partial solution states.
    *
-   * This is used to abandon difficult to solve puzzles after a finite amount of time.
+   * This is used to abandon difficult puzzles after a finite amount of time.
    *
    * @param max the maximum number of partial solutions to search
    * @param strategy a search strategy, by default [[cancan.OrderByCellSize]]
@@ -50,6 +50,7 @@ package object cancan {
 
   /**
    * Read in a file, treating # as a comment delimiter and skipping leading blank lines.
+   *
    * @param filename name of the file
    * @return file reader
    */
