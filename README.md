@@ -1,5 +1,5 @@
-CanCan - a KenKen Solver
-========================
+CanCan - a KenKen Solver and Generator
+======================================
 
 CanCan is a solver and generator of [KenKen](http://www.kenken.com) puzzles.
 
