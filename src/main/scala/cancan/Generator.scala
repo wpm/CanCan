@@ -336,15 +336,19 @@ object Generator {
 
     var macroCageSize = Map[Int, Int]()
     var totalCages = 0
+    var totalDifficulty = 0
     for (((puzzle, solution), i) <- puzzles.zipWithIndex) {
       println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend("# ", tableToString(solution)))
-      println("# Difficulty: " + OracleSolver(solution).difficulty(puzzle) + "\n")
+      val difficulty = OracleSolver(solution).difficulty(puzzle)
+      println("# Difficulty: " + difficulty + "\n")
+      totalDifficulty += difficulty
       macroCageSize = mapSum(macroCageSize, puzzle.cageSizes)
       totalCages += puzzle.cageConstraints.size
     }
     println(prepend("# ", "Cage size, Specified proportion, Associative probability\n%s, %.3f, %.3f".format(
       cageSize, specifiedProportion, associativeProbability)))
     println(prepend("# ", if (unique) "Unique solutions, maximum search " + maxSearch else "Non-unique solutions"))
+    println("# Average difficulty: %.3f".format(totalDifficulty / numPuzzles.toDouble))
     println(prepend("# ", "Cage Size Macro Average:\n" +
       averagesTable(Map() ++ macroCageSize.map(kv => (kv._1 -> kv._2 / totalCages.toDouble)))))
   }
