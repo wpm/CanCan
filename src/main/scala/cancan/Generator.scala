@@ -2,7 +2,7 @@ package cancan
 
 import annotation.tailrec
 import scala.util.Random._
-import util.parsing.combinator.RegexParsers
+import util.parsing.combinator.JavaTokenParsers
 import cancan.Generator.Multinomial.NumberListParser
 
 /**
@@ -237,15 +237,12 @@ object Generator {
   object Multinomial {
     def apply(s: String): Multinomial = Multinomial(s.split(",").map(_.toDouble): _*)
 
-    object NumberListParser extends RegexParsers {
-      def number: Parser[Double] = """\d+(\.\d*)?""".r ^^ (_.toDouble)
+    object NumberListParser extends JavaTokenParsers {
+      def number: Parser[Double] = decimalNumber ^^ (_.toDouble)
 
       def numbers: Parser[List[Double]] = rep1sep(number, ",")
 
-      def matches(s: String): Boolean = parseAll(numbers, s) match {
-        case _: Success[_] => true
-        case _ => false
-      }
+      def matches(s: String): Boolean = parseAll(numbers, s).successful
     }
 
   }
