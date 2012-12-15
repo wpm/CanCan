@@ -15,8 +15,8 @@ import cancan.Generator.Multinomial.NumberListParser
  * 3. An operation is randomly assigned to each cell and the value is calculated.
  *
  * To generate the cages in step (2), find the connected components of a random sub-graph of a graph where every cell
- * is adjacent to the ones with which it shares an edge. The sizes of the connected components range between one and
- * four and no more than 5% of the cells will be specified constraints. If necessary this procedure is repeated until
+ * is adjacent to the ones with which it shares an edge. The caller can specify a distribution from which cage sizes
+ * are drawn and a maximum proportion of single-cell cages per puzzle. If necessary this procedure is repeated until
  * a unique solution is found.
  *
  * The difficulty of a generated puzzle is the number of steps it takes the [[cancan.OracleSolver]] to solve it.
