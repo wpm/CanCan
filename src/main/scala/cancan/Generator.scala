@@ -25,19 +25,19 @@ object Generator {
   /**
    * Maximum number of partial solutions before abandoning a generated puzzle
    */
-  private val defaultMaxSearch = 1000
+  val defaultMaxSearch = 1000
   /**
    * Default distribution of cage sizes
    */
-  private val defaultCageSizeDistribution = Multinomial(0, 0.05, 0.35, 0.35, 0.2, 0.05)
+  val defaultCageSizeDistribution = Multinomial(0, 0.05, 0.35, 0.35, 0.2, 0.05)
   /**
    * Portion of cages that may consist of a single cell
    */
-  private val defaultSingleCellProportion = 0.2
+  val defaultSingleCellProportion = 0.2
   /**
    * Probability of assigning an associative operator to a 2-cell cage
    */
-  private val defaultAssociativeProbability = 1 / 3.0
+  val defaultAssociativeProbability = 1 / 3.0
 
   /**
    * Generate a random puzzle and its unique solution.
