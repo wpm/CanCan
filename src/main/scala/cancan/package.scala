@@ -27,7 +27,7 @@ package object cancan {
    * @return the puzzle's solutions
    */
   def solutions(implicit puzzle: Puzzle, solver: Solver = OrderByCellSize()): Stream[Markup] =
-    solver(puzzle).filter(_.isSolved).toStream
+    solver(puzzle).filter(_.isSolution).toStream
 
   /**
    * All the solutions of the puzzle up to `max` partial solution states.
@@ -42,7 +42,7 @@ package object cancan {
                       max: Int,
                       solver: Solver = OrderByCellSize()): (Stream[Markup], Boolean) = {
     val partialSolutions = solver(puzzle)
-    (partialSolutions.take(max).filter(_.isSolved).toStream, partialSolutions.drop(max).isEmpty)
+    (partialSolutions.take(max).filter(_.isSolution).toStream, partialSolutions.drop(max).isEmpty)
   }
 
   implicit def stringToPuzzle(s: String): Puzzle = Puzzle(s)

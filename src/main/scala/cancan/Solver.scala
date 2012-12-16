@@ -103,7 +103,7 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
  */
 case class OracleSolver(solution: Markup, strategyFactory: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
   extends Solver(strategyFactory) {
-  require(solution.isSolved, "Oracle solution is ambiguous\n" + solution)
+  require(solution.isSolution, "Oracle solution is ambiguous\n" + solution)
 
   override protected def guessValue(markup: Markup, cell: Cell): Seq[Int] = solution(cell).toSeq
 

@@ -50,7 +50,7 @@ object Analyzer {
     var all = 0.0
     puzzles.zipWithIndex.foreach {
       case (puzzle, i) =>
-        val partialSolutions = searchStrategy(puzzle).toSeq.zipWithIndex.filter(_._1.isSolved)
+        val partialSolutions = searchStrategy(puzzle).toSeq.zipWithIndex.filter(_._1.isSolution)
         val s = for ((partialSolutionIndex, solution) <- partialSolutions.map(_._2).zipWithIndex)
         yield (solution + 1, partialSolutionIndex + 1)
         first += s.head._2

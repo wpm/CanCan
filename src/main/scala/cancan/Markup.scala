@@ -13,9 +13,9 @@ import scala.util.parsing.input.Reader
  */
 case class Markup private(n: Int, markup: Vector[Vector[Set[Int]]]) {
   /**
-   * A markup is solved if all its cells contain a single value.
+   * A markup is a solution if all its cells contain a single value.
    */
-  def isSolved: Boolean = markup.flatten.forall(_.size == 1)
+  def isSolution: Boolean = markup.flatten.forall(_.size == 1)
 
   /**
    * The unsolved cells in the markup
