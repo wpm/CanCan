@@ -65,11 +65,11 @@ The `generate` command generates a set of puzzles of a specified size.
     # Cage size, Single cell cage proportion, Associative probability
     # [0:0.000, 1:0.050, 2:0.350, 3:0.350, 4:0.200, 5:0.050], 0.200, 0.333
     # Unique solutions, maximum search 1000
-    # Average difficulty: 1.000
+    # Average difficulty: 1.0
     # Cage Size Macro Average:
-    # 1: 0.100
-    # 2: 0.300
-    # 3: 0.600
+    # 1: 0.1000
+    # 2: 0.3000
+    # 3: 0.6000
 
 The `analyze` command inspects the details of the search procedure used to solve a set of puzzles.
 
