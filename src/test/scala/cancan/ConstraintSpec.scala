@@ -8,7 +8,7 @@ import org.scalatest.FlatSpec
 class ConstraintSpec extends FlatSpec {
   behavior of "A rank constraint"
 
-  def r5Fixture = PreemptiveSetConstraint(Grid.row(5)(1))
+  def r5Fixture = PreemptiveSetConstraint(Markup.row(5)(1))
 
   it should "have a size equal to the puzzle dimension" in {
     expect(5) {
@@ -22,37 +22,37 @@ class ConstraintSpec extends FlatSpec {
       (Cell(1, 3), Set(2, 3, 4, 5)),
       (Cell(1, 4), Set(2, 3, 4, 5)),
       (Cell(1, 5), Set(2, 3, 4, 5))))) {
-      val g = Grid(
+      val m = Markup(
         """1 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345""".stripMargin)
-      r5Fixture(g)
+      r5Fixture(m)
     }
   }
 
   it should "handle multiple pemutation sets" in {
     expect(Some(List((Cell(1, 5), Set(5))))) {
-      val g = Grid(
+      val m = Markup(
         """12 12 34 34 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345""".stripMargin)
-      r5Fixture(g)
+      r5Fixture(m)
     }
   }
 
   it should "do nothing if there are no permuation sets" in {
     expect(Some(Nil)) {
-      val g = Grid(
+      val m = Markup(
         """12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345""".stripMargin)
-      r5Fixture(g)
+      r5Fixture(m)
     }
   }
 
@@ -60,26 +60,26 @@ class ConstraintSpec extends FlatSpec {
 
   it should "detect an invalid configuration with multiple solved cells" in {
     expect(None) {
-      val g = Grid(
+      val m = Markup(
         """1 12345 12345 12345 1
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345""".stripMargin)
-      AllDifferentConstraint(Grid.row(5)(1))(g)
+      AllDifferentConstraint(Markup.row(5)(1))(m)
     }
   }
 
   it should "leave the row (23 5 6 4 3 2) unchanged" in {
     expect(Some(Nil)) {
-      val g = Grid(
+      val m = Markup(
         """23 5 6 4 3 2
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456""".stripMargin)
-      AllDifferentConstraint(Grid.row(6)(1))(g)
+      AllDifferentConstraint(Markup.row(6)(1))(m)
     }
   }
 
@@ -106,7 +106,7 @@ class ConstraintSpec extends FlatSpec {
 
   it should "Constrain 1234 1234 1234 to 123 123 123" in {
     expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
-      times6(Grid(4))
+      times6(Markup(4))
     }
   }
 
@@ -131,13 +131,13 @@ class ConstraintSpec extends FlatSpec {
 
   it should "Constrain 1234 1234 1234 to 123 123 123" in {
     expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
-      plus5(Grid(4))
+      plus5(Markup(4))
     }
   }
 
   it should "Constrain 1 23 123 to 1 23 123" in {
     expect(Some(Nil)) {
-      plus5(Grid(4) ++ List((Cell(1, 1), Set(1)), (Cell(1, 2), Set(2, 3)), (Cell(2, 1), Set(1, 2))))
+      plus5(Markup(4) ++ List((Cell(1, 1), Set(1)), (Cell(1, 2), Set(2, 3)), (Cell(2, 1), Set(1, 2))))
     }
   }
 
@@ -153,7 +153,7 @@ class ConstraintSpec extends FlatSpec {
 
   behavior of "Preemptive set constraints"
 
-  def preemptiveFixture = PreemptiveSetConstraint(Grid.row(6)(1))
+  def preemptiveFixture = PreemptiveSetConstraint(Markup.row(6)(1))
 
   it should "remove invalid candidates" in {
     expect(Some(List(
@@ -161,7 +161,7 @@ class ConstraintSpec extends FlatSpec {
       (Cell(1, 5), Set(5, 6)),
       (Cell(1, 6), Set(5, 6))
     ))) {
-      preemptiveFixture(Grid(
+      preemptiveFixture(Markup(
         """123 1234 12 23 123456 123456
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456
@@ -171,9 +171,9 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  it should "do nothing to an invalid grid" in {
+  it should "do nothing to an invalid markup" in {
     expect(Some(Nil)) {
-      preemptiveFixture(Grid(
+      preemptiveFixture(Markup(
         """1 1 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456
           |123456 123456 123456 123456 123456 123456

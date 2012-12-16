@@ -23,7 +23,7 @@ import cancan.Generator.Multinomial.NumberListParser
  */
 object Generator {
   /**
-   * Maximum number of partial solutions before abandoning a generated grid
+   * Maximum number of partial solutions before abandoning a generated puzzle
    */
   private val defaultMaxSearch = 1000
   /**
@@ -95,7 +95,7 @@ object Generator {
   }
 
   /**
-   * Generate a random cage constraint from a cage and a solution grid
+   * Generate a random cage constraint from a cage and a solution.
    */
   private def randomCageConstraint(solution: Seq[Seq[Int]],
                                    cage: Seq[Cell],
@@ -131,6 +131,7 @@ object Generator {
    * Generate a random Latin Square.
    *
    * Write a random permutation in the first row, generate successive rows by rotation, then shuffle the rows.
+   *
    * @param n the size of the Latin Square
    * @return a random Latin Square
    */
@@ -142,13 +143,14 @@ object Generator {
   }
 
   /**
-   * Randomly group adjacent cells in a grid into cages
-   * @param cells cells in the grid
+   * Randomly group adjacent cells in a markup into cages.
+   *
+   * @param cells cells in the markup
    * @param cageSize distribution from which to sample cage sizes
    * @return sets of cells in cages
    */
   private def randomCageLayout(cells: Seq[Cell], cageSize: Multinomial): Set[Set[Cell]] = {
-    // Create a random graph between adjacent cells in a grid
+    // Create a random graph between adjacent cells in a markup
     val edges = {
       /**
        * Given a cell, choose a random set of adjacent cells and create symmetric edges between them.
@@ -338,7 +340,7 @@ object Generator {
     var totalCages = 0
     var totalDifficulty = 0
     for (((puzzle, solution), i) <- puzzles.zipWithIndex) {
-      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend("# ", tableToString(solution)))
+      println("# " + (i + 1) + ".\n" + puzzle + "\n" + prepend("# ", matrixToString(solution)))
       val difficulty = OracleSolver(solution).difficulty(puzzle)
       println("# Difficulty: " + difficulty + "\n")
       totalDifficulty += difficulty

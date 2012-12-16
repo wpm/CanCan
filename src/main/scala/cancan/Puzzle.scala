@@ -25,13 +25,14 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
   lazy private val validator = LatinSquare(this)
 
   /**
-   * Does the specified grid satisfy all the constraints in this puzzle?
+   * Does the specified markup satisfy all the constraints in this puzzle?
    *
    * This function is provided as a debugging utility to check that the solver is returning the correct answers.
-   * @param grid the grid to check
-   * @return `true` if the grid satisfies the constrains, `false` if any constraints are violated
+   *
+   * @param markup the markup to check
+   * @return `true` if the markup satisfies the constrains, `false` if any constraints are violated
    */
-  def isPossibleSolution(grid: Grid): Boolean = validator(grid) != None
+  def isPossibleSolution(markup: Markup): Boolean = validator(markup) != None
 
   /**
    * Counts of cage sizes in the puzzle
@@ -76,11 +77,11 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
     val table = for (r <- (1 to n)) yield {
       for (c <- (1 to n); cell = Cell(r, c)) yield cellToName.getOrElse(cell, ".")
     }
-    // List of cage constraints followed by grid of letters representing cages.
+    // List of cage constraints followed by markup of letters representing cages.
     val cageKey = cageToName.map {
       case (cage, name) => name + "=" + cage
     }.toSeq.sorted.mkString(" ")
-    (if (!cageKey.isEmpty) cageKey + "\n" else "") + tableToString(table)
+    (if (!cageKey.isEmpty) cageKey + "\n" else "") + matrixToString(table)
   }
 
   /**
@@ -122,10 +123,10 @@ object Puzzle {
     // a a b
     // a b b
     // c c d
-    def table: Parser[Map[String, Seq[Cell]]] = rep(row) ^^ {
+    def matrix: Parser[Map[String, Seq[Cell]]] = rep(row) ^^ {
       labels: List[List[String]] =>
         val n = labels.length
-        require(labels.forall(_.length == n), "The table is not square:\n" + labels)
+        require(labels.forall(_.length == n), "The matrix is not square:\n" + labels)
         val labeledCells = for ((row, r) <- labels.zipWithIndex;
                                 (label, c) <- row.zipWithIndex)
         yield (label, Cell(r + 1, c + 1))
@@ -138,9 +139,9 @@ object Puzzle {
     // a a b
     // a b b
     // c c d
-    def puzzle: Parser[Puzzle] = cages ~ table ^^ {
+    def puzzle: Parser[Puzzle] = cages ~ matrix ^^ {
       case (c ~ t) =>
-        // The dimension of the grid is equal to the largest cell coordinate.
+        // The dimension of the markup is equal to the largest cell coordinate.
         val n = t.values.flatten.flatMap(cell => List(cell.row, cell.col)).max
         val cageConstraints = c.map {
           case (label, (value, op)) =>

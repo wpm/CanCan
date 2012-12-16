@@ -3,11 +3,11 @@ package cancan
 import annotation.tailrec
 
 /**
- * Set of constraints for a puzzle that can be applied to a grid.
+ * Set of constraints for a puzzle that can be applied to a markup.
  */
 abstract class ConstraintStrategy(puzzle: Puzzle) {
   /**
-   * Map of cells in the puzzle grid to the constraints that contain them
+   * Map of cells in the puzzle markup to the constraints that contain them
    */
   val constraintMap: Map[Cell, Set[Constraint]]
 
@@ -17,23 +17,23 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
   def constraints: Set[Constraint] = constraintMap.values.reduce(_ ++ _)
 
   /**
-   * Apply the specified constraints to a grid
+   * Apply the specified constraints to a markup
    *
-   * @param grid the grid to constrain
+   * @param markup the markup to constrain
    * @param constraints the constraints to apply
-   * @return a constrained grid or `None` if the grid is inconsistent with the constraints
+   * @return a constrained markup or `None` if the markup is inconsistent with the constraints
    */
   @tailrec
-  final def apply(grid: Grid, constraints: Set[_ <: Constraint] = constraints): Option[Grid] = {
-    if (constraints.isEmpty) Option(grid)
+  final def apply(markup: Markup, constraints: Set[_ <: Constraint] = constraints): Option[Markup] = {
+    if (constraints.isEmpty) Option(markup)
     else {
       val constraint = constraints.head
-      constraint(grid) match {
+      constraint(markup) match {
         case Some(changes) => {
           val triggeredConstraints = changes.flatMap {
             case (cell, _) => constraintMap(cell)
           }
-          apply(grid ++ changes, constraints ++ triggeredConstraints - constraint)
+          apply(markup ++ changes, constraints ++ triggeredConstraints - constraint)
         }
         case None => None
       }
@@ -41,7 +41,7 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
   }
 
   /**
-   * Utility to create row and column constraints for all row and columns in a puzzle
+   * Utility to create row and column constraints for all rows and columns in a puzzle
    *
    * @param constraints function that creates constraints for a given row or column
    * @return row and column constraints for the entire puzzle
@@ -49,7 +49,7 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
   protected def rowColumnConstraints(constraints: Seq[Cell] => Seq[Constraint]) = {
     val n = puzzle.n
     for {i <- (1 to n)
-         cells <- Seq(Grid.row(n)(i), Grid.col(n)(i))
+         cells <- Seq(Markup.row(n)(i), Markup.col(n)(i))
          constraint <- constraints(cells)
     } yield constraint
   }
@@ -72,6 +72,7 @@ case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
  * Implementation of the row and column constraints with the [[cancan.PreemptiveSet]] heuristic.
  *
  * This is faster than the [[cancan.LatinSquare]] constraint strategy.
+ *
  * @param puzzle puzzle to which to apply the constraints
  */
 case class PreemptiveSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {

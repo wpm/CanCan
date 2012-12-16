@@ -6,15 +6,14 @@ import annotation.tailrec
 /**
  * An algorithm for solving a puzzle
  *
- * A brute force solution would simply try all possible solutions for a grid. This can be implemented as a search of a
- * directed graph of partial solution grids where the edges point from partial solutions to partial solutions
- * containing where a candidate number has been removed from one of the cells. Vertices with no outgoing edges are
- * possible solutions.
+ * A brute force solution would simply try all possible solutions for a markup. This can be implemented as a search of a
+ * directed graph of markups where the edges point from markups to markups with a guessed number in one of the cells.
+ * Vertices with no outgoing edges are possible solutions.
  *
- * A depth-first search of the graph starting from a completely unsolved grid is infeasible.
+ * A depth-first search of the graph starting from a completely unsolved markup is infeasible.
  * However, at each guessed solution vertex, CanCan applies all the constraints, then all the constraints that apply to
  * any modified cells, and so on recursively.  This process is called ''constraint propagation'', and eliminates
- * possible values from some grids while revealing others as inconsistent with the constraints.
+ * possible values from some markups while revealing others as inconsistent with the constraints.
  * At each node it reduces the size of the search space to the point where an exhaustive search of the constrained
  * graph is tractable.
  *
@@ -26,7 +25,7 @@ import annotation.tailrec
  * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
  */
 abstract class Solver(strategyFactory: (Puzzle => ConstraintStrategy))
-  extends (Puzzle => TraversableView[Grid, Traversable[_]]) {
+  extends (Puzzle => TraversableView[Markup, Traversable[_]]) {
 
   /**
    * Lazily enumerate all possible solutions to a puzzle.
@@ -34,34 +33,34 @@ abstract class Solver(strategyFactory: (Puzzle => ConstraintStrategy))
    * @param puzzle the puzzle to solve
    * @return view of all possible solutions to a puzzle
    */
-  def apply(puzzle: Puzzle): TraversableView[Grid, Traversable[_]] = {
-    def search(grid: Grid, strategy: ConstraintStrategy): TraversableView[Grid, Traversable[_]] = {
-      def nextGrids(grid: Grid): TraversableView[Grid, Traversable[_]] = {
-        for {cell <- guessCell(grid, puzzle).toTraversable.view
-             value <- guessValue(grid, cell).par
-             next <- strategy(grid + (cell -> Set(value)), strategy.constraintMap(cell))}
+  def apply(puzzle: Puzzle): TraversableView[Markup, Traversable[_]] = {
+    def search(markup: Markup, strategy: ConstraintStrategy): TraversableView[Markup, Traversable[_]] = {
+      def nextMarkups(markup: Markup): TraversableView[Markup, Traversable[_]] = {
+        for {cell <- guessCell(markup, puzzle).toTraversable.view
+             value <- guessValue(markup, cell).par
+             next <- strategy(markup + (cell -> Set(value)), strategy.constraintMap(cell))}
         yield next
       }
 
-      Traversable(grid).view ++ nextGrids(grid).flatMap(g => search(g, strategy))
+      Traversable(markup).view ++ nextMarkups(markup).flatMap(m => search(m, strategy))
     }
 
     val strategy = strategyFactory(puzzle)
-    strategy(Grid(puzzle.n), puzzle.cageConstraints) match {
-      case Some(grid) => search(grid, strategy)
-      case None => Traversable[Grid]().view
+    strategy(Markup(puzzle.n), puzzle.cageConstraints) match {
+      case Some(markup) => search(markup, strategy)
+      case None => Traversable[Markup]().view
     }
   }
 
-  protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell] = {
-    val u = grid.unsolved
+  protected def guessCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
+    val u = markup.unsolved
     if (u.isEmpty) None
     else Some(u.toSeq.map {
       case (cell, values) => (values.size, cell)
     }.min._2)
   }
 
-  protected def guessValue(grid: Grid, cell: Cell): Seq[Int] = grid(cell).toSeq.sorted
+  protected def guessValue(markup: Markup, cell: Cell): Seq[Int] = markup(cell).toSeq.sorted
 }
 
 /**
@@ -76,11 +75,11 @@ case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintStrategy) = 
  */
 case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
   extends Solver(constraintStrategy) {
-  override protected def guessCell(grid: Grid, puzzle: Puzzle): Option[Cell] = {
-    val u = grid.unsolved
+  override protected def guessCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
+    val u = markup.unsolved
     if (u.isEmpty) None
     else {
-      val cageSize = cageAmbiguity(grid, puzzle)
+      val cageSize = cageAmbiguity(markup, puzzle)
       Some(u.toSeq.map {
         case (cell, values) =>
           (values.size, cageSize(puzzle.containingCages.get(cell)), cell)
@@ -88,9 +87,9 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
     }
   }
 
-  private def cageAmbiguity(grid: Grid, puzzle: Puzzle): Map[Option[Constraint], Int] = {
+  private def cageAmbiguity(markup: Markup, puzzle: Puzzle): Map[Option[Constraint], Int] = {
     Map[Option[Constraint], Int]().withDefaultValue(0) ++
-      puzzle.containingCages.values.map(cage => Some(cage) -> (1 /: cage.cells.map(grid(_).size))(_ * _))
+      puzzle.containingCages.values.map(cage => Some(cage) -> (1 /: cage.cells.map(markup(_).size))(_ * _))
   }
 }
 
@@ -102,11 +101,11 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
  * @param solution solution to the puzzle that will be solved
  * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
  */
-case class OracleSolver(solution: Grid, strategyFactory: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
+case class OracleSolver(solution: Markup, strategyFactory: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
   extends Solver(strategyFactory) {
   require(solution.isSolved, "Oracle solution is ambiguous\n" + solution)
 
-  override protected def guessValue(grid: Grid, cell: Cell): Seq[Int] = solution(cell).toSeq
+  override protected def guessValue(markup: Markup, cell: Cell): Seq[Int] = solution(cell).toSeq
 
   /**
    * The difficulty of this puzzle

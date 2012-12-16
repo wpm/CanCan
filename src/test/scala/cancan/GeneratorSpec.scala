@@ -22,7 +22,7 @@ class GeneratorSpec extends FlatSpec {
     expect(1, "Invalid number of solutions for\n" + puzzle) {
       actual.size
     }
-    expect(List[Grid](solution), "Invalid solution for\n" + puzzle) {
+    expect(List[Markup](solution), "Invalid solution for\n" + puzzle) {
       actual
     }
   }

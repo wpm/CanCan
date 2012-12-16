@@ -19,7 +19,7 @@ class PuzzleSpec extends FlatSpec {
   behavior of "A 2x2 Latin square"
 
   it should "have solutions\n" + ls_2x2_sol1 + "\n" + ls_2x2_sol2 in {
-    expect(Set(Grid(ls_2x2_sol1), Grid(ls_2x2_sol2))) {
+    expect(Set(Markup(ls_2x2_sol1), Markup(ls_2x2_sol2))) {
       Set() ++ solutions(Puzzle(2))
     }
   }
@@ -51,7 +51,7 @@ class PuzzleSpec extends FlatSpec {
   behavior of kenken1_4x4_puzzle
 
   it should "have solution\n" + kenken1_4x4_solution in {
-    expect(List(Grid(kenken1_4x4_solution))) {
+    expect(List(Markup(kenken1_4x4_solution))) {
       solutions(kenken1_4x4_puzzle)
     }
   }
@@ -84,7 +84,7 @@ class PuzzleSpec extends FlatSpec {
   behavior of kenken2_24x4_puzzle
 
   it should "have solution\n" + kenken2_4x4_solution in {
-    expect(List(Grid(kenken2_4x4_solution))) {
+    expect(List(Markup(kenken2_4x4_solution))) {
       solutions(kenken2_24x4_puzzle)
     }
   }
@@ -111,7 +111,7 @@ class PuzzleSpec extends FlatSpec {
   behavior of kenken3_4x4_puzzle
 
   it should "have solution\n" + kenken3_4x4_solution in {
-    expect(List(Grid(kenken3_4x4_solution))) {
+    expect(List(Markup(kenken3_4x4_solution))) {
       solutions(kenken3_4x4_puzzle)
     }
   }
@@ -142,7 +142,7 @@ class PuzzleSpec extends FlatSpec {
   behavior of kenken_6x6_puzzle
 
   it should "have solution\n" + kenken_6x6_solution in {
-    expect(List(Grid(kenken_6x6_solution))) {
+    expect(List(Markup(kenken_6x6_solution))) {
       solutions(kenken_6x6_puzzle)
     }
   }

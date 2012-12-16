@@ -4,11 +4,11 @@ import annotation.tailrec
 
 
 /**
- * Constraint on a region of cells in a grid
+ * Constraint on a region of cells in a markup
  *
- * @param region region of cells in the grid
+ * @param region region of cells in the markup
  */
-abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell, Set[Int])]]) {
+abstract class Constraint(region: Seq[Cell]) extends ((Markup) => Option[Seq[(Cell, Set[Int])]]) {
   /**
    * The cells to which this constraint applies
    */
@@ -17,12 +17,12 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
   lazy val size = cells.size
 
   /**
-   * Apply the constraint to the grid
+   * Apply the constraint to the markup
    *
    * @return sequence of (cell, values) tuples for all changed cells or `None` if the constraint cannot be satisfied
    */
-  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] = {
-    val before = values(grid)
+  override def apply(markup: Markup): Option[Seq[(Cell, Set[Int])]] = {
+    val before = values(markup)
     constrainedValues(before) match {
       case None => None
       case Some(after) => Some(changedValues(cells, before, after))
@@ -36,17 +36,17 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
   /**
    * Values in the cells
    *
-   * @param grid a grid
-   * @return the values in the grid for this constraint's cells
+   * @param markup a markup
+   * @return the values in the markup for this constraint's cells
    */
-  protected def values(grid: Grid): Seq[Set[Int]] = cells.map(grid(_))
+  protected def values(markup: Markup): Seq[Set[Int]] = cells.map(markup(_))
 
   protected def solvedValues(values: Seq[Set[Int]]) = values.filter(_.size == 1)
 
   /**
    * Changes this constraint makes to a sequence of cell values
    *
-   * @param values original values in the grid
+   * @param values original values in the markup
    * @return constrained values or `None` if the constraint cannot be satisfied
    */
   protected def constrainedValues(values: Seq[Set[Int]]): Option[Seq[Set[Int]]] = None
@@ -66,7 +66,7 @@ abstract class Constraint(region: Seq[Cell]) extends ((Grid) => Option[Seq[(Cell
  * The preemptive set constraint as described in J.F. Cook, "A Pencil-and-Paper Algorithm for Solving Sudoku Puzzles",
  * ''Notices of the American Mathematical Society'', April 2009, Volume 56, Number 4, pp. 460-468
  *
- * @param region region of cells in the grid
+ * @param region region of cells in the markup
  */
 case class PreemptiveSetConstraint(region: Seq[Cell]) extends Constraint(region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
@@ -89,7 +89,7 @@ case class PreemptiveSetConstraint(region: Seq[Cell]) extends Constraint(region)
 /**
  * All solved cells in the region must be unique.
  *
- * This constraint does not change any values in the grid but can be violated.
+ * This constraint does not change any values in the markup but can be violated.
  *
  *  - `[123 123 123] -> [123 123 123]`
  *  - `[1 23 123] -> [1 23 123]`
@@ -151,8 +151,8 @@ abstract class CageConstraint(value: Int, region: Seq[Cell]) extends Constraint(
  * @param cell the cell
  */
 case class SpecifiedConstraint(value: Int, cell: Cell) extends CageConstraint(value, Seq(cell)) {
-  override def apply(grid: Grid): Option[Seq[(Cell, Set[Int])]] =
-    if (grid(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
+  override def apply(markup: Markup): Option[Seq[(Cell, Set[Int])]] =
+    if (markup(cell).contains(value)) Some(Seq(cell -> Set(value))) else None
 
   override protected val symbol = ""
   lazy override protected val nekNekSymbol = "!"
@@ -279,7 +279,7 @@ case class TimesConstraint(value: Int, region: Seq[Cell]) extends AssociativeCon
 
 object Constraint {
   /**
-   * Map of cells in a puzzle grid to the constraints that contain them
+   * Map of cells in a puzzle markup to the constraints that contain them
    */
   def constraintMap(constraints: Set[_ <: Constraint]): Map[Cell, Set[Constraint]] = {
     (Map[Cell, Set[Constraint]]() /:

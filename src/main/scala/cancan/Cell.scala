@@ -1,7 +1,7 @@
 package cancan
 
 /**
- * A position in a [[cancan.Grid]].
+ * A position in a [[cancan.Markup]].
  *
  * Cells sort by row then column. Row and column values are 1-based.
  * @param row cell row
