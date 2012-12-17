@@ -59,7 +59,7 @@ object Analyzer {
         all += s.last._2
         println(((i + 1) :: s.map(t => t._1 + ":" + t._2).toList).mkString("\t"))
     }
-    println("Mean steps to first solution " + first / puzzles.size)
-    println("Mean steps to all solutions " + all / puzzles.size)
+    println("Mean steps to first solution %.4f".format(first / puzzles.size))
+    println("Mean steps to all solutions %.4f".format(all / puzzles.size))
   }
 }
