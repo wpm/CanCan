@@ -59,7 +59,7 @@ package object cancan {
   }
 
   /**
-   * Print a 2-dimensional array of objects as a markup, centering each element.
+   * Print a 2-dimensional array of objects as a grid, centering each element.
    *
    * @param matrix 2-dimensional array of objects
    * @tparam T object in the array
@@ -68,10 +68,14 @@ package object cancan {
   def matrixToString[T](matrix: Traversable[Traversable[T]]) = {
     def centered(s: String, width: Int) = {
       val pad = (width - s.length) / 2
-      ("%" + width + "s").format(" " * pad + s)
+      ("%-" + width + "s").format(" " * pad + s)
     }
+    def stripTrailing(s: String) = s.replaceAll( """\s+$""", "")
+
     val widest = (for (row <- matrix; col <- row) yield col.toString.size).max
-    matrix.map(row => row.map(col => centered(col.toString, widest)).mkString(" ")).mkString("\n")
+    matrix.map {
+      row => stripTrailing(row.map(col => centered(col.toString, widest)).mkString(" "))
+    }.mkString("\n")
   }
 
   trait MultilineParser extends RegexParsers {

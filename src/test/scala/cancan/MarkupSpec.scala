@@ -6,8 +6,8 @@ import org.scalatest.FlatSpec
  * Unit tests for the [[cancan.Markup]] object.
  */
 class MarkupSpec extends FlatSpec {
-  val m2x2 = """12  2
-               | 1 12""".stripMargin
+  val m2x2 = """12 2
+               |1  12""".stripMargin
 
   behavior of "A markup"
 
