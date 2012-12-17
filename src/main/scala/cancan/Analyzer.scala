@@ -11,14 +11,16 @@ object Analyzer {
    */
   def analyze(args: Array[String]) {
     val usage =
-      """analyze [-l|-c] file
+      """analyze [-l|-c] file [file...]
         |
         |Count the number of partial solutions in a set of puzzles.
+        |
+        |    file - file containing puzzles
         |
         |    -l - use the Latin Square constraints without heuristics
         |    -c - use the order-by-cage search strategy""".stripMargin
 
-    def parseCommandLine(args: Array[String]): (String, Solver) = {
+    def parseCommandLine(args: Array[String]): (Seq[String], Solver) = {
       def select(cageOrder: Boolean, latinSquare: Boolean): Solver = (cageOrder, latinSquare) match {
         case (true, true) => OrderByCellThenCage(LatinSquare(_))
         case (true, false) => OrderByCellThenCage(PreemptiveSet(_))
@@ -40,12 +42,12 @@ object Analyzer {
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      Dispatcher.errorIf(positional.size != 1, "Invalid number of arguments")
-      (positional.head, select(option.contains('cageOrder), option.contains('latinSquare)))
+      Dispatcher.errorIf(positional.size < 1, "Invalid number of arguments")
+      (positional, select(option.contains('cageOrder), option.contains('latinSquare)))
     }
 
-    val (filename, searchStrategy) = parseCommandLine(args)
-    val puzzles = readPuzzlesFromFile(filename)
+    val (filenames, searchStrategy) = parseCommandLine(args)
+    val puzzles = filenames.flatMap(readPuzzlesFromFile(_))
     var first = 0.0
     var all = 0.0
     puzzles.zipWithIndex.foreach {

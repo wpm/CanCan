@@ -122,19 +122,21 @@ case class OracleSolver(solution: Markup, strategyFactory: (Puzzle => Constraint
  */
 object Solver {
   private val usage =
-    """solve [-a|-m|-v] file
+    """solve [-a|-m|-v] file [file...]
       |
-      |Solve the puzzles in a file.
+      |Solve the puzzles in a set of files.
+      |
+      |    file - file containing puzzles
       |
       |    -a - find all solutions instead of just the first one
       |    -m - maximum number of partial solutions to search before giving up
       |    -v - validate the returned solutions""".stripMargin
 
   /**
-   * Solve all the puzzles in a file.
+   * Solve all the puzzles in a set of files.
    */
   def solve(args: Array[String]) {
-    def parseCommandLine(args: Array[String]): (String, Boolean, Boolean, Option[Int]) = {
+    def parseCommandLine(args: Array[String]): (Seq[String], Boolean, Boolean, Option[Int]) = {
       @tailrec
       def parseCommandLineRec(args: List[String],
                               positional: List[String],
@@ -151,16 +153,16 @@ object Solver {
         }
       }
       val (positional, option) = parseCommandLineRec(args.toList, Nil, Map())
-      Dispatcher.errorIf(positional.size != 1, "Incorrect number of arguments")
+      Dispatcher.errorIf(positional.size < 1, "Incorrect number of arguments")
       val max = option.get('max) match {
         case Some(s) => Some(s.toInt)
         case None => None
       }
-      (positional.head, !option.contains('all), option.contains('validate), max)
+      (positional, !option.contains('all), option.contains('validate), max)
     }
 
-    val (filename, firstOnly, validate, max) = parseCommandLine(args)
-    readPuzzlesFromFile(filename).zipWithIndex.foreach {
+    val (filenames, firstOnly, validate, max) = parseCommandLine(args)
+    filenames.flatMap(readPuzzlesFromFile(_)).zipWithIndex.foreach {
       case (puzzle, i) =>
         println((i + 1) + ".\n" + puzzle + "\n")
         val (ss, remaining) = max match {
