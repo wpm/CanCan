@@ -6,11 +6,11 @@ import org.scalatest.FlatSpec
  * Unit tests for the [[cancan.Constraint]] objects.
  */
 class ConstraintSpec extends FlatSpec {
-  behavior of "A rank constraint"
+  behavior of "A 5-cell preemptive set constraint"
 
   def r5Fixture = PreemptiveSetConstraint(Markup.row(5)(1))
 
-  it should "have a size equal to the puzzle dimension" in {
+  it should "have size 5" in {
     expect(5) {
       r5Fixture.size
     }
@@ -32,7 +32,7 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  it should "handle multiple pemutation sets" in {
+  it should "handle multiple preemptive sets" in {
     expect(Some(List((Cell(1, 5), Set(5))))) {
       val m = Markup(
         """12 12 34 34 12345
@@ -44,7 +44,7 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  it should "do nothing if there are no permuation sets" in {
+  it should "do nothing if there are no preemptive sets" in {
     expect(Some(Nil)) {
       val m = Markup(
         """12345 12345 12345 12345 12345
@@ -53,6 +53,44 @@ class ConstraintSpec extends FlatSpec {
           |12345 12345 12345 12345 12345
           |12345 12345 12345 12345 12345""".stripMargin)
       r5Fixture(m)
+    }
+  }
+
+  behavior of "A 6-cell preemptive set constraint"
+
+  def preemptiveFixture = PreemptiveSetConstraint(Markup.row(6)(1))
+
+  it should "have size 6" in {
+    expect(6) {
+      preemptiveFixture.size
+    }
+  }
+
+  it should "remove invalid candidates" in {
+    expect(Some(List(
+      (Cell(1, 2), Set(4)),
+      (Cell(1, 5), Set(5, 6)),
+      (Cell(1, 6), Set(5, 6))
+    ))) {
+      preemptiveFixture(Markup(
+        """123 1234 12 23 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456""".stripMargin))
+    }
+  }
+
+  it should "do nothing to an invalid markup" in {
+    expect(Some(Nil)) {
+      preemptiveFixture(Markup(
+        """1 1 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456
+          |123456 123456 123456 123456 123456 123456""".stripMargin))
     }
   }
 
@@ -104,13 +142,13 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  it should "Constrain 1234 1234 1234 to 123 123 123" in {
+  it should "constrain 1234 1234 1234 to 123 123 123" in {
     expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
       times6(Markup(4))
     }
   }
 
-  it should "Stringify as '6x' and '*\t6\tA1 A2 B1'" in {
+  it should "stringify as '6x' and '*\t6\tA1 A2 B1'" in {
     expect("6x") {
       times6.toString()
     }
@@ -129,57 +167,25 @@ class ConstraintSpec extends FlatSpec {
     }
   }
 
-  it should "Constrain 1234 1234 1234 to 123 123 123" in {
+  it should "constrain 1234 1234 1234 to 123 123 123" in {
     expect(Some(List((Cell(1, 1), Set(1, 2, 3)), (Cell(1, 2), Set(1, 2, 3)), (Cell(2, 1), Set(1, 2, 3))))) {
       plus5(Markup(4))
     }
   }
 
-  it should "Constrain 1 23 123 to 1 23 123" in {
+  it should "constrain 1 23 123 to 1 23 123" in {
     expect(Some(Nil)) {
       plus5(Markup(4) ++ List((Cell(1, 1), Set(1)), (Cell(1, 2), Set(2, 3)), (Cell(2, 1), Set(1, 2))))
     }
   }
 
-  it should "Stringify as '5+' and '*\t5\tA1 A2 B1'" in {
+  it should "stringify as '5+' and '*\t5\tA1 A2 B1'" in {
     expect("5+") {
       plus5.toString()
     }
 
     expect("+\t5\tA1 A2 B1") {
       plus5.toNekNekString
-    }
-  }
-
-  behavior of "Preemptive set constraints"
-
-  def preemptiveFixture = PreemptiveSetConstraint(Markup.row(6)(1))
-
-  it should "remove invalid candidates" in {
-    expect(Some(List(
-      (Cell(1, 2), Set(4)),
-      (Cell(1, 5), Set(5, 6)),
-      (Cell(1, 6), Set(5, 6))
-    ))) {
-      preemptiveFixture(Markup(
-        """123 1234 12 23 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456""".stripMargin))
-    }
-  }
-
-  it should "do nothing to an invalid markup" in {
-    expect(Some(Nil)) {
-      preemptiveFixture(Markup(
-        """1 1 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456
-          |123456 123456 123456 123456 123456 123456""".stripMargin))
     }
   }
 }

@@ -9,7 +9,7 @@ class MarkupSpec extends FlatSpec {
   val m2x2 = """12 2
                |1  12""".stripMargin
 
-  behavior of "A markup"
+  behavior of "The markup\n" + m2x2
 
   it can "be created from string" in {
     val m = Markup(m2x2)

@@ -48,7 +48,7 @@ class PuzzleSpec extends FlatSpec {
       |1 2 4 3""".stripMargin
     )
 
-  behavior of kenken1_4x4_puzzle
+  behavior of "The puzzle\n" + kenken1_4x4_puzzle
 
   it should "have solution\n" + kenken1_4x4_solution in {
     expect(List(Markup(kenken1_4x4_solution))) {
@@ -68,8 +68,7 @@ class PuzzleSpec extends FlatSpec {
     }
   }
 
-
-  val (kenken2_24x4_puzzle, kenken2_4x4_solution) = (
+  val (kenken2_4x4_puzzle, kenken2_4x4_solution) = (
     """a=2/ b=1- c=12x d=1- e=1 f=12x g=2/ h=3+
       |a a b b
       |c d d e
@@ -81,17 +80,17 @@ class PuzzleSpec extends FlatSpec {
       |3 2 1 4""".stripMargin
     )
 
-  behavior of kenken2_24x4_puzzle
+  behavior of "The puzzle\n" + kenken2_4x4_puzzle
 
   it should "have solution\n" + kenken2_4x4_solution in {
     expect(List(Markup(kenken2_4x4_solution))) {
-      solutions(kenken2_24x4_puzzle)
+      solutions(kenken2_4x4_puzzle)
     }
   }
 
-  it should "print as\n" + kenken2_24x4_puzzle in {
-    expect(kenken2_24x4_puzzle) {
-      Puzzle(kenken2_24x4_puzzle).toString
+  it should "print as\n" + kenken2_4x4_puzzle in {
+    expect(kenken2_4x4_puzzle) {
+      Puzzle(kenken2_4x4_puzzle).toString
     }
   }
 
@@ -108,7 +107,7 @@ class PuzzleSpec extends FlatSpec {
       |4 2 1 3""".stripMargin
     )
 
-  behavior of kenken3_4x4_puzzle
+  behavior of "The puzzle\n" + kenken3_4x4_puzzle
 
   it should "have solution\n" + kenken3_4x4_solution in {
     expect(List(Markup(kenken3_4x4_solution))) {
@@ -139,7 +138,7 @@ class PuzzleSpec extends FlatSpec {
       |2 5 3 1 6 4""".stripMargin
     )
 
-  behavior of kenken_6x6_puzzle
+  behavior of "The puzzle\n" + kenken_6x6_puzzle
 
   it should "have solution\n" + kenken_6x6_solution in {
     expect(List(Markup(kenken_6x6_solution))) {
