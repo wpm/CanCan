@@ -69,7 +69,8 @@ case class LatinSquare(puzzle: Puzzle) extends ConstraintSet(puzzle) {
 }
 
 /**
- * Implementation of the row and column constraints with the [[cancan.PreemptiveSet]] heuristic.
+ * Implementation of the row and column constraints with the [[cancan.PreemptiveSetConstraint]] and
+ * [[cancan.UniquenessConstraint]] heuristics.
  *
  * This is faster than the [[cancan.LatinSquare]] constraint strategy.
  *
