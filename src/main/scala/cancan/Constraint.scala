@@ -146,7 +146,8 @@ abstract class CageConstraint(value: Int, region: Seq[Cell]) extends Constraint(
 }
 
 /**
- * A single cell contains a specified value
+ * A single cell that contains a specified value.
+ *
  * @param value the value the cell must contain
  * @param cell the cell
  */
@@ -159,7 +160,7 @@ case class SpecifiedConstraint(value: Int, cell: Cell) extends CageConstraint(va
 }
 
 /**
- * A set of cells whose values must combine arithmetically to a specified value.
+ * A cage constraint whose values must combine arithmetically to a specified value.
  */
 abstract class ArithmeticConstraint(value: Int, region: Seq[Cell]) extends CageConstraint(value, region) {
   override protected def constrainedValues(values: Seq[Set[Int]]) = {
