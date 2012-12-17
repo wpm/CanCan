@@ -38,7 +38,7 @@ abstract class Solver(constraintFactory: (Puzzle => ConstraintSet))
       def nextMarkups(markup: Markup): TraversableView[Markup, Traversable[_]] = {
         for {cell <- guessCell(markup, puzzle).toTraversable.view
              value <- guessValue(markup, cell).par
-             next <- constraints(markup + (cell -> Set(value)), constraints.constraintMap(cell))}
+             next <- constraints(markup + (cell -> Set(value)), constraints.cellMap(cell))}
         yield next
       }
 

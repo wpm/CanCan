@@ -9,12 +9,12 @@ abstract class ConstraintSet(puzzle: Puzzle) {
   /**
    * Map of cells in the puzzle markup to the constraints that contain them
    */
-  val constraintMap: Map[Cell, Set[Constraint]]
+  val cellMap: Map[Cell, Set[Constraint]]
 
   /**
    * All the constraints in this set
    */
-  def constraints: Set[Constraint] = constraintMap.values.reduce(_ ++ _)
+  def constraints: Set[Constraint] = cellMap.values.reduce(_ ++ _)
 
   /**
    * Apply the specified constraints to a markup
@@ -31,7 +31,7 @@ abstract class ConstraintSet(puzzle: Puzzle) {
       constraint(markup) match {
         case Some(changes) => {
           val triggeredConstraints = changes.flatMap {
-            case (cell, _) => constraintMap(cell)
+            case (cell, _) => cellMap(cell)
           }
           apply(markup ++ changes, constraints ++ triggeredConstraints - constraint)
         }
@@ -63,7 +63,7 @@ abstract class ConstraintSet(puzzle: Puzzle) {
  * @param puzzle puzzle to which to apply the constraints
  */
 case class LatinSquare(puzzle: Puzzle) extends ConstraintSet(puzzle) {
-  override val constraintMap =
+  override val cellMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(AllDifferentConstraint(cells)))))
 }
@@ -77,7 +77,7 @@ case class LatinSquare(puzzle: Puzzle) extends ConstraintSet(puzzle) {
  * @param puzzle puzzle to which to apply the constraints
  */
 case class PreemptiveSet(puzzle: Puzzle) extends ConstraintSet(puzzle) {
-  override val constraintMap =
+  override val cellMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(
         AllDifferentConstraint(cells),
