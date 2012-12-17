@@ -15,16 +15,16 @@ import annotation.tailrec
  * any modified cells, and so on recursively.  This process is called ''constraint propagation'', and eliminates
  * possible values from some markups while revealing others as inconsistent with the constraints.
  * At each node it reduces the size of the search space to the point where an exhaustive search of the constrained
- * graph is tractable.
+ * graph is tractable. When possible, this search is conducted in parallel.
  *
- * The basic algorithm may be customized by specifying a [[cancan.ConstraintStrategy]] and a search strategy. The case
+ * The basic algorithm may be customized by specifying a [[cancan.ConstraintSet]] and a search strategy. The case
  * classes of [[cancan.Solver]] implement various search strategies. [[cancan.OrderByCellSize]] is the default. The
- * constraint strategy specifies a set of constraints to propagate. The search strategy specifies the rule by which to
+ * constraint set specifies a set of constraints to propagate. The search strategy specifies the rule by which to
  * choose guess a value for.
  *
- * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
+ * @param constraintFactory function that creates a [[cancan.ConstraintSet]] from a [[cancan.Puzzle]]
  */
-abstract class Solver(strategyFactory: (Puzzle => ConstraintStrategy))
+abstract class Solver(constraintFactory: (Puzzle => ConstraintSet))
   extends (Puzzle => TraversableView[Markup, Traversable[_]]) {
 
   /**
@@ -34,18 +34,18 @@ abstract class Solver(strategyFactory: (Puzzle => ConstraintStrategy))
    * @return view of all possible solutions to a puzzle
    */
   def apply(puzzle: Puzzle): TraversableView[Markup, Traversable[_]] = {
-    def search(markup: Markup, strategy: ConstraintStrategy): TraversableView[Markup, Traversable[_]] = {
+    def search(markup: Markup, constraints: ConstraintSet): TraversableView[Markup, Traversable[_]] = {
       def nextMarkups(markup: Markup): TraversableView[Markup, Traversable[_]] = {
         for {cell <- guessCell(markup, puzzle).toTraversable.view
              value <- guessValue(markup, cell).par
-             next <- strategy(markup + (cell -> Set(value)), strategy.constraintMap(cell))}
+             next <- constraints(markup + (cell -> Set(value)), constraints.constraintMap(cell))}
         yield next
       }
 
-      Traversable(markup).view ++ nextMarkups(markup).flatMap(m => search(m, strategy))
+      Traversable(markup).view ++ nextMarkups(markup).flatMap(m => search(m, constraints))
     }
 
-    val strategy = strategyFactory(puzzle)
+    val strategy = constraintFactory(puzzle)
     strategy(Markup(puzzle.n), puzzle.cageConstraints) match {
       case Some(markup) => search(markup, strategy)
       case None => Traversable[Markup]().view
@@ -66,14 +66,13 @@ abstract class Solver(strategyFactory: (Puzzle => ConstraintStrategy))
 /**
  * Make a guess in a cell that has the fewest possible values.
  */
-case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
-  extends Solver(constraintStrategy) {
-}
+case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintSet) = PreemptiveSet(_))
+  extends Solver(constraintStrategy)
 
 /**
  * Make a guess in a cell that has the fewest possible values, then by cage ambiguity.
  */
-case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
+case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintSet) = PreemptiveSet(_))
   extends Solver(constraintStrategy) {
   override protected def guessCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
     val u = markup.unsolved
@@ -99,9 +98,9 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintStrategy
  * The solution specified to the constructor must be a solution for any puzzle this solver attempts.
  *
  * @param solution solution to the puzzle that will be solved
- * @param strategyFactory function that creates a [[cancan.ConstraintStrategy]] from a [[cancan.Puzzle]]
+ * @param strategyFactory function that creates a [[cancan.ConstraintSet]] from a [[cancan.Puzzle]]
  */
-case class OracleSolver(solution: Markup, strategyFactory: (Puzzle => ConstraintStrategy) = PreemptiveSet(_))
+case class OracleSolver(solution: Markup, strategyFactory: (Puzzle => ConstraintSet) = PreemptiveSet(_))
   extends Solver(strategyFactory) {
   require(solution.isSolution, "Oracle solution is ambiguous\n" + solution)
 

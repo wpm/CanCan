@@ -5,7 +5,7 @@ import annotation.tailrec
 /**
  * Set of constraints for a puzzle that can be applied to a markup.
  */
-abstract class ConstraintStrategy(puzzle: Puzzle) {
+abstract class ConstraintSet(puzzle: Puzzle) {
   /**
    * Map of cells in the puzzle markup to the constraints that contain them
    */
@@ -62,7 +62,7 @@ abstract class ConstraintStrategy(puzzle: Puzzle) {
  *
  * @param puzzle puzzle to which to apply the constraints
  */
-case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
+case class LatinSquare(puzzle: Puzzle) extends ConstraintSet(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(AllDifferentConstraint(cells)))))
@@ -75,7 +75,7 @@ case class LatinSquare(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
  *
  * @param puzzle puzzle to which to apply the constraints
  */
-case class PreemptiveSet(puzzle: Puzzle) extends ConstraintStrategy(puzzle) {
+case class PreemptiveSet(puzzle: Puzzle) extends ConstraintSet(puzzle) {
   override val constraintMap =
     Constraint.constraintMap(puzzle.cageConstraints ++
       rowColumnConstraints((cells => Seq(
