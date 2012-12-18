@@ -35,12 +35,11 @@ abstract class Solver(constraintFactory: (Puzzle => ConstraintSet))
    */
   def apply(puzzle: Puzzle): TraversableView[Markup, Traversable[_]] = {
     def search(markup: Markup, constraints: ConstraintSet): TraversableView[Markup, Traversable[_]] = {
-      def nextMarkups(markup: Markup): TraversableView[Markup, Traversable[_]] = {
-        for {cell <- guessCell(markup, puzzle).toTraversable.view
+      def nextMarkups(markup: Markup): TraversableView[Markup, Traversable[_]] =
+        for {cell <- selectCell(markup, puzzle).toTraversable.view
              value <- guessValue(markup, cell).par
              next <- constraints(markup + (cell -> Set(value)), constraints.cellMap(cell))}
         yield next
-      }
 
       Traversable(markup).view ++ nextMarkups(markup).flatMap(m => search(m, constraints))
     }
@@ -52,7 +51,7 @@ abstract class Solver(constraintFactory: (Puzzle => ConstraintSet))
     }
   }
 
-  protected def guessCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
+  protected def selectCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
     val u = markup.unsolved
     if (u.isEmpty) None
     else Some(u.toSeq.map {
@@ -74,7 +73,7 @@ case class OrderByCellSize(constraintStrategy: (Puzzle => ConstraintSet) = Preem
  */
 case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintSet) = PreemptiveSet(_))
   extends Solver(constraintStrategy) {
-  override protected def guessCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
+  override protected def selectCell(markup: Markup, puzzle: Puzzle): Option[Cell] = {
     val u = markup.unsolved
     if (u.isEmpty) None
     else {
