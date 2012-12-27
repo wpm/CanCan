@@ -1,3 +1,5 @@
+package com.github.wpm
+
 import collection.immutable.PagedSeq
 import io.Source
 import util.parsing.combinator.RegexParsers
@@ -10,7 +12,7 @@ package object cancan {
   /**
    * Read a set of puzzles from a file, treating # as a comment delimiter and skipping leading blank lines.
    *
-   * See [[cancan.StringRepresentation.PuzzleParser]] for details of the puzzle representation format.
+   * See [[com.github.wpm.cancan.StringRepresentation.PuzzleParser]] for details of the puzzle representation format.
    * @param filename name of the file containing the puzzles
    * @return puzzles
    */
@@ -23,7 +25,7 @@ package object cancan {
    * If a puzzle has multiple solutions, the order in which they are returned is undefined.
    *
    * @param puzzle a puzzle
-   * @param solver a puzzle solver, by default [[cancan.OrderByCellSize]]
+   * @param solver a puzzle solver, by default [[com.github.wpm.cancan.OrderByCellSize]]
    * @return the puzzle's solutions
    */
   def solutions(implicit puzzle: Puzzle, solver: Solver = OrderByCellSize()): Stream[Markup] =
@@ -35,7 +37,7 @@ package object cancan {
    * This is used to abandon difficult puzzles after a finite amount of time.
    *
    * @param max the maximum number of partial solutions to search
-   * @param solver a search strategy, by default [[cancan.OrderByCellSize]]
+   * @param solver a search strategy, by default [[com.github.wpm.cancan.OrderByCellSize]]
    * @return tuple (solutions, `true` if all solutions have been searched)
    */
   def cappedSolutions(implicit puzzle: Puzzle,

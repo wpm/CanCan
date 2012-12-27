@@ -1,4 +1,4 @@
-package cancan
+package com.github.wpm.cancan
 
 import annotation.tailrec
 
@@ -69,10 +69,10 @@ case class LatinSquare(puzzle: Puzzle) extends ConstraintSet(puzzle) {
 }
 
 /**
- * Implementation of the row and column constraints with the [[cancan.PreemptiveSetConstraint]] and
- * [[cancan.UniquenessConstraint]] heuristics.
+ * Implementation of the row and column constraints with the [[com.github.wpm.cancan.PreemptiveSetConstraint]] and
+ * [[com.github.wpm.cancan.UniquenessConstraint]] heuristics.
  *
- * This is faster than the [[cancan.LatinSquare]] constraint strategy.
+ * This is faster than the [[com.github.wpm.cancan.LatinSquare]] constraint strategy.
  *
  * @param puzzle puzzle to which to apply the constraints
  */

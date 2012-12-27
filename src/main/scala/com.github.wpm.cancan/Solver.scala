@@ -1,4 +1,4 @@
-package cancan
+package com.github.wpm.cancan
 
 import collection.TraversableView
 import annotation.tailrec
@@ -17,12 +17,13 @@ import annotation.tailrec
  * At each node it reduces the size of the search space to the point where an exhaustive search of the constrained
  * graph is tractable. When possible, this search is conducted in parallel.
  *
- * The basic algorithm may be customized by specifying a [[cancan.ConstraintSet]] and a search strategy. The case
- * classes of [[cancan.Solver]] implement various search strategies. [[cancan.OrderByCellSize]] is the default. The
- * constraint set specifies a set of constraints to propagate. The search strategy specifies the rule by which to
- * choose guess a value for.
+ * The basic algorithm may be customized by specifying a [[com.github.wpm.cancan.ConstraintSet]] and a search strategy.
+ * The case classes of [[com.github.wpm.cancan.Solver]] implement various search strategies.
+ * [[com.github.wpm.cancan.OrderByCellSize]] is the default. The constraint set specifies a set of constraints to
+ * propagate. The search strategy specifies the rule by which to choose guess a value for.
  *
- * @param constraintFactory function that creates a [[cancan.ConstraintSet]] from a [[cancan.Puzzle]]
+ * @param constraintFactory function that creates a [[com.github.wpm.cancan.ConstraintSet]] from a
+ *                          [[com.github.wpm.cancan.Puzzle]]
  */
 abstract class Solver(constraintFactory: (Puzzle => ConstraintSet))
   extends (Puzzle => TraversableView[Markup, Traversable[_]]) {
@@ -97,7 +98,8 @@ case class OrderByCellThenCage(constraintStrategy: (Puzzle => ConstraintSet) = P
  * The solution specified to the constructor must be a solution for any puzzle this solver attempts.
  *
  * @param solution solution to the puzzle that will be solved
- * @param strategyFactory function that creates a [[cancan.ConstraintSet]] from a [[cancan.Puzzle]]
+ * @param strategyFactory function that creates a [[com.github.wpm.cancan.ConstraintSet]] from a
+ *                        [[com.github.wpm.cancan.Puzzle]]
  */
 case class OracleSolver(solution: Markup, strategyFactory: (Puzzle => ConstraintSet) = PreemptiveSet(_))
   extends Solver(strategyFactory) {

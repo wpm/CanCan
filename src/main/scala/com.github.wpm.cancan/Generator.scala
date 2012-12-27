@@ -1,9 +1,9 @@
-package cancan
+package com.github.wpm.cancan
 
 import annotation.tailrec
 import scala.util.Random._
 import util.parsing.combinator.JavaTokenParsers
-import cancan.Generator.Multinomial.NumberListParser
+import Generator.Multinomial.NumberListParser
 
 /**
  * Generator of random KenKen puzzles
@@ -19,7 +19,8 @@ import cancan.Generator.Multinomial.NumberListParser
  * are drawn and a maximum proportion of single-cell cages per puzzle. If necessary this procedure is repeated until
  * a unique solution is found.
  *
- * The difficulty of a generated puzzle is the number of steps it takes the [[cancan.OracleSolver]] to solve it.
+ * The difficulty of a generated puzzle is the number of steps it takes the [[com.github.wpm.cancan.OracleSolver]] to
+ * solve it.
  */
 object Generator {
   /**

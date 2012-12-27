@@ -1,9 +1,9 @@
-package cancan
+package com.github.wpm.cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[cancan.Constraint]] objects.
+ * Unit tests for the [[com.github.wpm.cancan.Constraint]] objects.
  */
 class ConstraintSpec extends FlatSpec {
   behavior of "A 5-cell preemptive set constraint"

@@ -1,4 +1,4 @@
-package cancan
+package com.github.wpm.cancan
 
 import annotation.tailrec
 

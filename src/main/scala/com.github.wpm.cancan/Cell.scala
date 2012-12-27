@@ -1,7 +1,7 @@
-package cancan
+package com.github.wpm.cancan
 
 /**
- * A position in a [[cancan.Markup]].
+ * A position in a [[com.github.wpm.cancan.Markup]].
  *
  * Cells sort by row then column. Row and column values are 1-based.
  * @param row cell row

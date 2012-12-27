@@ -1,9 +1,9 @@
-package cancan
+package com.github.wpm.cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[cancan.Puzzle]] object.
+ * Unit tests for the [[com.github.wpm.cancan.Puzzle]] object.
  */
 class PuzzleSpec extends FlatSpec {
 

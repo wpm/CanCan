@@ -1,4 +1,4 @@
-package cancan
+package com.github.wpm.cancan
 
 import util.parsing.input.Reader
 import scala.IllegalArgumentException
@@ -96,7 +96,7 @@ case class Puzzle(n: Int, cageConstraints: Set[CageConstraint] = Set()) {
 object Puzzle {
 
   /**
-   * Parser of a string representation of a [[cancan.Puzzle]].
+   * Parser of a string representation of a [[com.github.wpm.cancan.Puzzle]].
    */
   object PuzzleParser extends MultilineParser {
     val cellLabel = """\w+""".r

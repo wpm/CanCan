@@ -1,9 +1,9 @@
-package cancan
+package com.github.wpm.cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[cancan.Markup]] object.
+ * Unit tests for the [[com.github.wpm.cancan.Markup]] object.
  */
 class MarkupSpec extends FlatSpec {
   val m2x2 = """12 2

@@ -1,4 +1,4 @@
-package cancan
+package com.github.wpm.cancan
 
 import scala.collection.GenTraversableOnce
 import java.lang.IllegalArgumentException
@@ -7,9 +7,9 @@ import scala.util.parsing.input.Reader
 /**
  * An ''n'' x ''n'' grid containing numbers that may appear in a puzzle's solution
  *
- * The markup is a square array of [[cancan.Cell]]s. Each cell contains a set of numbers from 1 to ''n'' which may
- * possibly occupy that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1) is in the
- * upper left hand corner.
+ * The markup is a square array of [[com.github.wpm.cancan.Cell]]s. Each cell contains a set of numbers from 1 to ''n''
+ * which may possibly occupy that cell in a solution. Cells are referred to by pairs of 1-based coordinates where (1,1)
+ * is in the upper left hand corner.
  */
 case class Markup private(n: Int, markup: Vector[Vector[Set[Int]]]) {
   /**
@@ -83,7 +83,7 @@ case class Markup private(n: Int, markup: Vector[Vector[Set[Int]]]) {
 object Markup {
 
   /**
-   * Parser of a string representation of a [[cancan.Markup]].
+   * Parser of a string representation of a [[com.github.wpm.cancan.Markup]].
    */
   private object MarkupParser extends MultilineParser {
     // 12

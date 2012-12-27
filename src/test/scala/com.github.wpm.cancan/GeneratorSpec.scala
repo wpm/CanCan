@@ -1,9 +1,9 @@
-package cancan
+package com.github.wpm.cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[cancan.Generator]] object.
+ * Unit tests for the [[com.github.wpm.cancan.Generator]] object.
  */
 class GeneratorSpec extends FlatSpec {
   "The connected components of a->bc b->ac c->ab d->e e->d f" should "be abc, de, f" in {

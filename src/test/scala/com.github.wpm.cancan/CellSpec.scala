@@ -1,9 +1,9 @@
-package cancan
+package com.github.wpm.cancan
 
 import org.scalatest.FlatSpec
 
 /**
- * Unit tests for the [[cancan.Cell]] objects.
+ * Unit tests for the [[com.github.wpm.cancan.Cell]] objects.
  */
 class CellSpec extends FlatSpec {
   behavior of "Cell (3,4)"

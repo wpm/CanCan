@@ -1,4 +1,4 @@
-package cancan
+package com.github.wpm.cancan
 
 /**
  * Top level dispatcher for commands that can be run from a prompt.
