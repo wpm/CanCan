@@ -10,7 +10,7 @@ scalaVersion := "2.9.2"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
-initialCommands in console := "import cancan._"
+initialCommands in console := "import com.github.wpm.cancan._"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.8" % "test"
 
